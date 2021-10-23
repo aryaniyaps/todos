@@ -6,6 +6,7 @@ This is an example todos app, which uses [Python](https://python.org) for the ba
 - [Nginx](https://github.com/nginx/nginx) reverse proxy
 - [Gunicorn](https://github.com/benoitc/gunicorn) WSGI HTTP server
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) mapper/ SQL toolkit
+- [Alembic](https://github.com/sqlalchemy/alembic) migrations
 - [PostgreSQL](https://github.com/postgres/postgres) database server
 - [Redis](https://github.com/redis/redis) cache store
 
