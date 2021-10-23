@@ -16,7 +16,7 @@ have it installed on your machine! For development purposes, you can get going w
 ```text
 docker compose up
 ```
-This spins up a container locally. The API will be available at http://localhost:8000.
+This spins up a few containers locally. The API will be available at http://localhost:8000.
 To use in a production environment, you need to set environment variables first. Here's an
 [example env file](example.env) to reference.
 ```text
