@@ -7,6 +7,8 @@ from todos.extensions import db
 class User(db.Model):
     """Represents an individual user account."""
 
+    __tablename__ = "users"
+
     id = db.Column(
         db.Integer,
         primary_key=True,
@@ -51,6 +53,10 @@ class User(db.Model):
         db.DateTime(timezone=True),
         onupdate=func.now(),
         nullable=False,
+    )
+
+    todos = db.relationship(
+        "Todo", back_populates="user", lazy="dynamic",
     )
 
     def __repr__(self) -> str:
