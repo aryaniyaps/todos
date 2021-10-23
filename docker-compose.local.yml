@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  app:
+    command: pipenv run gunicorn todos --bind=0.0.0.0:8000
+    environment:
+      FLASK_DEBUG: "true"
+      FLASK_ENV: development
+      SESSION_COOKIE_SECURE: "false"
+      DATABASE_URL: postgresql://todos:todos@postgres:5432/todos/
+      CACHE_TYPE: RedisCache
+      CACHE_DEFAULT_TIMEOUT: 300
+      CACHE_REDIS_URL: redis://:todos@localhost:6379/
+      SECRET_KEY: secretkey
+    ports:
+      - "8000:8000"
+
+  postgres:
+    environment:
+      POSTGRES_USER: todos
+      POSTGRES_PASSWORD: todos
+      POSTGRES_DB: todos
+    ports:
+      - "5432:5432"
+
+  redis:
+    environment:
+      REDIS_PASSWORD: todos
+    ports:
+      - "6379:6379"
