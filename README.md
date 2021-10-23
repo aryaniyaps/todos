@@ -11,14 +11,15 @@ This is an example todos app, which uses [Python](https://python.org) for the ba
 - [Redis](https://github.com/redis/redis) cache store
 
 ## How to use
-You can use [Docker Compose](https://github.com/docker/compose) to run this application. Make sure you
-have it installed on your machine! For development purposes, you can get going with the following command:
+You can use [Docker Compose](https://github.com/docker/compose) to run this application.
+Make sure you have it installed on your machine! For development purposes, you can get
+going with the following command:
 ```text
 docker compose up
 ```
-This spins up a few containers locally. The API will be available at http://localhost:8000.
-To use in a production environment, you need to set environment variables first. Here's an
-[example env file](example.env) to reference.
+This spins up a few containers locally. The API will be available at
+http://localhost:8000. To use in a production environment, you need to set environment
+variables first. Here's an [example env file](example.env) to reference.
 ```text
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```

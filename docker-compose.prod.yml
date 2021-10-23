@@ -15,7 +15,6 @@ services:
       - app
 
   app:
-    command: "./scripts/entrypoint.sh"
     environment:
       FLASK_DEBUG: "false"
       FLASK_ENV: production

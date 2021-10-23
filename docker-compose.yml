@@ -5,6 +5,7 @@ services:
     build: "."
     container_name: todos-app
     restart: always
+    command: "./scripts/entrypoint.sh"
     networks:
       - todos-main
     volumes:
