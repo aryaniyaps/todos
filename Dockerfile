@@ -4,12 +4,13 @@ FROM python:3.9-slim as builder
 ARG APP_HOME=/app/
 WORKDIR ${APP_HOME}
 
-FROM builder as production
-
+# install pipenv
 RUN pip install --no-cache pipenv
 
 # copy dep files
 COPY ./Pipfile.lock ./Pipfile ${APP_HOME}
+
+FROM builder as production
 
 # install dependencies
 RUN pipenv install --deploy
@@ -18,11 +19,6 @@ RUN pipenv install --deploy
 COPY ./ ${APP_HOME}
 
 FROM builder as development
-
-RUN pip install pipenv
-
-# copy dep files
-COPY ./Pipfile.lock ./Pipfile ${APP_HOME}
 
 # install dependencies
 RUN pipenv install --dev
