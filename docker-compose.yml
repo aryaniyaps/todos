@@ -15,7 +15,9 @@ services:
       - app
 
   app:
-    build: "."
+    build:
+      context: "."
+      target: production
     container_name: todos-app
     restart: always
     command: "./scripts/start-prod.sh"

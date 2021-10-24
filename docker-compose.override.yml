@@ -2,6 +2,9 @@ version: "3.9"
 
 services:
   app:
+    build:
+      context: "."
+      target: development
     command: "./scripts/start-local.sh"
     environment:
       FLASK_DEBUG: "true"
