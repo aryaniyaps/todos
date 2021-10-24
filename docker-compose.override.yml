@@ -1,6 +1,10 @@
 version: "3.9"
 
 services:
+  nginx:
+    ports:
+      - "80:80"
+
   app:
     environment:
       FLASK_DEBUG: "true"
