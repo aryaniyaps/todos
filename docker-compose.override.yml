@@ -9,10 +9,11 @@ services:
       FLASK_DEBUG: "true"
       FLASK_ENV: development
       SESSION_COOKIE_SECURE: "false"
-      DATABASE_URL: postgresql://todos:todos@postgres:5432/todos/
+      DATABASE_URL: postgresql://todos:todos@postgres:5432/todos
+      ELASTIC_SEARCH_URL: http://:todos@elastic:9200
       CACHE_TYPE: RedisCache
       CACHE_DEFAULT_TIMEOUT: 300
-      CACHE_REDIS_URL: redis://:todos@localhost:6379/
+      CACHE_REDIS_URL: redis://:todos@localhost:6379
       SECRET_KEY: todos
     ports:
       - "8000:8000"
@@ -30,3 +31,11 @@ services:
       REDIS_PASSWORD: todos
     ports:
       - "6379:6379"
+
+  elasticsearch:
+    environment:
+      ELASTIC_PASSWORD: "todos"
+      discovery.type: "single-node"
+      xpack.security.enabled: "true"
+    ports:
+      - "9200:9200"

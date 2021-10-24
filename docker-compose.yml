@@ -27,6 +27,7 @@ services:
       FLASK_APP: "todos:application"
       SESSION_COOKIE_SECURE: "${SESSION_COOKIE_SECURE:-false}"
       DATABASE_URL: "${DATABASE_URL}"
+      ELASTIC_SEARCH_URL: "${ELASTIC_SEARCH_URL}"
       CACHE_TYPE: "${CACHE_TYPE:-RedisCache}"
       CACHE_DEFAULT_TIMEOUT: "${CACHE_DEFAULT_TIMEOUT:-300}"
       CACHE_REDIS_URL: "${CACHE_REDIS_URL}"
@@ -38,6 +39,7 @@ services:
       - .:/app
     depends_on:
       - postgres
+      - elasticsearch
       - redis
 
   postgres:
@@ -62,7 +64,24 @@ services:
     networks:
       - todos-main
     volumes:
-      - ./data/redis:/data
+      - ./data/redis:/redis/data
+
+  elasticsearch:
+    image: elasticsearch:7.14.2
+    container_name: todos-elasticsearch
+    restart: always
+    environment:
+      ELASTIC_PASSWORD: "${ELASTIC_PASSWORD}"
+      discovery.type: "${ELASTIC_DISCOVERY:-single-node}"
+      xpack.security.enabled: "${ELASTIC_SECURE:-true}"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - todos-main
+    volumes:
+      - ./data/elasticsearch:/elasticsearch/data
 
 networks:
   todos-main:

@@ -11,9 +11,10 @@ flask-cors = ">=3.0"
 flask-caching = ">=1.10"
 sqlalchemy = {extras = ["postgresql_psycopg2binary"], version = ">=1.4" }
 passlib = {extras = ["argon2"], version = ">=1.7"}
-environs = ">=9.3"
-gunicorn = ">=20.1"
 redis = ">=3.5"
+elasticsearch-dsl = ">=7.4"
+gunicorn = ">=20.1"
+environs = ">=9.3"
 
 [dev-packages]
 

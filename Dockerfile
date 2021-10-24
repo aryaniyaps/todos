@@ -10,6 +10,7 @@ RUN pip install --no-cache pipenv
 # copy dep files
 COPY ./Pipfile.lock ./Pipfile ${APP_HOME}
 
+# production stage
 FROM builder as production
 
 # install dependencies
@@ -18,6 +19,7 @@ RUN pipenv install --deploy
 # copy project files
 COPY ./ ${APP_HOME}
 
+# development stage
 FROM builder as development
 
 # install dependencies

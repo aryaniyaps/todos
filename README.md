@@ -9,6 +9,7 @@ This is an example todos app, which uses [Python](https://python.org) for the ba
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
 - [PostgreSQL](https://github.com/postgres/postgres) database server
 - [Redis](https://github.com/redis/redis) cache store
+- [Elasticsearch](https://github.com/elastic/elasticsearch) search engine
 
 ## How to use
 You can use [Docker Compose](https://github.com/docker/compose) to run this application.
