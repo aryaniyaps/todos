@@ -5,6 +5,7 @@ services:
     environment:
       FLASK_DEBUG: "true"
       FLASK_ENV: development
+      FLASK_APP: "todos:application"
       SESSION_COOKIE_SECURE: "false"
       DATABASE_URL: postgresql://todos:todos@postgres:5432/todos/
       CACHE_TYPE: RedisCache

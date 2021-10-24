@@ -3,7 +3,7 @@ This is an example todos app, which uses [Python](https://python.org) for the ba
 
 ## Tech stack used
 - [Flask](https://github.com/pallets/flask) web framework
-- [Nginx](https://github.com/nginx/nginx) reverse proxy
+- [Nginx](https://github.com/nginx/nginx) load balancer/ reverse proxy
 - [Gunicorn](https://github.com/benoitc/gunicorn) WSGI HTTP server
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) mapper/ SQL toolkit
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations

@@ -1,8 +1,6 @@
 FROM python:3.9-slim
 
-# set flask app
-ENV FLASK_APP todos:application
-
+# set workdir
 ARG APP_HOME=/app/
 WORKDIR ${APP_HOME}
 
