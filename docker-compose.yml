@@ -18,7 +18,7 @@ services:
     build: "."
     container_name: todos-app
     restart: always
-    command: "./scripts/start-app.sh"
+    command: "./scripts/start-prod.sh"
     environment:
       FLASK_DEBUG: "false"
       FLASK_ENV: production
