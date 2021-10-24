@@ -21,5 +21,5 @@ This spins up a few containers locally. The API will be available at
 http://localhost:8000. To use in a production environment, you need to set environment
 variables first. Here's an [example env file](example.env) to reference.
 ```text
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.yml up -d
 ```
