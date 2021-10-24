@@ -72,6 +72,7 @@ services:
     restart: always
     environment:
       ELASTIC_PASSWORD: "${ELASTIC_PASSWORD}"
+      bootstrap.memory_lock: "${ELASTIC_MEMORY_LOCK:-true}"
       discovery.type: "${ELASTIC_DISCOVERY:-single-node}"
       xpack.security.enabled: "${ELASTIC_SECURE:-true}"
     ulimits:
