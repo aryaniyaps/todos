@@ -65,3 +65,5 @@ services:
 networks:
   todos-main:
     driver: bridge
+  todos-proxy:
+    driver: bridge
