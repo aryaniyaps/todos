@@ -23,6 +23,7 @@ services:
     environment:
       NODE_ENV: "production"
     networks:
+      - todos-frontend
       - todos-proxy
     volumes:
       - .:/frontend
@@ -40,7 +41,7 @@ services:
       ELASTIC_SEARCH_URL: "${ELASTICSEARCH_URL}"
       DATABASE_URL: "${DATABASE_URL}"
     networks:
-      - todos-main
+      - todos-backend
       - todos-proxy
     volumes:
       - .:/backend
@@ -58,7 +59,7 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       POSTGRES_DB: "${POSTGRES_DB}"
     networks:
-      - todos-main
+      - todos-backend
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
 
@@ -69,7 +70,7 @@ services:
     environment:
       REDIS_PASSWORD: "${REDIS_PASSWORD}"
     networks:
-      - todos-main
+      - todos-backend
     volumes:
       - ./data/redis:/redis/data
 
@@ -81,7 +82,7 @@ services:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
     networks:
-      - todos-main
+      - todos-backend
     volumes:
       - ./data/rabbitmq:/rabbitmq/data
 
@@ -99,12 +100,14 @@ services:
         soft: -1
         hard: -1
     networks:
-      - todos-main
+      - todos-backend
     volumes:
       - ./data/elasticsearch:/elasticsearch/data
 
 networks:
-  todos-main:
+  todos-backend:
+    driver: bridge
+  todos-frontend:
     driver: bridge
   todos-proxy:
     driver: bridge
