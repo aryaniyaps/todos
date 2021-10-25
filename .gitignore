@@ -1,7 +1,2 @@
-*.pyc
-*.log
-.idea
-venv/
-backend/.env
-
+.env
 data/

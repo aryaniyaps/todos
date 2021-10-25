@@ -1,7 +1,7 @@
 FROM python:3.9-slim as builder
 
 # set workdir
-ARG APP_HOME=/app/
+ARG APP_HOME=/backend/
 WORKDIR ${APP_HOME}
 
 # install pipenv
