@@ -1,9 +1,16 @@
 # Todos app
-This is an example todos app, which uses [Python](https://python.org) for the backend.
+This is an example todos app.
 
 ## Tech stack used
-- [Flask](https://github.com/pallets/flask) web framework
+These are the technologies used to build this app.
+
+### General
 - [Nginx](https://github.com/nginx/nginx) load balancer/ reverse proxy
+- Docker/ [Docker Compose](https://github.com/docker/compose) DevOps
+
+
+### Backend
+- [Flask](https://github.com/pallets/flask) web framework
 - [Gunicorn](https://github.com/benoitc/gunicorn) WSGI HTTP server
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) mapper/ SQL toolkit
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations

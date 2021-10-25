@@ -12,13 +12,13 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - app
+      - backend
 
-  app:
+  backend:
     build:
-      context: "."
+      context: "./backend"
       target: production
-    container_name: todos-app
+    container_name: todos-backend
     restart: always
     command: "./scripts/start-prod.sh"
     environment:
@@ -36,7 +36,7 @@ services:
       - todos-main
       - todos-proxy
     volumes:
-      - .:/app
+      - .:/backend
     depends_on:
       - postgres
       - elasticsearch

@@ -1,7 +1,7 @@
 from passlib.hash import argon2
 from sqlalchemy.sql import func
 
-from todos.extensions import db
+from backend.todos.extensions import db
 
 
 class User(db.Model):

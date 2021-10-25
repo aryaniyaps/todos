@@ -8,7 +8,7 @@ WORKDIR ${APP_HOME}
 RUN pip install --no-cache pipenv
 
 # copy dep files
-COPY ./Pipfile.lock ./Pipfile ${APP_HOME}
+COPY Pipfile.lock ./Pipfile ${APP_HOME}
 
 # production stage
 FROM builder as production
@@ -17,7 +17,7 @@ FROM builder as production
 RUN pipenv install --deploy
 
 # copy project files
-COPY ./ ${APP_HOME}
+COPY .. ${APP_HOME}
 
 # development stage
 FROM builder as development
@@ -26,4 +26,4 @@ FROM builder as development
 RUN pipenv install --dev
 
 # copy project files
-COPY ./ ${APP_HOME}
+COPY .. ${APP_HOME}

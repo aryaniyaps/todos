@@ -1,6 +1,6 @@
 from sqlalchemy.sql import func
 
-from todos.extensions import db
+from backend.todos.extensions import db
 
 
 class Todo(db.Model):

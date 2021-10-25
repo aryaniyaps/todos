@@ -1,6 +1,6 @@
 from flask import Flask
 
-from todos.extensions import cors, cache, db, migrate
+from backend.todos.extensions import cors, cache, db, migrate
 
 
 __all__ = ("application",)
