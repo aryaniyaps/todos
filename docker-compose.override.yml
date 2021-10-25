@@ -1,6 +1,12 @@
 version: "3.9"
 
 services:
+  frontend:
+    environment:
+      NODE_ENV: "development"
+    ports:
+      - "3000:3000"
+
   backend:
     build:
       target: "development"
