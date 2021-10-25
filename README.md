@@ -2,15 +2,8 @@
 This is an example todos app.
 
 ## Tech stack used
-These are the technologies used to build this app.
-
-### General
-- [Nginx](https://github.com/nginx/nginx) load balancer/ reverse proxy
-- Docker/ [Docker Compose](https://github.com/docker/compose) DevOps
-
-
-### Backend
 - [Flask](https://github.com/pallets/flask) web framework
+- [Nginx](https://github.com/nginx/nginx) load balancer/ reverse proxy
 - [Gunicorn](https://github.com/benoitc/gunicorn) WSGI HTTP server
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) mapper/ SQL toolkit
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
