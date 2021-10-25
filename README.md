@@ -8,8 +8,10 @@ This is an example todos app, which uses [Python](https://python.org) for the ba
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) mapper/ SQL toolkit
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
 - [PostgreSQL](https://github.com/postgres/postgres) database server
-- [Redis](https://github.com/redis/redis) cache store
+- [Redis](https://github.com/redis/redis) cache store/ tasks backend
 - [Elasticsearch](https://github.com/elastic/elasticsearch) search engine
+- [Celery](https://github.com/celery/celery) task queue
+  ([RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) broker)
 
 ## How to use
 You can use [Docker Compose](https://github.com/docker/compose) to run this application.

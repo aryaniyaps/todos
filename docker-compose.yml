@@ -66,6 +66,18 @@ services:
     volumes:
       - ./data/redis:/redis/data
 
+  rabbitmq:
+    image: rabbitmq:3.9-alpine
+    container_name: reddit-rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
+    networks:
+      - todos-main
+    volumes:
+      - ./data/rabbitmq:/data
+
   elasticsearch:
     image: elasticsearch:7.14.2
     container_name: todos-elasticsearch

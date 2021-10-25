@@ -32,6 +32,13 @@ services:
     ports:
       - "6379:6379"
 
+  rabbitmq:
+    environment:
+      RABBITMQ_DEFAULT_USER: todos
+      RABBITMQ_DEFAULT_PASS: todos
+    ports:
+      - "5672:5672"
+
   elasticsearch:
     environment:
       ELASTIC_PASSWORD: "todos"
