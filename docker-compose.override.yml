@@ -3,32 +3,32 @@ version: "3.9"
 services:
   backend:
     build:
-      target: development
+      target: "development"
     environment:
       FASTAPI_DEBUG: "true"
-      ELASTICSEARCH_URL: http://:todos@elastic:9200
-      DATABASE_URL: postgresql+asyncpg://todos:todos@postgres:5432/todos
+      ELASTICSEARCH_URL: "http://:todos@elastic:9200"
+      DATABASE_URL: "postgresql+asyncpg://todos:todos@postgres:5432/todos"
     ports:
       - "8000:8000"
 
   postgres:
     environment:
-      POSTGRES_USER: todos
-      POSTGRES_PASSWORD: todos
-      POSTGRES_DB: todos
+      POSTGRES_USER: "todos"
+      POSTGRES_PASSWORD: "todos"
+      POSTGRES_DB: "todos"
     ports:
       - "5432:5432"
 
   redis:
     environment:
-      REDIS_PASSWORD: todos
+      REDIS_PASSWORD: "todos"
     ports:
       - "6379:6379"
 
   rabbitmq:
     environment:
-      RABBITMQ_DEFAULT_USER: todos
-      RABBITMQ_DEFAULT_PASS: todos
+      RABBITMQ_DEFAULT_USER: "todos"
+      RABBITMQ_DEFAULT_PASS: "todos"
     ports:
       - "5672:5672"
 
