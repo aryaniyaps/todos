@@ -20,9 +20,8 @@ services:
       target: production
     container_name: todos-backend
     restart: always
-    command: "./scripts/start-prod.sh"
     environment:
-      DEBUG: "false"
+      FASTAPI_DEBUG: "false"
       ELASTIC_SEARCH_URL: "${ELASTIC_SEARCH_URL}"
       DATABASE_URL: "${DATABASE_URL}"
     networks:

@@ -1,12 +1,11 @@
 version: "3.9"
 
 services:
-  app:
+  backend:
     build:
       target: development
-    command: "./scripts/start-local.sh"
     environment:
-      DEBUG: "true"
+      FASTAPI_DEBUG: "true"
       ELASTIC_SEARCH_URL: http://:todos@elastic:9200
       DATABASE_URL: postgresql+asyncpg://todos:todos@postgres:5432/todos
     ports:

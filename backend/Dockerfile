@@ -19,6 +19,8 @@ RUN pipenv install --deploy
 # copy project files
 COPY .. ${APP_HOME}
 
+CMD "./scripts/start-prod.sh"
+
 # development stage
 FROM builder as development
 
@@ -27,3 +29,5 @@ RUN pipenv install --dev
 
 # copy project files
 COPY .. ${APP_HOME}
+
+CMD "./scripts/start-local.sh"
