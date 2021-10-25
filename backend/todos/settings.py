@@ -1,23 +1,13 @@
-from environs import Env
+from starlette.config import Config
 
 
-env = Env()
-env.read_env()
+config = Config(env_file=".env")
 
-# flask core configuration.
-SECRET_KEY = env.str("SECRET_KEY")
-SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=False)
-ENV = env.str("FLASK_ENV", default="development")
-DEBUG = env.bool("FLASK_DEBUG", default=True)
+# whether the application is in development mode.
+DEBUG: bool = config("DEBUG", cast=bool, default=True)
 
-# sqlalchemy configuration.
-SQLALCHEMY_DATABASE_URI = env.str("DATABASE_URL")
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-# flask-caching configuration.
-CACHE_TYPE = env.str("CACHE_TYPE")
-CACHE_DEFAULT_TIMEOUT = env.int("CACHE_DEFAULT_TIMEOUT")
-CACHE_REDIS_URL = env.str("CACHE_REDIS_URL")
+# sqlalchemy database url.
+DATABASE_URL: str = config("DATABASE_URL", cast=str)
 
 # elasticsearch configuration.
-ELASTIC_SEARCH_URL = env.str("ELASTIC_SEARCH_URL")
+ELASTIC_SEARCH_URL: str = config("ELASTIC_SEARCH_URL", cast=str)

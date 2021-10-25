@@ -22,16 +22,9 @@ services:
     restart: always
     command: "./scripts/start-prod.sh"
     environment:
-      FLASK_DEBUG: "false"
-      FLASK_ENV: production
-      FLASK_APP: "todos:application"
-      SESSION_COOKIE_SECURE: "${SESSION_COOKIE_SECURE:-false}"
-      DATABASE_URL: "${DATABASE_URL}"
+      DEBUG: "false"
       ELASTIC_SEARCH_URL: "${ELASTIC_SEARCH_URL}"
-      CACHE_TYPE: "${CACHE_TYPE:-RedisCache}"
-      CACHE_DEFAULT_TIMEOUT: "${CACHE_DEFAULT_TIMEOUT:-300}"
-      CACHE_REDIS_URL: "${CACHE_REDIS_URL}"
-      SECRET_KEY: "${SECRET_KEY}"
+      DATABASE_URL: "${DATABASE_URL}"
     networks:
       - todos-main
       - todos-proxy

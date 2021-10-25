@@ -1,44 +1,18 @@
-from flask import Flask
+from fastapi import FastAPI
 
-from backend.todos.extensions import cors, cache, db, migrate
-
-
-__all__ = ("application",)
+from todos import settings
 
 
-def create_app(config: str = "todos.settings") -> Flask:
+__all__ = ("app",)
+
+
+def create_app() -> FastAPI:
     """
     Initializes an app instance.
 
-    :param config: The configuration file to use.
     :return: The created app.
     """
-    app = Flask(__name__)
-    app.config.from_object(config)
-    register_extensions(app)
-    register_blueprints(app)
-    return app
+    return FastAPI(debug=settings.DEBUG)
 
 
-def register_extensions(app: Flask) -> None:
-    """
-    Registers extensions for the given app.
-
-    :param app: The app the register extensions for.
-    """
-    db.init_app(app)
-    migrate.init_app(app, db)
-    cache.init_app(app)
-    cors.init_app(app)
-
-
-def register_blueprints(app: Flask) -> None:
-    """
-    Registers blueprints for the given app.
-
-    :param app: The app the register blueprints for.
-    """
-    pass
-
-
-application = create_app()
+app = create_app()

@@ -1,3 +1,3 @@
 #!/bin/bash
-pipenv run flask db upgrade
-pipenv run flask run -h 0.0.0.0 -p 8000
+pipenv run alembic upgrade head
+pipenv run uvicorn todos:app --host 0.0.0.0 --port 8000 --reload
