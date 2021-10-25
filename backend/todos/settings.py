@@ -10,4 +10,4 @@ DEBUG: bool = config("FASTAPI_DEBUG", cast=bool, default=True)
 DATABASE_URL: str = config("DATABASE_URL", cast=str)
 
 # elasticsearch configuration.
-ELASTIC_SEARCH_URL: str = config("ELASTIC_SEARCH_URL", cast=str)
+ELASTICSEARCH_URL: str = config("ELASTICSEARCH_URL", cast=str)

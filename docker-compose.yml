@@ -22,7 +22,7 @@ services:
     restart: always
     environment:
       FASTAPI_DEBUG: "false"
-      ELASTIC_SEARCH_URL: "${ELASTIC_SEARCH_URL}"
+      ELASTIC_SEARCH_URL: "${ELASTICSEARCH_URL}"
       DATABASE_URL: "${DATABASE_URL}"
     networks:
       - todos-main
@@ -68,7 +68,7 @@ services:
     networks:
       - todos-main
     volumes:
-      - ./data/rabbitmq:/data
+      - ./data/rabbitmq:/rabbitmq/data
 
   elasticsearch:
     image: elasticsearch:7.14.2
