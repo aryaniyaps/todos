@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Text, Boolean, Integer, DateTime
 from sqlalchemy.sql import func
 
-from todos.database import Base
+from backend.database import Base
 
 
 class Todo(Base):

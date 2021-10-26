@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from todos import settings
+from backend import settings
 
 
 __all__ = ("app",)

@@ -7,8 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 
 from alembic import context
 
-from todos.database import Base
-from todos.settings import DATABASE_URL
+from backend.database import Base
+from backend.settings import DATABASE_URL
 
 
 # this is the Alembic Config object, which provides
@@ -22,8 +22,8 @@ config.set_main_option("sqlalchemy.url", DATABASE_URL)
 fileConfig(config.config_file_name)
 
 # populate Base.metadata
-from todos.users.models import User  # noqa
-from todos.todos.models import Todo  # noqa
+from backend.users.models import User  # noqa
+from backend.todos.models import Todo  # noqa
 
 # add your model's MetaData object here
 # for 'autogenerate' support
