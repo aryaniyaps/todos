@@ -26,7 +26,7 @@ services:
       - todos-frontend
       - todos-proxy
     volumes:
-      - .:/frontend
+      - ./frontend:/frontend
     depends_on:
       - backend
 
@@ -36,7 +36,8 @@ services:
       target: "production"
     container_name: todos-backend
     restart: always
-    command: "./backend/scripts/start-prod.sh"
+    working_dir: "/backend/"
+    command: "scripts/start-prod.sh"
     environment:
       FASTAPI_DEBUG: "false"
       ELASTIC_SEARCH_URL: "${ELASTICSEARCH_URL}"
@@ -45,7 +46,7 @@ services:
       - todos-backend
       - todos-proxy
     volumes:
-      - .:/backend
+      - ./backend:/backend
     depends_on:
       - postgres
       - elasticsearch
