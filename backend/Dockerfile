@@ -17,9 +17,7 @@ FROM builder as production
 RUN pipenv install --deploy
 
 # copy project files
-COPY .. ${APP_HOME}
-
-CMD "./scripts/start-prod.sh"
+COPY ./ ${APP_HOME}
 
 # development stage
 FROM builder as development
@@ -28,6 +26,4 @@ FROM builder as development
 RUN pipenv install --dev
 
 # copy project files
-COPY .. ${APP_HOME}
-
-CMD "./scripts/start-local.sh"
+COPY ./ ${APP_HOME}

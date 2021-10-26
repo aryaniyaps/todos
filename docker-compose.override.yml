@@ -10,6 +10,7 @@ services:
   backend:
     build:
       target: "development"
+    command: "./backend/scripts/start-local.sh"
     environment:
       FASTAPI_DEBUG: "true"
       ELASTICSEARCH_URL: "http://:todos@elastic:9200"

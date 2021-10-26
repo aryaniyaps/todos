@@ -14,4 +14,4 @@ COPY yarn.lock ./package.json ${APP_HOME}
 RUN yarn install
 
 # copy project files
-COPY .. ${APP_HOME}
+COPY ./ ${APP_HOME}

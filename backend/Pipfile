@@ -11,6 +11,7 @@ celery = {version = ">=5.1", extras = ["rabbitmq", "redis"]}
 sqlalchemy = {version = ">=1.4", extras = ["postgresql_asyncpg"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}
 elasticsearch-dsl = ">=7.4"
+alembic = ">=1.7"
 
 [dev-packages]
 
