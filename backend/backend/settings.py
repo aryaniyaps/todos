@@ -1,7 +1,7 @@
 from starlette.config import Config
 
 
-config = Config(env_file=".env")
+config = Config()
 
 # whether the application is in development mode.
 DEBUG: bool = config("FASTAPI_DEBUG", cast=bool, default=True)
