@@ -4,11 +4,14 @@ FROM node:17-alpine
 ARG APP_HOME=/frontend/
 WORKDIR ${APP_HOME}
 
+# install yarn
+RUN npm install yarn
+
 # copy dep files
-COPY package-lock.json ./package.json ${APP_HOME}
+COPY yarn.lock ./package.json ${APP_HOME}
 
 # install dependencies
-RUN npm install
+RUN yarn install
 
 # copy project files
 COPY .. ${APP_HOME}
