@@ -7,7 +7,7 @@ from backend.database import get_session
 
 
 @fixture(scope="function")
-async def session()-> AsyncSession:
+async def session() -> AsyncSession:
     async with get_session() as session:
         yield session
 
