@@ -15,6 +15,7 @@ alembic = ">=1.7"
 
 [dev-packages]
 pytest = ">=6.2"
+httpx = ">=0.20"
 
 [requires]
 python_version = "3.9"

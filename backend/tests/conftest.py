@@ -1,16 +1,18 @@
-import pytest
-from fastapi.testclient import TestClient
+from pytest import fixture
+from httpx import AsyncClient
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend import app
 from backend.database import get_session
 
 
-@pytest.fixture(scope="function")
-async def session():
+@fixture(scope="function")
+async def session()-> AsyncSession:
     async with get_session() as session:
         yield session
 
-@pytest.fixture(scope="module")
-def client():
-    with TestClient(app=app) as client:
+
+@fixture(scope="module")
+async def client() -> AsyncClient:
+    async with AsyncClient(app=app) as client:
         yield client
