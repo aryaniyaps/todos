@@ -23,7 +23,6 @@ async def get_session() -> AsyncGenerator[AsyncSession, None]:
     session = session_factory()
     try:
         yield session
-        await session.commit()
     except Exception as err:
         await session.rollback()
         raise err
