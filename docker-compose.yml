@@ -18,8 +18,11 @@ services:
   frontend:
     build:
       context: "./frontend"
+      target: "production"
     container_name: todos-frontend
     restart: always
+    working_dir: "/frontend/"
+    command: "scripts/start-prod.sh"
     environment:
       NODE_ENV: "production"
     networks:

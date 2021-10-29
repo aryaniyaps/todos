@@ -1,6 +1,9 @@
 version: "3.9"
 
 services:
+  build:
+    target: "development"
+  command: "scripts/start-local.sh"
   frontend:
     environment:
       NODE_ENV: "development"
