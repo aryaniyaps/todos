@@ -12,6 +12,7 @@ sqlalchemy = {version = ">=1.4", extras = ["postgresql_asyncpg"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}
 elasticsearch-dsl = ">=7.4"
 alembic = ">=1.7"
+jinja2 = ">=3.0"
 
 [dev-packages]
 pytest = ">=6.2"
