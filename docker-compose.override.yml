@@ -16,7 +16,7 @@ services:
     command: "scripts/start-local.sh"
     environment:
       FASTAPI_DEBUG: "true"
-      ELASTICSEARCH_URL: "http://:todos@elastic:9200"
+      ELASTICSEARCH_URL: "http://elastic:todos@elastic:9200"
       DATABASE_URL: "postgresql+asyncpg://todos:todos@postgres:5432/todos"
     ports:
       - "8000:8000"

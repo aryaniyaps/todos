@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from backend import settings
 
@@ -12,7 +13,14 @@ def create_app() -> FastAPI:
 
     :return: The created app.
     """
-    return FastAPI(debug=settings.DEBUG)
+    app = FastAPI(debug=settings.DEBUG)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_headers=["*"]
+    )
+    return app
 
 
 app = create_app()
