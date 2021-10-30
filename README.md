@@ -11,7 +11,7 @@ This is an example todos app.
 -   [Alembic](https://github.com/sqlalchemy/alembic) migrations
 -   [PostgreSQL](https://github.com/postgres/postgres) database server
 -   [Elasticsearch](https://github.com/elastic/elasticsearch) search engine
--   [Celery](https://github.com/celery/celery) task queue
+-   [Celery](https://github.com/celery/celery) task queue/ scheduler
     ([RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) +
     [Redis](https://github.com/redis/redis))
 
@@ -22,7 +22,7 @@ Make sure you have it installed on your machine! For development purposes, you c
 going with the following command:
 
 ```text
-docker compose up
+docker compose up --build
 ```
 
 This spins up a few containers locally. The API will be available at
