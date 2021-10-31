@@ -16,12 +16,6 @@ class User(Base):
         primary_key=True,
     )
 
-    username = Column(
-        String(32),
-        unique=True,
-        nullable=False,
-    )
-
     password = Column(
         String(255),
         nullable=False,
@@ -62,7 +56,7 @@ class User(Base):
     )
 
     def __repr__(self) -> str:
-        return f"User <{self.username}>"
+        return f"User <{self.email}>"
 
     def set_password(self, password: str) -> None:
         """

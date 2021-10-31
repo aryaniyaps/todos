@@ -1,18 +1,28 @@
+from typing import Optional
+
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.models.users import User
 
 
+async def user_by_email(session: AsyncSession, email: str) -> Optional[User]:
+    """
+    Gets an user by their email.
+    """
+    query = select(User).filter(User.email == email)
+    return (await session.execute(query)).scalar_one()
+
+
 async def create_user(
     session: AsyncSession,
     email: str, 
-    username: str, 
     password: str,
 ) -> User:
     """
     Creates an user instance.
     """
-    user = User(email=email, username=username)
+    user = User(email=email)
     user.set_password(password=password)
     session.add(instance=user)
     await session.commit()
