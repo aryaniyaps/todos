@@ -6,6 +6,7 @@ This is an example todos app.
 
 | library / service                                         | description                   |
 | --------------------------------------------------------- | ----------------------------- |
+| [React](https://github.com/facebook/react)                | UI library                    |
 | [FastAPI](https://github.com/tiangolo/fastapi)            | web framework                 |
 | [Nginx](https://github.com/nginx/nginx)                   | load balancer/ reverse proxy  |
 | [Uvicorn](https://github.com/encode/uvicorn)              | ASGI HTTP server              |
