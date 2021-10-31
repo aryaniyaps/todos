@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from routes.users import user_router
-from routes.todos import todos_router
+from backend.routes.users import user_router
+from backend.routes.todos import todos_router
 
 
 __all__ = ("router",)
