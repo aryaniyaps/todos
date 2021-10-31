@@ -21,10 +21,6 @@ config.set_main_option("sqlalchemy.url", DATABASE_URL)
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
 
-# populate Base.metadata
-from backend.users.models import User  # noqa
-from backend.todos.models import Todo  # noqa
-
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
