@@ -20,7 +20,7 @@ async def create_user(
     password: str,
 ) -> User:
     """
-    Creates an user instance.
+    Creates a new user.
     """
     user = User(email=email)
     user.set_password(password=password)
