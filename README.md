@@ -14,6 +14,7 @@ This is an example todos app.
 | [PostgreSQL](https://github.com/postgres/postgres)        | database server               |
 | [Elasticsearch](https://github.com/elastic/elasticsearch) | search engine                 |
 | [Celery](https://github.com/celery/celery)                | task queue/ scheduler         |
+| [Pytest](https://github.com/pytest-dev/pytest)            | testing framework             |
 
 ## How to use
 
@@ -26,7 +27,7 @@ docker compose up --build
 ```
 
 This spins up a few containers locally. The API will be available at
-http://localhost:8000. To use in a production environment, you need to set environment
+http://localhost/api. To use in a production environment, you need to set environment
 variables first. Here's an [example env file](example.env) to reference.
 
 ```text
