@@ -4,16 +4,16 @@ This is an example todos app.
 
 ## Tech stack used
 
--   [FastAPI](https://github.com/tiangolo/fastapi) web framework
--   [Nginx](https://github.com/nginx/nginx) load balancer/ reverse proxy
--   [Uvicorn](https://github.com/encode/uvicorn) ASGI HTTP server
--   [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) mapper/ SQL toolkit (asyncio)
--   [Alembic](https://github.com/sqlalchemy/alembic) migrations
--   [PostgreSQL](https://github.com/postgres/postgres) database server
--   [Elasticsearch](https://github.com/elastic/elasticsearch) search engine
--   [Celery](https://github.com/celery/celery) task queue/ scheduler
-    ([RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) +
-    [Redis](https://github.com/redis/redis))
+| library / service                                         | description                   |
+| --------------------------------------------------------- | ----------------------------- |
+| [FastAPI](https://github.com/tiangolo/fastapi)            | web framework                 |
+| [Nginx](https://github.com/nginx/nginx)                   | load balancer/ reverse proxy  |
+| [Uvicorn](https://github.com/encode/uvicorn)              | ASGI HTTP server              |
+| [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)    | mapper/ SQL toolkit (asyncio) |
+| [Alembic](https://github.com/sqlalchemy/alembic)          | migrations tool               |
+| [PostgreSQL](https://github.com/postgres/postgres)        | database server               |
+| [Elasticsearch](https://github.com/elastic/elasticsearch) | search engine                 |
+| [Celery](https://github.com/celery/celery)                | task queue/ scheduler         |
 
 ## How to use
 
