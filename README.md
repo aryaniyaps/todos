@@ -26,8 +26,8 @@ going with the following command:
 docker compose up --build
 ```
 
-This spins up a few containers locally. The API will be available at
-http://localhost/api. To use in a production environment, you need to set environment
+This spins up a few containers locally. The site will be available at
+http://localhost. To use in a production environment, you need to set environment
 variables first. Here's an [example env file](example.env) to reference.
 
 ```text
