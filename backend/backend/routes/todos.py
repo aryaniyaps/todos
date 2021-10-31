@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 
 
-todos_router = APIRouter(prefix="/todos")
+todo_router = APIRouter(prefix="/todos")
 
 
-@todos_router.get("/{todo_id}")
+@todo_router.get("/{todo_id}", name="todos:read")
 async def read_todo(todo_id: int):
     """
     Get a todo by ID.
@@ -12,7 +12,7 @@ async def read_todo(todo_id: int):
     pass
 
 
-@todos_router.get("")
+@todo_router.get("", name="todos:read-all")
 async def read_todos():
     """
     Get the current user's todos.
@@ -20,7 +20,7 @@ async def read_todos():
     pass
 
 
-@todos_router.post("")
+@todo_router.post("", name="todos:create")
 async def create_todo():
     """
     Create a new todo.
@@ -28,7 +28,7 @@ async def create_todo():
     pass
 
 
-@todos_router.patch("/{todo_id}")
+@todo_router.patch("/{todo_id}", name="todos:update")
 async def update_todo(todo_id: int):
     """
     Update a todo by ID.
@@ -36,7 +36,7 @@ async def update_todo(todo_id: int):
     pass
 
 
-@todos_router.delete("/{todo_id}")
+@todo_router.delete("/{todo_id}", name="todos:delete")
 async def delete_todo(todo_id: int):
     """
     Delete a todo by ID.
