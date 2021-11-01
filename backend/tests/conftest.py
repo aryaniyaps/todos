@@ -3,6 +3,7 @@ from httpx import AsyncClient
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from backend import app
 from backend.database import get_session
 
 
@@ -13,12 +14,6 @@ async def session() -> AsyncSession:
 
 
 @pytest.fixture(scope="module")
-async def client(app) -> AsyncClient:
+async def client() -> AsyncClient:
     async with AsyncClient(app=app) as client:
         yield client
-
-
-@pytest.fixture(scope="session")
-async def app() -> FastAPI:
-    from backend import app
-    return app
