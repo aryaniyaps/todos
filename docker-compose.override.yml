@@ -18,6 +18,11 @@ services:
       FASTAPI_DEBUG: "true"
       ELASTICSEARCH_URL: "http://elastic:todos@elastic:9200"
       DATABASE_URL: "postgresql+asyncpg://todos:todos@postgres:5432/todos"
+      MAIL_HOST: "localhost"
+      MAIL_PORT: 25
+      MAIL_USERNAME: "${MAIL_USERNAME}"
+      MAIL_PASSWORD: "${MAIL_PASSWORD}"
+      MAIL_SENDER: "${MAIL_SENDER}"
     ports:
       - "8000:8000"
 

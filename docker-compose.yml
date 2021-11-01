@@ -45,6 +45,11 @@ services:
       FASTAPI_DEBUG: "false"
       ELASTIC_SEARCH_URL: "${ELASTICSEARCH_URL}"
       DATABASE_URL: "${DATABASE_URL}"
+      MAIL_HOST: "${MAIL_HOST}"
+      MAIL_PORT: "${MAIL_PORT}"
+      MAIL_USERNAME: "${MAIL_USERNAME}"
+      MAIL_PASSWORD: "${MAIL_PASSWORD}"
+      MAIL_SENDER: "${MAIL_SENDER}"
     networks:
       - todos-backend
       - todos-proxy
