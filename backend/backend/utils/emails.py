@@ -1,5 +1,7 @@
+from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.utils import formatdate
 from smtplib import SMTP
 from typing import Optional
 
@@ -18,9 +20,10 @@ def send_mail(
     Sends a multipart email to the provided recipient.
     """
     message = MIMEMultipart()
+    message["Date"] = formatdate()
     message["From"] = settings.MAIL_SENDER
     message["To"] = recipient
-    message["Subject"] = subject
+    message["Subject"] = Header(subject, "utf-8")
 
     plain_text = MIMEText(content)
     message.attach(plain_text)
