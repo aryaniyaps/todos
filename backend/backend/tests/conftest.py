@@ -3,7 +3,7 @@ import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend import app
-from backend.database import get_session
+from backend.database import get_session, Base
 
 
 @pytest.fixture(scope="function")
