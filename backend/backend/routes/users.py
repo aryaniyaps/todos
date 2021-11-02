@@ -37,7 +37,7 @@ async def create_user(data: UserCreate, session: AsyncSession = Depends(get_sess
             detail="User with email already exists.",
         )
     user = await create_user(
-        ession=session, 
+        session=session, 
         password=data.password,
         email=data.email, 
     )
