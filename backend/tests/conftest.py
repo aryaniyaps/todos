@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 from httpx import AsyncClient
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
