@@ -1,9 +1,8 @@
-from schematics import Model
-from schematics.types import StringType
+from marshmallow import Schema, fields
 
 
-class TodoSerializer(Model):
-    content = StringType(
+class TodoSchema(Schema):
+    content = fields.String(
         required=True,
         metadata={
             "description": """

@@ -1,9 +1,8 @@
-from schematics import Model
-from schematics.types import EmailType, StringType
+from marshmallow import Schema, fields
 
 
-class UserSerializer(Model):
-    email = EmailType(
+class UserSchema(Schema):
+    email = fields.Email(
         required=True,
         metadata={
             "description": """
@@ -12,7 +11,7 @@ class UserSerializer(Model):
         }
     )
 
-    password = StringType(
+    password = fields.String(
         required=True,
         metadata={
             "description": """
