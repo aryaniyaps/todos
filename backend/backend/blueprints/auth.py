@@ -5,7 +5,7 @@ auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 
 
 @auth_blueprint.post("/login")
-async def login():
+def login():
     """
     Log the current user in.
     """
@@ -13,7 +13,7 @@ async def login():
 
 
 @auth_blueprint.post("/password/forgot")
-async def forgot_password():
+def forgot_password():
     """
     Request a password reset email.
     """
@@ -21,7 +21,7 @@ async def forgot_password():
 
 
 @auth_blueprint.post("/password/reset")
-async def reset_password():
+def reset_password():
     """
     Reset password for the associated user.
     """

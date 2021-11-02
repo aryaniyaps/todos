@@ -5,7 +5,7 @@ todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
 
 
 @todo_blueprint.get("/{todo_id}")
-async def read_todo(todo_id: int):
+def read_todo(todo_id: int):
     """
     Get a todo by ID.
     """
@@ -13,7 +13,7 @@ async def read_todo(todo_id: int):
 
 
 @todo_blueprint.get("")
-async def read_todos():
+def read_todos():
     """
     Get the current user's todos.
     """
@@ -21,7 +21,7 @@ async def read_todos():
 
 
 @todo_blueprint.post("")
-async def create_todo():
+def create_todo():
     """
     Create a new todo.
     """
@@ -29,7 +29,7 @@ async def create_todo():
 
 
 @todo_blueprint.patch("/{todo_id}")
-async def update_todo(todo_id: int):
+def update_todo(todo_id: int):
     """
     Update a todo by ID.
     """
@@ -37,7 +37,7 @@ async def update_todo(todo_id: int):
 
 
 @todo_blueprint.delete("/{todo_id}")
-async def delete_todo(todo_id: int):
+def delete_todo(todo_id: int):
     """
     Delete a todo by ID.
     """
