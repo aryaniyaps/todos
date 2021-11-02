@@ -8,7 +8,7 @@ def test_create_todo(session: Session, faker: Faker) -> None:
     """
     Ensure we can create a todo.
     """
-    content = faker.password(length=12)
+    content = faker.text(250)
     todo = create_todo(
         session=session,
         content=content,
