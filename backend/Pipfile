@@ -10,6 +10,7 @@ flask-login = ">=0.5"
 flask-cors = ">=3.0"
 flask-sqlalchemy = ">=2.5"
 flask-migrate = ">=3.1"
+schematics = ">=2.1"
 celery = {version = ">=5.1", extras = ["rabbitmq", "redis"]}
 sqlalchemy = {version = ">=1.4", extras = ["postgresql_asyncpg"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}
