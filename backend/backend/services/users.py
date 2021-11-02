@@ -6,6 +6,12 @@ from sqlalchemy.orm import Session
 from backend.models.users import User
 
 
+def load_user(user_id: int):
+    """
+    Loads an user by the given ID.
+    """
+    return User.query.filter(User.id == user_id).first()
+
 def user_by_email(session: Session, email: str) -> Optional[User]:
     """
     Gets an user by their email.

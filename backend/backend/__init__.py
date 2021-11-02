@@ -1,6 +1,7 @@
 from flask import Flask
 
-from backend.extensions import cors, db, migrate, mail
+from backend.services.users import load_user
+from backend.extensions import cors, db, migrate, mail, login_manager
 from backend.blueprints.auth import auth_blueprint
 from backend.blueprints.users import user_blueprint
 from backend.blueprints.todos import todo_blueprint
@@ -30,6 +31,8 @@ def register_extensions(app: Flask) -> None:
     migrate.init_app(app, db)
     cors.init_app(app)
     mail.init_app(app)
+    login_manager.init_app(app)
+    login_manager.user_loader(load_user)
 
 
 def register_blueprints(app: Flask) -> None:

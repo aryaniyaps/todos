@@ -1,9 +1,10 @@
 from passlib.hash import argon2
 
+from flask_login import UserMixin
 from sqlalchemy import db
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     """Represents an individual user account."""
 
     __tablename__ = "users"

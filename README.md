@@ -4,18 +4,18 @@ This is an example todos app.
 
 ## Tech stack used
 
-| library / service                                         | description                   |
-| --------------------------------------------------------- | ----------------------------- |
-| [React](https://github.com/facebook/react)                | UI library                    |
-| [Flask](https://github.com/pallets/flask)                 | web framework                 |
-| [Nginx](https://github.com/nginx/nginx)                   | load balancer/ reverse proxy  |
-| [Gunicorn](https://github.com/benoitc/gunicorn)           | WSGI HTTP server              |
-| [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)    | mapper/ SQL toolkit (asyncio) |
-| [Alembic](https://github.com/sqlalchemy/alembic)          | migrations tool               |
-| [PostgreSQL](https://github.com/postgres/postgres)        | database server               |
-| [Elasticsearch](https://github.com/elastic/elasticsearch) | search engine                 |
-| [Celery](https://github.com/celery/celery)                | task queue/ scheduler         |
-| [Pytest](https://github.com/pytest-dev/pytest)            | testing framework             |
+| library / service                                         | description                  |
+| --------------------------------------------------------- | ---------------------------- |
+| [React](https://github.com/facebook/react)                | UI library                   |
+| [Flask](https://github.com/pallets/flask)                 | web framework                |
+| [Nginx](https://github.com/nginx/nginx)                   | load balancer/ reverse proxy |
+| [Gunicorn](https://github.com/benoitc/gunicorn)           | WSGI HTTP server             |
+| [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)    | mapper/ SQL toolkit          |
+| [Alembic](https://github.com/sqlalchemy/alembic)          | migrations tool              |
+| [PostgreSQL](https://github.com/postgres/postgres)        | database server              |
+| [Elasticsearch](https://github.com/elastic/elasticsearch) | search engine                |
+| [Celery](https://github.com/celery/celery)                | task queue/ scheduler        |
+| [Pytest](https://github.com/pytest-dev/pytest)            | testing framework            |
 
 ## How to use
 
