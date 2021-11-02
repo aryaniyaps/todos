@@ -1,3 +1,3 @@
 #!/bin/sh
-pipenv run alembic upgrade head
-pipenv run uvicorn backend:app --host 0.0.0.0 --port 8000
+pipenv run flask db upgrade
+pipenv run gunicorn todos -b 0.0.0.0:8000

@@ -1,45 +1,44 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from flask import Flask
 
-from backend import settings
-from backend.routes.auth import auth_router
-from backend.routes.users import user_router
-from backend.routes.todos import todo_router
-
-
-__all__ = ("app",)
+from backend.extensions import cors, db, migrate, mail
+from backend.blueprints.auth import auth_blueprint
+from backend.blueprints.users import user_blueprint
+from backend.blueprints.todos import todo_blueprint
 
 
-def create_app() -> FastAPI:
+__all__ = ("create_app",)
+
+
+def create_app(config: str = "backend.settings") -> Flask:
     """
     Initializes an app instance.
 
     :return: The created app.
     """
-    app = FastAPI(debug=settings.DEBUG)
-    register_middleware(app)
-    register_routes(app)
+    app = Flask(__name__)
+    app.config.from_object(config)
+    register_extensions(app)
+    register_blueprints(app)
     return app
 
 
-def register_middleware(app: FastAPI) -> None:
+def register_extensions(app: Flask) -> None:
     """
-    Registers middleware for the app.
+    Registers extensions for the app.
     """
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_headers=["*"],
-    )
-
-def register_routes(app: FastAPI) -> None:
-    """
-    Registers routes for the app.
-    """
-    app.include_router(router=auth_router)
-    app.include_router(router=user_router)
-    app.include_router(router=todo_router)
+    db.init_app(app)
+    migrate.init_app(app, db)
+    cors.init_app(app)
+    mail.init_app(app)
 
 
-app = create_app()
+def register_blueprints(app: Flask) -> None:
+    """
+    Registers blueprints for the app.
+    """
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(user_blueprint)
+    app.register_blueprint(todo_blueprint)
+
+
+application = create_app()

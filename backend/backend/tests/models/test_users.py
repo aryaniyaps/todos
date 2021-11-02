@@ -1,6 +1,3 @@
-from backend.models.users import User
-
-
 def test_set_password():
     """
     Ensure we can set a password on a user.

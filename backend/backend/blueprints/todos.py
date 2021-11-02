@@ -1,10 +1,10 @@
-from fastapi import APIRouter
+from flask import Blueprint
 
 
-todo_router = APIRouter(prefix="/todos")
+todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
 
 
-@todo_router.get("/{todo_id}", name="todos:read")
+@todo_blueprint.get("/{todo_id}")
 async def read_todo(todo_id: int):
     """
     Get a todo by ID.
@@ -12,7 +12,7 @@ async def read_todo(todo_id: int):
     pass
 
 
-@todo_router.get("", name="todos:read-all")
+@todo_blueprint.get("")
 async def read_todos():
     """
     Get the current user's todos.
@@ -20,7 +20,7 @@ async def read_todos():
     pass
 
 
-@todo_router.post("", name="todos:create")
+@todo_blueprint.post("")
 async def create_todo():
     """
     Create a new todo.
@@ -28,7 +28,7 @@ async def create_todo():
     pass
 
 
-@todo_router.patch("/{todo_id}", name="todos:update")
+@todo_blueprint.patch("/{todo_id}")
 async def update_todo(todo_id: int):
     """
     Update a todo by ID.
@@ -36,7 +36,7 @@ async def update_todo(todo_id: int):
     pass
 
 
-@todo_router.delete("/{todo_id}", name="todos:delete")
+@todo_blueprint.delete("/{todo_id}")
 async def delete_todo(todo_id: int):
     """
     Delete a todo by ID.

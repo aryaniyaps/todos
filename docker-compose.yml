@@ -42,14 +42,17 @@ services:
     working_dir: "/backend/"
     command: "scripts/start-prod.sh"
     environment:
-      FASTAPI_DEBUG: "false"
+      FLASK_APP: "backend:application"
+      FLASK_DEBUG: "false"
+      FLASK_ENV: "production"
       ELASTIC_SEARCH_URL: "${ELASTICSEARCH_URL}"
       DATABASE_URL: "${DATABASE_URL}"
-      MAIL_HOST: "${MAIL_HOST}"
+      MAIL_SERVER: "${MAIL_SERVER}"
       MAIL_PORT: "${MAIL_PORT}"
+      MAIL_DEFAULT_SENDER: "${MAIL_DEFAULT_SENDER}"
+      MAIL_USE_TLS: "${MAIL_USE_TLS}"
       MAIL_USERNAME: "${MAIL_USERNAME}"
       MAIL_PASSWORD: "${MAIL_PASSWORD}"
-      MAIL_SENDER: "${MAIL_SENDER}"
     networks:
       - todos-backend
       - todos-proxy
@@ -58,7 +61,6 @@ services:
     depends_on:
       - postgres
       - elasticsearch
-      - redis
 
   postgres:
     image: postgres:14-alpine

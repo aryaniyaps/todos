@@ -1,57 +1,54 @@
 from passlib.hash import argon2
-from sqlalchemy import Column, String, Boolean, Integer, DateTime
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
 
-from backend.database import Base
+from sqlalchemy import db
 
 
-class User(Base):
+class User(db.Model):
     """Represents an individual user account."""
 
     __tablename__ = "users"
 
-    id = Column(
-        Integer,
+    id = db.Column(
+        db.Integer,
         primary_key=True,
     )
 
-    password = Column(
-        String(255),
+    password = db.Column(
+        db.String(255),
         nullable=False,
     )
 
-    email = Column(
-        String(255),
+    email = db.Column(
+        db.String(255),
         unique=True,
         nullable=False,
     )
 
-    avatar = Column(
-        String(255),
+    avatar = db.Column(
+        db.String(255),
         default="default.jpg",
         nullable=False,
     )
 
-    is_active = Column(
-        Boolean,
+    is_active = db.Column(
+        db.Boolean,
         default=True,
         nullable=False,
     )
 
-    created_at = Column(
-        DateTime(timezone=True),
-        server_default=func.now(),
+    created_at = db.Column(
+        db.DateTime(timezone=True),
+        server_default=db.func.now(),
         nullable=False,
     )
 
-    updated_at: Column(
-        DateTime(timezone=True),
-        onupdate=func.now(),
+    updated_at: db.Column(
+        db.DateTime(timezone=True),
+        onupdate=db.func.now(),
         nullable=False,
     )
 
-    todos = relationship(
+    todos = db.relationship(
         "Todo", back_populates="user", lazy="dynamic",
     )
 

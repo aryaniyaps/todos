@@ -1,45 +1,42 @@
-from sqlalchemy import Column, ForeignKey, Text, Boolean, Integer, DateTime
-from sqlalchemy.sql import func
-
-from backend.database import Base
+from backend import db
 
 
-class Todo(Base):
+class Todo(db.Model):
     """Represents an user's todo."""
 
     __tablename__ = "todos"
 
-    id = Column(
-        Integer,
+    id = db.Column(
+        db.Integer,
         primary_key=True,
     )
 
-    content = Column(
-        Text,
+    content = db.Column(
+        db.Text,
         nullable=False,
     )
 
-    completed = Column(
-        Boolean,
+    completed = db.Column(
+        db.Boolean,
         default=False,
         nullable=False,
     )
 
-    user_id = Column(
-        Integer,
-        ForeignKey("users.id"),
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey("users.id"),
         nullable=False,
     )
 
-    created_at = Column(
-        DateTime(timezone=True),
-        server_default=func.now(),
+    created_at = db.Column(
+        db.DateTime(timezone=True),
+        server_default=db.func.now(),
         nullable=False,
     )
 
-    updated_at: Column(
-        DateTime(timezone=True),
-        onupdate=func.now(),
+    updated_at: db.Column(
+        db.DateTime(timezone=True),
+        onupdate=db.func.now(),
         nullable=False,
     )
 

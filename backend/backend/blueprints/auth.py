@@ -1,10 +1,10 @@
-from fastapi import APIRouter
+from flask import Blueprint
 
 
-auth_router = APIRouter(prefix="/auth")
+auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 
 
-@auth_router.post("/login", name="auth:login")
+@auth_blueprint.post("/login")
 async def login():
     """
     Log the current user in.
@@ -12,7 +12,7 @@ async def login():
     pass
 
 
-@auth_router.post("/password/forgot", name="auth:forgot-password")
+@auth_blueprint.post("/password/forgot")
 async def forgot_password():
     """
     Request a password reset email.
@@ -20,7 +20,7 @@ async def forgot_password():
     pass
 
 
-@auth_router.post("/password/reset", name="auth:reset-password")
+@auth_blueprint.post("/password/reset")
 async def reset_password():
     """
     Reset password for the associated user.
