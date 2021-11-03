@@ -4,9 +4,9 @@ from backend.extensions import db
 from backend.models.users import User
 
 
-def load_user(user_id: int):
+def load_user(user_id: int) -> Optional[User]:
     """
-    Loads an user by the given ID.
+    Loads an user by their ID.
     """
     return User.query.filter(User.id == user_id).first()
 

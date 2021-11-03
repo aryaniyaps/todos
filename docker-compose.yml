@@ -45,6 +45,7 @@ services:
       FLASK_APP: "backend:application"
       FLASK_DEBUG: "false"
       FLASK_ENV: "production"
+      CORS_ORIGINS: "${CORS_ORIGINS}"
       ELASTIC_SEARCH_URL: "${ELASTICSEARCH_URL}"
       DATABASE_URL: "${DATABASE_URL}"
       MAIL_SERVER: "${MAIL_SERVER}"
