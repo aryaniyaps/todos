@@ -1,12 +1,12 @@
 from flask import Flask
 from marshmallow import ValidationError
 
-from backend.services.users import load_user
-from backend.handlers.validation_error import handle_validation_error
 from backend.extensions import cors, db, migrate, mail, login_manager
+from backend.handlers.validation_error import handle_validation_error
 from backend.routes.auth import auth_blueprint
 from backend.routes.users import user_blueprint
 from backend.routes.todos import todo_blueprint
+from backend.services.users import load_user
 
 
 __all__ = ("create_app",)

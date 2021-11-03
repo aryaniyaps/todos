@@ -36,11 +36,19 @@ def read_todos():
     """
     Get the current user's todos.
     """
-    todos = Todo.query.filter(
+    query = Todo.query.filter(
         Todo.user_id == current_user.id,
     )
-    data = TodoSchema(many=True).dump(todos)
-    return {"todos": data}
+    page = request.args.get(key="page", default=1, type=int)
+    limit = request.args.get(key="limit", default=20, type=int)
+    result = query.paginate(page=page, per_page=limit, error_out=False)
+    todos = TodoSchema(many=True).dump(result.items)
+    return {
+        "todos": todos,
+        "has_prev": result.has_prev,
+        "has_next": result.has_next,
+        "count": result.total
+    }
 
 
 @todo_blueprint.post("")

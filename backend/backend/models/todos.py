@@ -32,7 +32,7 @@ class Todo(db.Model):
         nullable=False,
     )
 
-    updated_at: db.Column(
+    updated_at = db.Column(
         db.DateTime(timezone=True),
         onupdate=db.func.now(),
         nullable=False,
@@ -41,7 +41,7 @@ class Todo(db.Model):
     __tablename__ = "todos"
 
     __mapper_args__ = {
-        "order_by": created_at
+        "order_by": created_at.desc()
     }
 
     def __repr__(self) -> str:

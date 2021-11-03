@@ -35,7 +35,7 @@ class User(db.Model, UserMixin):
         nullable=False,
     )
 
-    updated_at: db.Column(
+    updated_at = db.Column(
         db.DateTime(timezone=True),
         onupdate=db.func.now(),
         nullable=False,
@@ -51,7 +51,7 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     __mapper_args__ = {
-        "order_by": created_at
+        "order_by": created_at.desc()
     }
 
     def __repr__(self) -> str:

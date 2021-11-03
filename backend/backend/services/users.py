@@ -32,13 +32,6 @@ def create_user(
     return user
 
 
-def update_user(user: User) -> User:
-    """
-    Updates the given user.
-    """
-    pass
-
-
 def deactivate_user(user: User) -> User:
     """
     Deactivates the given user.
