@@ -15,8 +15,7 @@ def app():
 
 @pytest.fixture(scope="session")
 def db(app):
-    with app.app_context():
-        db.create_all()
+    db.create_all()
     yield db
     db.drop_all()
 
@@ -24,5 +23,4 @@ def db(app):
 @pytest.fixture(scope="function")
 def session(db):
     yield db.session
-    db.session.close()
-    db.session.rollback()
+    db.session.remove()

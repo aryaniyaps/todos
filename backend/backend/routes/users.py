@@ -28,13 +28,7 @@ def update_current_user():
     """
     Update the current user.
     """
-    schema = UserSchema()
-    data = schema.load(request.get_json())
-    user = update_user(
-        user=current_user,
-        avatar=data.get("avatar")
-    )
-    return {"user": schema.dump(user)}
+    pass
 
 
 @user_blueprint.post("")

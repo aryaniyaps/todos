@@ -23,12 +23,6 @@ class User(db.Model, UserMixin):
         nullable=False,
     )
 
-    avatar = db.Column(
-        db.String(255),
-        default="default.jpg",
-        nullable=False,
-    )
-
     is_active = db.Column(
         db.Boolean,
         default=True,

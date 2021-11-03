@@ -20,15 +20,6 @@ class UserSchema(Schema):
         }
     )
 
-    avatar = fields.String(
-        dump_only=True,
-        metadata={
-            "description": """
-            The avatar URL of the user.
-            """
-        }
-    )
-
     password = fields.String(
         required=True,
         load_only=True,
