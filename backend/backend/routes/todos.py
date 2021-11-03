@@ -4,11 +4,15 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 
 from backend.models.todos import Todo
-from backend.services.todos import create_todo, delete_todo
+from backend.services.todos import create_todo, delete_todo, update_todo
 from backend.schemas.todos import TodoSchema
 
 
-todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
+todo_blueprint = Blueprint(
+    name="todos", 
+    import_name=__name__, 
+    url_prefix="/todos",
+)
 
 
 @todo_blueprint.get("/<int:todo_id>")
@@ -55,7 +59,16 @@ def update_todo(todo_id: int):
     """
     Update a todo by ID.
     """
-    pass
+    query = Todo.query.filter_by(id=todo_id, user_id=current_user.id)
+    todo = query.first_or_404()
+    schema = TodoSchema()
+    data = schema.load(request.get_json())
+    todo = update_todo(
+        todo=todo,
+        completed=data.get("completed"),
+        content=data.get("content"), 
+    )
+    return {"todo": schema.dump(todo)}
 
 
 @todo_blueprint.delete("/<int:todo_id>")

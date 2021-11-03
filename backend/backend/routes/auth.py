@@ -1,7 +1,11 @@
 from flask import Blueprint
 
 
-auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
+auth_blueprint = Blueprint(
+    name="auth", 
+    import_name=__name__, 
+    url_prefix="/auth",
+)
 
 
 @auth_blueprint.post("/login")

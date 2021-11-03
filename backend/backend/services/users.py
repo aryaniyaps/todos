@@ -32,6 +32,20 @@ def create_user(
     return user
 
 
+def update_user(
+    user: User,
+    avatar: Optional[str]
+) -> User:
+    """
+    Updates the given user.
+    """
+    if avatar is not None:
+        user.avatar = avatar
+    db.session.commit()
+    db.session.refresh(instance=user)
+    return user
+
+
 def deactivate_user(user: User) -> User:
     """
     Deactivates the given user.
