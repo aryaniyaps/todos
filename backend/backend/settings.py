@@ -1,6 +1,10 @@
 from typing import Optional
 from os import getenv
 
+
+# branding configuration.
+PUBLIC_SITE_NAME = getenv("PUBLIC_SITE_NAME", default="Todos")
+
 # app environment.
 ENV: str = getenv("FLASK_ENV", default="development")
 

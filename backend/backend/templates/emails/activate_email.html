@@ -1,7 +1,7 @@
 {% extends "emails/base_email.html" %} {% block title %} Confirm Email {% endblock %} {%
 block content %}
 <p>
-    Someone tried to sign up for a {{ config.SITE_NAME }} account<br />
+    Someone tried to sign up for a {{ config.PUBLIC_SITE_NAME }} account<br />
     with <a href="mailto:{{ email }}">{{ email }}</a>. If this was you,<br />
     enter this confirmation code in the app:
 </p>
