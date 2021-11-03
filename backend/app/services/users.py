@@ -1,7 +1,7 @@
 from typing import Optional
 
-from backend.extensions import db
-from backend.models.users import User
+from app.extensions import db
+from app.models.users import User
 
 
 def load_user(user_id: int) -> Optional[User]:

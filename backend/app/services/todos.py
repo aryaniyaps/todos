@@ -1,7 +1,7 @@
 from typing import Optional
 
-from backend.extensions import db
-from backend.models.todos import Todo
+from app.extensions import db
+from app.models.todos import Todo
 
 
 def create_todo(content: str, user_id: int) -> Todo:

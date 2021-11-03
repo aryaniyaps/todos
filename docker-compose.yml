@@ -42,7 +42,7 @@ services:
     working_dir: "/backend/"
     command: "scripts/start-prod.sh"
     environment:
-      FLASK_APP: "backend:application"
+      FLASK_APP: "app:application"
       FLASK_DEBUG: "false"
       FLASK_ENV: "production"
       CORS_ORIGINS: "${CORS_ORIGINS}"

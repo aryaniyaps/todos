@@ -1,4 +1,4 @@
-from backend import db
+from app import db
 
 
 class Todo(db.Model):
@@ -39,10 +39,6 @@ class Todo(db.Model):
     )
 
     __tablename__ = "todos"
-
-    __mapper_args__ = {
-        "order_by": created_at.desc()
-    }
 
     def __repr__(self) -> str:
         return f"Todo <{self.content[:25]}>"

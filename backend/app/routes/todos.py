@@ -3,9 +3,9 @@ from http import HTTPStatus
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 
-from backend.models.todos import Todo
-from backend.services.todos import create_todo, delete_todo, update_todo
-from backend.schemas.todos import TodoSchema
+from app.models.todos import Todo
+from app.services.todos import create_todo, delete_todo, update_todo
+from app.schemas.todos import TodoSchema
 
 
 todo_blueprint = Blueprint(
@@ -26,8 +26,7 @@ def read_todo(todo_id: int):
         Todo.user_id == current_user.id,
     )
     todo = query.first_or_404()
-    data = TodoSchema().dump(todo)
-    return {"todo": data}
+    return TodoSchema().dump(todo)
 
 
 @todo_blueprint.get("")
@@ -41,13 +40,16 @@ def read_todos():
     )
     page = request.args.get(key="page", default=1, type=int)
     limit = request.args.get(key="limit", default=20, type=int)
-    result = query.paginate(page=page, per_page=limit, error_out=False)
-    todos = TodoSchema(many=True).dump(result.items)
+    results = query.paginate(
+        page=page, 
+        per_page=limit, 
+        error_out=False,
+    )
     return {
-        "todos": todos,
-        "has_prev": result.has_prev,
-        "has_next": result.has_next,
-        "count": result.total
+        "results": TodoSchema(many=True).dump(results.items),
+        "has_prev": results.has_prev,
+        "has_next": results.has_next,
+        "count": results.total
     }
 
 
@@ -63,7 +65,7 @@ def create_todo():
         user_id=current_user.id,
         content=data.get("content"), 
     )
-    return {"todo": schema.dump(todo)}
+    return schema.dump(todo)
 
 
 @todo_blueprint.patch("/<int:todo_id>")
@@ -84,7 +86,7 @@ def update_todo(todo_id: int):
         completed=data.get("completed"),
         content=data.get("content"), 
     )
-    return {"todo": schema.dump(todo)}
+    return schema.dump(todo)
 
 
 @todo_blueprint.delete("/<int:todo_id>")

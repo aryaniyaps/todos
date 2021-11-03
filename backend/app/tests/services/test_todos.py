@@ -1,7 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
 
-from backend.services.todos import create_todo
+from app.services.todos import create_todo
 
 
 def test_create_todo(session: Session, faker: Faker) -> None:

@@ -1,18 +1,18 @@
 from flask import Flask
 from marshmallow import ValidationError
 
-from backend.extensions import cors, db, migrate, mail, login_manager
-from backend.handlers.validation_error import handle_validation_error
-from backend.routes.auth import auth_blueprint
-from backend.routes.users import user_blueprint
-from backend.routes.todos import todo_blueprint
-from backend.services.users import load_user
+from app.extensions import cors, db, migrate, mail, login_manager
+from app.handlers.validation_error import handle_validation_error
+from app.routes.auth import auth_blueprint
+from app.routes.users import user_blueprint
+from app.routes.todos import todo_blueprint
+from app.services.users import load_user
 
 
 __all__ = ("create_app",)
 
 
-def create_app(config: str = "backend.settings") -> Flask:
+def create_app(config: str = "app.settings") -> Flask:
     """
     Initializes an app instance.
 

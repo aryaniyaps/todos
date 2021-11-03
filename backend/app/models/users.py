@@ -1,7 +1,7 @@
 from passlib.hash import argon2
 
 from flask_login import UserMixin
-from sqlalchemy import db
+from app import db
 
 
 class User(db.Model, UserMixin):
@@ -49,10 +49,6 @@ class User(db.Model, UserMixin):
     )
 
     __tablename__ = "users"
-
-    __mapper_args__ = {
-        "order_by": created_at.desc()
-    }
 
     def __repr__(self) -> str:
         return f"User <{self.email}>"

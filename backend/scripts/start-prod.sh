@@ -1,3 +1,3 @@
 #!/bin/sh
 pipenv run flask db upgrade
-pipenv run gunicorn todos -b 0.0.0.0:8000
+pipenv run gunicorn app -b 0.0.0.0:8000

@@ -3,8 +3,8 @@ from http import HTTPStatus
 from flask import Blueprint, request
 from flask_login import login_user, logout_user
 
-from backend.services.auth import authenticate_user
-from backend.schemas.users import UserSchema
+from app.services.auth import authenticate_user
+from app.schemas.users import UserSchema
 
 
 auth_blueprint = Blueprint(
@@ -31,7 +31,7 @@ def authenticate_user():
         }
         return errors, HTTPStatus.BAD_REQUEST
     login_user(user=user)
-    return {"user": schema.dump(user)}
+    return schema.dump(user)
 
 
 @auth_blueprint.post("/logout")

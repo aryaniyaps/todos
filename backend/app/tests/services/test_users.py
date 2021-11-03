@@ -1,7 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
 
-from backend.services.users import create_user, deactivate_user
+from app.services.users import create_user, deactivate_user
 
 
 def test_create_user(session: Session, faker: Faker) -> None:

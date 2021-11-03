@@ -1,7 +1,7 @@
 from typing import Optional
 
-from backend.models.users import User
-from backend.services.users import user_by_email
+from app.models.users import User
+from app.services.users import user_by_email
 
 
 def authenticate_user(email: str, password: str) -> Optional[User]:
