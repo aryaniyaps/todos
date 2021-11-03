@@ -7,8 +7,6 @@ from sqlalchemy import db
 class User(db.Model, UserMixin):
     """Represents an individual user account."""
 
-    __tablename__ = "users"
-
     id = db.Column(
         db.Integer,
         primary_key=True,
@@ -50,8 +48,17 @@ class User(db.Model, UserMixin):
     )
 
     todos = db.relationship(
-        "Todo", back_populates="user", lazy="dynamic",
+        "Todo", 
+        back_populates="user", 
+        lazy="dynamic", 
+        cascade="all, delete-orphan"
     )
+
+    __tablename__ = "users"
+
+    __mapper_args__ = {
+        "order_by": created_at
+    }
 
     def __repr__(self) -> str:
         return f"User <{self.email}>"

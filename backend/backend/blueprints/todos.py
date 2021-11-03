@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 
 from backend.models.todos import Todo
@@ -20,7 +20,7 @@ def read_todo(todo_id: int):
     query = Todo.query.filter_by(id=todo_id, user_id=current_user.id)
     todo = query.first_or_404()
     data = TodoSchema().dump(todo)
-    return jsonify({"todo": data}), HTTPStatus.OK
+    return {"todo": data}
 
 
 @todo_blueprint.get("")
@@ -31,7 +31,7 @@ def read_todos():
     """
     todos = Todo.query.filter_by(user_id=current_user.id)
     data = TodoSchema(many=True).dump(todos)
-    return jsonify({"todos": data}), HTTPStatus.OK
+    return {"todos": data}
 
 
 @todo_blueprint.post("")
@@ -40,19 +40,16 @@ def create_todo():
     """
     Create a new todo.
     """
-    data = request.get_json()
     schema = TodoSchema()
-    validated_data, errors = schema.load(data)
-    if errors:
-        return jsonify(errors), HTTPStatus.BAD_REQUEST
-    create_todo(
+    data = schema.load(request.get_json())
+    todo = create_todo(
         user_id=current_user.id,
-        content=validated_data.get("content"), 
+        content=data.get("content"), 
     )
-    return jsonify(schema.dump(schema.instance).data), HTTPStatus.CREATED
+    return {"todo": schema.dump(todo)}
 
 
-@todo_blueprint.patch("/{todo_id}")
+@todo_blueprint.patch("/<int:todo_id>")
 @login_required
 def update_todo(todo_id: int):
     """
@@ -61,7 +58,7 @@ def update_todo(todo_id: int):
     pass
 
 
-@todo_blueprint.delete("/{todo_id}")
+@todo_blueprint.delete("/<int:todo_id>")
 @login_required
 def delete_todo(todo_id: int):
     """

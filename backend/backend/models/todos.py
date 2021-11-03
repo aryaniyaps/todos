@@ -4,8 +4,6 @@ from backend import db
 class Todo(db.Model):
     """Represents an user's todo."""
 
-    __tablename__ = "todos"
-
     id = db.Column(
         db.Integer,
         primary_key=True,
@@ -39,6 +37,12 @@ class Todo(db.Model):
         onupdate=db.func.now(),
         nullable=False,
     )
+
+    __tablename__ = "todos"
+
+    __mapper_args__ = {
+        "order_by": created_at
+    }
 
     def __repr__(self) -> str:
         return f"Todo <{self.content[:25]}>"

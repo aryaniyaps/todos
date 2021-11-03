@@ -1,6 +1,8 @@
 from flask import Flask
+from marshmallow import ValidationError
 
 from backend.services.users import load_user
+from backend.handlers.validation_error import handle_validation_error
 from backend.extensions import cors, db, migrate, mail, login_manager
 from backend.blueprints.auth import auth_blueprint
 from backend.blueprints.users import user_blueprint
@@ -19,6 +21,7 @@ def create_app(config: str = "backend.settings") -> Flask:
     app = Flask(__name__)
     app.config.from_object(config)
     register_extensions(app)
+    register_error_handlers(app)
     register_blueprints(app)
     return app
 
@@ -42,6 +45,16 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(user_blueprint)
     app.register_blueprint(todo_blueprint)
+
+
+def register_error_handlers(app: Flask) -> None:
+    """
+    Registers error handlers for the app.
+    """
+    app.register_error_handler(
+        ValidationError, 
+        handle_validation_error,
+    )
 
 
 application = create_app()
