@@ -15,7 +15,6 @@ def app():
 
 @pytest.fixture(scope="session")
 def db(app):
-    db.app = app
     with app.app_context():
         db.create_all()
     yield db
