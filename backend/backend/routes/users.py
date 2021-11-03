@@ -1,8 +1,10 @@
+from http import HTTPStatus
+
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 
 from backend.schemas.users import UserSchema
-from backend.services.users import create_user, update_user
+from backend.services.users import create_user, user_by_email
 
 
 user_blueprint = Blueprint(
@@ -22,15 +24,6 @@ def read_current_user():
     return {"user": schema.dump(current_user)}
 
 
-@user_blueprint.patch("/me")
-@login_required
-def update_current_user():
-    """
-    Update the current user.
-    """
-    pass
-
-
 @user_blueprint.post("")
 def create_user():
     """
@@ -38,6 +31,14 @@ def create_user():
     """
     schema = UserSchema()
     data = schema.load(request.get_json())
+    user = user_by_email(email=data.get("email"))
+    if user is not None:
+        errors = {
+            "errors": {
+                "email": "User with email already exists."
+            }
+        }
+        return errors, HTTPStatus.BAD_REQUEST
     user = create_user(
         email=data.get("email"),
         password=data.get("password"), 

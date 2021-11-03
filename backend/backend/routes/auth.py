@@ -1,4 +1,10 @@
-from flask import Blueprint
+from http import HTTPStatus
+
+from flask import Blueprint, request
+from flask_login import login_user
+
+from backend.services.auth import authenticate_user
+from backend.schemas.users import UserSchema
 
 
 auth_blueprint = Blueprint(
@@ -9,11 +15,23 @@ auth_blueprint = Blueprint(
 
 
 @auth_blueprint.post("/login")
-def login():
+def authenticate_user():
     """
     Log the current user in.
     """
-    pass
+    schema = UserSchema()
+    data = schema.load(request.get_json())
+    user = authenticate_user(
+        email=data.get("email"), 
+        password=data.get("password"),
+    )
+    if user is None:
+        errors = {
+            "errors": "Incorrect email/ password provided."
+        }
+        return errors, HTTPStatus.BAD_REQUEST
+    login_user(user=user)
+    return {"user": schema.dump(user)}
 
 
 @auth_blueprint.post("/password/forgot")

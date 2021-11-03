@@ -29,6 +29,8 @@ def create_app(config: str = "backend.settings") -> Flask:
 def register_extensions(app: Flask) -> None:
     """
     Registers extensions for the app.
+
+    :param app: the app instance.
     """
     db.init_app(app)
     migrate.init_app(app, db)
@@ -41,6 +43,8 @@ def register_extensions(app: Flask) -> None:
 def register_blueprints(app: Flask) -> None:
     """
     Registers blueprints for the app.
+
+    :param app: the app instance.
     """
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(user_blueprint)
@@ -50,6 +54,8 @@ def register_blueprints(app: Flask) -> None:
 def register_error_handlers(app: Flask) -> None:
     """
     Registers error handlers for the app.
+
+    :param app: the app instance.
     """
     app.register_error_handler(
         ValidationError, 

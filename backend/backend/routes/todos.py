@@ -21,7 +21,10 @@ def read_todo(todo_id: int):
     """
     Get a todo by ID.
     """
-    query = Todo.query.filter_by(id=todo_id, user_id=current_user.id)
+    query = Todo.query.filter(
+        Todo.id == todo_id, 
+        Todo.user_id == current_user.id,
+    )
     todo = query.first_or_404()
     data = TodoSchema().dump(todo)
     return {"todo": data}
@@ -33,7 +36,9 @@ def read_todos():
     """
     Get the current user's todos.
     """
-    todos = Todo.query.filter_by(user_id=current_user.id)
+    todos = Todo.query.filter(
+        Todo.user_id == current_user.id,
+    )
     data = TodoSchema(many=True).dump(todos)
     return {"todos": data}
 
@@ -59,7 +64,10 @@ def update_todo(todo_id: int):
     """
     Update a todo by ID.
     """
-    query = Todo.query.filter_by(id=todo_id, user_id=current_user.id)
+    query = Todo.query.filter(
+        Todo.id == todo_id, 
+        Todo.user_id == current_user.id,
+    )
     todo = query.first_or_404()
     schema = TodoSchema()
     data = schema.load(request.get_json())
@@ -77,7 +85,10 @@ def delete_todo(todo_id: int):
     """
     Delete a todo by ID.
     """
-    query = Todo.query.filter_by(id=todo_id, user_id=current_user.id)
+    query = Todo.query.filter(
+        Todo.id == todo_id, 
+        Todo.user_id == current_user.id,
+    )
     todo = query.first_or_404()
     delete_todo(todo=todo)
     return "", HTTPStatus.NO_CONTENT
