@@ -1,8 +1,6 @@
 from typing import Optional
 
-from sqlalchemy import select
-from sqlalchemy.orm import Session
-
+from backend.extensions import db
 from backend.models.users import User
 
 
@@ -12,16 +10,14 @@ def load_user(user_id: int):
     """
     return User.query.filter(User.id == user_id).first()
 
-def user_by_email(session: Session, email: str) -> Optional[User]:
+def user_by_email(email: str) -> Optional[User]:
     """
     Gets an user by their email.
     """
-    query = select(User).filter(User.email == email)
-    return session.execute(query).scalar_one()
+    return User.query.filter(User.email == email).first()
 
 
 def create_user(
-    session: Session,
     email: str, 
     password: str,
 ) -> User:
@@ -30,18 +26,18 @@ def create_user(
     """
     user = User(email=email)
     user.set_password(password=password)
-    session.add(instance=user)
-    session.commit()
-    session.refresh(instance=user)
+    db.session.add(instance=user)
+    db.session.commit()
+    db.session.refresh(instance=user)
     return user
 
 
-def deactivate_user(session: Session, user: User) -> User:
+def deactivate_user(user: User) -> User:
     """
     Deactivates the given user.
     """
     user.is_active = False
-    session.add(instance=user)
-    session.commit()
-    session.refresh(instance=user)
+    db.session.add(instance=user)
+    db.session.commit()
+    db.session.refresh(instance=user)
     return user
