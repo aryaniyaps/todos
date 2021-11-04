@@ -16,7 +16,9 @@ services:
       - frontend
 
   frontend:
-    build: "./frontend"
+    build:
+      context: "./frontend"
+      target: "production"
     container_name: todos-frontend
     restart: on-failure
     working_dir: "/frontend/"

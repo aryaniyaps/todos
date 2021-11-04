@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:14-alpine as development
 
 # set workdir
 ARG APP_HOME=/frontend/
@@ -15,3 +15,9 @@ RUN yarn install
 
 # copy project files
 COPY ./ ${APP_HOME}
+
+# production stage
+FROM development as production
+
+# create optimized build
+RUN yarn build
