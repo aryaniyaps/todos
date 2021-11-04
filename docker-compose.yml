@@ -16,11 +16,9 @@ services:
       - frontend
 
   frontend:
-    build:
-      context: "./frontend"
-      target: "production"
+    build: "./frontend"
     container_name: todos-frontend
-    restart: always
+    restart: on-failure
     working_dir: "/frontend/"
     command: "scripts/start-prod.sh"
     environment:
@@ -38,7 +36,7 @@ services:
       context: "./backend"
       target: "production"
     container_name: todos-backend
-    restart: always
+    restart: on-failure
     working_dir: "/backend/"
     command: "scripts/start-prod.sh"
     environment:
@@ -66,7 +64,7 @@ services:
   postgres:
     image: postgres:14-alpine
     container_name: todos-postgres
-    restart: always
+    restart: on-failure
     environment:
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
@@ -79,7 +77,7 @@ services:
   redis:
     image: redis:6.2-alpine
     container_name: todos-redis
-    restart: always
+    restart: on-failure
     environment:
       REDIS_PASSWORD: "${REDIS_PASSWORD}"
     networks:
@@ -90,7 +88,7 @@ services:
   rabbitmq:
     image: rabbitmq:3.9-alpine
     container_name: reddit-rabbitmq
-    restart: always
+    restart: on-failure
     environment:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
@@ -102,7 +100,7 @@ services:
   elasticsearch:
     image: elasticsearch:7.14.2
     container_name: todos-elasticsearch
-    restart: always
+    restart: on-failure
     environment:
       ELASTIC_PASSWORD: "${ELASTIC_PASSWORD}"
       bootstrap.memory_lock: "${ELASTIC_MEMORY_LOCK:-true}"
