@@ -26,7 +26,7 @@ def test_deactivate_user(faker: Faker) -> None:
         email=faker.ascii_safe_email(),
         password=faker.password(length=12)
     )
-    deactivate_user(user=user)
+    user = deactivate_user(user=user)
     assert not user.is_active
 
 

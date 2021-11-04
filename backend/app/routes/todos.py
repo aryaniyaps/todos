@@ -15,20 +15,6 @@ todo_blueprint = Blueprint(
 )
 
 
-@todo_blueprint.get("/<int:todo_id>")
-@login_required
-def read_todo(todo_id: int):
-    """
-    Get a todo by ID.
-    """
-    query = Todo.query.filter(
-        Todo.id == todo_id, 
-        Todo.user_id == current_user.id,
-    )
-    todo = query.first_or_404()
-    return TodoSchema().dump(todo)
-
-
 @todo_blueprint.get("")
 @login_required
 def read_todos():
@@ -66,6 +52,20 @@ def create_todo():
         content=data.get("content"), 
     )
     return schema.dump(todo)
+
+
+@todo_blueprint.get("/<int:todo_id>")
+@login_required
+def read_todo(todo_id: int):
+    """
+    Get a todo by ID.
+    """
+    query = Todo.query.filter(
+        Todo.id == todo_id, 
+        Todo.user_id == current_user.id,
+    )
+    todo = query.first_or_404()
+    return TodoSchema().dump(todo)
 
 
 @todo_blueprint.patch("/<int:todo_id>")

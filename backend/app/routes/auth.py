@@ -40,20 +40,4 @@ def unauthenticate_user():
     Log the current user out.
     """
     logout_user()
-    # TODO: return a response here.
-
-
-@auth_blueprint.post("/password/forgot")
-def forgot_password():
-    """
-    Request a password reset email.
-    """
-    pass
-
-
-@auth_blueprint.post("/password/reset")
-def reset_password():
-    """
-    Reset password for the associated user.
-    """
-    pass
+    return "", HTTPStatus.NO_CONTENT
