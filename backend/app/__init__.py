@@ -9,7 +9,7 @@ from app.routes.todos import todo_blueprint
 from app.services.users import load_user
 
 
-__all__ = ("create_app",)
+__all__ = ("create_app", "application",)
 
 
 def create_app(config: str = "app.settings") -> Flask:
