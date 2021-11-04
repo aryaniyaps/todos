@@ -8,11 +8,7 @@ from app.services.todos import create_todo, delete_todo, update_todo
 from app.schemas.todos import TodoSchema
 
 
-todo_blueprint = Blueprint(
-    name="todos", 
-    import_name=__name__, 
-    url_prefix="/todos",
-)
+todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
 
 
 @todo_blueprint.get("")

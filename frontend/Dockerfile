@@ -1,4 +1,4 @@
-FROM node:14-alpine as builder
+FROM node:14-alpine
 
 # set workdir
 ARG APP_HOME=/frontend/
@@ -13,14 +13,5 @@ COPY yarn.lock ./package.json ${APP_HOME}
 # install dependencies
 RUN yarn install
 
-# development stage
-FROM builder as development
-
 # copy project files
 COPY ./ ${APP_HOME}
-
-# production stage
-FROM development as production
-
-# create production build
-RUN yarn build

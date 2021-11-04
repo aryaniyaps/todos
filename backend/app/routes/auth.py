@@ -7,11 +7,7 @@ from app.services.auth import authenticate_user
 from app.schemas.users import UserSchema
 
 
-auth_blueprint = Blueprint(
-    name="auth", 
-    import_name=__name__, 
-    url_prefix="/auth",
-)
+auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 
 
 @auth_blueprint.post("/login")

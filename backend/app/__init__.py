@@ -3,7 +3,7 @@ from marshmallow import ValidationError
 
 from app.extensions import cors, db, migrate, mail, login_manager
 from app.handlers.validation_error import handle_validation_error
-from app.routes import api_blueprint
+from app.routes import app_blueprint
 from app.services.users import load_user
 
 
@@ -44,7 +44,7 @@ def register_blueprints(app: Flask) -> None:
 
     :param app: the app instance.
     """
-    app.register_blueprint(api_blueprint)
+    app.register_blueprint(app_blueprint)
 
 
 def register_error_handlers(app: Flask) -> None:

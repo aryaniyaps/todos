@@ -7,11 +7,7 @@ from app.schemas.users import UserSchema
 from app.services.users import create_user, user_by_email
 
 
-user_blueprint = Blueprint(
-    name="users", 
-    import_name=__name__, 
-    url_prefix="/users",
-)
+user_blueprint = Blueprint("users",  __name__, url_prefix="/users")
 
 
 @user_blueprint.get("/me")
