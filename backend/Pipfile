@@ -12,10 +12,7 @@ flask-sqlalchemy = ">=2.5"
 flask-migrate = ">=3.1"
 psycopg2-binary = ">=2.9"
 marshmallow = ">=3.14"
-celery = {version = ">=5.1", extras = ["rabbitmq", "redis"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}
-elasticsearch = ">=7.15"
-elasticsearch-dsl = ">=7.4"
 gunicorn = ">=20.1"
 
 [dev-packages]

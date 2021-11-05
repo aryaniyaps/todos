@@ -6,11 +6,11 @@ def test_authenticate_user(client: FlaskClient) -> None:
     """
     Ensure we can log the current user in.
     """
-    result = client.post(url_for("app.auth.authenticate_user"), data={})
+    response = client.post(url_for("app.auth.authenticate_user"), json={})
 
 
 def test_unauthenticate_user(client: FlaskClient) -> None:
     """
     Ensure we can log the current user out.
     """
-    result = client.post(url_for("app.auth.unauthenticate_user"))
+    response = client.post(url_for("app.auth.unauthenticate_user"))

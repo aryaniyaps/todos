@@ -4,8 +4,12 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 
 from app.models.todos import Todo
-from app.services.todos import create_todo, delete_todo, update_todo
 from app.schemas.todos import TodoSchema
+from app.services.todos import (
+    create_todo as _create_todo, 
+    delete_todo as _delete_todo, 
+    update_todo as _update_todo
+)
 
 
 todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
@@ -43,11 +47,11 @@ def create_todo():
     """
     schema = TodoSchema()
     data = schema.load(request.get_json())
-    todo = create_todo(
+    todo = _create_todo(
         user_id=current_user.id,
         content=data.get("content"), 
     )
-    return schema.dump(todo)
+    return schema.dump(todo), HTTPStatus.CREATED
 
 
 @todo_blueprint.get("/<int:todo_id>")
@@ -77,7 +81,7 @@ def update_todo(todo_id: int):
     todo = query.first_or_404()
     schema = TodoSchema()
     data = schema.load(request.get_json())
-    todo = update_todo(
+    todo = _update_todo(
         todo=todo,
         completed=data.get("completed"),
         content=data.get("content"), 
@@ -96,5 +100,5 @@ def delete_todo(todo_id: int):
         Todo.user_id == current_user.id,
     )
     todo = query.first_or_404()
-    delete_todo(todo=todo)
+    _delete_todo(todo=todo)
     return "", HTTPStatus.NO_CONTENT

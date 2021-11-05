@@ -13,7 +13,6 @@ This is an example todos app.
 | [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) | mapper/ SQL toolkit          |
 | [Alembic](https://github.com/sqlalchemy/alembic)       | migrations tool              |
 | [PostgreSQL](https://github.com/postgres/postgres)     | database server              |
-| [Celery](https://github.com/celery/celery)             | task queue/ scheduler        |
 | [Pytest](https://github.com/pytest-dev/pytest)         | testing framework            |
 
 ## How to use

@@ -37,16 +37,3 @@ services:
       POSTGRES_DB: "todos"
     ports:
       - "5432:5432"
-
-  redis:
-    environment:
-      REDIS_PASSWORD: "todos"
-    ports:
-      - "6379:6379"
-
-  rabbitmq:
-    environment:
-      RABBITMQ_DEFAULT_USER: "todos"
-      RABBITMQ_DEFAULT_PASS: "todos"
-    ports:
-      - "5672:5672"

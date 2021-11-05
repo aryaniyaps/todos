@@ -7,32 +7,32 @@ def test_read_todos(client: FlaskClient) -> None:
     """
     Ensure we can read the current user's todos.
     """
-    result = client.get(url_for("app.todos.read_todos"))
+    response = client.get(url_for("app.todos.read_todos"))
 
 
 def test_create_todo(client: FlaskClient, faker: Faker) -> None:
     """
     Ensure we can create a todo.
     """
-    result = client.post(url_for("app.todos.create_todo"), data={})
+    response = client.post(url_for("app.todos.create_todo"), json={})
 
 
 def test_read_todo(client: FlaskClient) -> None:
     """
     Ensure we can read a todo.
     """
-    result = client.get(url_for("app.todos.read_todo", todo_id=1))
+    response = client.get(url_for("app.todos.read_todo", todo_id=1))
 
 
 def test_update_todo(client: FlaskClient, faker: Faker) -> None:
     """
     Ensure we can update a todo.
     """
-    result = client.patch(url_for("app.todos.update_todo", todo_id=1), data={})
+    response = client.patch(url_for("app.todos.update_todo", todo_id=1), json={})
 
 
 def test_delete_todo(client: FlaskClient) -> None:
     """
     Ensure we can delete a todo.
     """
-    result = client.delete(url_for("app.todos.delete_todo", todo_id=1))
+    response = client.delete(url_for("app.todos.delete_todo", todo_id=1))

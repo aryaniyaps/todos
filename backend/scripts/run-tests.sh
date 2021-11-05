@@ -1,2 +1,2 @@
 #!/bin/sh
-pipenv run pytest app
+pipenv run pytest app -v
