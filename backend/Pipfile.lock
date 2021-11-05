@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "56ac360c46307bba0800651d2c0024794c00d5b513602785bc15458426c38197"
+            "sha256": "b73c72fbf2b930b7808257cc6c06b15a2cbb445cb9d1f079e4dc721cd6422aae"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -503,6 +503,14 @@
             ],
             "markers": "platform_system == 'Windows'",
             "version": "==0.4.4"
+        },
+        "factory-boy": {
+            "hashes": [
+                "sha256:a98d277b0c047c75eb6e4ab8508a7f81fb03d2cb21986f627913546ef7a2a55e",
+                "sha256:eb02a7dd1b577ef606b75a253b9818e6f9eaf996d94449c9d5ebb124f90dc795"
+            ],
+            "index": "pypi",
+            "version": "==3.2.1"
         },
         "faker": {
             "hashes": [

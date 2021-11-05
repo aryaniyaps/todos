@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from flask import Blueprint, request
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 from app.services.auth import authenticate_user as _authenticate_user
 from app.schemas.users import UserSchema
@@ -31,6 +31,7 @@ def authenticate_user():
 
 
 @auth_blueprint.post("/logout")
+@login_required
 def unauthenticate_user():
     """
     Log the current user out.
