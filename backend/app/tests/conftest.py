@@ -4,7 +4,7 @@ from flask.testing import FlaskClient
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
-from app.extensions import db as _db
+from app.extensions import db
 
 
 @pytest.fixture(scope="session")
@@ -29,26 +29,26 @@ def client(app: Flask) -> FlaskClient:
 
 
 @pytest.fixture(scope="session")
-def db(app: Flask) -> SQLAlchemy:
+def test_db(app: Flask) -> SQLAlchemy:
     """
     Sets up the database for tests.
 
     :return: the test database.
     """
-    app.db = _db
-    _db.create_all()
-    yield _db
-    _db.session.remove()
-    _db.drop_all()
+    app.db = db
+    db.create_all()
+    yield db
+    db.session.remove()
+    db.drop_all()
 
 
 @pytest.fixture(autouse=True)
-def session(db: SQLAlchemy):
+def session(test_db: SQLAlchemy):
     """
     Sets up transactions for every test case.
 
     :return: A session wrapped in a transaction.
     """
-    db.session.begin_nested()
-    yield db.session
-    db.session.rollback()
+    test_db.session.begin_nested()
+    yield test_db.session
+    test_db.session.rollback()
