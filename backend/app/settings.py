@@ -11,6 +11,9 @@ ENV: str = getenv("FLASK_ENV", default="development")
 # whether debug features are enabled.
 DEBUG: bool = bool(getenv("FLASK_DEBUG", default=True))
 
+# whether we are testing.
+TESTING: bool = bool(getenv("FLASK_TESTING", default=False))
+
 # sqlalchemy database URL.
 SQLALCHEMY_DATABASE_URI: str = getenv("DATABASE_URL")
 

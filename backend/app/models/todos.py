@@ -4,21 +4,11 @@ from app import db
 class Todo(db.Model):
     """Represents an user's todo."""
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-    )
+    id = db.Column(db.Integer, primary_key=True)
 
-    content = db.Column(
-        db.Text,
-        nullable=False,
-    )
+    content = db.Column(db.Text, nullable=False)
 
-    completed = db.Column(
-        db.Boolean,
-        default=False,
-        nullable=False,
-    )
+    completed = db.Column(db.Boolean, default=False, nullable=False)
 
     user_id = db.Column(
         db.Integer,
@@ -35,6 +25,7 @@ class Todo(db.Model):
     updated_at = db.Column(
         db.DateTime(timezone=True),
         onupdate=db.func.now(),
+        server_default=db.func.now(),
         nullable=False,
     )
 

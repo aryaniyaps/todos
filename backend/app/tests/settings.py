@@ -10,6 +10,9 @@ ENV: str = "development"
 # whether debug features are enabled.
 DEBUG: bool = True
 
+# whether we are testing.
+TESTING: bool = True
+
 # sqlalchemy database URL.
 SQLALCHEMY_DATABASE_URI: str = "sqlite://"
 

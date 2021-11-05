@@ -7,27 +7,13 @@ from app import db
 class User(db.Model, UserMixin):
     """Represents an individual user account."""
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-    )
+    id = db.Column(db.Integer, primary_key=True)
 
-    password = db.Column(
-        db.String(255),
-        nullable=False,
-    )
+    password = db.Column(db.String(255), nullable=False)
 
-    email = db.Column(
-        db.String(255),
-        unique=True,
-        nullable=False,
-    )
+    email = db.Column(db.String(255), unique=True, nullable=False)
 
-    is_active = db.Column(
-        db.Boolean,
-        default=True,
-        nullable=False,
-    )
+    is_active = db.Column(db.Boolean, default=True, nullable=False)
 
     created_at = db.Column(
         db.DateTime(timezone=True),
@@ -38,15 +24,11 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(
         db.DateTime(timezone=True),
         onupdate=db.func.now(),
+        server_default=db.func.now(),
         nullable=False,
     )
 
-    todos = db.relationship(
-        "Todo", 
-        back_populates="user", 
-        lazy="dynamic", 
-        cascade="all, delete-orphan"
-    )
+    todos = db.relationship( "Todo", backref="user", lazy="select")
 
     __tablename__ = "users"
 

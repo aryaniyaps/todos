@@ -17,6 +17,7 @@ services:
     environment:
       FLASK_APP: "app:application"
       FLASK_DEBUG: "true"
+      FLASK_TESTING: "false"
       FLASK_ENV: "development"
       CORS_ORIGINS: "${CORS_ORIGINS}"
       DATABASE_URL: "postgresql://todos:todos@postgres:5432/todos"

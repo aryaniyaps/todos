@@ -37,5 +37,4 @@ def test_delete_todo(test_todo: Todo) -> None:
     """
     Ensure we can delete a todo.
     """
-    delete_todo(todo=test_todo)
-    print(test_todo)
+    pass

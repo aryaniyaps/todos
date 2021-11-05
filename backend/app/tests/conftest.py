@@ -4,7 +4,7 @@ from flask.testing import FlaskClient
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
-from app.extensions import db
+from app.extensions import db as _db
 from app.models.users import User
 from app.models.todos import Todo
 from app.services.users import create_user
@@ -19,10 +19,8 @@ def app() -> Flask:
     :return: The initialized app.
     """
     app = create_app(config="app.tests.settings")
-    context = app.test_request_context()
-    context.push()
-    yield app
-    context.pop()
+    with app.app_context():
+        yield app
 
 
 @pytest.fixture
@@ -30,7 +28,7 @@ def client(app: Flask) -> FlaskClient:
     """
     :return: An HTTP test client.
     """
-    yield app.test_client()
+    return app.test_client()
 
 
 @pytest.fixture(scope="session")
@@ -40,11 +38,10 @@ def db(app: Flask) -> SQLAlchemy:
 
     :return: the test database.
     """
-    db.app = app
-    with app.app_context():
-        db.create_all()
-    yield db
-    db.drop_all()
+    _db.create_all()
+    yield _db
+    _db.session.remove()
+    _db.drop_all()
 
 
 @pytest.fixture(autouse=True)

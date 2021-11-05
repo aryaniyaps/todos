@@ -44,6 +44,7 @@ services:
     environment:
       FLASK_APP: "app:application"
       FLASK_DEBUG: "false"
+      FLASK_TESTING: "false"
       FLASK_ENV: "production"
       CORS_ORIGINS: "${CORS_ORIGINS}"
       DATABASE_URL: "${DATABASE_URL}"
