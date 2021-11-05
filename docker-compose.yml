@@ -46,7 +46,6 @@ services:
       FLASK_DEBUG: "false"
       FLASK_ENV: "production"
       CORS_ORIGINS: "${CORS_ORIGINS}"
-      ELASTIC_SEARCH_URL: "${ELASTICSEARCH_URL}"
       DATABASE_URL: "${DATABASE_URL}"
       MAIL_SERVER: "${MAIL_SERVER}"
       MAIL_PORT: "${MAIL_PORT}"
@@ -98,24 +97,6 @@ services:
       - todos-backend
     volumes:
       - ./data/rabbitmq:/rabbitmq/data
-
-  elasticsearch:
-    image: elasticsearch:7.14.2
-    container_name: todos-elasticsearch
-    restart: on-failure
-    environment:
-      ELASTIC_PASSWORD: "${ELASTIC_PASSWORD}"
-      bootstrap.memory_lock: "${ELASTIC_MEMORY_LOCK:-true}"
-      discovery.type: "${ELASTIC_DISCOVERY:-single-node}"
-      xpack.security.enabled: "${ELASTIC_SECURE:-true}"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    networks:
-      - todos-backend
-    volumes:
-      - ./data/elasticsearch:/elasticsearch/data
 
 networks:
   todos-backend:

@@ -1,6 +1,12 @@
 from faker import Faker
 
-from app.services.users import create_user, deactivate_user
+from app.models.users import User
+from app.services.users import (
+    create_user, 
+    deactivate_user, 
+    load_user, 
+    user_by_email
+)
 
 
 def test_create_user(faker: Faker) -> None:
@@ -30,15 +36,21 @@ def test_deactivate_user(faker: Faker) -> None:
     assert not user.is_active
 
 
-def test_load_user() -> None:
+def test_load_user(test_user: User) -> None:
     """
     Ensure we can load an user by their ID.
     """
-    pass
+    user = load_user(user_id=test_user.id)
+    assert user == test_user
+    unknown_user = load_user(user_id="unknown")
+    assert unknown_user is None
 
 
-def test_user_by_email() -> None:
+def test_user_by_email(test_user: User) -> None:
     """
     Ensure we can load an user by their email.
     """
-    pass
+    user = user_by_email(email=test_user.email)
+    assert user == test_user
+    unknown_user = user_by_email(email="unknown@example.org")
+    assert unknown_user is None

@@ -3,7 +3,7 @@ from os import getenv
 
 
 # branding configuration.
-PUBLIC_SITE_NAME = getenv("PUBLIC_SITE_NAME", default="Todos")
+PUBLIC_SITE_NAME: str = getenv("PUBLIC_SITE_NAME", default="Todos")
 
 # app environment.
 ENV: str = getenv("FLASK_ENV", default="development")
@@ -12,13 +12,10 @@ ENV: str = getenv("FLASK_ENV", default="development")
 DEBUG: bool = bool(getenv("FLASK_DEBUG", default=True))
 
 # sqlalchemy database URL.
-SQLALCHEMY_DATABASE_URI = getenv("DATABASE_URL")
+SQLALCHEMY_DATABASE_URI: str = getenv("DATABASE_URL")
 
 # whether modifications are tracked.
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-# elasticsearch configuration.
-ELASTICSEARCH_URL: str = getenv("ELASTICSEARCH_URL")
+SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
 
 # mail client host name.
 MAIL_SERVER: str = getenv("MAIL_SERVER")
@@ -27,7 +24,7 @@ MAIL_SERVER: str = getenv("MAIL_SERVER")
 MAIL_PORT: int = int(getenv("MAIL_PORT"))
 
 # whether the mail client should use tls.
-MAIL_USE_TLS = bool(getenv("MAIL_USE_TLS", default=True))
+MAIL_USE_TLS: bool = bool(getenv("MAIL_USE_TLS", default=True))
 
 # mail client auth username.
 MAIL_USERNAME: Optional[str] = getenv("MAIL_USERNAME", default=None)

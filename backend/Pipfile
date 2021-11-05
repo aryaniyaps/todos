@@ -20,7 +20,6 @@ gunicorn = ">=20.1"
 
 [dev-packages]
 pytest = ">=6.2"
-pytest-cov = ">=3.0"
 faker = ">=9.7"
 
 [requires]

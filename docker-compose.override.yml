@@ -19,7 +19,6 @@ services:
       FLASK_DEBUG: "true"
       FLASK_ENV: "development"
       CORS_ORIGINS: "${CORS_ORIGINS}"
-      ELASTICSEARCH_URL: "http://elastic:todos@elasticsearch:9200"
       DATABASE_URL: "postgresql://todos:todos@postgres:5432/todos"
       MAIL_SERVER: "localhost"
       MAIL_PORT: "25"
@@ -50,12 +49,3 @@ services:
       RABBITMQ_DEFAULT_PASS: "todos"
     ports:
       - "5672:5672"
-
-  elasticsearch:
-    environment:
-      ELASTIC_PASSWORD: "todos"
-      bootstrap.memory_lock: "true"
-      discovery.type: "single-node"
-      xpack.security.enabled: "true"
-    ports:
-      - "9200:9200"
