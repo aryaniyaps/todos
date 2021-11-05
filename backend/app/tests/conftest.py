@@ -24,7 +24,8 @@ def client(app: Flask) -> FlaskClient:
     """
     :return: An HTTP test client.
     """
-    return app.test_client()
+    with app.test_request_context():
+        yield app.test_client()
 
 
 @pytest.fixture(scope="session")
@@ -34,6 +35,7 @@ def db(app: Flask) -> SQLAlchemy:
 
     :return: the test database.
     """
+    app.db = _db
     _db.create_all()
     yield _db
     _db.session.remove()
