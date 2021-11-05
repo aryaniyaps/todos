@@ -1,7 +1,4 @@
-from app.models.users import User
-
-
-def test_authenticate_user(test_user: User) -> None:
+def test_authenticate_user() -> None:
     """
     Ensure we can authenticate an user.
     """

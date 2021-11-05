@@ -5,10 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
 from app.extensions import db as _db
-from app.models.users import User
-from app.models.todos import Todo
-from app.services.users import create_user
-from app.services.todos import create_todo
 
 
 @pytest.fixture(scope="session")
@@ -54,25 +50,3 @@ def session(db: SQLAlchemy):
     db.session.begin_nested()
     yield db.session
     db.session.rollback()
-
-
-@pytest.fixture
-def test_user() -> User:
-    """
-    Creates an user instance for testing.
-    """
-    return create_user(
-        email="user@example.org",
-        password="password"
-    )
-
-
-@pytest.fixture
-def test_todo(test_user: User) -> Todo:
-    """
-    Creates a todo instance for testing.
-    """
-    return create_todo(
-        content="sample content",
-        user_id=test_user.id
-    )
