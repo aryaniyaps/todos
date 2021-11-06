@@ -13,6 +13,9 @@ DEBUG: bool = True
 # whether we are testing.
 TESTING: bool = True
 
+# session secret configuration.
+SECRET_KEY: str = "secret"
+
 # sqlalchemy database URL.
 SQLALCHEMY_DATABASE_URI: str = "sqlite://"
 

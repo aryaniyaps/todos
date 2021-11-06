@@ -47,6 +47,7 @@ services:
       FLASK_TESTING: "false"
       FLASK_ENV: "production"
       CORS_ORIGINS: "${CORS_ORIGINS}"
+      SECRET_KEY: "${SECRET_KEY}"
       DATABASE_URL: "${DATABASE_URL}"
       MAIL_SERVER: "${MAIL_SERVER}"
       MAIL_PORT: "${MAIL_PORT}"

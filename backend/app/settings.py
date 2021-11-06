@@ -14,6 +14,9 @@ DEBUG: bool = bool(getenv("FLASK_DEBUG", default=True))
 # whether we are testing.
 TESTING: bool = bool(getenv("FLASK_TESTING", default=False))
 
+# session secret configuration.
+SECRET_KEY: str = getenv("SECRET_KEY")
+
 # sqlalchemy database URL.
 SQLALCHEMY_DATABASE_URI: str = getenv("DATABASE_URL")
 

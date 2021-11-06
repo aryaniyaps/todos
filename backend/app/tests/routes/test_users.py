@@ -7,7 +7,7 @@ from flask.testing import FlaskClient
 from app.models.users import User
 
 
-def test_read_current_user(client: FlaskClient) -> None:
+def test_read_current_user(client: FlaskClient, user: User) -> None:
     """
     Ensure we can read the current user.
     """
