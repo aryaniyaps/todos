@@ -29,6 +29,8 @@ class Todo(db.Model):
         nullable=False,
     )
 
+    user = db.relationship("User", back_populates="todos")
+
     __tablename__ = "todos"
 
     def __repr__(self) -> str:

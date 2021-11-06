@@ -28,7 +28,7 @@ class User(db.Model, UserMixin):
         nullable=False,
     )
 
-    todos = db.relationship( "Todo", backref="user", lazy="select")
+    todos = db.relationship("Todo", back_populates="user")
 
     __tablename__ = "users"
 

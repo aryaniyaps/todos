@@ -41,7 +41,6 @@ def test_db(app: Flask) -> SQLAlchemy:
     app.db = db
     db.create_all()
     yield db
-    db.session.remove()
     db.drop_all()
 
 
@@ -58,7 +57,7 @@ def session(test_db: SQLAlchemy):
 
 
 @pytest.fixture
-def user() -> User:
+def user(session) -> User:
     """
     Creates an user for tests.
 
@@ -68,10 +67,11 @@ def user() -> User:
 
 
 @pytest.fixture
-def todo() -> Todo:
+def todo(user: User, session) -> Todo:
     """
     Creates a todo for tests.
 
     :return: The created todo.
     """
+    # TODO: pass in user to todo factory.
     return TodoFactory()
