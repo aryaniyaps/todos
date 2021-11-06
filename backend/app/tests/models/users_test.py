@@ -10,8 +10,9 @@ def test_set_password(user: User, faker: Faker) -> None:
     """
     password = faker.password(length=12)
     user.set_password(password=password)
-    assert argon2.identify(user.password)
+    assert user.password != password
     assert user.check_password(password=password)
+    assert argon2.identify(user.password)
 
 
 def test_check_password(user: User, faker: Faker) -> None:
