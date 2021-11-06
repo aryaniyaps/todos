@@ -57,7 +57,7 @@ def session(test_db: SQLAlchemy):
 
 
 @pytest.fixture
-def user(session) -> User:
+def user() -> User:
     """
     Creates an user for tests.
 
@@ -67,11 +67,10 @@ def user(session) -> User:
 
 
 @pytest.fixture
-def todo(user: User, session) -> Todo:
+def todo() -> Todo:
     """
     Creates a todo for tests.
 
     :return: The created todo.
     """
-    # TODO: pass in user to todo factory.
     return TodoFactory()
