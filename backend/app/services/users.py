@@ -8,13 +8,13 @@ def load_user(user_id: int) -> Optional[User]:
     """
     Loads an user by their ID.
     """
-    return User.query.filter(User.id == user_id).first()
+    return User.query.filter_by(id=user_id).first()
 
 def user_by_email(email: str) -> Optional[User]:
     """
     Gets an user by their email.
     """
-    return User.query.filter(User.email == email).first()
+    return User.query.filter_by(email=email).first()
 
 
 def create_user(

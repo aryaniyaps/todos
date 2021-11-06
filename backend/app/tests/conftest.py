@@ -51,9 +51,9 @@ def session(test_db: SQLAlchemy):
 
     :return: A session wrapped in a transaction.
     """
-    test_db.session.begin_nested()
+    test_db.session.begin()
     yield test_db.session
-    test_db.session.rollback()
+    test_db.session.remove()
 
 
 @pytest.fixture

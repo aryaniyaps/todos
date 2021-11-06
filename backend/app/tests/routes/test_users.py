@@ -20,16 +20,16 @@ def test_create_user(client: FlaskClient, faker: Faker) -> None:
     Ensure we can create an user.
     """
     data = {
-        "email": faker.ascii_free_email(), 
+        "email": faker.free_email(), 
         "password": faker.password(length=12)
     }
     response = client.post(url_for("app.users.create_user"), json=data)
     assert response.status_code == HTTPStatus.CREATED
 
 
-def test_duplicate_user(client: FlaskClient, user: User, faker: Faker) -> None:
+def test_create_duplicate_user(client: FlaskClient, user: User, faker: Faker) -> None:
     """
-    Ensure we cannot create an user with an existing email.
+    Ensure we cannot create an user with a duplicate email.
     """
     data = {"email": user.email, "password": faker.password(length=12)}
     response = client.post(url_for("app.users.create_user"), json=data)

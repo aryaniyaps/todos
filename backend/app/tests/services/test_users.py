@@ -8,7 +8,7 @@ def test_create_user(faker: Faker) -> None:
     """
     Ensure we can create an user.
     """
-    email = faker.ascii_free_email()
+    email = faker.free_email()
     password = faker.password(length=12)
     user = create_user(
         email=email, 
