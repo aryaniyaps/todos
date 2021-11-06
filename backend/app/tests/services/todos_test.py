@@ -1,15 +1,17 @@
-from faker import Faker
-
 from app.models.todos import Todo
 from app.models.users import User
-from app.services.todos import create_todo, delete_todo, update_todo
+from app.services.todos import (
+    create_todo, 
+    delete_todo, 
+    update_todo
+)
 
 
-def test_create_todo(user: User, faker: Faker) -> None:
+def test_create_todo(user: User) -> None:
     """
     Ensure we can create a todo.
     """
-    content = faker.text(250)
+    content = "sample content"
     todo = create_todo(
         content=content,
         user_id=user.id
@@ -19,11 +21,11 @@ def test_create_todo(user: User, faker: Faker) -> None:
     assert not todo.completed
 
 
-def test_update_todo(todo: Todo, faker: Faker) -> None:
+def test_update_todo(todo: Todo) -> None:
     """
     Ensure we can update a todo.
     """
-    content = faker.text(250)
+    content = "sample content"
     todo = update_todo(
         todo=todo,
         content=content,

@@ -1,15 +1,18 @@
-from faker import Faker
-
 from app.models.users import User
-from app.services.users import create_user, deactivate_user, load_user, user_by_email
+from app.services.users import (
+    create_user, 
+    deactivate_user, 
+    load_user, 
+    user_by_email
+)
 
 
-def test_create_user(faker: Faker) -> None:
+def test_create_user() -> None:
     """
     Ensure we can create an user.
     """
-    email = faker.free_email()
-    password = faker.password(length=12)
+    email = "user@example.org"
+    password = "password"
     user = create_user(
         email=email, 
         password=password,

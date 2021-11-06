@@ -1,5 +1,7 @@
+from http import HTTPStatus
+
 import pytest
-from flask import Flask
+from flask import Flask, url_for
 from flask.testing import FlaskClient
 from flask_sqlalchemy import SQLAlchemy
 
@@ -25,10 +27,26 @@ def app() -> Flask:
 @pytest.fixture
 def client(app: Flask) -> FlaskClient:
     """
-    :return: An HTTP test client.
+    Creates an HTTP test client that is
+    aware of the request context.
+
+    :return: The created test client.
     """
     with app.test_request_context():
         yield app.test_client()
+
+
+@pytest.fixture
+def user_client(client: FlaskClient) -> FlaskClient:
+    """
+    Creates an authenticated test client.
+
+    :return: The created test client.
+    """
+    data = {"email": "", "password": ""}
+    response = client.post(url_for("app.auth.login"), json=data)
+    assert response.status_code == HTTPStatus.OK
+    return client
 
 
 @pytest.fixture(scope="session")
@@ -36,7 +54,7 @@ def test_db(app: Flask) -> SQLAlchemy:
     """
     Sets up the database for tests.
 
-    :return: the test database.
+    :return: The test database.
     """
     app.db = db
     db.create_all()
@@ -51,7 +69,7 @@ def session(test_db: SQLAlchemy):
 
     :return: A session wrapped in a transaction.
     """
-    test_db.session.begin()
+    test_db.session.begin_nested()
     yield test_db.session
     test_db.session.remove()
 
