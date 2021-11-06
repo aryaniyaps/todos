@@ -1,10 +1,9 @@
 from flask import Flask
 from marshmallow import ValidationError
 
-from app.extensions import cors, db, migrate, mail, login_manager
+from app.extensions import cors, db, migrate, mail
 from app.handlers.validation_error import handle_validation_error
 from app.routes import app_blueprint
-from app.services.users import load_user
 
 
 __all__ = ("create_app", "application",)
@@ -34,8 +33,6 @@ def register_extensions(app: Flask) -> None:
     migrate.init_app(app, db)
     cors.init_app(app)
     mail.init_app(app)
-    login_manager.init_app(app)
-    login_manager.user_loader(load_user)
 
 
 def register_blueprints(app: Flask) -> None:

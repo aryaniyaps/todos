@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 flask = ">=2.0"
 flask-mail = ">=0.9"
-flask-login = ">=0.5"
+flask-httpauth = ">=4.5"
 flask-cors = ">=3.0"
 flask-sqlalchemy = ">=2.5"
 flask-migrate = ">=3.1"

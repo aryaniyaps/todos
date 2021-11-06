@@ -1,4 +1,4 @@
-from factory import Faker, Sequence, SubFactory
+from factory import Sequence, SubFactory
 from factory.alchemy import SQLAlchemyModelFactory
 
 from app.extensions import db
@@ -32,7 +32,6 @@ class TodoFactory(BaseFactory):
     Todo factory.
     """
     content = "sample content"
-    completed = False
     user = SubFactory(UserFactory)
 
     class Meta:
