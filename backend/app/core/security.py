@@ -18,7 +18,7 @@ def remove_auth_token(user: User) -> None:
     Removes the authentication token stored for
     the given user, if it exists.
 
-    :param user: THe user to remove the token for.
+    :param user: The user to remove the token for.
     """
     pass
 

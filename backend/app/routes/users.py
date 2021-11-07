@@ -1,22 +1,25 @@
 from http import HTTPStatus
 
 from flask import Blueprint, request
-from flask_login import login_required, current_user
 
+from app.extensions import auth
 from app.schemas.users import UserSchema
-from app.services.users import create_user as _create_user, user_by_email
+from app.services.users import (
+    create_user as _create_user, 
+    user_by_email
+)
 
 
 user_blueprint = Blueprint("users",  __name__, url_prefix="/users")
 
 
 @user_blueprint.get("/me")
-@login_required
+@auth.login_required
 def read_current_user():
     """
     Get the current user.
     """
-    return UserSchema().dump(current_user)
+    return UserSchema().dump(auth.current_user())
 
 
 @user_blueprint.post("")

@@ -1,8 +1,8 @@
 from http import HTTPStatus
 
 from flask import Blueprint, request
-from flask_login import login_required, current_user
 
+from app.extensions import auth
 from app.models.todos import Todo
 from app.schemas.todos import TodoSchema
 from app.services.todos import (
@@ -16,12 +16,12 @@ todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
 
 
 @todo_blueprint.get("")
-@login_required
+@auth.login_required
 def read_todos():
     """
     Get the current user's todos.
     """
-    query = Todo.query.filter_by(user_id=current_user.id)
+    query = Todo.query.filter_by(user_id=auth.current_user().id)
     page = request.args.get(key="page", default=1, type=int)
     limit = request.args.get(key="limit", default=20, type=int)
     results = query.paginate(
@@ -38,7 +38,7 @@ def read_todos():
 
 
 @todo_blueprint.post("")
-@login_required
+@auth.login_required
 def create_todo():
     """
     Create a new todo.
@@ -46,35 +46,35 @@ def create_todo():
     schema = TodoSchema()
     data = schema.load(request.get_json())
     todo = _create_todo(
-        user_id=current_user.id,
+        user_id=auth.current_user().id,
         content=data.get("content"), 
     )
     return schema.dump(todo), HTTPStatus.CREATED
 
 
 @todo_blueprint.get("/<int:todo_id>")
-@login_required
+@auth.login_required
 def read_todo(todo_id: int):
     """
     Get a todo by ID.
     """
     query = Todo.query.filter_by(
         id=todo_id, 
-        user_id=current_user.id,
+        user_id=auth.current_user().id,
     )
     todo = query.first_or_404()
     return TodoSchema().dump(todo)
 
 
 @todo_blueprint.patch("/<int:todo_id>")
-@login_required
+@auth.login_required
 def update_todo(todo_id: int):
     """
     Update a todo by ID.
     """
     query = Todo.query.filter_by(
         id=todo_id, 
-        user_id=current_user.id,
+        user_id=auth.current_user().id,
     )
     todo = query.first_or_404()
     schema = TodoSchema()
@@ -88,14 +88,14 @@ def update_todo(todo_id: int):
 
 
 @todo_blueprint.delete("/<int:todo_id>")
-@login_required
+@auth.login_required
 def delete_todo(todo_id: int):
     """
     Delete a todo by ID.
     """
     query = Todo.query.filter_by(
         id=todo_id, 
-        user_id=current_user.id,
+        user_id=auth.current_user().id,
     )
     todo = query.first_or_404()
     _delete_todo(todo=todo)
