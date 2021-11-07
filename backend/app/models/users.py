@@ -1,10 +1,9 @@
 from passlib.hash import argon2
 
-from flask_login import UserMixin
 from app import db
 
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     """Represents an individual user account."""
 
     id = db.Column(db.Integer, primary_key=True)
