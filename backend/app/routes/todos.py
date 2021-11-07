@@ -4,7 +4,7 @@ from flask import Blueprint, request
 
 from app.extensions import auth
 from app.models.todos import Todo
-from app.schemas.todos import TodoSchema
+from app.schemas.todos import todo_schema, todos_schema
 from app.services.todos import (
     create_todo as _create_todo, 
     delete_todo as _delete_todo, 
@@ -30,7 +30,7 @@ def read_todos():
         error_out=False,
     )
     return {
-        "results": TodoSchema(many=True).dump(results.items),
+        "results": todos_schema.dump(results.items),
         "has_prev": results.has_prev,
         "has_next": results.has_next,
         "count": results.total
@@ -43,13 +43,12 @@ def create_todo():
     """
     Create a new todo.
     """
-    schema = TodoSchema()
-    data = schema.load(request.get_json())
+    data = todo_schema.load(request.get_json())
     todo = _create_todo(
         user_id=auth.current_user().id,
         content=data.get("content"), 
     )
-    return schema.dump(todo), HTTPStatus.CREATED
+    return todo_schema.dump(todo), HTTPStatus.CREATED
 
 
 @todo_blueprint.get("/<int:todo_id>")
@@ -63,7 +62,7 @@ def read_todo(todo_id: int):
         user_id=auth.current_user().id,
     )
     todo = query.first_or_404()
-    return TodoSchema().dump(todo)
+    return todo_schema.dump(todo)
 
 
 @todo_blueprint.patch("/<int:todo_id>")
@@ -77,14 +76,13 @@ def update_todo(todo_id: int):
         user_id=auth.current_user().id,
     )
     todo = query.first_or_404()
-    schema = TodoSchema()
-    data = schema.load(request.get_json())
+    data = todo_schema.load(request.get_json())
     todo = _update_todo(
         todo=todo,
         completed=data.get("completed"),
         content=data.get("content"), 
     )
-    return schema.dump(todo)
+    return todo_schema.dump(todo)
 
 
 @todo_blueprint.delete("/<int:todo_id>")

@@ -1,8 +1,11 @@
-from app.extensions import mail
+from typing import Optional
+
 from flask_mail import Message
 
+from app.extensions import mail
 
-def send_mail(to: str, subject: str, html: str, body: str) -> None:
+
+def send_mail(to: str, subject: str, body: str, html: Optional[str] = None) -> None:
     """
     Sends an individual email.
 
@@ -12,8 +15,8 @@ def send_mail(to: str, subject: str, html: str, body: str) -> None:
     :param body: The content of the email.
     """
     message = Message(
-        subject=subject,
-        body=body,
+        subject=subject, 
+        body=body, 
         html=html
     )
     message.add_recipient(to)
