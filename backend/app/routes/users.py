@@ -41,4 +41,5 @@ def create_user():
         email=data.get("email"),
         password=data.get("password"), 
     )
+    # TODO: return auth token here.
     return schema.dump(user), HTTPStatus.CREATED

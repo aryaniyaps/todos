@@ -3,13 +3,6 @@ from typing import Optional
 from app.extensions import db
 from app.models.users import User
 
-
-def load_user(user_id: int) -> Optional[User]:
-    """
-    Loads an user by their ID.
-    """
-    return User.query.filter_by(id=user_id).first()
-
 def user_by_email(email: str) -> Optional[User]:
     """
     Gets an user by their email.

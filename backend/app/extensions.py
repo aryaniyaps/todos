@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_httpauth import HTTPTokenAuth
+from flask_redis import FlaskRedis
 
 from app.core.security import check_auth_token
 from app.models.users import User
@@ -14,6 +15,7 @@ cors = CORS()
 migrate = Migrate()
 db = SQLAlchemy()
 mail = Mail()
+redis_store = FlaskRedis()
 auth = HTTPTokenAuth()
 
 
