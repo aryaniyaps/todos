@@ -5,7 +5,7 @@ from flask import Blueprint, request
 from app.core.security import create_auth_token, remove_auth_token
 from app.extensions import auth
 from app.services.auth import authenticate_user
-from app.schemas.users import UserSchema
+from app.schemas.users import user_schema
 
 
 auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
@@ -16,8 +16,7 @@ def login():
     """
     Log the current user in.
     """
-    schema = UserSchema()
-    data = schema.load(request.get_json())
+    data = user_schema.load(request.get_json())
     user = authenticate_user(
         email=data.get("email"), 
         password=data.get("password"),
@@ -28,7 +27,7 @@ def login():
         }
         return errors, HTTPStatus.BAD_REQUEST
     token = create_auth_token(user_id=user.id)
-    return {"token": token, "user": schema.dump(user)}
+    return {"token": token, "user": user_schema.dump(user)}
 
 
 @auth_blueprint.post("/logout")
