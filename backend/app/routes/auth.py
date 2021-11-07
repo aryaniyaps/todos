@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask import Blueprint, request
 
-from app.core.security import remove_auth_token
+from app.core.security import create_auth_token, remove_auth_token
 from app.extensions import auth
 from app.services.auth import authenticate_user
 from app.schemas.users import UserSchema
@@ -27,8 +27,8 @@ def login():
             "errors": "Incorrect email/ password provided."
         }
         return errors, HTTPStatus.BAD_REQUEST
-    # TODO: return auth token here.
-    return schema.dump(user)
+    token = create_auth_token(user_id=user.id)
+    return {"token": token, "user": schema.dump(user)}
 
 
 @auth_blueprint.post("/logout")

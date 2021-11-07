@@ -3,6 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint, request
 
 from app.extensions import auth
+from app.core.security import create_auth_token
 from app.schemas.users import UserSchema
 from app.services.users import (
     create_user as _create_user, 
@@ -41,5 +42,5 @@ def create_user():
         email=data.get("email"),
         password=data.get("password"), 
     )
-    # TODO: return auth token here.
-    return schema.dump(user), HTTPStatus.CREATED
+    token = create_auth_token(user_id=user.id)
+    return {"token": token, "user": schema.dump(user)}, HTTPStatus.CREATED
