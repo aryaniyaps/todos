@@ -1,4 +1,12 @@
-def test_create_auth_token() -> None:
+from app.models.users import User
+from app.core.security import (
+    create_auth_token,
+    remove_auth_token,
+    check_auth_token
+)
+
+
+def test_create_auth_token(user: User) -> None:
     """
     Ensure we can create an auth token.
     """

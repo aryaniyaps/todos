@@ -1,11 +1,10 @@
-from http import HTTPStatus
-
 import pytest
-from flask import Flask, url_for
+from flask import Flask
 from flask.testing import FlaskClient
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
+from app.core.security import create_auth_token
 from app.extensions import db
 from app.models.todos import Todo
 from app.models.users import User
@@ -37,16 +36,13 @@ def client(app: Flask) -> FlaskClient:
 
 
 @pytest.fixture
-def user_client(client: FlaskClient) -> FlaskClient:
+def user_client(app: Flask, user: User) -> FlaskClient:
     """
     Creates an authenticated test client.
 
     :return: The created test client.
     """
-    data = {"email": "", "password": ""}
-    response = client.post(url_for("app.auth.login"), json=data)
-    assert response.status_code == HTTPStatus.OK
-    return client
+    pass
 
 
 @pytest.fixture(scope="session")
@@ -85,10 +81,10 @@ def user() -> User:
 
 
 @pytest.fixture
-def todo() -> Todo:
+def todo(user: User) -> Todo:
     """
     Creates a todo for tests.
 
     :return: The created todo.
     """
-    return TodoFactory()
+    return TodoFactory(user=user)
