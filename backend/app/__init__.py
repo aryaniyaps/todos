@@ -1,8 +1,12 @@
+from typing import Optional
+
 from flask import Flask
 from marshmallow import ValidationError
 
-from app.extensions import cors, db, migrate, mail
+from app.core.security import check_auth_token
+from app.extensions import cors, db, migrate, mail, auth
 from app.handlers.validation_error import handle_validation_error
+from app.models.users import User
 from app.routes import app_blueprint
 
 
@@ -33,6 +37,10 @@ def register_extensions(app: Flask) -> None:
     migrate.init_app(app, db)
     cors.init_app(app)
     mail.init_app(app)
+
+    @auth.verify_token
+    def verify_token(token: str) -> Optional[User]:
+        return check_auth_token(token=token)
 
 
 def register_blueprints(app: Flask) -> None:
