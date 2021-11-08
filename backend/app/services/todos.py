@@ -2,6 +2,7 @@ from typing import Optional
 
 from app.extensions import db
 from app.models.todos import Todo
+from app.models.users import User
 
 
 def create_todo(content: str, user_id: int) -> Todo:
@@ -38,3 +39,10 @@ def delete_todo(todo: Todo) -> None:
     """
     db.session.delete(todo)
     db.session.commit()
+
+
+def clear_todos(user: User) -> None:
+    """
+    Clears todos for the given user.
+    """
+    Todo.query.filter_by(user_id=user.id).delete()

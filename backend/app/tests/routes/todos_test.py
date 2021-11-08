@@ -14,6 +14,14 @@ def test_read_todos(user_client: FlaskClient) -> None:
     assert response.status_code == HTTPStatus.OK
 
 
+def test_clear_todos(user_client: FlaskClient) -> None:
+    """
+    Ensure we can clear the current user's todos.
+    """
+    response = user_client.delete(url_for("app.todos.clear_todos"))
+    assert response.status_code == HTTPStatus.NO_CONTENT
+
+
 def test_create_todo(user_client: FlaskClient) -> None:
     """
     Ensure we can create a todo.

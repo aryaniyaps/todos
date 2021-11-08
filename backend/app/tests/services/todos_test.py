@@ -3,7 +3,8 @@ from app.models.users import User
 from app.services.todos import (
     create_todo, 
     delete_todo, 
-    update_todo
+    update_todo,
+    clear_todos
 )
 
 
@@ -40,5 +41,13 @@ def test_delete_todo(todo: Todo) -> None:
     Ensure we can delete a todo.
     """
     delete_todo(todo=todo)
-    result = Todo.query.filter_by(id=todo.id)
-    assert result.first() is None
+    assert not Todo.query.get(todo.id)
+
+
+def test_clear_todos(user: User) -> None:
+    """
+    Ensure we can clear todos for an user.
+    """
+    clear_todos(user=user)
+    todos = Todo.query.filter_by(user_id=user.id)
+    assert not todos.first()

@@ -8,7 +8,8 @@ from app.schemas.todos import todo_schema, todos_schema
 from app.services.todos import (
     create_todo as _create_todo, 
     delete_todo as _delete_todo, 
-    update_todo as _update_todo
+    update_todo as _update_todo,
+    clear_todos as _clear_todos
 )
 
 
@@ -97,4 +98,14 @@ def delete_todo(todo_id: int):
     )
     todo = query.first_or_404()
     _delete_todo(todo=todo)
+    return "", HTTPStatus.NO_CONTENT
+
+
+@todo_blueprint.delete("")
+@login_required
+def clear_todos():
+    """
+    Clears the current user's todos.
+    """
+    _clear_todos(user=current_user)
     return "", HTTPStatus.NO_CONTENT
