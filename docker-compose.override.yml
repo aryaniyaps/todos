@@ -32,6 +32,7 @@ services:
       - "8000:8000"
 
   mysql:
+    environment:
       MYSQL_USER: "todos"
       MYSQL_ROOT_PASSWORD: "todos"
       MYSQL_PASSWORD: "todos"
