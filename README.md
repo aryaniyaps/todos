@@ -6,15 +6,15 @@ This is an example todos app.
 
 | library / service                                      | description                  |
 | ------------------------------------------------------ | ---------------------------- |
-| [React](https://github.com/facebook/react)             | UI library                   |
 | [Flask](https://github.com/pallets/flask)              | web framework                |
-| [Nginx](https://github.com/nginx/nginx)                | static web server            |
-| [Traefik](https://github.com/traefik/traefik)          | Load balancer/ reverse proxy |
 | [Gunicorn](https://github.com/benoitc/gunicorn)        | WSGI HTTP server             |
 | [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) | mapper/ SQL toolkit          |
 | [Alembic](https://github.com/sqlalchemy/alembic)       | migrations tool              |
 | [PostgreSQL](https://github.com/postgres/postgres)     | database server              |
 | [Pytest](https://github.com/pytest-dev/pytest)         | testing framework            |
+| [React](https://github.com/facebook/react)             | UI library                   |
+| [Nginx](https://github.com/nginx/nginx)                | static web server            |
+| [Traefik](https://github.com/traefik/traefik)          | Load balancer/ reverse proxy |
 
 ## How to use
 
