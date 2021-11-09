@@ -61,21 +61,21 @@ services:
     volumes:
       - ./backend:/backend
     depends_on:
-      - postgres
-      - elasticsearch
+      - mysql
 
-  postgres:
-    image: postgres:14-alpine
-    container_name: todos-postgres
+  mysql:
+    image: mysql:8
+    container_name: todos-mysql
     restart: on-failure
     environment:
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
-      POSTGRES_DB: "${POSTGRES_DB}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
     networks:
       - todos-backend
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - ./data/mysql:/var/lib/mysql
 
 networks:
   todos-backend:

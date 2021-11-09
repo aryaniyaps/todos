@@ -21,7 +21,7 @@ services:
       FLASK_ENV: "development"
       CORS_ORIGINS: "${CORS_ORIGINS}"
       SECRET_KEY: "secret"
-      DATABASE_URL: "postgresql://todos:todos@postgres:5432/todos"
+      DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:5432/todos"
       MAIL_SERVER: "localhost"
       MAIL_PORT: "25"
       MAIL_USE_TLS: "false"
@@ -31,10 +31,10 @@ services:
     ports:
       - "8000:8000"
 
-  postgres:
-    environment:
-      POSTGRES_USER: "todos"
-      POSTGRES_PASSWORD: "todos"
-      POSTGRES_DB: "todos"
+  mysql:
+      MYSQL_USER: "todos"
+      MYSQL_ROOT_PASSWORD: "todos"
+      MYSQL_PASSWORD: "todos"
+      MYSQL_DATABASE: "todos"
     ports:
-      - "5432:5432"
+      - "3306:3306"
