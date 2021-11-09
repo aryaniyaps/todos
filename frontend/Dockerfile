@@ -1,3 +1,4 @@
+# development stage
 FROM node:14-alpine as development
 
 # set workdir
@@ -16,16 +17,17 @@ RUN yarn install
 # copy project files
 COPY ./ ${APP_HOME}
 
-# production stage
+# build stage
 FROM development as build
 
 # create optimized build
 RUN yarn build
 
+# production stage
 FROM nginx:1.21-alpine as production
 
 # copy configuration files
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-# copy production build
+# copy compiled build
 COPY --from=build /frontend/build /usr/share/nginx/html

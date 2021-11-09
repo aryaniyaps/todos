@@ -1,4 +1,5 @@
-FROM python:3.9-slim as builder
+# build stage
+FROM python:3.9-slim as build
 
 # set workdir
 ARG APP_HOME=/backend/
@@ -11,7 +12,7 @@ RUN pip install --no-cache pipenv
 COPY Pipfile.lock ./Pipfile ${APP_HOME}
 
 # development stage
-FROM builder as development
+FROM build as development
 
 # install dependencies
 RUN pipenv install --dev
@@ -20,7 +21,7 @@ RUN pipenv install --dev
 COPY ./ ${APP_HOME}
 
 # production stage
-FROM builder as production
+FROM build as production
 
 # install dependencies
 RUN pipenv install --deploy
