@@ -17,7 +17,15 @@ RUN yarn install
 COPY ./ ${APP_HOME}
 
 # production stage
-FROM development as production
+FROM development as build
 
 # create optimized build
 RUN yarn build
+
+FROM nginx:1.21-alpine as production
+
+# copy configuration files
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+# copy production build
+COPY --from=build ${APP_HOME}/build /usr/share/nginx/html

@@ -1,0 +1,11 @@
+[entryPoints]
+  [entryPoints.web]
+      address = ":80"
+
+[api]
+  dashboard = true
+
+[providers]
+  [providers.docker]
+      watch = true
+      exposedByDefault = false

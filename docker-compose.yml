@@ -1,19 +1,16 @@
 version: "3.9"
 
 services:
-  nginx:
-    build: "./nginx"
-    container_name: todos-nginx
-    restart: always
+  traefik:
+    build: "./traefik"
+    container_name: todos-traefik
+    restart: on-failure
     networks:
       - todos-proxy
     ports:
       - "80:80"
     volumes:
-      - ./nginx:/nginx
-    depends_on:
-      - backend
-      - frontend
+      - /var/run/docker.sock:/var/run/docker.sock
 
   frontend:
     build:
