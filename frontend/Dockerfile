@@ -26,8 +26,8 @@ RUN yarn build
 # production stage
 FROM nginx:1.21-alpine as production
 
-# copy configuration files
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
-
 # copy compiled build
 COPY --from=build /frontend/build /usr/share/nginx/html
+
+# copy configuration files
+COPY --from=build /frontend/nginx/nginx.conf /etc/nginx/conf.d/default.conf
