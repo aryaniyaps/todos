@@ -1,7 +1,7 @@
 from flask import Flask
 from marshmallow import ValidationError
 
-from app.extensions import cors, db, migrate, mail
+from app.extensions import cors, db, migrate, mail, redis_store
 from app.handlers.validation_error import handle_validation_error
 from app.routes import app_blueprint
 
@@ -31,6 +31,7 @@ def register_extensions(app: Flask) -> None:
     """
     db.init_app(app)
     migrate.init_app(app, db)
+    redis_store.init_app(app)
     cors.init_app(app)
     mail.init_app(app)
 

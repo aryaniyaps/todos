@@ -1,26 +1,31 @@
+from binascii import hexlify
+from os import urandom
 from typing import Optional
 
+from app.extensions import redis_store
 from app.models.users import User
 
 
-def create_auth_token(user: User) -> str:
+def create_auth_token(user: User, length: int = 20) -> str:
     """
     Creates and stores an authentication token.
 
     :param user: The user to create the token for.
+    :param length: The length of the auth token.
     :return: The created auth token.
     """
-    pass
+    token = hexlify(urandom(length)).decode()
+    redis_store.set(token, user.id)
+    return token
 
 
-def remove_auth_token(user: User) -> None:
+def remove_auth_token(token: str) -> None:
     """
-    Removes the authentication token stored for
-    the given user, if it exists.
+    Removes the authentication token given.
 
-    :param user: The user to remove the token for.
+    :param token: The auth token to remove.
     """
-    pass
+    redis_store.delete(token)
 
 
 def check_auth_token(token: Optional[str]) -> Optional[User]:
@@ -29,6 +34,10 @@ def check_auth_token(token: Optional[str]) -> Optional[User]:
     given auth token, if they exist.
 
     :param token: The auth token to check.
+    
     :return: The user associated with the auth token.
     """
-    pass
+    user_id = redis_store.get(token)
+    if user_id is None:
+        return None
+    return User.query.get(user_id)

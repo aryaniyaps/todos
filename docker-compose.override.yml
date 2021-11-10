@@ -22,6 +22,7 @@ services:
       CORS_ORIGINS: "${CORS_ORIGINS}"
       SECRET_KEY: "secret"
       DATABASE_URL: "mysql+pymysql://todos:todos@mysql:3306/todos"
+      REDIS_URL: "redis://:todos@redis:6379/0"
       MAIL_SERVER: "localhost"
       MAIL_PORT: "25"
       MAIL_USE_TLS: "false"
@@ -30,6 +31,12 @@ services:
       MAIL_PASSWORD: "${MAIL_PASSWORD}"
     ports:
       - "8000:8000"
+
+  redis:
+    environment:
+      REDIS_PASSWORD: "todos"
+    ports:
+      - "6379:6379"
 
   mysql:
     environment:

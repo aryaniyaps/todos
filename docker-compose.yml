@@ -49,6 +49,7 @@ services:
       CORS_ORIGINS: "${CORS_ORIGINS}"
       SECRET_KEY: "${SECRET_KEY}"
       DATABASE_URL: "${DATABASE_URL}"
+      REDIS_URL: "${REDIS_URL}"
       MAIL_SERVER: "${MAIL_SERVER}"
       MAIL_PORT: "${MAIL_PORT}"
       MAIL_DEFAULT_SENDER: "${MAIL_DEFAULT_SENDER}"
@@ -62,6 +63,18 @@ services:
       - ./backend:/backend
     depends_on:
       - mysql
+      - redis
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: todos-redis
+    restart: on-failure
+    environment:
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
+    networks:
+      - todos-backend
+    volumes:
+      - ./data/redis:/data
 
   mysql:
     image: mysql:8
