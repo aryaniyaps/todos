@@ -37,7 +37,8 @@ def check_auth_token(token: Optional[str]) -> Optional[User]:
     
     :return: The user associated with the auth token.
     """
+    if token is None:
+        return
     user_id = redis_store.get(token)
-    if user_id is None:
-        return None
-    return User.query.get(user_id)
+    if user_id is not None:
+        return User.query.get(user_id)
