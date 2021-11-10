@@ -3,11 +3,11 @@ from typing import Optional
 from app.models.users import User
 
 
-def create_auth_token(user_id: int) -> str:
+def create_auth_token(user: User) -> str:
     """
     Creates and stores an authentication token.
 
-    :param user_id: The user ID to create the token for.
+    :param user: The user to create the token for.
     :return: The created auth token.
     """
     pass
@@ -23,12 +23,12 @@ def remove_auth_token(user: User) -> None:
     pass
 
 
-def check_auth_token(token: str) -> Optional[User]:
+def check_auth_token(token: Optional[str]) -> Optional[User]:
     """
     Checks and gets the user associated with the
     given auth token, if they exist.
 
     :param token: The auth token to check.
-    :return: The associated user.
+    :return: The user associated with the auth token.
     """
     pass
