@@ -21,7 +21,7 @@ services:
       FLASK_ENV: "development"
       CORS_ORIGINS: "${CORS_ORIGINS}"
       SECRET_KEY: "secret"
-      DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:5432/todos"
+      DATABASE_URL: "mysql+pymysql://todos:todos@mysql:3306/todos"
       MAIL_SERVER: "localhost"
       MAIL_PORT: "25"
       MAIL_USE_TLS: "false"
