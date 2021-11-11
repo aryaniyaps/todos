@@ -1,2 +1,2 @@
 #!/bin/sh
-yarn dev
+yarn dev --host
