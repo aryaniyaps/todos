@@ -1,18 +1,15 @@
 # development stage
-FROM node:14-alpine as development
+FROM node:14-slim as development
 
 # set workdir
 ARG APP_HOME=/frontend/
 WORKDIR ${APP_HOME}
 
-# install yarn
-RUN npm install yarn
-
 # copy dep files
 COPY yarn.lock ./package.json ${APP_HOME}
 
 # install dependencies
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # copy project files
 COPY ./ ${APP_HOME}

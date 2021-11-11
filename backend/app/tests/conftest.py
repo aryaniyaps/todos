@@ -4,7 +4,6 @@ from flask.testing import FlaskClient
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
-from app.core.security import create_auth_token
 from app.extensions import db
 from app.models.todos import Todo
 from app.models.users import User
@@ -42,7 +41,8 @@ def auth_client(app: Flask, user: User) -> FlaskClient:
 
     :return: The created test client.
     """
-    pass
+    with app.test_request_context():
+        yield app.test_client()
 
 
 @pytest.fixture(scope="session")
