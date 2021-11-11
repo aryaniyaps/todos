@@ -7,6 +7,7 @@ This is an example todos app.
 | library / service                                      | description               |
 | ------------------------------------------------------ | ------------------------- |
 | [React](https://github.com/facebook/react)             | UI library                |
+| [Vite](https://github.com/vitejs/vite)                 | frontend build tool       |
 | [Nginx](https://github.com/nginx/nginx)                | web server/ reverse proxy |
 | [Flask](https://github.com/pallets/flask)              | web framework             |
 | [Gunicorn](https://github.com/benoitc/gunicorn)        | WSGI HTTP server          |
