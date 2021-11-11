@@ -6,11 +6,11 @@ from flask.testing import FlaskClient
 from app.models.users import User
 
 
-def test_read_current_user(user_client: FlaskClient) -> None:
+def test_read_current_user(auth_client: FlaskClient) -> None:
     """
     Ensure we can read the current user.
     """
-    response = user_client.get(url_for("app.users.read_current_user"))
+    response = auth_client.get(url_for("app.users.read_current_user"))
     assert response.status_code == HTTPStatus.OK
 
 

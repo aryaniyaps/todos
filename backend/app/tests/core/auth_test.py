@@ -1,5 +1,5 @@
 from app.models.users import User
-from app.core.security import (
+from app.core.auth import (
     create_auth_token,
     remove_auth_token,
     check_auth_token

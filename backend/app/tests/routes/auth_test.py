@@ -15,9 +15,9 @@ def test_login(client: FlaskClient, user: User) -> None:
     assert response.status_code == HTTPStatus.OK
 
 
-def test_logout(user_client: FlaskClient) -> None:
+def test_logout(auth_client: FlaskClient) -> None:
     """
     Ensure we can log the current user out.
     """
-    response = user_client.post(url_for("app.auth.logout"))
+    response = auth_client.post(url_for("app.auth.logout"))
     assert response.status_code == HTTPStatus.NO_CONTENT

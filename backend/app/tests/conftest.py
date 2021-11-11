@@ -36,7 +36,7 @@ def client(app: Flask) -> FlaskClient:
 
 
 @pytest.fixture
-def user_client(app: Flask, user: User) -> FlaskClient:
+def auth_client(app: Flask, user: User) -> FlaskClient:
     """
     Creates an authenticated test client.
 

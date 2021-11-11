@@ -12,7 +12,6 @@ This is an example todos app.
 | [Flask](https://github.com/pallets/flask)              | web framework             |
 | [Gunicorn](https://github.com/benoitc/gunicorn)        | WSGI HTTP server          |
 | [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) | mapper/ SQL toolkit       |
-| [Redis](https://github.com/redis/redis)                | in-memory datastore       |
 | [Alembic](https://github.com/sqlalchemy/alembic)       | migrations tool           |
 | [MySQL](https://github.com/mysql/mysql-server)         | database server           |
 | [Pytest](https://github.com/pytest-dev/pytest)         | testing framework         |

@@ -2,8 +2,7 @@ from http import HTTPStatus
 
 from flask import Blueprint, request
 
-from app.core.auth import auth
-from app.core.security import create_auth_token, remove_auth_token
+from app.core.auth import auth, create_auth_token, remove_auth_token
 from app.services.auth import authenticate_user
 from app.schemas.users import user_schema
 
