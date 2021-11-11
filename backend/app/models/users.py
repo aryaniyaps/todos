@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from passlib.hash import argon2
 
 from app.extensions import db
@@ -57,13 +55,3 @@ class User(db.Model):
         :param password: The password to check.
         """
         return argon2.verify(password, self.password)
-
-    @classmethod
-    def check_auth_token(cls, token: str) -> Optional[User]:
-        """
-        Checks if the given auth token is valid, 
-        and returns the associated user.
-
-        :param token: The auth token to check.
-        """
-        return cls.query.filter_by(auth_token=token).first()

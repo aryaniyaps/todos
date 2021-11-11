@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask import Blueprint, request
 
-from app.core.auth import auth, create_auth_token
+from app.core.auth import auth, generate_auth_token
 from app.core.emails import send_user_created_mail
 from app.schemas.users import user_schema
 from app.services.users import (
@@ -37,10 +37,11 @@ def create_user():
             }
         }
         return errors, HTTPStatus.BAD_REQUEST
+    auth_token = generate_auth_token()
     user = _create_user(
         email=data.get("email"),
         password=data.get("password"), 
+        auth_token=auth_token
     )
     send_user_created_mail(recipient=user.email, user=user)
-    token = create_auth_token(user=user)
-    return {"user": user_schema.dump(user), "token": token}, HTTPStatus.CREATED
+    return {"user": user_schema.dump(user), "token": auth_token}, HTTPStatus.CREATED

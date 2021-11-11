@@ -6,32 +6,18 @@ from flask_httpauth import HTTPTokenAuth
 
 from app.models.users import User
 
-__all__ = ("auth", "create_auth_token", "remove_auth_token", "check_auth_token")
-
 
 auth = HTTPTokenAuth()
 
 
-def create_auth_token(user: User, length: int = 20) -> str:
+def generate_auth_token(length: int = 20) -> str:
     """
-    Creates and stores an authentication token.
+    Generates an authentication token.
 
-    :param user: The user to create the token for.
     :param length: The length of the auth token.
-    :return: The created auth token.
+    :return: The generated auth token.
     """
-    user.auth_token = hexlify(urandom(length)).decode()
-    return user
-
-
-def remove_auth_token(user: User) -> None:
-    """
-    Removes the authentication token given.
-
-    :param user: The user to remove the auth token for.
-    """
-    user.auth_token = None
-    return user
+    return hexlify(urandom(length)).decode()
 
 
 @auth.verify_token
@@ -45,5 +31,5 @@ def check_auth_token(token: Optional[str]) -> Optional[User]:
     :return: The user associated with the auth token.
     """
     if token is not None:
-        return User.check_auth_token(token) 
+        return User.query.filter_by(auth_token=token).first()
     return None
