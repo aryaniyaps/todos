@@ -25,7 +25,7 @@ services:
       MAIL_SERVER: "localhost"
       MAIL_PORT: "25"
       MAIL_USE_TLS: "false"
-      MAIL_DEFAULT_SENDER: "${MAIL_DEFAULT_SENDER}"
+      MAIL_DEFAULT_SENDER: "user@example.org"
       MAIL_USERNAME: "${MAIL_USERNAME}"
       MAIL_PASSWORD: "${MAIL_PASSWORD}"
     ports:

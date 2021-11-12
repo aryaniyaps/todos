@@ -1,8 +1,6 @@
 from marshmallow import Schema, fields
 from marshmallow.validate import Length
 
-__all__ = ("user_schema",)
-
 
 class UserSchema(Schema):
     id = fields.Integer(

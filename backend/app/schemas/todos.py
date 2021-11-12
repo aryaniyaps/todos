@@ -1,7 +1,5 @@
 from marshmallow import Schema, fields
 
-__all__ = ("todo_schema", "todos_schema")
-
 
 class TodoSchema(Schema):
     id = fields.Integer(

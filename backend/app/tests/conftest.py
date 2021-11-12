@@ -34,18 +34,14 @@ def viewer_client(app: Flask) -> FlaskClient:
 
 
 @pytest.fixture
-def user_client(app: Flask, user: User) -> FlaskClient:
+def user_client(app: Flask) -> FlaskClient:
     """
     Creates an authenticated test client.
 
     :return: The created test client.
     """
     with app.test_request_context():
-        yield app.test_client(
-            headers={
-                "Authorization": f"Bearer {user.auth_token}"
-            }
-        )
+        yield app.test_client()
 
 
 @pytest.fixture(scope="session")

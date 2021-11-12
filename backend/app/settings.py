@@ -39,4 +39,4 @@ MAIL_USERNAME: Optional[str] = getenv("MAIL_USERNAME", default=None)
 MAIL_PASSWORD: Optional[str] = getenv("MAIL_PASSWORD", default=None)
 
 # mail client sender address.
-MAIL_DEFAULT_SENDER: Optional[str] = getenv("MAIL_DEFAULT_SENDER", default=None)
+MAIL_DEFAULT_SENDER: str = getenv("MAIL_DEFAULT_SENDER")

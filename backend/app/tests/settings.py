@@ -38,4 +38,4 @@ MAIL_USERNAME: Optional[str] = None
 MAIL_PASSWORD: Optional[str] = None
 
 # mail client sender address.
-MAIL_DEFAULT_SENDER: Optional[str] = None
+MAIL_DEFAULT_SENDER: Optional[str] = "user@example.org"
