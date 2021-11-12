@@ -5,12 +5,6 @@ from os import getenv
 # branding configuration.
 PUBLIC_SITE_NAME: str = getenv("PUBLIC_SITE_NAME", default="Todos")
 
-# app environment.
-ENV: str = getenv("FLASK_ENV", default="development")
-
-# whether debug features are enabled.
-DEBUG: bool = bool(getenv("FLASK_DEBUG", default=True))
-
 # whether we are testing.
 TESTING: bool = bool(getenv("FLASK_TESTING", default=False))
 
