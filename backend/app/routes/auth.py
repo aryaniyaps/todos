@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint, request
 
 from app.core.auth import auth
-from app.services.auth import authenticate_user
+from app.models.users import User
 from app.schemas.users import user_schema
 
 
@@ -16,11 +16,14 @@ def login():
     Log the current user in.
     """
     data = user_schema.load(request.get_json())
-    user = authenticate_user(
-        email=data.get("email"), 
-        password=data.get("password"),
+    email = data.get("email")
+    password = data.get("password")
+    user = User.query.filter_by(email=email).first()
+    authenticated = (
+        user is not None and 
+        user.check_password(password=password)
     )
-    if user is None:
+    if not authenticated:
         errors = {
             "errors": "Incorrect email/ password provided."
         }

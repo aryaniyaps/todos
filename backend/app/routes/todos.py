@@ -3,14 +3,9 @@ from http import HTTPStatus
 from flask import Blueprint, request
 
 from app.core.auth import auth
+from app.extensions import db
 from app.models.todos import Todo
 from app.schemas.todos import todo_schema, todos_schema
-from app.services.todos import (
-    create_todo as _create_todo, 
-    delete_todo as _delete_todo, 
-    update_todo as _update_todo,
-    clear_todos as _clear_todos
-)
 
 
 todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
@@ -45,10 +40,12 @@ def create_todo():
     Create a new todo.
     """
     data = todo_schema.load(request.get_json())
-    todo = _create_todo(
-        user_id=auth.current_user().id,
-        content=data.get("content"), 
-    )
+    content = data.get("content")
+    user_id = auth.current_user().id
+    todo = Todo(content=content, user_id=user_id)
+    db.session.add(todo)
+    db.session.commit()
+    db.session.refresh(todo)
     return todo_schema.dump(todo), HTTPStatus.CREATED
 
 
@@ -78,11 +75,14 @@ def update_todo(todo_id: int):
     )
     todo = query.first_or_404()
     data = todo_schema.load(request.get_json())
-    todo = _update_todo(
-        todo=todo,
-        completed=data.get("completed"),
-        content=data.get("content"), 
-    )
+    content = data.get("content")
+    completed = data.get("completed")
+    if content is not None:
+        todo.content = content
+    if completed is not None:
+        todo.completed = completed
+    db.session.commit()
+    db.session.refresh(todo)
     return todo_schema.dump(todo)
 
 
@@ -97,7 +97,8 @@ def delete_todo(todo_id: int):
         user_id=auth.current_user().id,
     )
     todo = query.first_or_404()
-    _delete_todo(todo=todo)
+    db.session.delete(todo)
+    db.session.commit()
     return "", HTTPStatus.NO_CONTENT
 
 
@@ -107,5 +108,6 @@ def clear_todos():
     """
     Clears the current user's todos.
     """
-    _clear_todos(user=auth.current_user())
+    user = auth.current_user()
+    Todo.query.filter_by(user_id=user.id).delete()
     return "", HTTPStatus.NO_CONTENT

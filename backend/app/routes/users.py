@@ -4,10 +4,11 @@ from flask import Blueprint, request
 
 from app.core.auth import auth, generate_auth_token
 from app.core.emails import send_user_created_mail
+from app.extensions import db
+from app.models.users import User
 from app.schemas.users import user_schema
 from app.services.users import (
-    create_user as _create_user, 
-    user_by_email
+    create_user as _create_user,
 )
 
 
@@ -29,7 +30,9 @@ def create_user():
     Create a new user.
     """
     data = user_schema.load(request.get_json())
-    user = user_by_email(email=data.get("email"))
+    email = data.get("email")
+    password = data.get("password")
+    user = User.query.filter_by(email=email)
     if user is not None:
         errors = {
             "errors": {
@@ -38,10 +41,10 @@ def create_user():
         }
         return errors, HTTPStatus.BAD_REQUEST
     auth_token = generate_auth_token()
-    user = _create_user(
-        email=data.get("email"),
-        password=data.get("password"), 
-        auth_token=auth_token
-    )
+    user = User(email=email, auth_token=auth_token)
+    user.set_password(password=password)
+    db.session.add(user)
+    db.session.commit()
+    db.session.refresh(user)
     send_user_created_mail(recipient=user.email, user=user)
     return {"user": user_schema.dump(user), "token": auth_token}, HTTPStatus.CREATED
