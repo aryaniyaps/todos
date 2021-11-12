@@ -23,10 +23,9 @@ def app() -> Flask:
 
 
 @pytest.fixture
-def client(app: Flask) -> FlaskClient:
+def viewer_client(app: Flask) -> FlaskClient:
     """
-    Creates an HTTP test client that is
-    aware of the request context.
+    Creates an anonymous test client.
 
     :return: The created test client.
     """
@@ -35,14 +34,18 @@ def client(app: Flask) -> FlaskClient:
 
 
 @pytest.fixture
-def auth_client(app: Flask, user: User) -> FlaskClient:
+def user_client(app: Flask, user: User) -> FlaskClient:
     """
     Creates an authenticated test client.
 
     :return: The created test client.
     """
     with app.test_request_context():
-        yield app.test_client()
+        yield app.test_client(
+            headers={
+                "Authorization": f"Bearer {user.auth_token}"
+            }
+        )
 
 
 @pytest.fixture(scope="session")
@@ -88,3 +91,24 @@ def todo(user: User) -> Todo:
     :return: The created todo.
     """
     return TodoFactory(user=user)
+
+
+@pytest.fixture
+def foreign_user() -> User:
+    """
+    Creates a foreign user for tests.
+
+    :return: The created user.
+    """
+    return UserFactory()
+
+
+@pytest.fixture
+def foreign_todo(foreign_user: User) -> Todo:
+    """
+    Creates a todo that belongs to a foreign
+    user for tests.
+
+    :return: The created todo.
+    """
+    return TodoFactory(user=foreign_user)

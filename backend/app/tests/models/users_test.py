@@ -18,5 +18,5 @@ def test_check_password(user: User) -> None:
     Ensure we can verify an user's password.
     """
     user.set_password(password="password")
+    assert not user.check_password(password="bananas")
     assert user.check_password(password="password")
-    assert not user.check_password(password="another")

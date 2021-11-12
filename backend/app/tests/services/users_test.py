@@ -12,11 +12,14 @@ def test_create_user() -> None:
     """
     email = "user@example.org"
     password = "password"
+    auth_token = "auth-token"
     user = create_user(
         email=email, 
         password=password,
+        auth_token=auth_token
     )
     assert user.email == email
+    assert user.auth_token == auth_token
     assert user.check_password(password=password)
     assert user.is_active
 
