@@ -1,12 +1,13 @@
+"""
+Configuration options for development/ production.
+"""
+
 from typing import Optional
 from os import getenv
 
 
 # branding configuration.
 PUBLIC_SITE_NAME: str = getenv("PUBLIC_SITE_NAME", default="Todos")
-
-# whether we are testing.
-TESTING: bool = bool(getenv("FLASK_TESTING", default=False))
 
 # session secret configuration.
 SECRET_KEY: str = getenv("SECRET_KEY")

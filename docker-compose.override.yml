@@ -16,7 +16,6 @@ services:
     command: "scripts/start-local.sh"
     environment:
       FLASK_APP: "app:application"
-      FLASK_TESTING: "false"
       FLASK_ENV: "development"
       CORS_ORIGINS: "${CORS_ORIGINS}"
       SECRET_KEY: "secret"

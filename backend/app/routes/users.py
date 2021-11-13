@@ -7,9 +7,6 @@ from app.core.emails import send_user_created_mail
 from app.extensions import db
 from app.models.users import User
 from app.schemas.users import user_schema
-from app.services.users import (
-    create_user as _create_user,
-)
 
 
 user_blueprint = Blueprint("users",  __name__, url_prefix="/users")

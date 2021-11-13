@@ -17,12 +17,12 @@ def app() -> Flask:
 
     :return: The initialized app.
     """
-    app = create_app(config="app.tests.settings")
+    app = create_app("app.tests.settings")
     with app.app_context():
         yield app
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def viewer_client(app: Flask) -> FlaskClient:
     """
     Creates an anonymous test client.
@@ -33,7 +33,7 @@ def viewer_client(app: Flask) -> FlaskClient:
         yield app.test_client()
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def user_client(app: Flask) -> FlaskClient:
     """
     Creates an authenticated test client.
@@ -60,14 +60,21 @@ def test_db(app: Flask) -> SQLAlchemy:
 @pytest.fixture(autouse=True)
 def session(test_db: SQLAlchemy):
     """
-    Sets up transactions for every test case.
+    Creates a session enclosed in a transaction.
 
-    :return: A session wrapped in a transaction.
+    :return: The created session.
     """
-    test_db.session.begin_nested()
-    yield test_db.session
-    test_db.session.remove()
+    connection = test_db.engine.connect()
+    transaction = connection.begin()
+    options = dict(bind=connection, binds={})
+    session = test_db.create_scoped_session(options=options)
 
+    test_db.session = session
+    yield session
+
+    transaction.rollback()
+    connection.close()
+    session.remove()
 
 @pytest.fixture
 def user() -> User:
