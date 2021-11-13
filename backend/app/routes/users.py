@@ -29,7 +29,7 @@ def create_user():
     data = user_schema.load(request.get_json())
     email = data.get("email")
     password = data.get("password")
-    user = User.query.filter_by(email=email)
+    user = User.query.filter_by(email=email).first()
     if user is not None:
         errors = {
             "errors": {

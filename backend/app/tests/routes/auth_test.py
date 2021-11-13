@@ -10,7 +10,7 @@ def test_login(viewer_client: FlaskClient, user: User) -> None:
     """
     Ensure we can log the current user in.
     """
-    data = {"email": user.email, "password": ""}
+    data = {"email": user.email, "password": "password"}
     response = viewer_client.post(url_for("app.auth.login"), json=data)
     assert response.status_code == HTTPStatus.OK
 
