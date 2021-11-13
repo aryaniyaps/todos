@@ -1,2 +1,2 @@
 #!/bin/sh
-pipenv run pytest app -v
+pipenv run pytest -v --cov

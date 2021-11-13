@@ -1,4 +1,17 @@
-*.pyc
-*.log
-venv/
+# Python
+__pycache__/
+
+# testing / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
 .pytest_cache
+coverage.xml
+*.cover
+
+# virtual-env
+.env
+.venv
+env/
+venv/
