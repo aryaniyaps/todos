@@ -1,6 +1,6 @@
 import pytest
 from flask import Flask
-from flask.testing import FlaskClient
+from flask_login import FlaskLoginClient
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
@@ -18,12 +18,12 @@ def app() -> Flask:
     :return: The initialized app.
     """
     app = create_app("app.tests.settings")
-    with app.app_context():
-        yield app
+    app.test_client_class = FlaskLoginClient
+    return app
 
 
-@pytest.fixture(scope="session")
-def viewer_client(app: Flask) -> FlaskClient:
+@pytest.fixture
+def viewer_client(app: Flask) -> FlaskLoginClient:
     """
     Creates an anonymous test client.
 
@@ -33,15 +33,15 @@ def viewer_client(app: Flask) -> FlaskClient:
         yield app.test_client()
 
 
-@pytest.fixture(scope="session")
-def user_client(app: Flask) -> FlaskClient:
+@pytest.fixture
+def user_client(app: Flask, user: User) -> FlaskLoginClient:
     """
     Creates an authenticated test client.
 
     :return: The created test client.
     """
     with app.test_request_context():
-        yield app.test_client()
+        yield app.test_client(user=user)
 
 
 @pytest.fixture(scope="session")
@@ -51,10 +51,10 @@ def test_db(app: Flask) -> SQLAlchemy:
 
     :return: The test database.
     """
-    app.db = db
-    db.create_all()
-    yield db
-    db.drop_all()
+    with app.app_context():
+        db.create_all()
+        yield db
+        db.drop_all()
 
 
 @pytest.fixture(autouse=True)
@@ -97,21 +97,11 @@ def todo(user: User) -> Todo:
 
 
 @pytest.fixture
-def foreign_user() -> User:
+def foreign_todo() -> Todo:
     """
-    Creates a foreign user for tests.
-
-    :return: The created user.
-    """
-    return UserFactory()
-
-
-@pytest.fixture
-def foreign_todo(foreign_user: User) -> Todo:
-    """
-    Creates a todo that belongs to a foreign
+    Creates a todo that belongs to another
     user for tests.
 
     :return: The created todo.
     """
-    return TodoFactory(user=foreign_user)
+    return TodoFactory()

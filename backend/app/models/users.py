@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+from flask_login import UserMixin
 from passlib.hash import argon2
 
 from app.extensions import db
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     """Represents an individual user account."""
 
     id = db.Column(db.Integer, primary_key=True)
@@ -15,8 +16,6 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
 
     is_active = db.Column(db.Boolean, default=True, nullable=False)
-
-    auth_token = db.Column(db.String(32), unique=True, nullable=False)
 
     created_at = db.Column(
         db.DateTime(timezone=True),

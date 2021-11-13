@@ -21,7 +21,6 @@ class UserFactory(BaseFactory):
     User factory.
     """
     email = Sequence(lambda n: f"user-{n}@example.org")
-    auth_token = Sequence(lambda n: f"token-{n}")
     password = "password"
 
     class Meta:
