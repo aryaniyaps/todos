@@ -21,7 +21,7 @@ class TodoSchema(Schema):
     )
 
     completed = fields.Boolean(
-        dump_only=True,
+        dump_default=False,
         metadata={
             "description": """
             Whether the todo is completed.

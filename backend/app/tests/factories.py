@@ -1,4 +1,4 @@
-from factory import Sequence, SubFactory
+from factory import Sequence, SubFactory, PostGenerationMethodCall
 from factory.alchemy import SQLAlchemyModelFactory
 
 from app.extensions import db
@@ -12,7 +12,6 @@ class BaseFactory(SQLAlchemyModelFactory):
     """
     class Meta:
         abstract = True
-        sqlalchemy_session_persistence = "commit"
         sqlalchemy_session = db.session
 
 
@@ -21,7 +20,7 @@ class UserFactory(BaseFactory):
     User factory.
     """
     email = Sequence(lambda n: f"user-{n}@example.org")
-    password = "password"
+    password = PostGenerationMethodCall("set_password", password="password")
 
     class Meta:
         model = User

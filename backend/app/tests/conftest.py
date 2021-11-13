@@ -40,6 +40,12 @@ def user_client(app: Flask, user: User) -> FlaskLoginClient:
 
     :return: The created test client.
     """
+    # with app.test_request_context(
+    #     environ_base={
+    #         "HTTP_AUTHORIZATION": f"Bearer token"
+    #     }
+    # ):
+    #     yield app.test_client()
     with app.test_request_context():
         yield app.test_client(user=user)
 
@@ -64,44 +70,43 @@ def session(test_db: SQLAlchemy):
 
     :return: The created session.
     """
-    connection = test_db.engine.connect()
-    transaction = connection.begin()
-    options = dict(bind=connection, binds={})
-    session = test_db.create_scoped_session(options=options)
+    test_db.session.begin_nested()
+    yield test_db.session
+    test_db.session.remove()
 
-    test_db.session = session
-    yield session
-
-    transaction.rollback()
-    connection.close()
-    session.remove()
 
 @pytest.fixture
-def user() -> User:
+def user(session) -> User:
     """
     Creates an user for tests.
 
     :return: The created user.
     """
-    return UserFactory()
+    user = UserFactory()
+    session.commit()
+    return user
 
 
 @pytest.fixture
-def todo(user: User) -> Todo:
+def todo(user: User, session) -> Todo:
     """
     Creates a todo for tests.
 
     :return: The created todo.
     """
-    return TodoFactory(user=user)
+    todo = TodoFactory(user=user)
+    session.commit()
+    return todo
 
 
 @pytest.fixture
-def foreign_todo() -> Todo:
+def foreign_todo(session) -> Todo:
     """
     Creates a todo that belongs to another
     user for tests.
 
     :return: The created todo.
     """
-    return TodoFactory()
+    todo = TodoFactory()
+    session.commit()
+    return todo
