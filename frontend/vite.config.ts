@@ -8,15 +8,8 @@ export default defineConfig({
             babel: {
                 presets: [
                     "@babel/preset-typescript",
-                    [
-                        "@babel/preset-react",
-                        {
-                            runtime: "automatic",
-                            importSource: "@emotion/react",
-                        },
-                    ],
+                    ["@babel/preset-react", { runtime: "automatic" }],
                 ],
-                plugins: ["@emotion/babel-plugin"],
             },
         }),
     ],

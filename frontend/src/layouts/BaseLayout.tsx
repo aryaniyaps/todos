@@ -1,12 +1,11 @@
 import React from "react";
 import { NavBar } from "../components/NavBar";
 
-interface BaseLayoutProps {}
-
-export const BaseLayout: React.FC<BaseLayoutProps> = () => {
+export const BaseLayout: React.FC = (props) => {
     return (
-        <div css={{ background: "black" }}>
+        <div>
             <NavBar />
+            {props.children}
         </div>
     );
 };
