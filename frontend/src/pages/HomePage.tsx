@@ -8,7 +8,7 @@ export const HomePage: React.FC = () => {
             <Helmet>
                 <title>Home | Todos</title>
             </Helmet>
-            Hello world!
+            home page content
         </BaseLayout>
     );
 };
