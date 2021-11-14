@@ -5,7 +5,7 @@ interface BaseLayoutProps {}
 
 export const BaseLayout: React.FC<BaseLayoutProps> = () => {
     return (
-        <div>
+        <div css={{ background: "black" }}>
             <NavBar />
         </div>
     );
