@@ -1,11 +1,14 @@
+import React from "react";
 import "./styles/app.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HomeContainer } from "./containers/HomeContainer";
 
-function App() {
+export const App: React.FC = () => {
     return (
-        <div className="App">
-            <p>Hello world!</p>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<HomeContainer />} />
+            </Routes>
+        </BrowserRouter>
     );
-}
-
-export default App;
+};
