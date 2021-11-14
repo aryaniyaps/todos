@@ -8,6 +8,7 @@
         "serve": "vite preview"
     },
     "dependencies": {
+        "axios": "^0.24.0",
         "react": "^17.0.0",
         "react-dom": "^17.0.0",
         "react-helmet": "^6.1.0",
@@ -17,6 +18,7 @@
         "@babel/core": "^7.16.0",
         "@babel/preset-react": "^7.16.0",
         "@babel/preset-typescript": "^7.16.0",
+        "@types/node": "^16.11.7",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
         "@types/react-helmet": "^6.1.4",
