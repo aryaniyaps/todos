@@ -40,5 +40,4 @@ def create_user():
     user.set_password(password=password)
     db.session.add(user)
     db.session.commit()
-    db.session.refresh(user)
     return user_schema.dump(user), HTTPStatus.CREATED

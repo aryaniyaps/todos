@@ -45,7 +45,6 @@ def create_todo():
     todo = Todo(content=content, user_id=user_id)
     db.session.add(todo)
     db.session.commit()
-    db.session.refresh(todo)
     return todo_schema.dump(todo), HTTPStatus.CREATED
 
 
@@ -82,7 +81,6 @@ def update_todo(todo_id: int):
     if completed is not None:
         todo.completed = completed
     db.session.commit()
-    db.session.refresh(todo)
     return todo_schema.dump(todo)
 
 

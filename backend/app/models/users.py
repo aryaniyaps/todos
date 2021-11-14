@@ -15,8 +15,6 @@ class User(db.Model, UserMixin):
 
     email = db.Column(db.String(255), unique=True, nullable=False)
 
-    is_active = db.Column(db.Boolean, default=True, nullable=False)
-
     created_at = db.Column(
         db.DateTime(timezone=True),
         server_default=db.func.now(),

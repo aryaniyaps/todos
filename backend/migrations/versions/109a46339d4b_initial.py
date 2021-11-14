@@ -21,12 +21,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('password', sa.String(length=255), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
-    sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('auth_token')
+    sa.UniqueConstraint('email')
     )
     op.create_table('todos',
     sa.Column('id', sa.Integer(), nullable=False),

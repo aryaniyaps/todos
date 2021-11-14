@@ -4,17 +4,18 @@ This is an example todos app.
 
 ## Tech stack used
 
-| library / service                                      | description               |
-| ------------------------------------------------------ | ------------------------- |
-| [React](https://github.com/facebook/react)             | UI library                |
-| [Vite](https://github.com/vitejs/vite)                 | frontend build tool       |
-| [Nginx](https://github.com/nginx/nginx)                | web server/ reverse proxy |
-| [Flask](https://github.com/pallets/flask)              | web framework             |
-| [Gunicorn](https://github.com/benoitc/gunicorn)        | WSGI HTTP server          |
-| [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) | mapper/ SQL toolkit       |
-| [Alembic](https://github.com/sqlalchemy/alembic)       | migrations tool           |
-| [MySQL](https://github.com/mysql/mysql-server)         | database server           |
-| [Pytest](https://github.com/pytest-dev/pytest)         | testing framework         |
+| library / service                                      | description                  |
+| ------------------------------------------------------ | ---------------------------- |
+| [React](https://github.com/facebook/react)             | UI library                   |
+| [Vite](https://github.com/vitejs/vite)                 | frontend build tool          |
+| [Nginx](https://github.com/nginx/nginx)                | web server                   |
+| [HAProxy](https://github.com/haproxy/haproxy)          | reverse proxy/ load balancer |
+| [Flask](https://github.com/pallets/flask)              | web framework                |
+| [Gunicorn](https://github.com/benoitc/gunicorn)        | WSGI HTTP server             |
+| [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) | mapper/ SQL toolkit          |
+| [Alembic](https://github.com/sqlalchemy/alembic)       | migrations tool              |
+| [MySQL](https://github.com/mysql/mysql-server)         | database server              |
+| [Pytest](https://github.com/pytest-dev/pytest)         | testing framework            |
 
 ## How to use
 
