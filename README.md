@@ -9,7 +9,7 @@ This is an example todos app.
 | [React](https://github.com/facebook/react)                  | UI library                   |
 | [Storybook](https://github.com/storybookjs/storybook)       | UI component explorer        |
 | [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) | CSS library                  |
-| [Vite](https://github.com/vitejs/vite)                      | frontend build tool          |
+| [Webpack](https://github.com/webpack/webpack)               | frontend build tool          |
 | [Nginx](https://github.com/nginx/nginx)                     | web server                   |
 | [HAProxy](https://github.com/haproxy/haproxy)               | reverse proxy/ load balancer |
 | [Flask](https://github.com/pallets/flask)                   | web framework                |
