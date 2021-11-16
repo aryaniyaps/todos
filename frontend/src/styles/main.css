@@ -1,37 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-    h1 {
-        @apply text-6xl;
-        @apply font-bold;
-    }
-
-    h2 {
-        @apply text-4xl;
-        @apply font-bold;
-    }
-
-    h3 {
-        @apply text-3xl;
-        @apply font-semibold;
-    }
-
-    h4 {
-        @apply text-2xl;
-        @apply font-medium;
-    }
-
-    a {
-        @apply font-medium;
-        @apply text-accent;
-    }
-}
-
 :root {
-    font-size: 14px;
-
     --color-button-text: #fff;
     --color-primary-100: #dee3ea;
     --color-primary-200: #cdcdcd;
@@ -55,36 +22,22 @@
 html,
 body,
 #root {
-    @apply w-full;
-    @apply h-full;
-    @apply text-primary-100;
-    @apply bg-primary-900;
-    @apply flex;
+    width: 100%;
+    height: 100%;
+    color: var(--color-primary-100);
+    background-color: var(--color-primary-900);
+    display: flex;
 }
 
 html {
-    @apply fixed;
+    position: fixed;
 }
 
 #root {
-    @apply overflow-y-auto;
+    overflow-y: auto;
 }
 
 input:focus,
 button:focus {
-    @apply outline-none;
-}
-
-::-webkit-scrollbar {
-    @apply w-2.5;
-}
-
-::-webkit-scrollbar-track {
-    @apply bg-transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    @apply rounded;
-    @apply bg-primary-700;
-    @apply bg-clip-content;
+    outline: none;
 }

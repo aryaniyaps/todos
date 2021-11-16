@@ -3,10 +3,21 @@ import { NavBar } from "../components/NavBar";
 
 export const BaseLayout: React.FC = (props) => {
     return (
-        <div className="flex flex-col h-full w-full bg-primary-800">
+        <div
+            css={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+                width: "100%",
+                background: "black",
+            }}
+        >
             <NavBar />
-            <div className="overflow-y-auto flex-grow flex">
-                <div className="p-4 flex-grow mx-auto flex max-w-7xl">
+            <div css={{ overflowY: "auto", display: "flex" }} className="flex-grow">
+                <div
+                    css={{ display: "flex" }}
+                    className="p-4 flex-grow mx-auto max-w-7xl"
+                >
                     {props.children}
                 </div>
             </div>
