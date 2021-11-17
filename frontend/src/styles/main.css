@@ -21,7 +21,7 @@
 
 html,
 body,
-#root {
+#app {
     width: 100%;
     height: 100%;
     color: var(--color-primary-100);
@@ -33,7 +33,7 @@ html {
     position: fixed;
 }
 
-#root {
+#app {
     overflow-y: auto;
 }
 

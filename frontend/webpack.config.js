@@ -1,41 +1,57 @@
-var path = require("path");
+const path = require("path");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    // Change to your "entry-point".
     entry: "./src/index",
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js",
     },
+    stats: "minimal",
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json"],
     },
     devServer: {
+        client: {
+            overlay: true,
+            progress: true,
+        },
         static: {
             directory: path.resolve(__dirname, "public"),
         },
         compress: true,
         port: 3000,
     },
+    plugins: [
+        new HTMLWebpackPlugin({
+            template: path.resolve(__dirname, "public/index.html"),
+        }),
+    ],
     module: {
         rules: [
             {
-                test: /\.(ts|js)x?$/,
-                exclude: /node_modules/,
-                loader: "babel-loader",
+                test: /\.tsx?$/,
+                exclude: [/\.test.tsx?$/],
+                user: ["babel-loader", "ts-loader"],
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: [/node_modules/, /\.test.jsx?$/],
+                use: ["babel-loader"],
             },
 
             {
-                test: /\.(scss|sass|css)$/,
+                test: /\.css$/,
                 exclude: /node_modules/,
-                use: [
-                    // Translates CSS into CommonJS
-                    "css-loader",
-                ],
+                use: ["style-loader", "css-loader"],
             },
             {
                 test: /\.svg$/,
-                loader: "svg-inline-loader",
+                use: ["svg-inline-loader"],
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: "asset/resource",
             },
         ],
     },
