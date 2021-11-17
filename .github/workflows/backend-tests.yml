@@ -30,7 +30,7 @@ jobs:
           MYSQL_DATABASE: "todos"
 
     steps:
-      - name: checkout
+      - name: checkout code
         uses: actions/checkout@v2
 
       - name: setup python
