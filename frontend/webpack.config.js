@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 // path configuration
 const staticPath = path.resolve(__dirname, "public");
-const appHTML = path.resolve(__dirname, "public/index.html");
+const appHTML = path.resolve(__dirname, "index.html");
 const outputPath = path.resolve(__dirname, "dist");
 
 module.exports = function (env) {
@@ -15,6 +15,7 @@ module.exports = function (env) {
         output: {
             path: outputPath,
             filename: "bundle.js",
+            clean: __prod__,
         },
         stats: "minimal",
         resolve: {
@@ -33,7 +34,6 @@ module.exports = function (env) {
         },
         plugins: [
             new HTMLWebpackPlugin({
-                inject: true,
                 template: appHTML,
             }),
         ],
