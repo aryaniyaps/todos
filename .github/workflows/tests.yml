@@ -1,0 +1,42 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: install pipenv
+        working-directory: ./backend
+        run: pip install --no-cache pipenv
+
+      - name: install dependencies
+        working-directory: ./backend
+        run: pipenv install --dev
+
+      - name: run tests
+        working-directory: ./backend
+        run: ./scripts/run-tests.sh
+
+      - name: upload coverage
+        uses: codecov/codecov-action@v2
+        with:
+          fail_ci_if_error: true
+          verbose: true

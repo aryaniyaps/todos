@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/frontend/"
+    schedule:
+      interval: "weekly"
+      time: "08:00"
+    open-pull-requests-limit: 50
+    labels:
+      - npm
+      - dependabot
+
+  - package-ecosystem: "pip"
+    directory: "/backend/"
+    schedule:
+      interval: "weekly"
+      time: "08:00"
+    open-pull-requests-limit: 50
+    labels:
+      - pip
+      - dependabot
