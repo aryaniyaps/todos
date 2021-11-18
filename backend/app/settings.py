@@ -21,11 +21,11 @@ SQLALCHEMY_DATABASE_URI: str = getenv("DATABASE_URL")
 # whether modifications are tracked.
 SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
 
-# mail client host name.
-MAIL_SERVER: str = getenv("MAIL_SERVER")
+# mail server name.
+MAIL_SERVER: str = getenv("MAIL_SERVER", default="localhost")
 
 # mail client port.
-MAIL_PORT: int = int(getenv("MAIL_PORT"))
+MAIL_PORT: int = int(getenv("MAIL_PORT", default=25))
 
 # whether the mail client should use tls.
 MAIL_USE_TLS: bool = bool(getenv("MAIL_USE_TLS", default=True))
@@ -39,5 +39,5 @@ MAIL_PASSWORD: Optional[str] = getenv("MAIL_PASSWORD", default=None)
 # mail client sender address.
 MAIL_DEFAULT_SENDER: str = getenv("MAIL_DEFAULT_SENDER")
 
-# disable mail sending.
-MAIL_SUPPRESS_SEND: bool = getenv("MAIL_SUPPRESS_SEND", default=False)
+# whether mail sending is disabled.
+MAIL_SUPPRESS_SEND: bool = bool(getenv("MAIL_SUPPRESS_SEND", default=False))

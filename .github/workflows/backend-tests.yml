@@ -22,7 +22,7 @@ jobs:
       FLASK_TESTING: true
       MAIL_SUPPRESS_SEND: true
       SECRET_KEY: "secret"
-      SQLALCHEMY_DATABASE_URI: "mysql+pymysql://todos:todos@mysql:3306/todos"
+      DATABASE_URL: "mysql+pymysql://todos:todos@mysql:3306/todos"
 
     services:
       mysql:
