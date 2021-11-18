@@ -36,5 +36,5 @@ http://localhost. To use in a production environment, you need to set environmen
 variables first. Here's an [example env file](example.env) to reference.
 
 ```text
-docker compose -f docker-compose.yml up -d
+docker compose -f docker-compose.yml up --build
 ```
