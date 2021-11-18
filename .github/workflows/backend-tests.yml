@@ -50,7 +50,7 @@ jobs:
         run: pipenv install --dev
 
       - name: Run Tests
-        run: ./scripts/run-tests.sh
+        run: sh ./scripts/run-tests.sh
 
       - name: Upload Coverage
         uses: codecov/codecov-action@v2

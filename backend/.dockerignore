@@ -1,3 +1,8 @@
+# pycharm
 .idea
+
+# venv
 venv/
+
+# packaging
 dist/
