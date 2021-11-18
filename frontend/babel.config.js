@@ -11,6 +11,7 @@ module.exports = {
             {
                 useBuiltIns: "usage",
                 corejs: 3.18,
+                loose: true,
                 targets: packageConfig.browserslist,
                 shippedProposals: true,
             },
