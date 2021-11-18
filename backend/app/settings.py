@@ -9,6 +9,9 @@ from os import getenv
 # branding configuration.
 PUBLIC_SITE_NAME: str = getenv("PUBLIC_SITE_NAME", default="Todos")
 
+# whether we are testing.
+TESTING: bool = bool(getenv("FLASK_TESTING", default=False))
+
 # session secret configuration.
 SECRET_KEY: str = getenv("SECRET_KEY")
 
@@ -35,3 +38,6 @@ MAIL_PASSWORD: Optional[str] = getenv("MAIL_PASSWORD", default=None)
 
 # mail client sender address.
 MAIL_DEFAULT_SENDER: str = getenv("MAIL_DEFAULT_SENDER")
+
+# disable mail sending.
+MAIL_SUPPRESS_SEND: bool = getenv("MAIL_SUPPRESS_SEND", default=False)

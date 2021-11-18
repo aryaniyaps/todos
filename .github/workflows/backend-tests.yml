@@ -18,6 +18,11 @@ jobs:
     defaults:
       run:
         working-directory: ./backend
+    env:
+      FLASK_TESTING: true
+      MAIL_SUPPRESS_SEND: true
+      SECRET_KEY: "secret"
+      SQLALCHEMY_DATABASE_URI: "mysql+pymysql://todos:todos@mysql:3306/todos"
 
     services:
       mysql:
@@ -30,24 +35,24 @@ jobs:
           MYSQL_DATABASE: "todos"
 
     steps:
-      - name: checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: setup python
+      - name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
-      - name: install pipenv
+      - name: Install Pipenv
         run: pip install --no-cache pipenv
 
-      - name: install dependencies
+      - name: Install Dependencies
         run: pipenv install --dev
 
-      - name: run tests
+      - name: Run Tests
         run: ./scripts/run-tests.sh
 
-      - name: upload coverage
+      - name: Upload Coverage
         uses: codecov/codecov-action@v2
         with:
           fail_ci_if_error: true

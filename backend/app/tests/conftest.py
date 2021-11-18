@@ -17,7 +17,7 @@ def app() -> Flask:
 
     :return: The initialized app.
     """
-    app = create_app("app.tests.settings")
+    app = create_app()
     app.test_client_class = FlaskLoginClient
     return app
 
