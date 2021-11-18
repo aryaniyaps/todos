@@ -1,5 +1,7 @@
 # Todos app
 
+[![codecov](https://codecov.io/gh/aryaniyaps/todos/branch/main/graph/badge.svg?token=K82QAJ2EF7)](https://codecov.io/gh/aryaniyaps/todos)
+
 This is an example todos app.
 
 ## Tech stack used
