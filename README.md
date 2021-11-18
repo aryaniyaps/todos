@@ -1,5 +1,6 @@
 # Todos app
 
+[![GitHub](https://img.shields.io/github/license/aryaniyaps/todos)](https://github.com/aryaniyaps/todos)
 [![codecov](https://codecov.io/gh/aryaniyaps/todos/branch/main/graph/badge.svg?token=K82QAJ2EF7)](https://codecov.io/gh/aryaniyaps/todos)
 
 This is an example todos app.
