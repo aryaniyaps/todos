@@ -31,6 +31,7 @@ jobs:
           - "3306:3306"
         env:
           MYSQL_USER: "todos"
+          MYSQL_ROOT_PASSWORD: "todos"
           MYSQL_PASSWORD: "todos"
           MYSQL_DATABASE: "todos"
 
