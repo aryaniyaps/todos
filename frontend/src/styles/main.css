@@ -1,3 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-6xl;
+        @apply font-bold;
+    }
+
+    h2 {
+        @apply text-4xl;
+        @apply font-bold;
+    }
+
+    h3 {
+        @apply text-3xl;
+        @apply font-semibold;
+    }
+
+    h4 {
+        @apply text-2xl;
+        @apply font-medium;
+    }
+
+    a {
+        @apply font-medium;
+        @apply text-accent;
+    }
+}
+
 :root {
     --color-button-text: #fff;
     --color-primary-100: #dee3ea;
@@ -10,29 +41,32 @@
     --color-primary-800: #242627;
     --color-primary-900: #1e1f1f;
     --color-danger: #f04747;
+    --color-danger-hover: #f54c4c;
     --color-accent: #5575e7;
+    --color-accent-hover: #5d7ef5;
+    --color-accent-disabled: #879eed;
     --color-floating: rgba(17, 19, 20, 0.85);
 }
 
 html,
 body,
 #app {
-    width: 100%;
-    height: 100%;
-    color: var(--color-primary-100);
-    background-color: var(--color-primary-900);
-    display: flex;
+    @apply w-full;
+    @apply h-full;
+    @apply text-primary-100;
+    @apply bg-primary-900;
+    @apply flex;
 }
 
 html {
-    position: fixed;
+    @apply fixed;
 }
 
 #app {
-    overflow-y: auto;
+    @apply overflow-y-auto;
 }
 
 input:focus,
 button:focus {
-    outline: none;
+    @apply outline-none;
 }

@@ -12,18 +12,5 @@ export const Button: React.FC<ButtonProps> = ({
     size = "medium",
     ...props
 }) => {
-    return (
-        <button
-            css={{
-                cursor: "pointer",
-                display: "inline-block",
-                lineHeight: 1,
-                backgroundColor: primary ? "" : "",
-                color: primary ? "" : "",
-            }}
-            {...props}
-        >
-            {children}
-        </button>
-    );
+    return <button {...props}>{children}</button>;
 };
