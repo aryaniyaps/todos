@@ -24,11 +24,6 @@
         @apply text-2xl;
         @apply font-medium;
     }
-
-    a {
-        @apply font-medium;
-        @apply text-accent;
-    }
 }
 
 :root {

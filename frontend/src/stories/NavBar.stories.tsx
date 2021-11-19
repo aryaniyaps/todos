@@ -12,4 +12,4 @@ const Template: ComponentStory<typeof NavBar> = (props) => {
     return <NavBar {...props} />;
 };
 
-export const Main = Template.bind({});
+export const Default = Template.bind({});
