@@ -1,9 +1,6 @@
 import { addons } from "@storybook/addons";
-import { create } from "@storybook/theming";
+import { themes } from "@storybook/theming";
 
 addons.setConfig({
-    theme: create({
-        base: "dark",
-        brandTitle: "Todos",
-    }),
+    theme: themes.dark,
 });
