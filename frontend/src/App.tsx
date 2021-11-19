@@ -1,4 +1,3 @@
-import "./styles/fonts.css";
 import "./styles/main.css";
 import React from "react";
 import { QueryClientProvider } from "react-query";
