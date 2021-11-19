@@ -2,24 +2,9 @@
 
 [![GitHub](https://img.shields.io/github/license/aryaniyaps/todos)](https://github.com/aryaniyaps/todos)
 ![Build Status](https://github.com/aryaniyaps/todos/workflows/tests/badge.svg)
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/aryaniyaps/todos)
 
 This is an example todos app.
-
-## Tech stack used
-
-| library / service                                      | description                  |
-| ------------------------------------------------------ | ---------------------------- |
-| [React](https://github.com/facebook/react)             | UI library                   |
-| [Storybook](https://github.com/storybookjs/storybook)  | UI component explorer        |
-| [Webpack](https://github.com/webpack/webpack)          | Module bundler               |
-| [Nginx](https://github.com/nginx/nginx)                | web server                   |
-| [HAProxy](https://github.com/haproxy/haproxy)          | reverse proxy/ load balancer |
-| [Flask](https://github.com/pallets/flask)              | web framework                |
-| [Gunicorn](https://github.com/benoitc/gunicorn)        | WSGI HTTP server             |
-| [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) | mapper/ SQL toolkit          |
-| [Alembic](https://github.com/sqlalchemy/alembic)       | migrations tool              |
-| [MySQL](https://github.com/mysql/mysql-server)         | database server              |
-| [Pytest](https://github.com/pytest-dev/pytest)         | testing framework            |
 
 ## How to use
 
