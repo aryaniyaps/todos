@@ -1,6 +1,6 @@
-import { client } from "../lib/axiosClient";
+import { client } from "../lib/httpClient";
 
-export const authenticate = async (data: any) => {
+export const authenticate = async (data: { email: string; password: string }) => {
     return await client.post("/auth/login", data);
 };
 
