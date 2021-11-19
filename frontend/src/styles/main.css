@@ -10,13 +10,8 @@
     --color-primary-800: #242627;
     --color-primary-900: #1e1f1f;
     --color-danger: #f04747;
-    --color-danger-hover: #f54c4c;
     --color-accent: #5575e7;
-    --color-accent-hover: #5d7ef5;
-    --color-accent-disabled: #879eed;
     --color-floating: rgba(17, 19, 20, 0.85);
-    --color-separator: hsla(0, 0%, 100%, 0.06);
-    --text-input-bg: rgba(0, 0, 0, 0.1);
 }
 
 html,
