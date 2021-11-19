@@ -52,9 +52,3 @@ jobs:
 
       - name: Run Tests
         run: sh ./scripts/run-tests.sh
-
-      - name: Upload Coverage
-        uses: codecov/codecov-action@v2
-        with:
-          fail_ci_if_error: true
-          verbose: true

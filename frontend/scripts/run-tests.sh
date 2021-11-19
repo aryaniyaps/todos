@@ -1,2 +1,2 @@
 #!/bin/sh
-yarn test --coverage
+yarn test
