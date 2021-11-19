@@ -53,7 +53,7 @@ export const Button: FC<ButtonProps> = ({
             </span>
             {loading ? (
                 <span className="absolute">
-                    <Spinner size={size === "small" ? "2" : "4"} />
+                    <Spinner size={size === "small" ? "small" : "big"} />
                 </span>
             ) : null}
         </button>

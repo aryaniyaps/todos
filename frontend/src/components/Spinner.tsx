@@ -1,15 +1,15 @@
 import { FC } from "react";
 
 const sizeMap = {
-    "2": "h-4 w-4",
-    "4": "h-6 w-6",
+    small: "h-4 w-4",
+    big: "h-6 w-6",
 };
 
 export type SpinnerProps = {
     size?: keyof typeof sizeMap;
 };
 
-export const Spinner: FC<SpinnerProps> = ({ size = "4" }) => {
+export const Spinner: FC<SpinnerProps> = ({ size = "big" }) => {
     return (
         <svg
             className={`animate-spin text-button ${sizeMap[size]}`}
