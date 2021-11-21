@@ -3,7 +3,7 @@ module.exports = {
     darkMode: false,
     theme: {
         fontFamily: {
-            sans: ["Poppins", "Segoe UI", "Roboto", "sans-serif"],
+            sans: ["Inter", "Segoe UI", "Roboto", "sans-serif"],
             mono: ["Menlo", "Monaco", "Courier New", "monospace"],
         },
         fontSize: {
