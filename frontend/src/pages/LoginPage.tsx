@@ -12,32 +12,19 @@ const LoginForm: FC = () => {
             onSubmit={({ email, password }) => {}}
         >
             {({ handleSubmit, isSubmitting }) => (
-                <Form className="flex flex-col max-w-sm w-full p-6 bg-primary-600 rounded border border-primary-800">
-                    {/* form header */}
-                    <div className="mb-6 mx-auto text-center">
-                        <h3>Welcome back</h3>
-                        <p className="text-sm text-primary-200">
-                            We're excited to see you again!
-                        </p>
-                    </div>
-                    <FormField
-                        name="email"
-                        placeholder="email"
-                        type="email"
-                        spellCheck={false}
-                    />
+                <Form className="flex flex-col max-w-sm w-full p-6 bg-primary-100 rounded-md shadow">
+                    <FormField name="email" placeholder="email" type="email" />
                     <FormField name="password" placeholder="password" type="password" />
+                    <a href="/password" className="text-right text-sm mb-4">
+                        Forgot password?
+                    </a>
                     <Button
-                        title="login"
                         onClick={() => handleSubmit()}
                         loading={isSubmitting}
                         className="mt-2"
                     >
                         login
                     </Button>
-                    <a className="mt-4 mx-auto" href="/">
-                        I need an account
-                    </a>
                 </Form>
             )}
         </Formik>
@@ -51,7 +38,15 @@ export const LoginPage: FC = () => {
                 <title>Login | Todos</title>
             </Helmet>
             <div className="flex flex-col self-center h-full w-full justify-center items-center">
+                {/* header */}
+                <div className="mb-6 mx-auto text-center">
+                    <h2>Welcome back</h2>
+                    <p>We're excited to see you again!</p>
+                </div>
                 <LoginForm />
+                <div className="mt-4">
+                    Don't have an account? <a href="/">register</a>
+                </div>
             </div>
         </BaseLayout>
     );

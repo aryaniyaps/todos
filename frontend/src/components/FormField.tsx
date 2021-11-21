@@ -9,7 +9,7 @@ export const FormField: React.FC<
 > = ({ ref: _, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className="flex flex-col mb-4 text-lg text-left">
+        <div className="flex flex-col mb-5 text-lg text-left">
             {meta.error && meta.touched && (
                 <span className="italic text-danger">
                     <span className="mx-1">-</span>

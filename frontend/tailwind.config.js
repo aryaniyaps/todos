@@ -22,8 +22,7 @@ module.exports = {
         },
         colors: {
             transparent: "transparent",
-            input: "var(--color-input)",
-            button: "var(--color-button-text)",
+            "header-text": "var(--color-header-text)",
             floating: "var(--color-floating)",
             primary: {
                 100: "var(--color-primary-100)",
@@ -32,9 +31,6 @@ module.exports = {
                 400: "var(--color-primary-400)",
                 500: "var(--color-primary-500)",
                 600: "var(--color-primary-600)",
-                700: "var(--color-primary-700)",
-                800: "var(--color-primary-800)",
-                900: "var(--color-primary-900)",
             },
             accent: {
                 DEFAULT: "var(--color-accent)",

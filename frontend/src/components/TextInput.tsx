@@ -7,8 +7,8 @@ export interface TextInputInputProps
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputInputProps>(
     ({ className = "", invalid, ...props }, ref) => {
-        const border = invalid ? "border-danger" : "border-primary-800";
-        const styles = `w-full py-2 px-3 rounded text-primary-300 placeholder-primary-400 border ${border} transition-colors duration-300 ease-in-out bg-input  ${className}`;
+        const border = invalid ? "border-danger" : "border-primary-400";
+        const styles = `relative w-full py-2 px-3 shadow-sm rounded-md placeholder-primary-500 border ${border} bg-transparent  ${className}`;
 
         return <input className={styles} ref={ref} data-testid="input" {...props} />;
     }

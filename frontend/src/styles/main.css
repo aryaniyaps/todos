@@ -5,14 +5,21 @@
 @tailwind utilities;
 
 @layer base {
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply text-header-text;
+    }
+
     h1 {
-        @apply text-6xl;
-        @apply font-bold;
+        @apply text-4xl;
+        @apply font-black;
     }
 
     h2 {
-        @apply text-4xl;
-        @apply font-bold;
+        @apply text-3xl;
+        @apply font-black;
     }
 
     h3 {
@@ -24,25 +31,27 @@
         @apply text-xl;
         @apply font-semibold;
     }
+
+    a {
+        @apply text-accent;
+        @apply hover:text-accent-hover;
+        @apply font-semibold;
+    }
 }
 
 :root {
-    --color-button-text: #fff;
-    --color-primary-100: #dee3ea;
-    --color-primary-200: #cdcdcd;
-    --color-primary-300: #a3a3a3;
-    --color-primary-400: #919191;
-    --color-primary-500: #464f56;
-    --color-primary-600: #3b4146;
-    --color-primary-700: #2f3437;
-    --color-primary-800: #242627;
-    --color-primary-900: #1e1f1f;
+    --color-primary-100: #f9fafb;
+    --color-primary-200: #f3f4f6;
+    --color-primary-300: #e5e7eb;
+    --color-primary-400: #d1d5db;
+    --color-primary-500: #9ca3af;
+    --color-primary-600: #6b7280;
+    --color-header-text: #1f2937;
     --color-danger: #f04747;
     --color-danger-hover: #f54c4c;
     --color-accent: #5575e7;
     --color-accent-hover: #5d7ef5;
     --color-accent-disabled: #879eed;
-    --color-input: rgba(0, 0, 0, 0.1);
     --color-floating: rgba(17, 19, 20, 0.85);
 }
 
@@ -51,8 +60,8 @@ body,
 #app {
     @apply w-full;
     @apply h-full;
-    @apply text-primary-100;
-    @apply bg-primary-900;
+    @apply text-primary-600;
+    @apply bg-primary-200;
     @apply flex;
 }
 
