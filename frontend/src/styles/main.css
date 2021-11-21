@@ -16,13 +16,13 @@
     }
 
     h3 {
-        @apply text-3xl;
+        @apply text-2xl;
         @apply font-semibold;
     }
 
     h4 {
-        @apply text-2xl;
-        @apply font-medium;
+        @apply text-xl;
+        @apply font-semibold;
     }
 }
 

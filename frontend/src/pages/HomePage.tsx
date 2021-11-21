@@ -1,14 +1,14 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { BaseLayout } from "../layouts/BaseLayout";
+import { AppLayout } from "../layouts/AppLayout";
 
 export const HomePage: React.FC = () => {
     return (
-        <BaseLayout>
+        <AppLayout>
             <Helmet>
                 <title>Home | Todos</title>
             </Helmet>
             home page content
-        </BaseLayout>
+        </AppLayout>
     );
 };

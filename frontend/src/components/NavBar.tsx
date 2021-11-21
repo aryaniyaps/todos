@@ -7,3 +7,5 @@ export const NavBar: FC = () => {
         </div>
     );
 };
+
+NavBar.displayName = "NavBar";

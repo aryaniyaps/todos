@@ -33,3 +33,5 @@ export const Spinner: FC<SpinnerProps> = ({ size = "big" }) => {
         </svg>
     );
 };
+
+Spinner.displayName = "Spinner";

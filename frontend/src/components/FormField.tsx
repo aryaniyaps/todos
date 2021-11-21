@@ -1,6 +1,6 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import { useField } from "formik";
-import { Input } from "./Input";
+import { TextInput } from "./TextInput";
 
 export const FormField: React.FC<
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
@@ -9,14 +9,16 @@ export const FormField: React.FC<
 > = ({ ref: _, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className="flex flex-col mb-2 text-lg text-left">
+        <div className="flex flex-col mb-4 text-lg text-left">
             {meta.error && meta.touched && (
                 <span className="italic text-danger">
                     <span className="mx-1">-</span>
                     {meta.error}
                 </span>
             )}
-            <Input {...field} {...props} invalid={!!meta.error} />
+            <TextInput {...field} {...props} invalid={!!meta.error} />
         </div>
     );
 };
+
+FormField.displayName = "FormField";

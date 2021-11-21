@@ -9,7 +9,7 @@ const sizeMap = {
 
 const colorMap = {
     accent: "bg-accent hover:bg-accent-hover disabled:bg-accent-disabled",
-    primary: "bg-primary-800 hover:bg-primary-700 disabled:bg-accent-hover",
+    primary: "bg-primary-900 hover:bg-primary-800 disabled:bg-accent-hover",
     transparent: "bg-transparent",
 };
 
@@ -35,7 +35,7 @@ export const Button: FC<ButtonProps> = ({
     transition,
     className = "",
     color = "primary",
-    size = "small",
+    size = "big",
     ...props
 }) => {
     return (
@@ -59,3 +59,5 @@ export const Button: FC<ButtonProps> = ({
         </button>
     );
 };
+
+Button.displayName = "Button";
