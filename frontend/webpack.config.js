@@ -15,6 +15,7 @@ module.exports = function (env) {
         output: {
             path: outputPath,
             filename: "bundle.js",
+            publicPath: "/",
             clean: __prod__,
         },
         stats: "minimal",
@@ -29,6 +30,7 @@ module.exports = function (env) {
             static: {
                 directory: staticPath,
             },
+            historyApiFallback: true,
             compress: true,
             port: 3000,
         },

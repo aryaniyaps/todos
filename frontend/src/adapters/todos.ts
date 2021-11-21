@@ -4,6 +4,10 @@ export const fetchTodos = async () => {
     return await client.get("/todos");
 };
 
+export const fetchTodo = async (todoId: number) => {
+    return await client.get(`/todos/${todoId}`);
+};
+
 export const createTodo = async (data: { content: string; completed?: boolean }) => {
     return await client.post("/todos", data);
 };

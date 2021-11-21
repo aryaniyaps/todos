@@ -42,6 +42,7 @@
     --color-accent: #5575e7;
     --color-accent-hover: #5d7ef5;
     --color-accent-disabled: #879eed;
+    --color-input: rgba(0, 0, 0, 0.1);
     --color-floating: rgba(17, 19, 20, 0.85);
 }
 

@@ -4,6 +4,7 @@ import { QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { queryClient } from "./lib/queryClient";
 import { HomePage } from "./pages/HomePage";
+import { LoginPage } from "./pages/LoginPage";
 
 export const App: React.FC = () => {
     return (
@@ -11,6 +12,7 @@ export const App: React.FC = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/login" element={<LoginPage />} />
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>

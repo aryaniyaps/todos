@@ -22,6 +22,7 @@ module.exports = {
         },
         colors: {
             transparent: "transparent",
+            input: "var(--color-input)",
             button: "var(--color-button-text)",
             floating: "var(--color-floating)",
             primary: {
