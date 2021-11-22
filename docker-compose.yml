@@ -66,12 +66,23 @@ services:
   worker:
     image: todos-backend
     container_name: todos-worker
-    restart: on-failure
+    restart: always
     working_dir: "/backend/"
     command: "scripts/run-worker.sh"
-    environment: *base-environment
+    environment:
+      FLASK_APP: "app:application"
+      FLASK_ENV: "production"
+      CORS_ORIGINS: "${CORS_ORIGINS}"
+      SECRET_KEY: "${SECRET_KEY}"
+      DATABASE_URL: "${DATABASE_URL}"
+      MAIL_SERVER: "${MAIL_SERVER}"
+      MAIL_PORT: "${MAIL_PORT}"
+      MAIL_DEFAULT_SENDER: "${MAIL_DEFAULT_SENDER}"
+      MAIL_USE_TLS: "${MAIL_USE_TLS}"
+      MAIL_USERNAME: "${MAIL_USERNAME}"
+      MAIL_PASSWORD: "${MAIL_PASSWORD}"
     networks:
-      - reddit-main
+      - todos-backend
     volumes:
       - ./backend:/backend
     depends_on:
