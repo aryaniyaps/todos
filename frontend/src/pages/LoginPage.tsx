@@ -1,13 +1,19 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
 import { Formik, Form } from "formik";
+import * as yup from "yup";
 import { Button } from "../components/Button";
 import { FormField } from "../components/FormField";
 import { BaseLayout } from "../layouts/BaseLayout";
 
 const LoginForm: FC = () => {
+    const schema = yup.object().shape({
+        email: yup.string().email().required(),
+        password: yup.string().required(),
+    });
     return (
         <Formik
+            validationSchema={schema}
             initialValues={{ email: "", password: "" }}
             onSubmit={({ email, password }) => {}}
         >
