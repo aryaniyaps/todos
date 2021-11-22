@@ -5,7 +5,7 @@ import { Button } from "../components/Button";
 import { FormField } from "../components/FormField";
 import { BaseLayout } from "../layouts/BaseLayout";
 
-const LoginForm: FC = () => {
+const RegisterForm: FC = () => {
     return (
         <Formik
             initialValues={{ email: "", password: "" }}
@@ -15,15 +15,12 @@ const LoginForm: FC = () => {
                 <Form className="flex flex-col max-w-sm w-full p-6 bg-primary-100 rounded-md shadow">
                     <FormField name="email" placeholder="email" type="email" />
                     <FormField name="password" placeholder="password" type="password" />
-                    <a href="/password" className="text-right text-sm mb-4">
-                        Forgot password?
-                    </a>
                     <Button
                         onClick={() => handleSubmit()}
                         loading={isSubmitting}
                         className="mt-2"
                     >
-                        login
+                        register
                     </Button>
                 </Form>
             )}
@@ -31,21 +28,24 @@ const LoginForm: FC = () => {
     );
 };
 
-export const LoginPage: FC = () => {
+export const RegisterPage: FC = () => {
     return (
         <BaseLayout>
             <Helmet>
-                <title>Login | Todos</title>
+                <title>Register | Todos</title>
             </Helmet>
             <div className="flex flex-col h-full w-full justify-center items-center">
                 {/* header */}
                 <div className="mb-6 mx-auto text-center">
-                    <h2>Welcome back</h2>
-                    <p>We're excited to see you again!</p>
+                    <h2>Welcome aboard</h2>
+                    <p>
+                        By creating an account, you agree to our
+                        <br /> <a>terms of service</a> and <a>privacy policy</a>.
+                    </p>
                 </div>
-                <LoginForm />
+                <RegisterForm />
                 <div className="mt-4">
-                    Don't have an account? <a href="/register">register</a>
+                    Already have an account? <a href="/login">login</a>
                 </div>
             </div>
         </BaseLayout>

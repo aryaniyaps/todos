@@ -8,7 +8,8 @@ const sizeMap = {
 };
 
 const colorMap = {
-    accent: "bg-accent hover:bg-accent-hover disabled:bg-accent-disabled",
+    accent:
+        "text-primary-100 bg-accent hover:bg-accent-hover disabled:bg-accent-disabled",
     primary:
         "text-primary-100 bg-primary-600 hover:bg-primary-500 disabled:bg-primary-500",
     transparent: "bg-transparent",
@@ -43,7 +44,7 @@ export const Button: FC<ButtonProps> = ({
         <button
             disabled={disabled || loading}
             data-testid="button"
-            className={`flex ${sizeMap[size]}
+            className={`flex ${sizeMap[size]} 
             ${transition ? "transition duration-200 ease-in-out" : ""} 
             ${colorMap[color]} font-semibold items-center justify-center 
             ${disabled ? "cursor-not-allowed" : ""} ${className}`}
