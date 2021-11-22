@@ -10,6 +10,7 @@ flask-login = ">=0.5"
 flask-cors = ">=3.0"
 flask-sqlalchemy = ">=2.5"
 flask-migrate = ">=3.1"
+celery = {version=">=5.2", extras = ["redis", "librabbitmq"]}
 pymysql = {version = ">=1.0", extras = ["rsa"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}
 marshmallow = ">=3.14"

@@ -38,6 +38,7 @@ services:
     build:
       context: "./backend"
       target: "production"
+    image: todos-backend
     container_name: todos-backend
     restart: on-failure
     working_dir: "/backend/"
@@ -62,6 +63,22 @@ services:
     depends_on:
       - mysql
 
+  worker:
+    image: todos-backend
+    container_name: todos-worker
+    restart: on-failure
+    working_dir: "/backend/"
+    command: "scripts/run-worker.sh"
+    environment: *base-environment
+    networks:
+      - reddit-main
+    volumes:
+      - ./backend:/backend
+    depends_on:
+      - rabbitmq
+      - redis
+      - backend
+
   mysql:
     image: mysql:8
     container_name: todos-mysql
@@ -75,6 +92,29 @@ services:
       - todos-backend
     volumes:
       - ./data/mysql:/var/lib/mysql
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: todos-redis
+    restart: on-failure
+    environment:
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
+    networks:
+      - todos-backend
+    volumes:
+      - ./data/redis:/data
+
+  rabbitmq:
+    image: rabbitmq:3.9-alpine
+    container_name: todos-rabbitmq
+    restart: on-failure
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USERNAME}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
+    networks:
+      - todos-backend
+    volumes:
+      - ./data/rabbitmq:/data
 
 networks:
   todos-backend:
