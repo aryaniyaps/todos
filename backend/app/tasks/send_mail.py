@@ -6,7 +6,7 @@ from app.core.celery import celery
 from app.extensions import mail
 
 
-@celery.task(bind=True)
+@celery.task(name="send_email", bind=True)
 def send_mail(
     recipient: str, 
     subject: str, 

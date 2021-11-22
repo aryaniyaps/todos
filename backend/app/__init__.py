@@ -27,7 +27,7 @@ def register_extensions(app: Flask) -> None:
     """
     Registers extensions for the app.
 
-    :param app: the app instance.
+    :param app: The app instance.
     """
     db.init_app(app)
     migrate.init_app(app, db)
@@ -44,7 +44,7 @@ def register_blueprints(app: Flask) -> None:
     """
     Registers blueprints for the app.
 
-    :param app: the app instance.
+    :param app: The app instance.
     """
     app.register_blueprint(app_blueprint)
 
@@ -53,7 +53,7 @@ def register_error_handlers(app: Flask) -> None:
     """
     Registers error handlers for the app.
 
-    :param app: the app instance.
+    :param app: The app instance.
     """
     app.register_error_handler(
         ValidationError, 
