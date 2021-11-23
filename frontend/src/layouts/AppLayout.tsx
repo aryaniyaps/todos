@@ -7,7 +7,7 @@ export const AppLayout: React.FC = (props) => {
         <BaseLayout>
             <NavBar />
             <div className="overflow-y-auto">
-                <div className="p-4 flex-grow mx-auto w-full flex max-w-7xl">
+                <div className="p-4 flex-grow mx-auto flex max-w-7xl">
                     {props.children}
                 </div>
             </div>
