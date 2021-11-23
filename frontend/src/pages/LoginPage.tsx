@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { Button } from "../components/Button";
@@ -33,9 +34,9 @@ const LoginForm: FC = () => {
                             placeholder="password"
                             type="password"
                         />
-                        <a href="/password" className="text-right text-sm mb-4">
+                        <Link to="/password" className="text-right text-sm mb-4">
                             Forgot password?
-                        </a>
+                        </Link>
                         <Button
                             onClick={() => handleSubmit()}
                             loading={isSubmitting}
@@ -46,7 +47,7 @@ const LoginForm: FC = () => {
                     </Form>
                     {/* form footer */}
                     <div className="mt-4">
-                        Don't have an account? <a href="/register">register</a>
+                        Don't have an account? <Link to="/register">register</Link>
                     </div>
                 </div>
             )}

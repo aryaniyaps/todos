@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { Button } from "../components/Button";
@@ -46,7 +47,7 @@ const RegisterForm: FC = () => {
                     </Form>
                     {/* form footer */}
                     <div className="mt-4">
-                        Already have an account? <a href="/login">login</a>
+                        Already have an account? <Link to="/login">login</Link>
                     </div>
                 </div>
             )}
