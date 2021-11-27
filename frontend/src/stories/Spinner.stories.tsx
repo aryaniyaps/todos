@@ -1,15 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Spinner from "../components/Spinner";
+import SpinnerComponent from "../components/Spinner";
 
 export default {
     title: "Components/Spinner",
-    component: Spinner,
-} as ComponentMeta<typeof Spinner>;
+    component: SpinnerComponent,
+} as ComponentMeta<typeof SpinnerComponent>;
 
-const Template: ComponentStory<typeof Spinner> = (props) => {
-    return <Spinner {...props} />;
+const Template: ComponentStory<typeof SpinnerComponent> = (props) => {
+    return <SpinnerComponent {...props} />;
 };
 
 export const Big = Template.bind({});

@@ -1,15 +1,18 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Button from "../components/Button";
+import ButtonComponent from "../components/Button";
 
 export default {
     title: "Components/Button",
-    component: Button,
-} as ComponentMeta<typeof Button>;
+    component: ButtonComponent,
+} as ComponentMeta<typeof ButtonComponent>;
 
-const Template: ComponentStory<typeof Button> = ({ children = "button", ...props }) => {
-    return <Button {...props}>{children}</Button>;
+const Template: ComponentStory<typeof ButtonComponent> = ({
+    children = "sample label",
+    ...props
+}) => {
+    return <ButtonComponent {...props}>{children}</ButtonComponent>;
 };
 
 export const Primary = Template.bind({});

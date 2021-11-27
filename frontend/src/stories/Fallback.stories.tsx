@@ -1,15 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Fallback from "../components/Fallback";
+import FallbackComponent from "../components/Fallback";
 
 export default {
     title: "Components/Fallback",
-    component: Fallback,
-} as ComponentMeta<typeof Fallback>;
+    component: FallbackComponent,
+} as ComponentMeta<typeof FallbackComponent>;
 
-const Template: ComponentStory<typeof Fallback> = (props) => {
-    return <Fallback {...props} />;
+const Template: ComponentStory<typeof FallbackComponent> = (props) => {
+    return <FallbackComponent {...props} />;
 };
 
-export const Default = Template.bind({});
+export const Fallback = Template.bind({});

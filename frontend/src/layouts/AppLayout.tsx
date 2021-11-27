@@ -1,11 +1,11 @@
 import React from "react";
-import NavBar from "../components/NavBar";
+import Navbar from "../components/Navbar";
 import BaseLayout from "./BaseLayout";
 
 const AppLayout: React.FC = (props) => {
     return (
         <BaseLayout>
-            <NavBar />
+            <Navbar />
             <div className="overflow-y-auto">
                 <div className="p-4 flex-grow mx-auto flex max-w-7xl">
                     {props.children}

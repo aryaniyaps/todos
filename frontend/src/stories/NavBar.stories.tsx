@@ -1,15 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import NavBar from "../components/NavBar";
+import NavbarComponent from "../components/Navbar";
 
 export default {
-    title: "Components/NavBar",
-    component: NavBar,
-} as ComponentMeta<typeof NavBar>;
+    title: "Components/Navbar",
+    component: NavbarComponent,
+} as ComponentMeta<typeof NavbarComponent>;
 
-const Template: ComponentStory<typeof NavBar> = (props) => {
-    return <NavBar {...props} />;
+const Template: ComponentStory<typeof NavbarComponent> = (props) => {
+    return <NavbarComponent {...props} />;
 };
 
-export const Default = Template.bind({});
+export const Navbar = Template.bind({});
