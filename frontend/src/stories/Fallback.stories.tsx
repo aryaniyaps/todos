@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Fallback } from "../components/Fallback";
+import Fallback from "../components/Fallback";
 
 export default {
     title: "Components/Fallback",

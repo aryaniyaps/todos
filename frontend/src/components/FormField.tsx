@@ -1,8 +1,8 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import { FC, DetailedHTMLProps, InputHTMLAttributes } from "react";
 import { useField } from "formik";
-import { TextInput } from "./TextInput";
+import TextInput from "./TextInput";
 
-export const FormField: React.FC<
+const FormField: FC<
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
         name: string;
     }
@@ -19,3 +19,4 @@ export const FormField: React.FC<
 };
 
 FormField.displayName = "FormField";
+export default FormField;

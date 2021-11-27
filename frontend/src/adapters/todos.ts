@@ -1,4 +1,4 @@
-import { client } from "../lib/httpClient";
+import client from "../lib/httpClient";
 
 export const fetchTodos = async () => {
     return await client.get("/todos");

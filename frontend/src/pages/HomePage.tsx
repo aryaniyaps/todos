@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
-import { AppLayout } from "../layouts/AppLayout";
+import AppLayout from "../layouts/AppLayout";
 
-export const HomePage: FC = () => {
+const HomePage: FC = () => {
     return (
         <AppLayout>
             <Helmet>
@@ -12,3 +12,6 @@ export const HomePage: FC = () => {
         </AppLayout>
     );
 };
+
+HomePage.displayName = "HomePage";
+export default HomePage;

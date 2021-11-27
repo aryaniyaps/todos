@@ -1,5 +1,5 @@
 import { FC, ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { Spinner } from "./Spinner";
+import Spinner from "./Spinner";
 
 const sizeMap = {
     big: "py-2 px-6 text-md rounded-lg",
@@ -30,7 +30,7 @@ interface ButtonProps
     transition?: boolean;
 }
 
-export const Button: FC<ButtonProps> = ({
+const Button: FC<ButtonProps> = ({
     children,
     disabled,
     loading,
@@ -63,3 +63,4 @@ export const Button: FC<ButtonProps> = ({
 };
 
 Button.displayName = "Button";
+export default Button;

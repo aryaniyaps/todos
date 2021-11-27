@@ -1,4 +1,4 @@
-import { client } from "../lib/httpClient";
+import client from "../lib/httpClient";
 
 export const fetchCurrentUser = async () => {
     return await client.get("/users/me");

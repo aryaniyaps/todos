@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { Button } from "../components/Button";
-import { BaseLayout } from "../layouts/BaseLayout";
+import Button from "../components/Button";
+import BaseLayout from "../layouts/BaseLayout";
 
-export const NotFoundPage: FC = () => {
+const NotFoundPage: FC = () => {
     return (
         <BaseLayout>
             <Helmet>
@@ -22,3 +22,6 @@ export const NotFoundPage: FC = () => {
         </BaseLayout>
     );
 };
+
+NotFoundPage.displayName = "NotFoundPage";
+export default NotFoundPage;

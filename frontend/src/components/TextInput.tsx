@@ -1,11 +1,11 @@
-import React, { forwardRef, HTMLProps } from "react";
+import { forwardRef, HTMLProps } from "react";
 
 export interface TextInputInputProps
     extends Omit<HTMLProps<HTMLInputElement>, "prefix" | "size"> {
     invalid?: boolean;
 }
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputInputProps>(
+const TextInput = forwardRef<HTMLInputElement, TextInputInputProps>(
     ({ className = "", invalid, ...props }, ref) => {
         const border = invalid ? "border-danger" : "border-primary-400";
         const styles = `relative w-full py-2 px-3 shadow-sm rounded-md placeholder-primary-500 border ${border} bg-transparent  ${className}`;
@@ -15,3 +15,4 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputInputProps>(
 );
 
 TextInput.displayName = "TextInput";
+export default TextInput;

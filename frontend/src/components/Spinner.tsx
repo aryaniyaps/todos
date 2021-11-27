@@ -9,7 +9,7 @@ export type SpinnerProps = {
     size?: keyof typeof sizeMap;
 };
 
-export const Spinner: FC<SpinnerProps> = ({ size = "big" }) => {
+const Spinner: FC<SpinnerProps> = ({ size = "big" }) => {
     return (
         <svg
             className={`animate-spin text-button ${sizeMap[size]}`}
@@ -35,3 +35,4 @@ export const Spinner: FC<SpinnerProps> = ({ size = "big" }) => {
 };
 
 Spinner.displayName = "Spinner";
+export default Spinner;

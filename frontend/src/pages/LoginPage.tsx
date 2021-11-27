@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
-import { Button } from "../components/Button";
-import { FormField } from "../components/FormField";
-import { BaseLayout } from "../layouts/BaseLayout";
+import Button from "../components/Button";
+import FormField from "../components/FormField";
+import BaseLayout from "../layouts/BaseLayout";
 
 const LoginForm: FC = () => {
     const loginSchema = yup.object().shape({
@@ -55,7 +55,9 @@ const LoginForm: FC = () => {
     );
 };
 
-export const LoginPage: FC = () => {
+LoginForm.displayName = "LoginForm";
+
+const LoginPage: FC = () => {
     return (
         <BaseLayout>
             <Helmet>
@@ -67,3 +69,6 @@ export const LoginPage: FC = () => {
         </BaseLayout>
     );
 };
+
+LoginPage.displayName = "LoginPage";
+export default LoginPage;

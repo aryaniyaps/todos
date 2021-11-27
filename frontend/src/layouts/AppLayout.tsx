@@ -1,8 +1,8 @@
 import React from "react";
-import { NavBar } from "../components/NavBar";
-import { BaseLayout } from "./BaseLayout";
+import NavBar from "../components/NavBar";
+import BaseLayout from "./BaseLayout";
 
-export const AppLayout: React.FC = (props) => {
+const AppLayout: React.FC = (props) => {
     return (
         <BaseLayout>
             <NavBar />
@@ -14,3 +14,6 @@ export const AppLayout: React.FC = (props) => {
         </BaseLayout>
     );
 };
+
+AppLayout.displayName = "AppLayout";
+export default AppLayout;

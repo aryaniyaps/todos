@@ -2,14 +2,14 @@ import "./styles/main.css";
 import { FC, Suspense } from "react";
 import { QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { queryClient } from "./lib/queryClient";
-import { Fallback } from "./components/Fallback";
-import { HomePage } from "./pages/HomePage";
-import { RegisterPage } from "./pages/RegisterPage";
-import { LoginPage } from "./pages/LoginPage";
-import { NotFoundPage } from "./pages/NotFoundPage";
+import queryClient from "./lib/queryClient";
+import Fallback from "./components/Fallback";
+import HomePage from "./pages/HomePage";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
-export const App: FC = () => {
+const App: FC = () => {
     return (
         <Suspense fallback={<Fallback />}>
             <QueryClientProvider client={queryClient}>
@@ -25,3 +25,6 @@ export const App: FC = () => {
         </Suspense>
     );
 };
+
+App.displayName = "App";
+export default App;
