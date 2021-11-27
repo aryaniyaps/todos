@@ -3,8 +3,8 @@ import Spinner from "./Spinner";
 
 const sizeMap = {
     big: "py-2 px-6 text-md rounded-lg",
-    small: "px-2 py-1 text-base rounded-md",
-    tiny: "px-1 text-sm rounded-sm",
+    small: "py-1.5 px-2 text-base rounded-md",
+    tiny: "py-1 px-1.5 text-sm rounded",
 };
 
 const colorMap = {
