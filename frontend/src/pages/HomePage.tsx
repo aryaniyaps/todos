@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import { Helmet } from "react-helmet";
 import { AppLayout } from "../layouts/AppLayout";
 
-export const HomePage: React.FC = () => {
+export const HomePage: FC = () => {
     return (
         <AppLayout>
             <Helmet>
