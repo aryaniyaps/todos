@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
+import withAuth from "../hocs/withAuth";
 import AppLayout from "../layouts/AppLayout";
 
 const HomePage: FC = () => {
@@ -14,4 +15,4 @@ const HomePage: FC = () => {
 };
 
 HomePage.displayName = "HomePage";
-export default HomePage;
+export default withAuth(HomePage);
