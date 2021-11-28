@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import Button from "../../components/Button";
 
-describe("Button tests", () => {
+describe("Button component tests", () => {
     it("should render a button", () => {
         const { getByText } = render(<Button>sample label</Button>);
         const text = getByText("sample label");

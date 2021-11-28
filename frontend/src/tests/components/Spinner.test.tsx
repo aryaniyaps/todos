@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import Spinner from "../../components/Spinner";
 
-describe("Spinner tests", () => {
+describe("Spinner component tests", () => {
     it("should render a spinner", () => {
         const { getByTestId } = render(<Spinner />);
         const spinner = getByTestId("spinner");
