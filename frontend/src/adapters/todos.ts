@@ -1,18 +1,18 @@
 import client from "../lib/httpClient";
 
-export const fetchTodos = async () => {
+const fetchTodos = async () => {
     return await client.get("/todos");
 };
 
-export const fetchTodo = async (todoId: number) => {
+const fetchTodo = async (todoId: number) => {
     return await client.get(`/todos/${todoId}`);
 };
 
-export const createTodo = async (data: { content: string; completed?: boolean }) => {
+const createTodo = async (data: { content: string; completed?: boolean }) => {
     return await client.post("/todos", data);
 };
 
-export const updateTodo = async (
+const updateTodo = async (
     todoId: number,
     data: {
         content?: string;
@@ -22,6 +22,8 @@ export const updateTodo = async (
     return await client.patch(`/todos/${todoId}`, data);
 };
 
-export const deleteTodo = async (todoId: number) => {
+const deleteTodo = async (todoId: number) => {
     return await client.delete(`/todos/${todoId}`);
 };
+
+export default { fetchTodos, fetchTodo, createTodo, updateTodo, deleteTodo };
