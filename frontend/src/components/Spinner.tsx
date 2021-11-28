@@ -12,6 +12,7 @@ export type SpinnerProps = {
 const Spinner: FC<SpinnerProps> = ({ size = "big" }) => {
     return (
         <svg
+            data-testid="spinner"
             className={`animate-spin text-button ${sizeMap[size]}`}
             fill="none"
             viewBox="0 0 24 24"
@@ -28,7 +29,7 @@ const Spinner: FC<SpinnerProps> = ({ size = "big" }) => {
             <path
                 className="opacity-75"
                 fill="currentColor"
-                d={`M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z`}
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
         </svg>
     );

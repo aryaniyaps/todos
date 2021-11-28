@@ -44,10 +44,11 @@ const Button: FC<ButtonProps> = ({
         <button
             disabled={disabled || loading}
             data-testid="button"
-            className={`flex ${sizeMap[size]} 
-            ${transition ? "transition duration-200 ease-in-out" : ""} 
-            ${colorMap[color]} font-semibold items-center justify-center 
-            ${disabled ? "cursor-not-allowed" : ""} ${className}`}
+            className={`flex ${sizeMap[size]} ${
+                transition ? "transition duration-200 ease-in-out" : ""
+            } ${colorMap[color]} font-semibold items-center justify-center ${
+                disabled ? "cursor-not-allowed" : ""
+            } ${className}`}
             {...props}
         >
             <span className={loading ? "opacity-0" : `flex items-center`}>
