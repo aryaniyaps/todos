@@ -20,7 +20,7 @@ describe("Todos adapter tests", () => {
             completed: false,
         };
 
-        mock.onGet(`todos/${todo.id}`).reply(200, todo);
+        mock.onGet(`/todos/${todo.id}`).reply(200, todo);
         const { data } = await todosAdapter.fetchTodo(todo.id);
         expect(data).toEqual(todo);
     });
