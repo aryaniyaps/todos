@@ -13,23 +13,13 @@ describe("Todos adapter tests", () => {
         mock.reset();
     });
 
-    it("fetches an existing todo", async () => {
-        const todo: any = {
-            id: 1,
-            content: "sample content",
-            completed: false,
-        };
-
-        mock.onGet(`/todos/${todo.id}`).reply(200, todo);
-        const { data } = await todosAdapter.fetchTodo(todo.id);
-        expect(data).toEqual(todo);
-    });
+    it("fetches an existing todo", async () => {});
 
     it("fetches the current user's todos", async () => {});
 
     it("creates a new todo", async () => {});
 
-    it("updates a new todo", async () => {});
+    it("updates an existing todo", async () => {});
 
-    it("deletes a new todo", async () => {});
+    it("deletes an existing todo", async () => {});
 });
