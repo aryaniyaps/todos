@@ -1,13 +1,35 @@
+import MockAdapter from "axios-mock-adapter";
+import client from "../../lib/httpClient";
 import todosAdapter from "../../adapters/todos";
 
 describe("Todos adapter tests", () => {
-    it("fetches an existing todo", () => {});
+    let mock: MockAdapter;
 
-    it("fetches the current user's todos", () => {});
+    beforeAll(() => {
+        mock = new MockAdapter(client);
+    });
 
-    it("creates a new todo", () => {});
+    afterEach(() => {
+        mock.reset();
+    });
 
-    it("updates a new todo", () => {});
+    it("fetches an existing todo", async () => {
+        const todo: any = {
+            id: 1,
+            content: "sample content",
+            completed: false,
+        };
 
-    it("deletes a new todo", () => {});
+        mock.onGet(`todos/${todo.id}`).reply(200, todo);
+        const { data } = await todosAdapter.fetchTodo(todo.id);
+        expect(data).toEqual(todo);
+    });
+
+    it("fetches the current user's todos", async () => {});
+
+    it("creates a new todo", async () => {});
+
+    it("updates a new todo", async () => {});
+
+    it("deletes a new todo", async () => {});
 });
