@@ -1,4 +1,4 @@
-import { FC, ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { forwardRef, ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import Spinner from "./Spinner";
 
 const sizeMap = {
@@ -30,38 +30,44 @@ interface ButtonProps
     transition?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({
-    children,
-    disabled,
-    loading,
-    transition,
-    className = "",
-    color = "primary",
-    size = "big",
-    ...props
-}) => {
-    return (
-        <button
-            disabled={disabled || loading}
-            data-testid="button"
-            className={`flex ${sizeMap[size]} ${
-                transition ? "transition duration-200 ease-in-out" : ""
-            } ${colorMap[color]} font-semibold items-center justify-center ${
-                disabled ? "cursor-not-allowed" : ""
-            } ${className}`}
-            {...props}
-        >
-            <span className={loading ? "opacity-0" : `flex items-center`}>
-                {children}
-            </span>
-            {loading ? (
-                <span className="absolute">
-                    <Spinner size={size === "small" ? "small" : "big"} />
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+    (
+        {
+            children,
+            disabled,
+            loading,
+            transition,
+            className = "",
+            color = "primary",
+            size = "big",
+            ...props
+        },
+        ref
+    ) => {
+        return (
+            <button
+                ref={ref}
+                disabled={disabled || loading}
+                data-testid="button"
+                className={`flex ${sizeMap[size]} ${
+                    transition ? "transition duration-200 ease-in-out" : ""
+                } ${colorMap[color]} font-semibold items-center justify-center ${
+                    disabled ? "cursor-not-allowed" : ""
+                } ${className}`}
+                {...props}
+            >
+                <span className={loading ? "opacity-0" : `flex items-center`}>
+                    {children}
                 </span>
-            ) : null}
-        </button>
-    );
-};
+                {loading ? (
+                    <span className="absolute">
+                        <Spinner size={size === "small" ? "small" : "big"} />
+                    </span>
+                ) : null}
+            </button>
+        );
+    }
+);
 
 Button.displayName = "Button";
 export default Button;
