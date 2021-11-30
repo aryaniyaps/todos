@@ -3,8 +3,9 @@ import { SVGProps, FC } from "react";
 const SettingsIcon: FC = (props: SVGProps<SVGSVGElement>) => {
     return (
         <svg
+            height={30}
+            width={30}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
             {...props}

@@ -6,8 +6,8 @@ const AppLayout: React.FC = (props) => {
     return (
         <BaseLayout>
             <Navbar />
-            <div className="overflow-y-auto">
-                <div className="p-4 flex-grow mx-auto flex max-w-7xl">
+            <div className="overflow-y-auto w-full">
+                <div className="py-4 flex-grow mx-auto flex max-w-7xl">
                     {props.children}
                 </div>
             </div>
