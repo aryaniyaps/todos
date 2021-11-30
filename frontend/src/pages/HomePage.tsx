@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Helmet } from "react-helmet";
 import withAuth from "../hocs/withAuth";
 import AppLayout from "../layouts/AppLayout";
+import TodoList from "../components/TodoList";
 
 const HomePage: FC = () => {
     return (
@@ -9,7 +10,7 @@ const HomePage: FC = () => {
             <Helmet>
                 <title>Home | Todos</title>
             </Helmet>
-            home page content
+            <TodoList />
         </AppLayout>
     );
 };

@@ -60,6 +60,7 @@ body,
 #app {
     @apply w-full;
     @apply h-full;
+    @apply box-border;
     @apply text-primary-600;
     @apply bg-primary-200;
     @apply flex;
