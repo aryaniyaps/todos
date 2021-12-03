@@ -14,7 +14,8 @@ module.exports = function (env) {
         entry: "./src/index",
         output: {
             path: outputPath,
-            filename: "bundle.js",
+            filename: "[name].bundle.js",
+            chunkFilename: "[name].bundle.js",
             publicPath: "/",
             clean: __prod__,
         },

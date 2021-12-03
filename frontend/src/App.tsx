@@ -1,13 +1,14 @@
 import "./styles/main.css";
-import { FC, Suspense } from "react";
+import { FC, Suspense, lazy } from "react";
 import { QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import queryClient from "./lib/queryClient";
 import Fallback from "./components/Fallback";
-import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage";
-import LoginPage from "./pages/LoginPage";
-import NotFoundPage from "./pages/NotFoundPage";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App: FC = () => {
     return (
