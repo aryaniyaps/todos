@@ -34,15 +34,11 @@ services:
     depends_on:
       - backend
 
-  backend:
+  base-app:
     build:
       context: "./backend"
       target: "production"
-    image: todos-backend
-    container_name: todos-backend
-    restart: on-failure
     working_dir: "/backend/"
-    command: "scripts/start-prod.sh"
     environment:
       FLASK_APP: "app:application"
       FLASK_ENV: "production"
@@ -55,36 +51,29 @@ services:
       MAIL_USE_TLS: "${MAIL_USE_TLS}"
       MAIL_USERNAME: "${MAIL_USERNAME}"
       MAIL_PASSWORD: "${MAIL_PASSWORD}"
+    volumes:
+      - ./backend:/backend
+
+  backend:
+    extends:
+      service: base-app
+    container_name: todos-backend
+    restart: on-failure
+    command: "scripts/start-prod.sh"
     networks:
       - todos-backend
       - todos-proxy
-    volumes:
-      - ./backend:/backend
     depends_on:
       - mysql
 
   worker:
-    image: todos-backend
+    extends:
+      service: base-app
     container_name: todos-worker
     restart: always
-    working_dir: "/backend/"
     command: "scripts/run-worker.sh"
-    environment:
-      FLASK_APP: "app:application"
-      FLASK_ENV: "production"
-      CORS_ORIGINS: "${CORS_ORIGINS}"
-      SECRET_KEY: "${SECRET_KEY}"
-      DATABASE_URL: "${DATABASE_URL}"
-      MAIL_SERVER: "${MAIL_SERVER}"
-      MAIL_PORT: "${MAIL_PORT}"
-      MAIL_DEFAULT_SENDER: "${MAIL_DEFAULT_SENDER}"
-      MAIL_USE_TLS: "${MAIL_USE_TLS}"
-      MAIL_USERNAME: "${MAIL_USERNAME}"
-      MAIL_PASSWORD: "${MAIL_PASSWORD}"
     networks:
       - todos-backend
-    volumes:
-      - ./backend:/backend
     depends_on:
       - rabbitmq
       - redis

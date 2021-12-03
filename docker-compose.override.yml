@@ -10,10 +10,10 @@ services:
     ports:
       - "3000:3000"
 
-  backend:
+  base-app:
     build:
+      context: "./backend"
       target: "development"
-    command: "scripts/start-local.sh"
     environment:
       FLASK_APP: "app:application"
       FLASK_ENV: "development"
@@ -26,22 +26,13 @@ services:
       MAIL_DEFAULT_SENDER: "user@example.org"
       MAIL_USERNAME: "${MAIL_USERNAME}"
       MAIL_PASSWORD: "${MAIL_PASSWORD}"
+
+  backend:
+    command: "scripts/start-local.sh"
     ports:
       - "8000:8000"
 
   worker:
-    environment:
-      FLASK_APP: "app:application"
-      FLASK_ENV: "development"
-      CORS_ORIGINS: "${CORS_ORIGINS}"
-      SECRET_KEY: "secret"
-      DATABASE_URL: "mysql+pymysql://todos:todos@mysql:3306/todos"
-      MAIL_SERVER: "localhost"
-      MAIL_PORT: "25"
-      MAIL_USE_TLS: "false"
-      MAIL_DEFAULT_SENDER: "user@example.org"
-      MAIL_USERNAME: "${MAIL_USERNAME}"
-      MAIL_PASSWORD: "${MAIL_PASSWORD}"
     ports:
       - "8080:8080"
 
