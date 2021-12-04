@@ -4,16 +4,16 @@ import withAuth from "../hocs/withAuth";
 import AppLayout from "../layouts/AppLayout";
 import TodoList from "../components/TodoList";
 
-const HomePage: FC = () => {
+const DashboardPage: FC = () => {
     return (
         <AppLayout>
             <Helmet>
-                <title>Home | Todos</title>
+                <title>Dashboard | Todos</title>
             </Helmet>
             <TodoList />
         </AppLayout>
     );
 };
 
-HomePage.displayName = "HomePage";
-export default withAuth(HomePage);
+DashboardPage.displayName = "DashboardPage";
+export default withAuth(DashboardPage);

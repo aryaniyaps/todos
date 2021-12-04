@@ -12,7 +12,7 @@ const colorMap = {
         "text-primary-100 bg-accent hover:bg-accent-hover disabled:bg-accent-disabled",
     primary:
         "text-primary-100 bg-primary-600 hover:bg-primary-500 disabled:bg-primary-500",
-    transparent: "bg-transparent",
+    transparent: "bg-transparent hover:underline",
 };
 
 interface ButtonProps
