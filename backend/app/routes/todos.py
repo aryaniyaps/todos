@@ -20,16 +20,12 @@ def read_todos():
     query = Todo.query.filter_by(user_id=current_user.id)
     page = request.args.get(key="page", default=1, type=int)
     limit = request.args.get(key="limit", default=20, type=int)
-    results = query.paginate(
-        page=page, 
-        per_page=limit, 
-        error_out=False,
-    )
+    results = query.paginate(page, limit, False)
     return {
-        "results": todos_schema.dump(results.items),
         "has_prev": results.has_prev,
         "has_next": results.has_next,
-        "count": results.total
+        "total": results.total,
+        "results": todos_schema.dump(results.items)
     }
 
 
@@ -40,9 +36,10 @@ def create_todo():
     Create a new todo.
     """
     data = todo_schema.load(request.get_json())
-    content = data.get("content")
-    user_id = current_user.id
-    todo = Todo(content=content, user_id=user_id)
+    todo = Todo(
+        content=data.get("content"), 
+        user_id=current_user.id
+    )
     db.session.add(todo)
     db.session.commit()
     return todo_schema.dump(todo), HTTPStatus.CREATED
