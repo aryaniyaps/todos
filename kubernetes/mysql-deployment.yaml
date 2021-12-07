@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+              name: mysql
+          env:
+            - name: MYSQL_DATABASE
+              value: todos
+            - name: MYSQL_PASSWORD
+              value: todos
+            - name: MYSQL_ROOT_PASSWORD
+              value: todos
+            - name: MYSQL_USER
+              value: todos
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "300m"
+            limits:
+              memory: "500Mi"
+              cpu: "300m"
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      restartPolicy: Always
+      volumes:
+        - name: mysql-persistent-storage
+          emptyDir: {}
