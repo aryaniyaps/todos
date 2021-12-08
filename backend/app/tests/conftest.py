@@ -1,62 +1,32 @@
 import pytest
-from flask import Flask
-from flask_login import FlaskLoginClient
-from flask_sqlalchemy import SQLAlchemy
+from sanic import Sanic
+from sqlalchemy.orm import Session
 
 from app import create_app
-from app.extensions import db
+from app.core.database import Base
 from app.models.todos import Todo
 from app.models.users import User
 from app.tests.factories import UserFactory, TodoFactory
 
 
 @pytest.fixture(scope="session")
-def app() -> Flask:
+def app() -> Sanic:
     """
     Initializes the app for testing.
 
     :return: The initialized app.
     """
-    app = create_app()
-    app.test_client_class = FlaskLoginClient
-    return app
-
-
-@pytest.fixture
-def viewer_client(app: Flask) -> FlaskLoginClient:
-    """
-    Creates an anonymous test client.
-
-    :return: The created test client.
-    """
-    with app.test_request_context():
-        yield app.test_client()
-
-
-@pytest.fixture
-def user_client(app: Flask, user: User) -> FlaskLoginClient:
-    """
-    Creates an authenticated test client.
-
-    :return: The created test client.
-    """
-    # with app.test_request_context(
-    #     environ_base={
-    #         "HTTP_AUTHORIZATION": f"Bearer token"
-    #     }
-    # ):
-    #     yield app.test_client()
-    with app.test_request_context():
-        yield app.test_client(user=user)
+    return create_app()
 
 
 @pytest.fixture(scope="session")
-def test_db(app: Flask) -> SQLAlchemy:
+def test_db(app: Sanic) -> SQLAlchemy:
     """
     Sets up the database for tests.
 
     :return: The test database.
     """
+    Base.metadata.create_all()
     with app.app_context():
         db.create_all()
         yield db
@@ -76,7 +46,7 @@ def session(test_db: SQLAlchemy):
 
 
 @pytest.fixture
-def user(session) -> User:
+def user(session: Session) -> User:
     """
     Creates an user for tests.
 
@@ -88,7 +58,7 @@ def user(session) -> User:
 
 
 @pytest.fixture
-def todo(user: User, session) -> Todo:
+def todo(user: User, session: Session) -> Todo:
     """
     Creates a todo for tests.
 
@@ -100,7 +70,7 @@ def todo(user: User, session) -> Todo:
 
 
 @pytest.fixture
-def foreign_todo(session) -> Todo:
+def foreign_todo(session: Session) -> Todo:
     """
     Creates a todo that belongs to another
     user for tests.

@@ -1,7 +1,6 @@
 from factory import Sequence, SubFactory, PostGenerationMethodCall
 from factory.alchemy import SQLAlchemyModelFactory
 
-from app.extensions import db
 from app.models.todos import Todo
 from app.models.users import User
 
@@ -12,7 +11,6 @@ class BaseFactory(SQLAlchemyModelFactory):
     """
     class Meta:
         abstract = True
-        sqlalchemy_session = db.session
 
 
 class UserFactory(BaseFactory):

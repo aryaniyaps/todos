@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from flask import Blueprint, request
+from sanic import Blueprint, Request
 from flask_login import login_required, current_user
 
 from app.extensions import db
@@ -8,12 +8,12 @@ from app.models.users import User
 from app.schemas.users import user_schema
 
 
-user_blueprint = Blueprint("users",  __name__, url_prefix="/users")
+user_blueprint = Blueprint("users", url_prefix="/users")
 
 
 @user_blueprint.get("/me")
 @login_required
-def read_current_user():
+def read_current_user(request: Request):
     """
     Get the current user.
     """
@@ -21,7 +21,7 @@ def read_current_user():
 
 
 @user_blueprint.post("")
-def create_user():
+def create_user(request: Request):
     """
     Create a new user.
     """

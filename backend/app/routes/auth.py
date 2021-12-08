@@ -1,17 +1,17 @@
 from http import HTTPStatus
 
-from flask import Blueprint, request
+from sanic import Blueprint, Request
 from flask_login import login_required, login_user, logout_user
 
 from app.models.users import User
 from app.schemas.users import user_schema
 
 
-auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
+auth_blueprint = Blueprint("auth", url_prefix="/auth")
 
 
 @auth_blueprint.post("/login")
-def login():
+def login(request: Request):
     """
     Log the current user in.
     """
@@ -34,7 +34,7 @@ def login():
 
 @auth_blueprint.post("/logout")
 @login_required
-def logout():
+def logout(request: Request):
     """
     Log the current user out.
     """

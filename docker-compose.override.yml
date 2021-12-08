@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 services:
   frontend:
@@ -15,11 +15,8 @@ services:
       context: "./backend"
       target: "development"
     environment:
-      FLASK_APP: "app:application"
-      FLASK_ENV: "development"
-      CORS_ORIGINS: "${CORS_ORIGINS}"
       SECRET_KEY: "secret"
-      DATABASE_URL: "mysql+pymysql://todos:todos@mysql:3306/todos"
+      DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:3306/todos"
       MAIL_SERVER: "localhost"
       MAIL_PORT: "25"
       MAIL_USE_TLS: "false"

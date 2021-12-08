@@ -1,9 +1,6 @@
 from typing import Optional
 
-from flask_mail import Message
-
 from app.core.celery import celery
-from app.extensions import mail
 
 
 @celery.task(name="send_email", bind=True)
@@ -21,6 +18,4 @@ def send_mail(
     :param body: The body of the email.
     :param html: The HTML content of the email.
     """
-    message = Message(subject=subject, body=body, html=html)
-    message.add_recipient(recipient=recipient)
-    mail.send(message=message)
+    pass

@@ -1,34 +1,35 @@
 from __future__ import annotations
 
-from flask_login import UserMixin
+from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.orm import relationship
 from passlib.hash import argon2
 
-from app.extensions import db
+from app.core.database import Base
 
 
-class User(db.Model, UserMixin):
+class User(Base):
     """Represents an individual user account."""
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
 
-    password = db.Column(db.String(255), nullable=False)
+    password = Column(String(255), nullable=False)
 
-    email = db.Column(db.String(255), unique=True, nullable=False)
+    email = Column(String(255), unique=True, nullable=False)
 
-    created_at = db.Column(
-        db.DateTime(timezone=True),
-        server_default=db.func.now(),
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now(),
         nullable=False,
     )
 
-    updated_at = db.Column(
-        db.DateTime(timezone=True),
-        onupdate=db.func.now(),
-        server_default=db.func.now(),
+    updated_at = Column(
+        DateTime(timezone=True),
+        onupdate=func.now(),
+        server_default=func.now(),
         nullable=False,
     )
 
-    todos = db.relationship("Todo", back_populates="user")
+    todos = relationship("Todo", back_populates="user")
 
     __tablename__ = "users"
 

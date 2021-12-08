@@ -1,27 +1,20 @@
-from celery import Celery, Task
-from flask import Flask
+from celery import Celery
+from sanic import Sanic
 
 from app import application
 
 
-def create_celery_app(app: Flask) -> Celery:
+def create_celery_app(app: Sanic) -> Celery:
     """
     Initializes a Celery app instance.
 
-    :param app: The Flask app instance.
+    :param app: The central app instance.
 
     :return: The created app.
     """
-    class ContextTask(Task):
-        abstract = True
-
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return super().__call__(*args, **kwargs)
 
     celery_app = Celery(
-        main=app.import_name, 
-        task_cls=ContextTask, 
+        main=app.name, 
         include=("app.tasks",)
     )
     celery_app.conf.update(app.config)

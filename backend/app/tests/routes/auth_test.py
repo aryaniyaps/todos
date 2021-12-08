@@ -1,31 +1,30 @@
 from http import HTTPStatus
 
-from flask import url_for
-from flask.testing import FlaskClient
+from sanic import Sanic
 
 from app.models.users import User
 
 
-def test_login(viewer_client: FlaskClient, user: User) -> None:
+def test_login(app: Sanic, user: User) -> None:
     """
     Ensure we can log the current user in.
     """
     data = {"email": user.email, "password": "password"}
-    response = viewer_client.post(url_for("app.auth.login"), json=data)
+    response = app.test_client.post(app.url_for("app.auth.login"), json=data)
     assert response.status_code == HTTPStatus.OK
 
 
-def test_logout(user_client: FlaskClient) -> None:
+def test_logout(app: Sanic) -> None:
     """
     Ensure we can log the current user out.
     """
-    response = user_client.post(url_for("app.auth.logout"))
+    response = app.test_client.post(app.url_for("app.auth.logout"))
     assert response.status_code == HTTPStatus.NO_CONTENT
 
 
-def test_logout_unauthorized(viewer_client: FlaskClient) -> None:
+def test_logout_unauthorized(app: Sanic) -> None:
     """
     Ensure we cannot logout anonymously.
     """
-    response = viewer_client.post(url_for("app.auth.logout"))
+    response = app.test_client.post(app.url_for("app.auth.logout"))
     assert response.status_code == HTTPStatus.UNAUTHORIZED

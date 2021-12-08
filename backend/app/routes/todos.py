@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from flask import Blueprint, request
+from sanic import Blueprint, Request
 from flask_login import login_required, current_user
 
 from app.extensions import db
@@ -8,12 +8,12 @@ from app.models.todos import Todo
 from app.schemas.todos import todo_schema, todos_schema
 
 
-todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
+todo_blueprint = Blueprint("todos", url_prefix="/todos")
 
 
 @todo_blueprint.get("")
 @login_required
-def read_todos():
+def read_todos(request: Request):
     """
     Get the current user's todos.
     """
@@ -31,7 +31,7 @@ def read_todos():
 
 @todo_blueprint.post("")
 @login_required
-def create_todo():
+def create_todo(request: Request):
     """
     Create a new todo.
     """
@@ -45,9 +45,9 @@ def create_todo():
     return todo_schema.dump(todo), HTTPStatus.CREATED
 
 
-@todo_blueprint.get("/<int:todo_id>")
+@todo_blueprint.get("/<todo_id:int>")
 @login_required
-def read_todo(todo_id: int):
+def read_todo(request: Request, todo_id: int):
     """
     Get a todo by ID.
     """
@@ -59,9 +59,9 @@ def read_todo(todo_id: int):
     return todo_schema.dump(todo)
 
 
-@todo_blueprint.patch("/<int:todo_id>")
+@todo_blueprint.patch("/<todo_id:int>")
 @login_required
-def update_todo(todo_id: int):
+def update_todo(request: Request, todo_id: int):
     """
     Update a todo by ID.
     """
@@ -81,9 +81,9 @@ def update_todo(todo_id: int):
     return todo_schema.dump(todo)
 
 
-@todo_blueprint.delete("/<int:todo_id>")
+@todo_blueprint.delete("/<todo_id:int>")
 @login_required
-def delete_todo(todo_id: int):
+def delete_todo(request: Request, todo_id: int):
     """
     Delete a todo by ID.
     """
@@ -99,7 +99,7 @@ def delete_todo(todo_id: int):
 
 @todo_blueprint.delete("")
 @login_required
-def clear_todos():
+def clear_todos(request: Request):
     """
     Clears the current user's todos.
     """

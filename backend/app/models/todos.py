@@ -1,35 +1,45 @@
-from app.extensions import db
+from sqlalchemy import (
+    Column, 
+    Integer, 
+    Text, 
+    DateTime, 
+    Boolean, 
+    ForeignKey
+)
+from sqlalchemy.orm import relationship
+
+from app.core.database import Base
 
 
-class Todo(db.Model):
+class Todo(Base):
     """Represents an user's todo."""
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
 
-    content = db.Column(db.Text, nullable=False)
+    content = Column(Text, nullable=False)
 
-    completed = db.Column(db.Boolean, default=False, nullable=False)
+    completed = Column(Boolean, default=False, nullable=False)
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey("users.id"),
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
         nullable=False,
     )
 
-    created_at = db.Column(
-        db.DateTime(timezone=True),
-        server_default=db.func.now(),
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now(),
         nullable=False,
     )
 
-    updated_at = db.Column(
-        db.DateTime(timezone=True),
-        onupdate=db.func.now(),
-        server_default=db.func.now(),
+    updated_at = Column(
+        DateTime(timezone=True),
+        onupdate=func.now(),
+        server_default=func.now(),
         nullable=False,
     )
 
-    user = db.relationship("User", back_populates="todos")
+    user = relationship("User", back_populates="todos")
 
     __tablename__ = "todos"
 

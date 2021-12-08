@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 services:
   haproxy:
@@ -40,9 +40,6 @@ services:
       target: "production"
     working_dir: "/backend/"
     environment:
-      FLASK_APP: "app:application"
-      FLASK_ENV: "production"
-      CORS_ORIGINS: "${CORS_ORIGINS}"
       SECRET_KEY: "${SECRET_KEY}"
       DATABASE_URL: "${DATABASE_URL}"
       MAIL_SERVER: "${MAIL_SERVER}"

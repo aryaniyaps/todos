@@ -1,3 +1,3 @@
 #!/bin/sh
-pipenv run flask db upgrade
-pipenv run gunicorn app
+pipenv run alembic upgrade head
+pipenv run uvicorn app:application
