@@ -72,7 +72,6 @@ services:
     networks:
       - todos-backend
     depends_on:
-      - rabbitmq
       - redis
       - backend
 
@@ -100,18 +99,6 @@ services:
       - todos-backend
     volumes:
       - ./data/redis:/data
-
-  rabbitmq:
-    image: rabbitmq:3.9-alpine
-    container_name: todos-rabbitmq
-    restart: on-failure
-    environment:
-      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USERNAME}"
-      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
-    networks:
-      - todos-backend
-    volumes:
-      - ./data/rabbitmq:/data
 
 networks:
   todos-backend:

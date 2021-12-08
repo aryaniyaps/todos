@@ -7,7 +7,7 @@ name = "pypi"
 sanic = ">=21.9"
 alembic = ">=1.7"
 sqlalchemy = {version=">=1.4", extras=["mysql"]}
-celery = {version=">=5.2", extras = ["redis", "librabbitmq"]}
+celery = {version=">=5.2", extras = ["redis"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}
 marshmallow = ">=3.14"
 uvicorn = ">=0.15"
