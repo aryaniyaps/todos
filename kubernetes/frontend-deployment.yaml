@@ -12,7 +12,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - name: frontend
+        - name: todos-frontend
           image: <Image>
           resources:
             limits:

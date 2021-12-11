@@ -12,7 +12,7 @@ spec:
         app: backend
     spec:
       containers:
-        - name: backend
+        - name: todos-backend
           image: <Image>
           resources:
             limits:

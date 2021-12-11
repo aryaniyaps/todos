@@ -15,7 +15,7 @@ spec:
         app: mysql
     spec:
       containers:
-        - name: mysql
+        - name: todos-mysql
           image: mysql:8
           ports:
             - containerPort: 3306
