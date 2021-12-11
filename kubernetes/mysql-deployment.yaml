@@ -42,4 +42,5 @@ spec:
       restartPolicy: Always
       volumes:
         - name: mysql-persistent-storage
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: mysql-volume-claim
