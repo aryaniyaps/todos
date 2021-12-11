@@ -1,20 +1,6 @@
 version: "3.9"
 
 services:
-  haproxy:
-    build: "./haproxy"
-    container_name: todos-haproxy
-    restart: always
-    networks:
-      - todos-proxy
-    ports:
-      - "80:80"
-    volumes:
-      - ./haproxy:/haproxy
-    depends_on:
-      - backend
-      - frontend
-
   frontend:
     build:
       context: "./frontend"
