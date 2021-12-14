@@ -36,7 +36,7 @@ def create_user(request: Request):
                 "email": "User with email already exists."
             }
         }
-        return errors, HTTPStatus.BAD_REQUEST
+        return json(errors, status=HTTPStatus.BAD_REQUEST)
     user = User(email=email)
     user.set_password(password=password)
     with get_session() as session:
