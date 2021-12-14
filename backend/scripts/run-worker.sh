@@ -1,2 +1,2 @@
 #!/bin/sh
-pipenv run celery -A app.core.celery worker
+pipenv run celery -A app.worker worker
