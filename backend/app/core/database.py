@@ -24,7 +24,6 @@ def get_session() -> Generator[Session, None]:
     session = session_factory()
     try:
         yield session
-        session.commit()
     except Exception as err:
         session.rollback()
         raise err

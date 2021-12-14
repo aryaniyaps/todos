@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
 from sanic import Blueprint, Request
+from sanic.response import json
 from flask_login import login_required, current_user
 
-from app.extensions import db
+from app.core.database import get_session
 from app.models.users import User
 from app.schemas.users import user_schema
 
@@ -17,7 +18,7 @@ def read_current_user(request: Request):
     """
     Get the current user.
     """
-    return user_schema.dump(current_user)
+    return json(user_schema.dump(current_user))
 
 
 @user_blueprint.post("")
@@ -38,6 +39,10 @@ def create_user(request: Request):
         return errors, HTTPStatus.BAD_REQUEST
     user = User(email=email)
     user.set_password(password=password)
-    db.session.add(user)
-    db.session.commit()
-    return user_schema.dump(user), HTTPStatus.CREATED
+    with get_session() as session:
+        session.add(user)
+        session.commit()
+    return json(
+        user_schema.dump(user), 
+        status=HTTPStatus.CREATED
+    )

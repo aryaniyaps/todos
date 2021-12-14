@@ -1,6 +1,6 @@
 from typing import Optional
 
-from app.core.celery import celery
+from app.core.worker import celery
 
 
 @celery.task(name="send_email", bind=True)

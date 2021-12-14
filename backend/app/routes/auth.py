@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from sanic import Blueprint, Request
+from sanic.response import empty, json
 from flask_login import login_required, login_user, logout_user
 
 from app.models.users import User
@@ -29,7 +30,7 @@ def login(request: Request):
         }
         return errors, HTTPStatus.BAD_REQUEST
     login_user(user=user)
-    return user_schema.dump(user)
+    return json(user_schema.dump(user))
 
 
 @auth_blueprint.post("/logout")
@@ -39,4 +40,4 @@ def logout(request: Request):
     Log the current user out.
     """
     logout_user()
-    return "", HTTPStatus.NO_CONTENT
+    return empty()

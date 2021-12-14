@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
 from sanic import Blueprint, Request
+from sanic.response import empty, json
 from flask_login import login_required, current_user
 
-from app.extensions import db
+from app.core.database import get_session
 from app.models.todos import Todo
 from app.schemas.todos import todo_schema, todos_schema
 
@@ -21,12 +22,12 @@ def read_todos(request: Request):
     page = request.args.get(key="page", default=1, type=int)
     limit = request.args.get(key="limit", default=20, type=int)
     results = query.paginate(page, limit, False)
-    return {
+    return json({
         "has_prev": results.has_prev,
         "has_next": results.has_next,
         "total": results.total,
         "results": todos_schema.dump(results.items)
-    }
+    })
 
 
 @todo_blueprint.post("")
@@ -40,9 +41,13 @@ def create_todo(request: Request):
         content=data.get("content"), 
         user_id=current_user.id
     )
-    db.session.add(todo)
-    db.session.commit()
-    return todo_schema.dump(todo), HTTPStatus.CREATED
+    with get_session() as session:
+        session.add(todo)
+        session.commit()
+    return json(
+        todo_schema.dump(todo), 
+        status=HTTPStatus.CREATED
+    )
 
 
 @todo_blueprint.get("/<todo_id:int>")
@@ -56,7 +61,7 @@ def read_todo(request: Request, todo_id: int):
         user_id=current_user.id,
     )
     todo = query.first_or_404()
-    return todo_schema.dump(todo)
+    return json(todo_schema.dump(todo))
 
 
 @todo_blueprint.patch("/<todo_id:int>")
@@ -77,8 +82,10 @@ def update_todo(request: Request, todo_id: int):
         todo.content = content
     if completed is not None:
         todo.completed = completed
-    db.session.commit()
-    return todo_schema.dump(todo)
+    with get_session() as session:
+        session.add(todo)
+        session.commit()
+    return json(todo_schema.dump(todo))
 
 
 @todo_blueprint.delete("/<todo_id:int>")
@@ -92,9 +99,10 @@ def delete_todo(request: Request, todo_id: int):
         user_id=current_user.id,
     )
     todo = query.first_or_404()
-    db.session.delete(todo)
-    db.session.commit()
-    return "", HTTPStatus.NO_CONTENT
+    with get_session() as session:
+        session.delete(todo)
+        session.commit()
+    return empty()
 
 
 @todo_blueprint.delete("")
@@ -104,4 +112,4 @@ def clear_todos(request: Request):
     Clears the current user's todos.
     """
     Todo.query.filter_by(user_id=current_user.id).delete()
-    return "", HTTPStatus.NO_CONTENT
+    return empty()
