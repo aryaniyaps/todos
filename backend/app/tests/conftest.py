@@ -27,10 +27,8 @@ def test_db(app: Sanic) -> SQLAlchemy:
     :return: The test database.
     """
     Base.metadata.create_all()
-    with app.app_context():
-        db.create_all()
-        yield db
-        db.drop_all()
+    yield
+    Base.metadata.drop_all()
 
 
 @pytest.fixture(autouse=True)

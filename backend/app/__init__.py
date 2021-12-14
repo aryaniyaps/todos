@@ -1,8 +1,5 @@
-from sanic import Sanic
+from sanic import Sanic, Blueprint
 from marshmallow import ValidationError
-
-from app.handlers.validation_error import handle_validation_error
-from app.routes import app_blueprint
 
 
 def create_app(config: str = "app.settings") -> Sanic:
@@ -24,7 +21,18 @@ def register_blueprints(app: Sanic) -> None:
 
     :param app: The app instance.
     """
-    app.blueprint(blueprint=app_blueprint)
+    from app.routes.auth import auth_blueprint
+    from app.routes.todos import todo_blueprint
+    from app.routes.users import user_blueprint
+
+    app.blueprint(
+        Blueprint.group(
+            auth_blueprint,
+            todo_blueprint,
+            user_blueprint,
+            url_prefix="/api"
+        )
+    )
 
 
 def register_error_handlers(app: Sanic) -> None:
@@ -33,9 +41,11 @@ def register_error_handlers(app: Sanic) -> None:
 
     :param app: The app instance.
     """
-    app.register_error_handler(
-        ValidationError, 
-        handle_validation_error,
+    from app.handlers.validation_error import validation_error_handler
+
+    app.error_handler.add(
+        exception=ValidationError,
+        handler=validation_error_handler
     )
 
 

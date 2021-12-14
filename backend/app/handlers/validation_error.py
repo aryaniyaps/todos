@@ -5,8 +5,6 @@ from sanic.response import json
 from marshmallow import ValidationError
 
 
-def handle_validation_error(request: Request, exception: ValidationError):
-    """
-    Handles validation errors.
-    """
+def validation_error_handler(request: Request, exception: ValidationError):
+    """Handler for validation errors."""
     return json({"errors": exception.messages}, status=HTTPStatus.BAD_REQUEST)
