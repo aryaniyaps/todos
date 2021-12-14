@@ -11,6 +11,7 @@ def create_app(config: str = "app.settings") -> Sanic:
     app = Sanic(__name__)
     app.update_config(config)
     register_error_handlers(app)
+    register_middleware(app)
     register_blueprints(app)
     return app
 
@@ -32,6 +33,20 @@ def register_blueprints(app: Sanic) -> None:
             user_blueprint,
             url_prefix="/api"
         )
+    )
+
+
+def register_middleware(app: Sanic) -> None:
+    """
+    Registers middleware for the app.
+
+    :param app: The app instance.
+    """
+    from app.middleware.security import security_middleware
+
+    app.register_middleware(
+        middleware=security_middleware, 
+        attach_to="response"
     )
 
 
