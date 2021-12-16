@@ -9,7 +9,7 @@ from app import settings
 
 Base = declarative_base()
 
-engine = create_engine(settings.DATABASE_URL, future=True)
+engine = create_engine(settings.DATABASE_URL, pool_size=20, future=True)
 
 session_factory = sessionmaker(bind=engine)
 

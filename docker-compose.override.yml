@@ -15,7 +15,6 @@ services:
       context: "./backend"
       target: "development"
     environment:
-      SECRET_KEY: "secret"
       DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:3306/todos"
       MAIL_SERVER: "localhost"
       MAIL_PORT: "25"

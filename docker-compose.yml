@@ -26,7 +26,6 @@ services:
       target: "production"
     working_dir: "/backend/"
     environment:
-      SECRET_KEY: "${SECRET_KEY}"
       DATABASE_URL: "${DATABASE_URL}"
       MAIL_SERVER: "${MAIL_SERVER}"
       MAIL_PORT: "${MAIL_PORT}"

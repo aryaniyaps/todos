@@ -2,8 +2,8 @@ from http import HTTPStatus
 
 from sanic import Blueprint, Request
 from sanic.response import empty, json
-from flask_login import login_required, current_user
 
+from app.core.auth import login_required
 from app.core.database import get_session
 from app.models.todos import Todo
 from app.schemas.todos import todo_schema, todos_schema
