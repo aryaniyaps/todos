@@ -20,10 +20,11 @@ logger = getLogger('alembic.env')
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
+from app import settings
 from app.core.database import Base
 
 target_metadata = Base.metadata
-config.set_main_option("sqlalchemy.url", "")
+config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
