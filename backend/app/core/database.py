@@ -10,7 +10,11 @@ from app import settings
 
 Base = declarative_base()
 
-engine = create_engine(settings.DATABASE_URL, pool_size=20, future=True)
+engine = create_engine(
+    future=True,
+    url=settings.DATABASE_URL, 
+    echo=settings.DEBUG, 
+)
 
 
 @contextmanager

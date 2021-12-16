@@ -2,14 +2,13 @@ from sanic import Sanic, Blueprint
 from marshmallow import ValidationError
 
 
-def create_app(config: str = "app.settings") -> Sanic:
+def create_app() -> Sanic:
     """
     Initializes an app instance.
 
     :return: The created app.
     """
     app = Sanic(__name__)
-    app.update_config(config)
     register_error_handlers(app)
     register_middleware(app)
     register_blueprints(app)

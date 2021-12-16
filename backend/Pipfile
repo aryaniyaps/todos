@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 sanic = ">=21.9"
 alembic = ">=1.7"
+jinja2 = ">=3.0"
 sqlalchemy = {version=">=1.4", extras=["mysql"]}
 celery = {version=">=5.2", extras = ["redis"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}

@@ -3,6 +3,8 @@ Configuration options for development/ production.
 """
 from os import getenv
 
+# whether the app is in development.
+DEBUG = bool(getenv("DEBUG", default=False))
 
 # branding configuration.
 PUBLIC_SITE_NAME = getenv("PUBLIC_SITE_NAME", default="Todos")
