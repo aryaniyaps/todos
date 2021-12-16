@@ -18,7 +18,7 @@ engine = create_engine(
 
 
 @contextmanager
-def get_session(engine: Engine = engine) -> Generator[Session, None]:
+def get_session(engine: Engine = engine) -> Generator[Session, None, None]:
     """
     Gets a session instance.
 
