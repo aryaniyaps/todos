@@ -19,9 +19,7 @@ jobs:
       run:
         working-directory: ./backend
     env:
-      FLASK_TESTING: true
       MAIL_SUPPRESS_SEND: true
-      SECRET_KEY: "secret"
       DATABASE_URL: "mysql+mysqldb://todos:todos@127.0.0.1:3306/todos"
 
     services:
