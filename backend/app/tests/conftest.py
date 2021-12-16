@@ -1,15 +1,17 @@
-import pytest
+from pytest import fixture
 from sanic import Sanic
+from sqlalchemy import create_engine
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
 from app import create_app
-from app.core.database import Base
+from app.core.database import get_session
 from app.models.todos import Todo
 from app.models.users import User
 from app.tests.factories import UserFactory, TodoFactory
 
 
-@pytest.fixture(scope="session")
+@fixture(scope="session")
 def app() -> Sanic:
     """
     Initializes the app for testing.
@@ -19,31 +21,28 @@ def app() -> Sanic:
     return create_app()
 
 
-@pytest.fixture(scope="session")
-def test_db(app: Sanic) -> SQLAlchemy:
+@fixture(scope="session")
+def test_engine() -> Engine:
     """
-    Sets up the database for tests.
+    Creates a database engine for testing.
 
-    :return: The test database.
+    :return: The created database engine.
     """
-    Base.metadata.create_all()
-    yield
-    Base.metadata.drop_all()
+    return create_engine()
 
 
-@pytest.fixture(autouse=True)
-def session(test_db: SQLAlchemy):
+@fixture(autouse=True)
+def session(test_engine: Engine):
     """
-    Creates a session enclosed in a transaction.
+    Creates a session for testing.
 
     :return: The created session.
     """
-    test_db.session.begin_nested()
-    yield test_db.session
-    test_db.session.remove()
+    with get_session(test_engine) as session:
+        yield session
 
 
-@pytest.fixture
+@fixture
 def user(session: Session) -> User:
     """
     Creates an user for tests.
@@ -55,7 +54,7 @@ def user(session: Session) -> User:
     return user
 
 
-@pytest.fixture
+@fixture
 def todo(user: User, session: Session) -> Todo:
     """
     Creates a todo for tests.
@@ -67,7 +66,7 @@ def todo(user: User, session: Session) -> Todo:
     return todo
 
 
-@pytest.fixture
+@fixture
 def foreign_todo(session: Session) -> Todo:
     """
     Creates a todo that belongs to another

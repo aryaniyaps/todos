@@ -26,20 +26,20 @@ def create_user(request: Request):
     """
     Create a new user.
     """
-    data = user_schema.load(request.get_json())
+    data = user_schema.load(request.json)
     email = data.get("email")
     password = data.get("password")
-    user = User.query.filter_by(email=email).first()
-    if user is not None:
-        errors = {
-            "errors": {
-                "email": "User with email already exists."
-            }
-        }
-        return json(errors, status=HTTPStatus.BAD_REQUEST)
-    user = User(email=email)
-    user.set_password(password=password)
     with get_session() as session:
+        user = session.query(User).filter_by(email=email).first()
+        if user is not None:
+            errors = {
+                "errors": {
+                    "email": "User with email already exists."
+                }
+            }
+            return json(errors, status=HTTPStatus.BAD_REQUEST)
+        user = User(email=email)
+        user.set_password(password=password)
         session.add(user)
         session.commit()
     return json(

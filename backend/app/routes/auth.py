@@ -4,6 +4,7 @@ from sanic import Blueprint, Request
 from sanic.response import empty, json
 
 from app.core.auth import login_required
+from app.core.database import get_session
 from app.models.users import User
 from app.schemas.users import user_schema
 
@@ -16,10 +17,11 @@ def login(request: Request):
     """
     Log the current user in.
     """
-    data = user_schema.load(request.get_json())
+    data = user_schema.load(request.json)
     email = data.get("email")
     password = data.get("password")
-    user = User.query.filter_by(email=email).first()
+    with get_session() as session:
+        user = session.query(User).filter_by(email=email).first()
     authenticated = (
         user is not None and 
         user.check_password(password=password)

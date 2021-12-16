@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from sanic import Blueprint, Request
+from sanic.exceptions import NotFound
 from sanic.response import empty, json
 
 from app.core.auth import login_required
@@ -18,16 +19,12 @@ def read_todos(request: Request):
     """
     Get the current user's todos.
     """
-    query = Todo.query.filter_by(user_id=current_user.id)
-    page = request.args.get(key="page", default=1, type=int)
+    offset = request.args.get(key="offset", default=1, type=int)
     limit = request.args.get(key="limit", default=20, type=int)
-    results = query.paginate(page, limit, False)
-    return json({
-        "has_prev": results.has_prev,
-        "has_next": results.has_next,
-        "total": results.total,
-        "results": todos_schema.dump(results.items)
-    })
+    with get_session() as session:
+        todos = session.query(Todo).filter_by(user_id=current_user.id)
+        todos.offset(offset).limit(limit)
+    return json(todos_schema.dump(todos))
 
 
 @todo_blueprint.post("")
@@ -36,12 +33,12 @@ def create_todo(request: Request):
     """
     Create a new todo.
     """
-    data = todo_schema.load(request.get_json())
-    todo = Todo(
-        content=data.get("content"), 
-        user_id=current_user.id
-    )
+    data = todo_schema.load(request.json)
     with get_session() as session:
+        todo = Todo(
+            content=data.get("content"), 
+            user_id=current_user.id
+        )
         session.add(todo)
         session.commit()
     return json(
@@ -56,11 +53,13 @@ def read_todo(request: Request, todo_id: int):
     """
     Get a todo by ID.
     """
-    query = Todo.query.filter_by(
-        id=todo_id, 
-        user_id=current_user.id,
-    )
-    todo = query.first_or_404()
+    with get_session() as session:
+        todo = session.query(Todo).filter_by(
+            id=todo_id, 
+            user_id=current_user.id
+        )
+    if todo is None:
+        raise NotFound("Couldn't find the requested todo.")
     return json(todo_schema.dump(todo))
 
 
@@ -70,19 +69,20 @@ def update_todo(request: Request, todo_id: int):
     """
     Update a todo by ID.
     """
-    query = Todo.query.filter_by(
-        id=todo_id, 
-        user_id=current_user.id,
-    )
-    todo = query.first_or_404()
-    data = todo_schema.load(request.get_json())
-    content = data.get("content")
-    completed = data.get("completed")
-    if content is not None:
-        todo.content = content
-    if completed is not None:
-        todo.completed = completed
     with get_session() as session:
+        todo = session.query(Todo).filter_by(
+            id=todo_id, 
+            user_id=current_user.id
+        )
+        if todo is None:
+            raise NotFound("Couldn't find the requested todo.")
+        data = todo_schema.load(request.json)
+        content = data.get("content")
+        completed = data.get("completed")
+        if content is not None:
+            todo.content = content
+        if completed is not None:
+            todo.completed = completed
         session.add(todo)
         session.commit()
     return json(todo_schema.dump(todo))
@@ -94,12 +94,13 @@ def delete_todo(request: Request, todo_id: int):
     """
     Delete a todo by ID.
     """
-    query = Todo.query.filter_by(
-        id=todo_id, 
-        user_id=current_user.id,
-    )
-    todo = query.first_or_404()
     with get_session() as session:
+        todo = session.query(Todo).filter_by(
+            id=todo_id, 
+            user_id=current_user.id
+        )
+        if todo is None:
+            raise NotFound("Couldn't find the requested todo.")
         session.delete(todo)
         session.commit()
     return empty()
@@ -111,5 +112,9 @@ def clear_todos(request: Request):
     """
     Clears the current user's todos.
     """
-    Todo.query.filter_by(user_id=current_user.id).delete()
+    with get_session() as session:
+        todos = session.query(Todo).filter_by(
+            user_id=current_user.id
+        )
+        todos.delete()
     return empty()
