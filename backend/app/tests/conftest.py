@@ -1,10 +1,12 @@
 from pytest import fixture
 from sanic import Sanic
+from sanic_testing import TestManager
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
+from sqlalchemy.orm.session import sessionmaker
 
 from app import create_app
-from app.core.database import Base, engine, get_session
+from app.core.database import Base, engine
 from app.models.todos import Todo
 from app.models.users import User
 from app.tests.factories import UserFactory, TodoFactory
@@ -17,7 +19,9 @@ def app() -> Sanic:
 
     :return: The initialized app.
     """
-    return create_app(testing=True)
+    app = create_app()
+    TestManager(app=app)
+    return app
 
 
 @fixture(scope="session")
@@ -34,15 +38,26 @@ def test_connection() -> Connection:
     Base.metadata.drop_all()
 
 
+@fixture(scope="session")
+def session_factory(test_connection: Connection) -> Session:
+    return sessionmaker(bind=test_connection)
+
+
 @fixture(autouse=True)
-def session(test_connection: Connection) -> Session:
+def session(session_factory: Session) -> Session:
     """
     Creates a session for testing.
 
     :return: The created session.
     """
-    with get_session(test_connection) as session:
+    session = session_factory()
+    try:
         yield session
+    except Exception as err:
+        session.rollback()
+        raise err
+    finally:
+        session.close()
 
 
 @fixture

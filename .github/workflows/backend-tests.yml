@@ -19,6 +19,7 @@ jobs:
       run:
         working-directory: ./backend
     env:
+      DEBUG: true
       MAIL_SUPPRESS_SEND: true
       DATABASE_URL: "mysql+mysqldb://todos:todos@127.0.0.1:3306/todos"
 

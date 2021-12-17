@@ -15,6 +15,7 @@ uvicorn = ">=0.15"
 
 [dev-packages]
 pytest = ">=6.2"
+sanic-testing = ">=0.7"
 factory-boy = ">=3.2"
 
 [requires]

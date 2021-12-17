@@ -16,17 +16,17 @@ engine = create_engine(
     echo=settings.DEBUG, 
 )
 
+session_factory = sessionmaker(bind=engine)
+
 
 @contextmanager
-def get_session(bind: Connectable = engine) -> Generator[Session, None, None]:
+def get_session() -> Generator[Session, None, None]:
     """
     Gets a session instance.
 
-    :param bind: The bind to pass to the session factory.
-
     :return: the obtained session.
     """
-    session = sessionmaker(bind=bind)
+    session = session_factory()
     try:
         yield session
     except Exception as err:
