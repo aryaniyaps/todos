@@ -18,7 +18,7 @@ class UserFactory(BaseFactory):
     User factory.
     """
     email = Sequence(lambda n: f"user-{n}@example.org")
-    password = PostGenerationMethodCall("set_password", password="password")
+    password = PostGenerationMethodCall("set_password", password="avocados")
 
     class Meta:
         model = User

@@ -1,11 +1,10 @@
 from pytest import fixture
 from sanic import Sanic
-from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
 
 from app import create_app
-from app.core.database import Base, get_session
+from app.core.database import Base, engine, get_session
 from app.models.todos import Todo
 from app.models.users import User
 from app.tests.factories import UserFactory, TodoFactory
@@ -28,7 +27,6 @@ def test_connection() -> Connection:
 
     :return: The created database connection.
     """
-    engine = create_engine()
     connection = engine.connect()
     Base.metadata.bind = connection
     Base.metadata.create_all()
@@ -50,7 +48,7 @@ def session(test_connection: Connection) -> Session:
 @fixture
 def user(session: Session) -> User:
     """
-    Creates an user for tests.
+    Creates an user for testing.
 
     :return: The created user.
     """
@@ -62,7 +60,7 @@ def user(session: Session) -> User:
 @fixture
 def todo(user: User, session: Session) -> Todo:
     """
-    Creates a todo for tests.
+    Creates a todo for testing.
 
     :return: The created todo.
     """
@@ -75,7 +73,7 @@ def todo(user: User, session: Session) -> Todo:
 def foreign_todo(session: Session) -> Todo:
     """
     Creates a todo that belongs to another
-    user for tests.
+    user for testing.
 
     :return: The created todo.
     """
