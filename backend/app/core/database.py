@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from typing import Generator
 
 from sqlalchemy import create_engine
-from sqlalchemy.engine import Engine
+from sqlalchemy.engine import Connectable
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 
@@ -18,13 +18,15 @@ engine = create_engine(
 
 
 @contextmanager
-def get_session(engine: Engine = engine) -> Generator[Session, None, None]:
+def get_session(bind: Connectable = engine) -> Generator[Session, None, None]:
     """
     Gets a session instance.
 
+    :param bind: The bind to pass to the session factory.
+
     :return: the obtained session.
     """
-    session = sessionmaker(bind=engine)
+    session = sessionmaker(bind=bind)
     try:
         yield session
     except Exception as err:

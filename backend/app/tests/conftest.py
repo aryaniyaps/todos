@@ -1,11 +1,11 @@
 from pytest import fixture
 from sanic import Sanic
 from sqlalchemy import create_engine
-from sqlalchemy.engine import Engine
+from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
 
 from app import create_app
-from app.core.database import get_session
+from app.core.database import Base, get_session
 from app.models.todos import Todo
 from app.models.users import User
 from app.tests.factories import UserFactory, TodoFactory
@@ -22,23 +22,28 @@ def app() -> Sanic:
 
 
 @fixture(scope="session")
-def test_engine() -> Engine:
+def test_connection() -> Connection:
     """
-    Creates a database engine for testing.
+    Creates a database connection for testing.
 
-    :return: The created database engine.
+    :return: The created database connection.
     """
-    return create_engine()
+    engine = create_engine()
+    connection = engine.connect()
+    Base.metadata.bind = connection
+    Base.metadata.create_all()
+    yield connection
+    Base.metadata.drop_all()
 
 
 @fixture(autouse=True)
-def session(test_engine: Engine):
+def session(test_connection: Connection) -> Session:
     """
     Creates a session for testing.
 
     :return: The created session.
     """
-    with get_session(test_engine) as session:
+    with get_session(test_connection) as session:
         yield session
 
 

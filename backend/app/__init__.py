@@ -1,6 +1,8 @@
 from sanic import Sanic, Blueprint
 from marshmallow import ValidationError
 
+from app import settings
+
 
 def create_app() -> Sanic:
     """
@@ -9,6 +11,7 @@ def create_app() -> Sanic:
     :return: The created app.
     """
     app = Sanic(__name__)
+    app.update_config(settings)
     register_error_handlers(app)
     register_middleware(app)
     register_blueprints(app)
