@@ -94,7 +94,7 @@ def test_update_todo_unauthorized(app: Sanic, todo: Todo) -> None:
     """
     data = {"content": "sample content", "completed": True}
     request, response = app.test_client.patch(app.url_for("app.todos.update_todo", todo_id=todo.id), json=data)
-    assert response.status_code == HTTPStatus.UNAUTHORIZED
+    assert response.status == HTTPStatus.UNAUTHORIZED
 
 
 def test_update_foreign_todo(app: Sanic, foreign_todo: Todo) -> None:
@@ -103,7 +103,7 @@ def test_update_foreign_todo(app: Sanic, foreign_todo: Todo) -> None:
     """
     data = {"content": "sample content", "completed": True}
     request, response = app.test_client.patch(app.url_for("app.todos.update_todo", todo_id=foreign_todo.id), json=data)
-    assert response.status_code == HTTPStatus.NOT_FOUND
+    assert response.status == HTTPStatus.NOT_FOUND
 
 
 def test_delete_todo(app: Sanic, todo: Todo) -> None:
@@ -111,7 +111,7 @@ def test_delete_todo(app: Sanic, todo: Todo) -> None:
     Ensure we can delete a todo.
     """
     request, response = app.test_client.delete(app.url_for("app.todos.delete_todo", todo_id=todo.id))
-    assert response.status_code == HTTPStatus.NO_CONTENT
+    assert response.status == HTTPStatus.NO_CONTENT
 
 
 def test_delete_todo_unauthorized(app: Sanic, todo: Todo) -> None:
