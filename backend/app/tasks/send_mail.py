@@ -1,9 +1,9 @@
 from typing import Optional
 
-from app.core.worker import celery
+from app.worker import worker
 
 
-@celery.task(name="send_email", bind=True)
+@worker.task(name="send_email", bind=True)
 def send_mail(
     recipient: str, 
     subject: str, 

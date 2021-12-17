@@ -31,7 +31,7 @@ def login(request: Request):
             "errors": "Incorrect email/ password provided."
         }
         return errors, HTTPStatus.BAD_REQUEST
-    login_user(user=user)
+    # login_user(user=user)
     return json(user_schema.dump(user))
 
 
@@ -41,5 +41,5 @@ def logout(request: Request):
     """
     Log the current user out.
     """
-    logout_user()
+    # logout_user()
     return empty()

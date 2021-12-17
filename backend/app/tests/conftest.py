@@ -68,6 +68,7 @@ def user(session: Session) -> User:
     :return: The created user.
     """
     user = UserFactory()
+    session.add(user)
     session.commit()
     return user
 
@@ -80,6 +81,7 @@ def todo(user: User, session: Session) -> Todo:
     :return: The created todo.
     """
     todo = TodoFactory(user=user)
+    session.add(todo)
     session.commit()
     return todo
 
@@ -93,5 +95,6 @@ def foreign_todo(session: Session) -> Todo:
     :return: The created todo.
     """
     todo = TodoFactory()
+    session.add(todo)
     session.commit()
     return todo

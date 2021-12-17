@@ -3,21 +3,19 @@ from celery import Celery
 from app import settings
 
 
-def create_celery() -> Celery:
+def create_worker() -> Celery:
     """
-    Initializes a Celery app instance.
+    Initializes a worker instance.
 
-    :param app: The central app instance.
-
-    :return: The created app.
+    :return: The created worker.
     """
 
-    celery_app = Celery(
+    celery = Celery(
         main=__name__, 
         include=("app.tasks",)
     )
-    celery_app.conf.update(settings)
-    return celery_app
+    celery.config_from_object(settings)
+    return celery
 
 
-celery = create_celery()
+worker = create_worker()
