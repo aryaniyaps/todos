@@ -4,13 +4,18 @@ from marshmallow import ValidationError
 from app import settings
 
 
-def create_app() -> Sanic:
+def create_app(testing: bool = False) -> Sanic:
     """
     Initializes an app instance.
+
+    :param testing: Whether the app is going 
+        to be used for testing.
 
     :return: The created app.
     """
     app = Sanic(__name__)
+    if testing:
+        app.test_mode = True
     app.update_config(settings)
     register_error_handlers(app)
     register_middleware(app)

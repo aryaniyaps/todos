@@ -17,7 +17,7 @@ def app() -> Sanic:
 
     :return: The initialized app.
     """
-    return create_app()
+    return create_app(testing=True)
 
 
 @fixture(scope="session")
