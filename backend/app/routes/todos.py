@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Request, Depends
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
@@ -12,8 +12,28 @@ from app.schemas.todos import TodoCreate, TodoUpdate
 todo_router = APIRouter(prefix="/todos")
 
 
+def get_todo(current_user, request: Request, session: Session = Depends(get_session)) -> Todo:
+    query = session.query(Todo).filter_by(
+        id=request.path_params.get("todo_id"), 
+        user_id=current_user.id
+    )
+    todo = query.first()
+    if todo is None:
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND, 
+            detail="Could not find the requested todo."
+        )
+    return todo
+
+
+
 @todo_router.get("", name="todos:read-all")
-def read_todos(current_user, session: Session = Depends(get_session), offset: int = 1, limit: int = 20):
+def read_todos(
+    current_user, 
+    session: Session = Depends(get_session), 
+    offset: int = 1, 
+    limit: int = 20
+):
     """
     Get the current user's todos.
     """
@@ -23,7 +43,11 @@ def read_todos(current_user, session: Session = Depends(get_session), offset: in
 
 
 @todo_router.post("", name="todos:create", status_code=HTTPStatus.CREATED)
-def create_todo(current_user, data: TodoCreate, session: Session = Depends(get_session)):
+def create_todo(
+    current_user, 
+    data: TodoCreate, 
+    session: Session = Depends(get_session)
+):
     """
     Create a new todo.
     """
@@ -38,36 +62,22 @@ def create_todo(current_user, data: TodoCreate, session: Session = Depends(get_s
 
 
 @todo_router.get("/{todo_id}", name="todos:read")
-def read_todo(current_user, todo_id: int, session: Session = Depends(get_session)):
+def read_todo(todo: Todo = Depends(get_todo)):
     """
     Get a todo by ID.
     """
-    todo = session.query(Todo).filter_by(
-        id=todo_id, 
-        user_id=current_user.id
-    )
-    if todo is None:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND, 
-            detail="Could not find the requested todo."
-        )
     return todo
 
 
 @todo_router.patch("/{todo_id}", name="todos:update")
-def update_todo(current_user, todo_id: int, data: TodoUpdate, session: Session = Depends(get_session)):
+def update_todo(
+    data: TodoUpdate, 
+    todo: Todo = Depends(get_todo), 
+    session: Session = Depends(get_session)
+):
     """
     Update a todo by ID.
     """
-    todo = session.query(Todo).filter_by(
-        id=todo_id, 
-        user_id=current_user.id
-    )
-    if todo is None:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND, 
-            detail="Could not find the requested todo."
-        )
     if data.content is not None:
         todo.content = data.content
     if data.completed is not None:
@@ -78,25 +88,22 @@ def update_todo(current_user, todo_id: int, data: TodoUpdate, session: Session =
 
 
 @todo_router.delete("/{todo_id}", name="todos:delete", status_code=HTTPStatus.NO_CONTENT)
-def delete_todo(current_user, todo_id: int, session: Session = Depends(get_session)):
+def delete_todo(
+    todo: Todo = Depends(get_todo), 
+    session: Session = Depends(get_session)
+):
     """
     Delete a todo by ID.
     """
-    todo = session.query(Todo).filter_by(
-        id=todo_id, 
-        user_id=current_user.id
-    )
-    if todo is None:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND, 
-            detail="Could not find the requested todo."
-        )
     session.delete(todo)
     session.commit()
 
 
 @todo_router.delete("", name="todos:clear", status_code=HTTPStatus.NO_CONTENT)
-def clear_todos(current_user, session: Session = Depends(get_session)):
+def clear_todos(
+    current_user, 
+    session: Session = Depends(get_session)
+):
     """
     Clears the current user's todos.
     """
