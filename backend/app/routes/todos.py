@@ -1,55 +1,48 @@
 from http import HTTPStatus
 
-from sanic import Blueprint, Request
-from sanic.exceptions import NotFound
-from sanic.response import empty, json
+from fastapi import APIRouter
 
 from app.core.auth import login_required
 from app.core.database import get_session
 from app.models.todos import Todo
-from app.schemas.todos import todo_schema, todos_schema
+from app.schemas.todos import TodoCreate
 
 
-todo_blueprint = Blueprint("todos", url_prefix="/todos")
+todo_router = APIRouter(prefix="/todos")
 
 
-@todo_blueprint.get("")
+@todo_router.get("")
 @login_required
-def read_todos(request: Request):
+def read_todos(offset: int = 1, limit: int = 20):
     """
     Get the current user's todos.
     """
-    offset = request.args.get(key="offset", default=1, type=int)
-    limit = request.args.get(key="limit", default=20, type=int)
     with get_session() as session:
         todos = session.query(Todo).filter_by(user_id=current_user.id)
         todos.offset(offset).limit(limit)
-    return json(todos_schema.dump(todos))
+    return todos
 
 
-@todo_blueprint.post("")
+@todo_router.post("", status_code=HTTPStatus.CREATED)
 @login_required
-def create_todo(request: Request):
+def create_todo(data: TodoCreate):
     """
     Create a new todo.
     """
-    data = todo_schema.load(request.json)
     with get_session() as session:
         todo = Todo(
-            content=data.get("content"), 
+            content=data.content, 
+            completed=data.completed,
             user_id=current_user.id
         )
         session.add(todo)
         session.commit()
-    return json(
-        todo_schema.dump(todo), 
-        status=HTTPStatus.CREATED
-    )
+    return todo
 
 
-@todo_blueprint.get("/<todo_id:int>")
+@todo_router.get("/{todo_id}")
 @login_required
-def read_todo(request: Request, todo_id: int):
+def read_todo(todo_id: int):
     """
     Get a todo by ID.
     """
@@ -60,12 +53,12 @@ def read_todo(request: Request, todo_id: int):
         )
     if todo is None:
         raise NotFound("Couldn't find the requested todo.")
-    return json(todo_schema.dump(todo))
+    return todo
 
 
-@todo_blueprint.patch("/<todo_id:int>")
+@todo_router.patch("/{todo_id}")
 @login_required
-def update_todo(request: Request, todo_id: int):
+def update_todo(todo_id: int):
     """
     Update a todo by ID.
     """
@@ -76,7 +69,7 @@ def update_todo(request: Request, todo_id: int):
         )
         if todo is None:
             raise NotFound("Couldn't find the requested todo.")
-        data = todo_schema.load(request.json)
+        data = todo_schema.load()
         content = data.get("content")
         completed = data.get("completed")
         if content is not None:
@@ -85,12 +78,12 @@ def update_todo(request: Request, todo_id: int):
             todo.completed = completed
         session.add(todo)
         session.commit()
-    return json(todo_schema.dump(todo))
+    return todo_schema.dump(todo)
 
 
-@todo_blueprint.delete("/<todo_id:int>")
+@todo_router.delete("/{todo_id}", status_code=HTTPStatus.NO_CONTENT)
 @login_required
-def delete_todo(request: Request, todo_id: int):
+def delete_todo(todo_id: int):
     """
     Delete a todo by ID.
     """
@@ -103,12 +96,11 @@ def delete_todo(request: Request, todo_id: int):
             raise NotFound("Couldn't find the requested todo.")
         session.delete(todo)
         session.commit()
-    return empty()
 
 
-@todo_blueprint.delete("")
+@todo_router.delete("", status_code=HTTPStatus.NO_CONTENT)
 @login_required
-def clear_todos(request: Request):
+def clear_todos():
     """
     Clears the current user's todos.
     """
@@ -117,4 +109,3 @@ def clear_todos(request: Request):
             user_id=current_user.id
         )
         todos.delete()
-    return empty()

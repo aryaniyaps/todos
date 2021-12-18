@@ -1,64 +1,28 @@
-from marshmallow import Schema, fields
-from marshmallow.validate import Length
+from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel, EmailStr
 
 
-class UserSchema(Schema):
-    id = fields.Integer(
-        dump_only=True,
-        metadata={
-            "description": """
-            The ID of the user.
-            """
-        }
-    )
+class UserBase(BaseModel):
+    email: Optional[EmailStr]
+    completed: Optional[bool] = False
 
-    email = fields.Email(
-        required=True,
-        metadata={
-            "description": """
-            The email of the user.
-            """
-        }
-    )
 
-    password = fields.String(
-        required=True,
-        load_only=True,
-        validate=(
-            Length(min=8, max=75),
-        ),
-        metadata={
-            "description": """
-            The password of the user.
-            """
-        }
-    )
+class UserCreate(UserBase):
+    email: EmailStr
+    password: str
 
-    is_active = fields.Boolean(
-        dump_only=True,
-        metadata={
-            "description": """
-            Whether the user is active.
-            """
-        }
-    )
 
-    created_at = fields.DateTime(
-        dump_only=True,
-        metadata={
-            "description": """
-            When the user was created.
-            """
-        }
-    )
+class UserUpdate(UserBase):
+    password: str
 
-    updated_at = fields.DateTime(
-        dump_only=True,
-        metadata={
-            "description": """
-            When the user was updated.
-            """
-        }
-    )
 
-user_schema = UserSchema()
+class User(UserBase):
+    id: int
+    email: EmailStr
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True

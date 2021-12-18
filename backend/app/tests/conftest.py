@@ -1,6 +1,5 @@
 from pytest import fixture
-from sanic import Sanic
-from sanic_testing import TestManager
+from fastapi import FastAPI
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.session import sessionmaker
@@ -13,15 +12,13 @@ from app.tests.factories import UserFactory, TodoFactory
 
 
 @fixture(scope="session")
-def app() -> Sanic:
+def app() -> FastAPI:
     """
     Initializes the app for testing.
 
     :return: The initialized app.
     """
-    app = create_app()
-    TestManager(app=app)
-    return app
+    return create_app()
 
 
 @fixture(scope="session")
@@ -60,7 +57,7 @@ def session(session_factory: Session) -> Session:
         session.close()
 
 
-@fixture
+@fixture()
 def user(session: Session) -> User:
     """
     Creates an user for testing.
@@ -73,7 +70,7 @@ def user(session: Session) -> User:
     return user
 
 
-@fixture
+@fixture()
 def todo(user: User, session: Session) -> Todo:
     """
     Creates a todo for testing.
@@ -86,7 +83,7 @@ def todo(user: User, session: Session) -> Todo:
     return todo
 
 
-@fixture
+@fixture()
 def foreign_todo(session: Session) -> Todo:
     """
     Creates a todo that belongs to another

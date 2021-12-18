@@ -1,52 +1,28 @@
-from marshmallow import Schema, fields
+from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel
 
 
-class TodoSchema(Schema):
-    id = fields.Integer(
-        dump_only=True,
-        metadata={
-            "description": """
-            The ID of the todo.
-            """
-        }
-    )
+class TodoBase(BaseModel):
+    content: Optional[str] = None
+    completed: Optional[bool] = False
 
-    content = fields.String(
-        required=True,
-        metadata={
-            "description": """
-            The content of the todo.
-            """
-        }
-    )
 
-    completed = fields.Boolean(
-        dump_default=False,
-        metadata={
-            "description": """
-            Whether the todo is completed.
-            """
-        }
-    )
+class TodoCreate(TodoBase):
+    content: str
 
-    created_at = fields.DateTime(
-        dump_only=True,
-        metadata={
-            "description": """
-            When the todo was created.
-            """
-        }
-    )
 
-    updated_at = fields.DateTime(
-        dump_only=True,
-        metadata={
-            "description": """
-            When the todo was updated.
-            """
-        }
-    )
+class TodoUpdate(TodoBase):
+    pass
 
-todo_schema = TodoSchema()
 
-todos_schema = TodoSchema(many=True)
+class Todo(TodoBase):
+    id: int
+    completed: bool
+    content: str
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True

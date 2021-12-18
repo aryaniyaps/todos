@@ -1,8 +1,8 @@
 from inspect import isawaitable
 from functools import wraps, partial
 
-from sanic import Request
-from sanic.exceptions import Unauthorized
+from fastapi import Request
+from fastapi.exceptions import Unauthorized
 
 
 def check_auth(request: Request) -> bool:

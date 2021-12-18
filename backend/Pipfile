@@ -4,18 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-sanic = ">=21.9"
-alembic = ">=1.7"
+fastapi = ">=0.70"
+pydantic = ">=1.8"
 jinja2 = ">=3.0"
+alembic = ">=1.7"
 sqlalchemy = {version=">=1.4", extras=["mysql"]}
 celery = {version=">=5.2", extras = ["redis"]}
 passlib = {version = ">=1.7", extras = ["argon2"]}
-marshmallow = ">=3.14"
 uvicorn = ">=0.15"
 
 [dev-packages]
 pytest = ">=6.2"
-sanic-testing = ">=0.7"
 factory-boy = ">=3.2"
 
 [requires]

@@ -1,24 +1,21 @@
-from sanic import Sanic, Blueprint
-from marshmallow import ValidationError
+from fastapi import FastAPI
 
 from app import settings
 
 
-def create_app() -> Sanic:
+def create_app() -> FastAPI:
     """
     Initializes an app instance.
 
     :return: The created app.
     """
-    app = Sanic(__name__)
-    app.update_config(settings)
-    register_error_handlers(app)
+    app = FastAPI(debug=settings.DEBUG)
     register_middleware(app)
     register_blueprints(app)
     return app
 
 
-def register_blueprints(app: Sanic) -> None:
+def register_blueprints(app: FastAPI) -> None:
     """
     Registers blueprints for the app.
 
@@ -38,7 +35,7 @@ def register_blueprints(app: Sanic) -> None:
     )
 
 
-def register_middleware(app: Sanic) -> None:
+def register_middleware(app: FastAPI) -> None:
     """
     Registers middleware for the app.
 
@@ -49,20 +46,6 @@ def register_middleware(app: Sanic) -> None:
     app.register_middleware(
         middleware=security_middleware, 
         attach_to="response"
-    )
-
-
-def register_error_handlers(app: Sanic) -> None:
-    """
-    Registers error handlers for the app.
-
-    :param app: The app instance.
-    """
-    from app.handlers.validation_error import validation_error_handler
-
-    app.error_handler.add(
-        exception=ValidationError,
-        handler=validation_error_handler
     )
 
 
