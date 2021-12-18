@@ -1,30 +1,30 @@
 from http import HTTPStatus
 
-from sanic import Sanic
+from fastapi.testclient import TestClient
 
 from app.models.users import User
 
 
-def test_login(app: Sanic, user: User) -> None:
+def test_login(client: TestClient, user: User) -> None:
     """
     Ensure we can log the current user in.
     """
     data = {"email": user.email, "password": "password"}
-    request, response = app.test_client.post(app.url_for("app.auth.login"), json=data)
-    assert response.status == HTTPStatus.OK
+    response = client.post(app.url_for("app.auth.login"), json=data)
+    assert response.status_code == HTTPStatus.OK
 
 
-def test_logout(app: Sanic) -> None:
+def test_logout(client: TestClient) -> None:
     """
     Ensure we can log the current user out.
     """
-    request, response = app.test_client.post(app.url_for("app.auth.logout"))
-    assert response.status == HTTPStatus.NO_CONTENT
+    response = client.post(app.url_for("app.auth.logout"))
+    assert response.status_code == HTTPStatus.NO_CONTENT
 
 
-def test_logout_unauthorized(app: Sanic) -> None:
+def test_logout_unauthorized(client: TestClient) -> None:
     """
     Ensure we cannot logout anonymously.
     """
-    request, response = app.test_client.post(app.url_for("app.auth.logout"))
-    assert response.status == HTTPStatus.UNAUTHORIZED
+    response = client.post(app.url_for("app.auth.logout"))
+    assert response.status_code == HTTPStatus.UNAUTHORIZED

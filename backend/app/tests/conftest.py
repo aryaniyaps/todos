@@ -1,5 +1,6 @@
 from pytest import fixture
 from fastapi import FastAPI
+from fastapi.testclient import TestClient
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.session import sessionmaker
@@ -19,6 +20,17 @@ def app() -> FastAPI:
     :return: The initialized app.
     """
     return create_app()
+
+
+@fixture()
+def client(app: FastAPI) -> TestClient:
+    """
+    Creates a client for testing.
+
+    :return: The created test client.
+    """
+    with TestClient(app) as client:
+        yield client
 
 
 @fixture(scope="session")

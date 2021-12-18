@@ -1,8 +1,8 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
-from app.core.auth import login_required
 from app.core.database import get_session
 from app.models.users import User
 
@@ -11,12 +11,11 @@ auth_router = APIRouter(prefix="/auth")
 
 
 @auth_router.post("/login")
-def login(data):
+def login(data, session: Session = Depends(get_session)):
     """
     Log the current user in.
     """
-    with get_session() as session:
-        user = session.query(User).filter_by(email=data.email).first()
+    user = session.query(User).filter_by(email=data.email).first()
     authenticated = (
         user is not None and 
         user.check_password(password=data.password)
@@ -31,7 +30,6 @@ def login(data):
 
 
 @auth_router.post("/logout", status_code=HTTPStatus.NO_CONTENT)
-@login_required
 def logout():
     """
     Log the current user out.
