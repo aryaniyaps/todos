@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import settings
@@ -10,7 +10,10 @@ def create_app() -> FastAPI:
 
     :return: The created app.
     """
-    app = FastAPI(debug=settings.DEBUG)
+    app = FastAPI(
+        root_path="/api", 
+        debug=settings.DEBUG,
+    )
     register_routes(app)
     register_middleware(app)
     return app
@@ -26,12 +29,9 @@ def register_routes(app: FastAPI) -> None:
     from app.routes.todos import todo_router
     from app.routes.users import user_router
 
-    app_router = APIRouter(prefix="/api")
-
-    app_router.include_router(auth_router)
-    app_router.include_router(todo_router)
-    app_router.include_router(user_router)
-    app.include_router(app_router)
+    app.include_router(auth_router)
+    app.include_router(todo_router)
+    app.include_router(user_router)
 
 
 def register_middleware(app: FastAPI) -> None:

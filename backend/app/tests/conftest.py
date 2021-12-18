@@ -2,7 +2,7 @@ from pytest import fixture
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from sqlalchemy.engine import Connection
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, scoped_session
 from sqlalchemy.orm.session import sessionmaker
 
 from app import create_app
@@ -49,10 +49,10 @@ def test_connection() -> Connection:
 
 @fixture(scope="session")
 def session_factory(test_connection: Connection) -> Session:
-    return sessionmaker(bind=test_connection)
+    return scoped_session(sessionmaker(test_connection))
 
 
-@fixture(autouse=True)
+@fixture()
 def session(session_factory: Session) -> Session:
     """
     Creates a session for testing.
@@ -60,13 +60,9 @@ def session(session_factory: Session) -> Session:
     :return: The created session.
     """
     session = session_factory()
-    try:
-        yield session
-    except Exception as err:
-        session.rollback()
-        raise err
-    finally:
-        session.close()
+    yield session
+    session.rollback()
+    session.close()
 
 
 @fixture()

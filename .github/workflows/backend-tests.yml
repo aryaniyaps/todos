@@ -20,8 +20,19 @@ jobs:
         working-directory: ./backend
     env:
       DEBUG: true
-      DATABASE_URL: "sqlite://"
+      DATABASE_URL: "mysql+mysqldb://todos:todos@127.0.0.1:3306/todos"
       MAIL_SUPPRESS_SEND: true
+
+    services:
+      mysql:
+        image: mysql:8
+        ports:
+          - "3306:3306"
+        env:
+          MYSQL_USER: "todos"
+          MYSQL_ROOT_PASSWORD: "todos"
+          MYSQL_PASSWORD: "todos"
+          MYSQL_DATABASE: "todos"
 
     steps:
       - name: Checkout Code
