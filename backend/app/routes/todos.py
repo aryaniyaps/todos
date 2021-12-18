@@ -12,7 +12,7 @@ from app.schemas.todos import TodoCreate, TodoUpdate
 todo_router = APIRouter(prefix="/todos")
 
 
-@todo_router.get("")
+@todo_router.get("", name="todos:read-all")
 def read_todos(current_user, session: Session = Depends(get_session), offset: int = 1, limit: int = 20):
     """
     Get the current user's todos.
@@ -22,7 +22,7 @@ def read_todos(current_user, session: Session = Depends(get_session), offset: in
     return todos
 
 
-@todo_router.post("", status_code=HTTPStatus.CREATED)
+@todo_router.post("", name="todos:create", status_code=HTTPStatus.CREATED)
 def create_todo(current_user, data: TodoCreate, session: Session = Depends(get_session)):
     """
     Create a new todo.
@@ -37,7 +37,7 @@ def create_todo(current_user, data: TodoCreate, session: Session = Depends(get_s
     return todo
 
 
-@todo_router.get("/{todo_id}")
+@todo_router.get("/{todo_id}", name="todos:read")
 def read_todo(current_user, todo_id: int, session: Session = Depends(get_session)):
     """
     Get a todo by ID.
@@ -54,7 +54,7 @@ def read_todo(current_user, todo_id: int, session: Session = Depends(get_session
     return todo
 
 
-@todo_router.patch("/{todo_id}")
+@todo_router.patch("/{todo_id}", name="todos:update")
 def update_todo(current_user, todo_id: int, data: TodoUpdate, session: Session = Depends(get_session)):
     """
     Update a todo by ID.
@@ -77,7 +77,7 @@ def update_todo(current_user, todo_id: int, data: TodoUpdate, session: Session =
     return todo
 
 
-@todo_router.delete("/{todo_id}", status_code=HTTPStatus.NO_CONTENT)
+@todo_router.delete("/{todo_id}", name="todos:delete", status_code=HTTPStatus.NO_CONTENT)
 def delete_todo(current_user, todo_id: int, session: Session = Depends(get_session)):
     """
     Delete a todo by ID.
@@ -95,7 +95,7 @@ def delete_todo(current_user, todo_id: int, session: Session = Depends(get_sessi
     session.commit()
 
 
-@todo_router.delete("", status_code=HTTPStatus.NO_CONTENT)
+@todo_router.delete("", name="todos:clear", status_code=HTTPStatus.NO_CONTENT)
 def clear_todos(current_user, session: Session = Depends(get_session)):
     """
     Clears the current user's todos.

@@ -10,7 +10,7 @@ from app.models.users import User
 auth_router = APIRouter(prefix="/auth")
 
 
-@auth_router.post("/login")
+@auth_router.post("/login", name="auth:login")
 def login(data, session: Session = Depends(get_session)):
     """
     Log the current user in.
@@ -29,7 +29,7 @@ def login(data, session: Session = Depends(get_session)):
     return user
 
 
-@auth_router.post("/logout", status_code=HTTPStatus.NO_CONTENT)
+@auth_router.post("/logout", name="auth:logout", status_code=HTTPStatus.NO_CONTENT)
 def logout():
     """
     Log the current user out.

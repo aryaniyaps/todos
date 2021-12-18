@@ -11,7 +11,7 @@ from app.schemas.users import UserCreate
 user_router = APIRouter(prefix="/users")
 
 
-@user_router.get("/me")
+@user_router.get("/me", name="users:current")
 def read_current_user(current_user):
     """
     Get the current user.
@@ -19,7 +19,7 @@ def read_current_user(current_user):
     return current_user
 
 
-@user_router.post("", status_code=HTTPStatus.CREATED)
+@user_router.post("", name="users:create", status_code=HTTPStatus.CREATED)
 def create_user(data: UserCreate, session: Session = Depends(get_session)):
     """
     Create a new user.

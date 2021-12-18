@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 
 from app import settings
 
@@ -10,29 +11,27 @@ def create_app() -> FastAPI:
     :return: The created app.
     """
     app = FastAPI(debug=settings.DEBUG)
+    register_routes(app)
     register_middleware(app)
-    register_blueprints(app)
     return app
 
 
-def register_blueprints(app: FastAPI) -> None:
+def register_routes(app: FastAPI) -> None:
     """
-    Registers blueprints for the app.
+    Registers routes for the app.
 
     :param app: The app instance.
     """
-    from app.routes.auth import auth_blueprint
-    from app.routes.todos import todo_blueprint
-    from app.routes.users import user_blueprint
+    from app.routes.auth import auth_router
+    from app.routes.todos import todo_router
+    from app.routes.users import user_router
 
-    app.blueprint(
-        Blueprint.group(
-            auth_blueprint,
-            todo_blueprint,
-            user_blueprint,
-            url_prefix="/api"
-        )
-    )
+    app_router = APIRouter(prefix="/api")
+
+    app_router.include_router(auth_router)
+    app_router.include_router(todo_router)
+    app_router.include_router(user_router)
+    app.include_router(app_router)
 
 
 def register_middleware(app: FastAPI) -> None:
@@ -41,11 +40,11 @@ def register_middleware(app: FastAPI) -> None:
 
     :param app: The app instance.
     """
-    from app.middleware.security import security_middleware
-
-    app.register_middleware(
-        middleware=security_middleware, 
-        attach_to="response"
+    app.add_middleware(
+        CORSMiddleware,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
 
 
