@@ -105,7 +105,6 @@ def clear_todos(
     """
     Clears the current user's todos.
     """
-    todos = session.query(Todo).filter_by(
-        user_id=current_user.id
-    )
+    todos = session.query(Todo)
+    todos.filter_by(user_id=current_user.id)
     todos.delete()
