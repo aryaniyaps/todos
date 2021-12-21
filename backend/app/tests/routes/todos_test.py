@@ -47,7 +47,7 @@ def test_create_todo(app: FastAPI, client: TestClient) -> None:
     assert response.status_code == HTTPStatus.CREATED
 
 
-def test_create_todos_unauthorized(app: FastAPI, client: TestClient) -> None:
+def test_create_todo_unauthorized(app: FastAPI, client: TestClient) -> None:
     """
     Ensure we cannot create a todo anonymously.
     """
