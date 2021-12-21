@@ -1,0 +1,16 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: todos-httpproxy
+spec:
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+        - name: todos-frontend
+          port: 3000
+      
+      - prefix: /api
+      services:
+        - name: todos-backend
+          port: 8080
