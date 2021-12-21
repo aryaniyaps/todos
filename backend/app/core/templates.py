@@ -1,9 +1,9 @@
 from jinja2 import Environment, PackageLoader
 
-from app import settings
+from app.config import DEBUG
 
 
 environment = Environment(
     loader=PackageLoader("app"), 
-    auto_reload=settings.DEBUG
+    auto_reload=DEBUG
 )

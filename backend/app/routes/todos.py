@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
@@ -12,11 +12,9 @@ from app.schemas.todos import TodoCreate, TodoUpdate
 todo_router = APIRouter(prefix="/todos")
 
 
-def get_todo(current_user, request: Request, session: Session = Depends(get_session)) -> Todo:
-    query = session.query(Todo).filter_by(
-        id=request.path_params.get("todo_id"), 
-        user_id=current_user.id
-    )
+def get_todo(current_user, todo_id: int, session: Session = Depends(get_session)) -> Todo:
+    query = session.query(Todo)
+    query.filter_by(id=todo_id, user_id=current_user.id)
     todo = query.first()
     if todo is None:
         raise HTTPException(

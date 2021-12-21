@@ -4,14 +4,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 
-from app import settings
+from app.config import DEBUG, DATABASE_URL
 
 Base = declarative_base()
 
 engine = create_engine(
     future=True,
-    url=settings.DATABASE_URL, 
-    echo=settings.DEBUG, 
+    url=DATABASE_URL, 
+    echo=DEBUG, 
 )
 
 session_factory = sessionmaker(bind=engine)

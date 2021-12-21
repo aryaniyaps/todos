@@ -1,6 +1,6 @@
 from celery import Celery
 
-from app import settings
+from app import config
 
 
 def create_worker() -> Celery:
@@ -9,12 +9,11 @@ def create_worker() -> Celery:
 
     :return: The created worker.
     """
-
     celery = Celery(
         main=__name__, 
         include=("app.tasks",)
     )
-    celery.config_from_object(settings)
+    celery.config_from_object(config)
     return celery
 
 

@@ -21,7 +21,6 @@ jobs:
     env:
       DEBUG: true
       DATABASE_URL: "mysql+mysqldb://todos:todos@127.0.0.1:3306/todos"
-      MAIL_SUPPRESS_SEND: true
 
     services:
       mysql:

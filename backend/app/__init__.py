@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app import settings
+from app.config import DEBUG
 
 
 def create_app() -> FastAPI:
@@ -12,7 +12,7 @@ def create_app() -> FastAPI:
     """
     app = FastAPI(
         root_path="/api", 
-        debug=settings.DEBUG,
+        debug=DEBUG,
     )
     register_routes(app)
     register_middleware(app)

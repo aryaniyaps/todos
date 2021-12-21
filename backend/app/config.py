@@ -12,9 +12,6 @@ PUBLIC_SITE_NAME = getenv("PUBLIC_SITE_NAME", default="Todos")
 # sqlalchemy database URL.
 DATABASE_URL = getenv("DATABASE_URL")
 
-# whether mail sending is disabled.
-MAIL_SUPPRESS_SEND = bool(getenv("MAIL_SUPPRESS_SEND", default=False))
-
 # mail server name.
 MAIL_SERVER = getenv("MAIL_SERVER", default="localhost")
 
@@ -29,6 +26,3 @@ MAIL_USERNAME = getenv("MAIL_USERNAME", default=None)
 
 # mail client auth password.
 MAIL_PASSWORD = getenv("MAIL_PASSWORD", default=None)
-
-# mail client sender address.
-MAIL_DEFAULT_SENDER = getenv("MAIL_DEFAULT_SENDER")
