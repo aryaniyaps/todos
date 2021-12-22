@@ -14,29 +14,14 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: todos-mysql-volume-claim
+  name: todos-mysql-claim
 spec:
-  storageClassName: manual
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 2Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: todos-mysql-volume
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,7 +42,7 @@ spec:
       volumes:
         - name: mysql-storage
           persistentVolumeClaim:
-            claimName: mysql-volume-claim
+            claimName: todos-mysql-claim
       containers:
         - name: todos-mysql
           image: mysql:8
