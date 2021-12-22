@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: todos-ingress
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: todos-frontend
+              portNumber: 3000
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: todos-backend
+              portNumber: 8080

@@ -5,12 +5,13 @@ name = "pypi"
 
 [packages]
 fastapi = ">=0.70"
+starlette = ">=0.16"
 jinja2 = ">=3.0"
 alembic = ">=1.7"
 pydantic = {version=">=1.8", extras=["email"]}
 sqlalchemy = {version=">=1.4", extras=["mysql"]}
-celery = {version=">=5.2", extras = ["redis"]}
-passlib = {version = ">=1.7", extras = ["argon2"]}
+celery = {version=">=5.2", extras=["redis"]}
+passlib = {version=">=1.7", extras=["argon2"]}
 uvicorn = ">=0.15"
 
 [dev-packages]

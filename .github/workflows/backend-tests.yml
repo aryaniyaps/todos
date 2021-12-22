@@ -21,6 +21,7 @@ jobs:
     env:
       DEBUG: true
       DATABASE_URL: "mysql+mysqldb://todos:todos@127.0.0.1:3306/todos"
+      SITE_NAME: "todos-tests"
 
     services:
       mysql:

@@ -1,0 +1,29 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: todos-worker
+spec:
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - image: <Image>
+        name: todos-worker
+        resources:
+          limits:
+            cpu: 300m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 50Mi
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+            configMapKeyRef:
+              name: todos-config
+              key: db_url

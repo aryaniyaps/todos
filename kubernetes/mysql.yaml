@@ -5,7 +5,9 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - port: 3306
+    - name: mysql
+      port: 3306
+      targetPort: 3306
   selector:
     app: mysql
 ---
@@ -52,21 +54,34 @@ spec:
       labels:
         app: mysql
     spec:
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-volume-claim
       containers:
         - name: todos-mysql
           image: mysql:8
           ports:
-            - containerPort: 3306
-              name: mysql
+            - name: mysql
+              containerPort: 3306              
           env:
             - name: MYSQL_DATABASE
-              value: todos
+              valueFrom:
+              configMapKeyRef:
+                name: todos-config
+                key: db_name
             - name: MYSQL_PASSWORD
-              value: todos
+              configMapKeyRef:
+                name: todos-config
+                key: db_password
             - name: MYSQL_ROOT_PASSWORD
-              value: todos
+              configMapKeyRef:
+                name: todos-config
+                key: db_root_password
             - name: MYSQL_USER
-              value: todos
+              configMapKeyRef:
+                name: todos-config
+                key: db_username
           resources:
             requests:
               memory: "500Mi"
@@ -75,10 +90,6 @@ spec:
               memory: "500Mi"
               cpu: "300m"
           volumeMounts:
-            - name: mysql-persistent-storage
+            - name: mysql-storage
               mountPath: /var/lib/mysql
       restartPolicy: Always
-      volumes:
-        - name: mysql-persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql-volume-claim

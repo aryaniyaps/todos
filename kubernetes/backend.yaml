@@ -5,7 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - protocol: "TCP"
+    - name: http
       port: 8080
       targetPort: 8080
   selector:
@@ -16,6 +16,7 @@ kind: Deployment
 metadata:
   name: todos-backend
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: backend
@@ -25,12 +26,19 @@ spec:
         app: backend
     spec:
       containers:
-        - name: todos-backend
-          image: <Image>
+        - image: <Image>
+          name: todos-backend
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
           ports:
-            - containerPort: 8080
+            - name: http 
+              containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+              configMapKeyRef:
+                name: todos-config
+                key: db_url
       restartPolicy: Always

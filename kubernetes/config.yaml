@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: todos-config-map
+  name: todos-config
 data:
-  db_port: "3306"
-  database: todos
-  db_user: todos
+  db_name: todos
+  db_root_password: todos
+  db_username: todos
   db_password: todos
   db_url: mysql+mysqldb://todos:todos@todos-mysql:3306/todos

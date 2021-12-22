@@ -1,28 +1,31 @@
 """
 Configuration options for development/ production.
 """
-from os import getenv
+from starlette.config import Config
+
+
+config = Config()
 
 # whether the app is in development.
-DEBUG = bool(getenv("DEBUG", default=False))
+DEBUG = config("DEBUG", cast=bool, default=False)
 
 # branding configuration.
-PUBLIC_SITE_NAME = getenv("PUBLIC_SITE_NAME", default="Todos")
+SITE_NAME = config("SITE_NAME", default="todos")
 
 # sqlalchemy database URL.
-DATABASE_URL = getenv("DATABASE_URL")
+DATABASE_URL = config("DATABASE_URL")
 
 # mail server name.
-MAIL_SERVER = getenv("MAIL_SERVER", default="localhost")
+MAIL_SERVER = config("MAIL_SERVER", default="localhost")
 
 # mail client port.
-MAIL_PORT = int(getenv("MAIL_PORT", default=25))
+MAIL_PORT = config("MAIL_PORT", cast=int, default=25)
 
 # whether the mail client should use tls.
-MAIL_USE_TLS = bool(getenv("MAIL_USE_TLS", default=True))
+MAIL_USE_TLS = config("MAIL_USE_TLS", cast=bool, default=True)
 
 # mail client auth username.
-MAIL_USERNAME = getenv("MAIL_USERNAME", default=None)
+MAIL_USERNAME = config("MAIL_USERNAME", default=None)
 
 # mail client auth password.
-MAIL_PASSWORD = getenv("MAIL_PASSWORD", default=None)
+MAIL_PASSWORD = config("MAIL_PASSWORD", default=None)

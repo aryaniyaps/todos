@@ -5,8 +5,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: "redis"
+    - name: redis
       port: 6397
+      targetPort: 6397
   selector:
     app: redis
 ---
@@ -31,10 +32,10 @@ spec:
             - containerPort: 6379
           resources:
             requests:
-              memory: "500Mi"
-              cpu: "300m"
+              memory: 256Mi
+              cpu: 125m
             limits:
-              memory: "500Mi"
-              cpu: "300m"
+              memory: 200Mi
+              cpu: 70m
       hostname: redis
       restartPolicy: Always

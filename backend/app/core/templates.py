@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader
 
-from app.config import DEBUG, PUBLIC_SITE_NAME
+from app.config import DEBUG, SITE_NAME
 
 
 environment = Environment(
@@ -9,5 +9,5 @@ environment = Environment(
 )
 
 environment.make_globals({
-    "site_name": PUBLIC_SITE_NAME
+    "site_name": SITE_NAME
 })

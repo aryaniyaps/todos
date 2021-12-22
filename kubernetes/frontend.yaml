@@ -5,7 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - protocol: "TCP"
+    - name: http
       port: 3000
       targetPort: 3000
   selector:
@@ -28,9 +28,13 @@ spec:
         - name: todos-frontend
           image: <Image>
           resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              cpu: 200m
+              memory: 128Mi
           ports:
-            - containerPort: 3000
+            - name: http
+              containerPort: 3000
       restartPolicy: Always
