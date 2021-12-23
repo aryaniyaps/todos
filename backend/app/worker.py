@@ -1,6 +1,10 @@
 from celery import Celery
 
-from app import config
+from app.config import (
+    CELERY_BROKER_URL, 
+    CELERY_RESULT_BACKEND, 
+    CELERY_RESULT_EXPIRES
+)
 
 
 def create_worker() -> Celery:
@@ -13,7 +17,11 @@ def create_worker() -> Celery:
         main=__name__, 
         include=("app.tasks",)
     )
-    celery.config_from_object(config)
+    celery.conf.update(
+        broker_url=CELERY_BROKER_URL,
+        result_expires=CELERY_RESULT_EXPIRES,
+        result_backend=CELERY_RESULT_BACKEND,
+    )
     return celery
 
 
