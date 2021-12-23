@@ -11,6 +11,7 @@ def create_app() -> FastAPI:
     :return: The created app.
     """
     app = FastAPI(
+        title="Todos",
         root_path="/api", 
         debug=DEBUG,
     )
