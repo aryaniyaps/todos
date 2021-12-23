@@ -41,4 +41,19 @@ spec:
               configMapKeyRef:
                 name: todos-config
                 key: db_url
+            - name: CELERY_BROKER_URL
+            valueFrom:
+            configMapKeyRef:
+              name: todos-config
+              key: celery_broker_url
+          - name: CELERY_RESULT_BACKEND
+            valueFrom:
+            configMapKeyRef:
+              name: todos-config
+              key: celery_result_backend
+          - name: CELERY_RESULT_EXPIRES
+            valueFrom:
+            configMapKeyRef:
+              name: todos-config
+              key: celery_result_expires
       restartPolicy: Always
