@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos-kibana
+  namespace: logging
+  labels:
+    app: kibana
+spec:
+  ports:
+  - name: kibana
+    targetPort: kibana
+    port: 5601
+  selector:
+    app: kibana
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-kibana
+  namespace: logging
+  labels:
+    app: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - name: todos-kibana
+        image: kibana:7.16.2
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        env:
+          - name: ELASTICSEARCH_URL
+            value: http://elasticsearch:9200
+        ports:
+        - name: kibana
+          containerPort: 5601

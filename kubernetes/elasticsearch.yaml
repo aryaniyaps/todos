@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos-elasticsearch
+  namespace: logging
+  labels:
+    app: elasticsearch
+spec:
+  selector:
+    app: elasticsearch
+  clusterIP: None
+  ports:
+    - port: 9200
+      name: rest
+    - port: 9300
+      name: inter-node
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: todos-elasticsearch-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 25Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todos-elasticsearch
+  namespace: logging
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: todos-elasticsearch
+        image: elasticsearch:7.16.2
+        ports:
+        - name: rest
+          containerPort: 9200
+        - name: inter-node
+          containerPort: 9300
+        volumeMounts:
+        - name: elasticsearch-storage
+          mountPath: /usr/share/elasticsearch/data
+        env:
+          - name: cluster.name
+            value: todos-logs
+          - name: node.name
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+      volumes:
+        - name: elasticsearch-storage
+          persistentVolumeClaim:
+            claimName: todos-elasticsearch-claim

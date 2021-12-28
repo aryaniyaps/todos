@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: todos-fluentd
+  namespace: logging
+  labels:
+    app: fluentd
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: fluentd
+    spec:
+      containers:
+      - name: todos-fluentd
+        image: fluent/fluentd-kubernetes-daemonset:v1-debian-elasticsearch
+        env:
+          - name: FLUENT_ELASTICSEARCH_HOST
+            value: "elasticsearch.logging.svc.cluster.local"
+          - name: FLUENT_ELASTICSEARCH_PORT
+            value: "9200"
+          - name: FLUENT_ELASTICSEARCH_SCHEME
+            value: "http"
+          - name: FLUENTD_SYSTEMD_CONF
+            value: disable
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: dockerlogs
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      termination:
+        gracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: dockerlogs
+        hostPath:
+          path: /var/lib/docker/containers

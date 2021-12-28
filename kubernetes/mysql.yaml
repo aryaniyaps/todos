@@ -16,12 +16,11 @@ kind: PersistentVolumeClaim
 metadata:
   name: todos-mysql-claim
 spec:
-  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 15Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
