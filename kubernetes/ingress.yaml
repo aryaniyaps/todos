@@ -13,10 +13,10 @@ spec:
           backend:
             service:
               name: todos-frontend
-              portNumber: 3000
+              portName: http
         - path: /api
           pathType: Prefix
           backend:
             service:
               name: todos-backend
-              portNumber: 8080
+              portName: http
