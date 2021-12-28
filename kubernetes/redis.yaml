@@ -44,3 +44,11 @@ spec:
               port: redis
             initialDelaySeconds: 5
             periodSeconds: 15
+      affinity:
+        podAntiAffinity:
+          requiredDuringScheduling:
+            ignoredDuringExecution:
+              - labelSelector:
+                  matchLabels:
+                    app: redis
+                topologyKey: "kubernetes.io/hostname"

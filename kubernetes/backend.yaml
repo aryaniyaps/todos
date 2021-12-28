@@ -64,3 +64,11 @@ spec:
               port: http
             initialDelaySeconds: 5
             periodSeconds: 15
+      affinity:
+        podAntiAffinity:
+          requiredDuringScheduling:
+            ignoredDuringExecution:
+              - labelSelector:
+                  matchLabels:
+                    app: backend
+                topologyKey: "kubernetes.io/hostname"

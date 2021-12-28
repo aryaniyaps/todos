@@ -83,3 +83,11 @@ spec:
         - name: mysql-storage
           persistentVolumeClaim:
             claimName: todos-mysql-claim
+      affinity:
+        podAntiAffinity:
+          requiredDuringScheduling:
+            ignoredDuringExecution:
+              - labelSelector:
+                  matchLabels:
+                    app: mysql
+                topologyKey: "kubernetes.io/hostname"

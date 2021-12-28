@@ -49,3 +49,11 @@ spec:
               command: []
             initialDelaySeconds: 5
             periodSeconds: 15
+      affinity:
+        podAntiAffinity:
+          requiredDuringScheduling:
+            ignoredDuringExecution:
+              - labelSelector:
+                  matchLabels:
+                    app: worker
+                topologyKey: "kubernetes.io/hostname"
