@@ -6,8 +6,8 @@ spec:
   clusterIP: None
   ports:
     - name: mysql
-      port: 3306
       targetPort: mysql
+      port: 3306
   selector:
     app: mysql
 ---
