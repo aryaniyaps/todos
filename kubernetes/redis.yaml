@@ -7,7 +7,7 @@ spec:
   ports:
     - name: redis
       port: 6397
-      targetPort: 6397
+      targetPort: redis
   selector:
     app: redis
 ---
@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: todos-redis
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: redis
@@ -25,11 +25,13 @@ spec:
       labels:
         app: redis
     spec:
+      restartPolicy: Always
       containers:
         - name: todos-redis
           image: redis:6.2-alpine
           ports:
-            - containerPort: 6379
+            - name: redis
+              containerPort: 6379
           resources:
             requests:
               memory: 256Mi
@@ -37,5 +39,8 @@ spec:
             limits:
               memory: 200Mi
               cpu: 70m
-      hostname: redis
-      restartPolicy: Always
+          livenessProbe:
+            tcpSocket:
+              port: redis
+            initialDelaySeconds: 5
+            periodSeconds: 15

@@ -1,8 +1,9 @@
-kind: DaemonSet
+kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: todos-worker
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: worker
@@ -14,13 +15,7 @@ spec:
       containers:
       - image: <Image>
         name: todos-worker
-        resources:
-          limits:
-            cpu: 300m
-            memory: 100Mi
-          requests:
-            cpu: 100m
-            memory: 50Mi
+        args: []
         env:
           - name: DATABASE_URL
             valueFrom:
@@ -42,3 +37,15 @@ spec:
             configMapKeyRef:
               name: todos-config
               key: celery_result_expires
+        resources:
+          limits:
+            cpu: 300m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 50Mi
+        livenessProbe:
+            exec:
+              command: []
+            initialDelaySeconds: 5
+            periodSeconds: 15

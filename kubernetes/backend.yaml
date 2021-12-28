@@ -7,7 +7,7 @@ spec:
   ports:
     - name: http
       port: 8080
-      targetPort: 8080
+      targetPort: http
   selector:
     app: backend
 ---
@@ -25,13 +25,11 @@ spec:
       labels:
         app: backend
     spec:
+      restartPolicy: Always
       containers:
         - image: <Image>
           name: todos-backend
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+          args: []
           ports:
             - name: http 
               containerPort: 8080
@@ -56,4 +54,13 @@ spec:
             configMapKeyRef:
               name: todos-config
               key: celery_result_expires
-      restartPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15

@@ -7,7 +7,7 @@ spec:
   ports:
     - name: mysql
       port: 3306
-      targetPort: 3306
+      targetPort: mysql
   selector:
     app: mysql
 ---
@@ -28,7 +28,7 @@ kind: Deployment
 metadata:
   name: todos-mysql
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: mysql
@@ -39,10 +39,7 @@ spec:
       labels:
         app: mysql
     spec:
-      volumes:
-        - name: mysql-storage
-          persistentVolumeClaim:
-            claimName: todos-mysql-claim
+      restartPolicy: Always
       containers:
         - name: todos-mysql
           image: mysql:8
@@ -74,7 +71,15 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "300m"
+          livenessProbe:
+            tcpSocket:
+              port: mysql
+            initialDelaySeconds: 5
+            periodSeconds: 15
           volumeMounts:
             - name: mysql-storage
               mountPath: /var/lib/mysql
-      restartPolicy: Always
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: todos-mysql-claim
