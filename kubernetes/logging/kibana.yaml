@@ -21,7 +21,7 @@ metadata:
   labels:
     app: kibana
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kibana
@@ -33,14 +33,14 @@ spec:
       containers:
       - name: todos-kibana
         image: kibana:7.16.2
+        ports:
+        - name: kibana
+          containerPort: 5601
+        env:
+          - name: ELASTICSEARCH_URL
+            value: http://elasticsearch:9200
         resources:
           limits:
             cpu: 1000m
           requests:
             cpu: 100m
-        env:
-          - name: ELASTICSEARCH_URL
-            value: http://elasticsearch:9200
-        ports:
-        - name: kibana
-          containerPort: 5601

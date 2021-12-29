@@ -30,7 +30,7 @@ def register_routes(app: FastAPI) -> None:
     from app.routes.todos import todo_router
     from app.routes.users import user_router
 
-    @app.get("/health")
+    @app.get("/status")
     def check_health():
         """
         Check whether the app is healthy.
