@@ -2,9 +2,8 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, Request
 from fastapi.exceptions import HTTPException
-from sqlalchemy.orm import Session
 
-from app.core.database import get_session
+from app.api.dependencies import get_service, get_current_user
 from app.models.users import User
 from app.schemas.auth import Login
 from app.services.users import UserService
@@ -13,11 +12,15 @@ auth_router = APIRouter(prefix="/auth")
 
 
 @auth_router.post("/login", name="auth:login")
-def login(request: Request, data: Login, session: Session = Depends(get_session)):
+def login(
+    request: Request, 
+    data: Login, 
+    user_service: UserService = Depends(get_service(UserService))
+):
     """
     Log the current user in.
     """
-    user = UserService(session).user_by_email(email=data.email)
+    user = user_service.user_by_email(email=data.email)
     authenticated = user is not None and user.check_password(password=data.password)
     if not authenticated:
         raise HTTPException(
@@ -29,7 +32,7 @@ def login(request: Request, data: Login, session: Session = Depends(get_session)
 
 
 @auth_router.post("/logout", name="auth:logout", status_code=HTTPStatus.NO_CONTENT)
-def logout(request: Request, current_user: User):
+def logout(request: Request, current_user: User = Depends(get_current_user)):
     """
     Log the current user out.
     """

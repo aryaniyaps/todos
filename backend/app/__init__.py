@@ -26,9 +26,9 @@ def register_routes(app: FastAPI) -> None:
 
     :param app: The app instance.
     """
-    from app.routes.auth import auth_router
-    from app.routes.todos import todo_router
-    from app.routes.users import user_router
+    from app.api.routes.auth import auth_router
+    from app.api.routes.todos import todo_router
+    from app.api.routes.users import user_router
 
     @app.get("/status", name="status")
     def check_status():

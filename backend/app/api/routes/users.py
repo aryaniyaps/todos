@@ -2,9 +2,8 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
-from sqlalchemy.orm import Session
 
-from app.core.database import get_session
+from app.api.dependencies import get_service
 from app.models.users import User
 from app.schemas.users import UserCreate
 from app.services.users import UserService
@@ -21,13 +20,16 @@ def read_current_user(current_user: User):
 
 
 @user_router.post("", name="users:create", status_code=HTTPStatus.CREATED)
-def create_user(data: UserCreate, session: Session = Depends(get_session)):
+def create_user(
+    data: UserCreate, 
+    user_service: UserService = Depends(get_service(UserService))
+):
     """
     Create a new user.
     """
-    user = UserService(session).user_by_email(email=data.email)
+    user = user_service.user_by_email(email=data.email)
     if user is not None:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST, detail="User with email already exists."
         )
-    return UserService(session).create_user(email=data.email, password=data.password)
+    return user_service.create_user(email=data.email, password=data.password)
