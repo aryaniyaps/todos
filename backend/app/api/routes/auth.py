@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
 
 from app.api.dependencies import get_service, get_current_user
@@ -13,9 +13,12 @@ auth_router = APIRouter(prefix="/auth")
 
 @auth_router.post("/login", name="auth:login")
 def login(
-    request: Request, 
     data: Login, 
-    user_service: UserService = Depends(get_service(UserService))
+    user_service: UserService = Depends(
+        dependency=get_service(
+            service=UserService,
+        ),
+    ),
 ):
     """
     Log the current user in.
@@ -27,13 +30,18 @@ def login(
             status_code=HTTPStatus.BAD_REQUEST,
             detail="Incorrect email/ password provided.",
         )
-    request.session["user_id"] = user.id
+    # TODO: login user here.
     return user
 
 
 @auth_router.post("/logout", name="auth:logout", status_code=HTTPStatus.NO_CONTENT)
-def logout(request: Request, current_user: User = Depends(get_current_user)):
+def logout(
+    current_user: User = Depends(
+        dependency=get_current_user,
+    ),
+):
     """
     Log the current user out.
     """
-    del request.session["user_id"]
+    # TODO: logout user here.
+    pass

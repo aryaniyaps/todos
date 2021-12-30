@@ -13,8 +13,14 @@ todo_router = APIRouter(prefix="/todos")
 
 @todo_router.get("", name="todos:read-all")
 def read_todos(
-    current_user: User = Depends(get_current_user), 
-    todo_service: TodoService = Depends(get_service(TodoService))
+    current_user: User = Depends(
+        dependency=get_current_user
+    ), 
+    todo_service: TodoService = Depends(
+        dependency=get_service(
+            service=TodoService,
+        ),
+    ),
 ):
     """
     Get the current user's todos.
@@ -25,8 +31,14 @@ def read_todos(
 @todo_router.post("", name="todos:create", status_code=HTTPStatus.CREATED)
 def create_todo(
     data: TodoCreate, 
-    current_user: User = Depends(get_current_user), 
-    todo_service: TodoService = Depends(get_service(TodoService))
+    current_user: User = Depends(
+        dependency=get_current_user
+    ), 
+    todo_service: TodoService = Depends(
+        dependency=get_service(
+            service=TodoService,
+        ),
+    ),
 ):
     """
     Create a new todo.
@@ -39,7 +51,7 @@ def create_todo(
 
 
 @todo_router.get("/{todo_id}", name="todos:read")
-def read_todo(todo: Todo = Depends(get_todo)):
+def read_todo(todo: Todo = Depends(dependency=get_todo)):
     """
     Get a todo by ID.
     """
@@ -49,8 +61,12 @@ def read_todo(todo: Todo = Depends(get_todo)):
 @todo_router.patch("/{todo_id}", name="todos:update")
 def update_todo(
     data: TodoUpdate,
-    todo: Todo = Depends(get_todo),
-    todo_service: TodoService = Depends(get_service(TodoService))
+    todo: Todo = Depends(dependency=get_todo),
+    todo_service: TodoService = Depends(
+        dependency=get_service(
+            service=TodoService,
+        ),
+    ),
 ):
     """
     Update a todo by ID.
@@ -66,8 +82,12 @@ def update_todo(
     status_code=HTTPStatus.NO_CONTENT,
 )
 def delete_todo(
-    todo: Todo = Depends(get_todo), 
-    todo_service: TodoService = Depends(get_service(TodoService))
+    todo: Todo = Depends(dependency=get_todo), 
+    todo_service: TodoService = Depends(
+        dependency=get_service(
+            service=TodoService,
+        ),
+    ),
 ):
     """
     Delete a todo by ID.
@@ -77,8 +97,14 @@ def delete_todo(
 
 @todo_router.delete("", name="todos:clear", status_code=HTTPStatus.NO_CONTENT)
 def clear_todos(
-    current_user: User = Depends(get_current_user), 
-    todo_service: TodoService = Depends(get_service(TodoService))
+    current_user: User = Depends(
+        dependency=get_current_user
+    ), 
+    todo_service: TodoService = Depends(
+        dependency=get_service(
+            service=TodoService,
+        ),
+    ),
 ):
     """
     Clears the current user's todos.

@@ -3,7 +3,7 @@ from http import HTTPStatus
 from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
 
-from app.api.dependencies import get_service
+from app.api.dependencies import get_service, get_current_user
 from app.models.users import User
 from app.schemas.users import UserCreate
 from app.services.users import UserService
@@ -12,7 +12,11 @@ user_router = APIRouter(prefix="/users")
 
 
 @user_router.get("/me", name="users:current")
-def read_current_user(current_user: User):
+def read_current_user(
+    current_user: User = Depends(
+        dependency=get_current_user,
+    ),
+):
     """
     Get the current user.
     """
@@ -22,7 +26,11 @@ def read_current_user(current_user: User):
 @user_router.post("", name="users:create", status_code=HTTPStatus.CREATED)
 def create_user(
     data: UserCreate, 
-    user_service: UserService = Depends(get_service(UserService))
+    user_service: UserService = Depends(
+        dependency=get_service(
+            service=UserService,
+        ),
+    ),
 ):
     """
     Create a new user.
@@ -30,6 +38,10 @@ def create_user(
     user = user_service.user_by_email(email=data.email)
     if user is not None:
         raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST, detail="User with email already exists."
+            status_code=HTTPStatus.BAD_REQUEST, 
+            detail="User with email already exists.",
         )
-    return user_service.create_user(email=data.email, password=data.password)
+    return user_service.create_user(
+        email=data.email, 
+        password=data.password,
+    )
