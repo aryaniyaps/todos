@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Generator, Type
+from typing import Callable, Generator, Type
 
 from fastapi import Depends
 from fastapi.exceptions import HTTPException
@@ -13,11 +13,6 @@ from backend.app.services.todos import TodoService
 
 
 def get_session() -> Generator[Session, None, None]:
-    """
-    Gets a session instance.
-
-    :return: the obtained session.
-    """
     session = session_factory()
     try:
         yield session
@@ -28,8 +23,16 @@ def get_session() -> Generator[Session, None, None]:
         session.close()
 
 
-def get_service(service: Type[BaseService]):
-    pass
+def get_service(
+    service: Type[BaseService],
+) -> Callable[[Session], BaseService]:
+    def service_initializer(
+        session: Session = Depends(
+            dependency=get_session,
+        ),
+    ) -> BaseService:
+        return service(session=session)
+    return service_initializer
 
 
 def get_current_user() -> User:
@@ -38,10 +41,19 @@ def get_current_user() -> User:
 
 def get_todo(
     todo_id: int, 
-    current_user: User = Depends(get_current_user), 
-    todo_service: TodoService = Depends(get_service(TodoService))
+    current_user: User = Depends(
+        dependency=get_current_user,
+    ), 
+    todo_service: TodoService = Depends(
+        dependency=get_service(
+            service=TodoService,
+        ),
+    ),
 ) -> Todo:
-    todo = todo_service.get_todo(todo_id=todo_id, user_id=current_user.id)
+    todo = todo_service.get_todo(
+        todo_id=todo_id, 
+        user_id=current_user.id,
+    )
     if todo is None:
         raise HTTPException(
             status_code=HTTPStatus.NOT_FOUND,
