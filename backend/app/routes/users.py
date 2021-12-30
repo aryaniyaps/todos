@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_session
 from app.models.users import User
+from app.services.users import UserService
 from app.schemas.users import UserCreate
 
 
@@ -12,7 +13,7 @@ user_router = APIRouter(prefix="/users")
 
 
 @user_router.get("/me", name="users:current")
-def read_current_user(current_user):
+def read_current_user(current_user: User):
     """
     Get the current user.
     """
@@ -24,7 +25,7 @@ def create_user(data: UserCreate, session: Session = Depends(get_session)):
     """
     Create a new user.
     """
-    user = session.query(User).filter_by(email=data.email).first()
+    user = UserService(session).user_by_email(email=data.email)
     if user is not None:
         errors = {
             "errors": {
@@ -32,8 +33,7 @@ def create_user(data: UserCreate, session: Session = Depends(get_session)):
             }
         }
         return errors, HTTPStatus.BAD_REQUEST
-    user = User(email=data.email)
-    user.set_password(password=data.password)
-    session.add(user)
-    session.commit()
-    return user
+    return UserService(session).create_user(
+        email=data.email, 
+        password=data.password
+    )

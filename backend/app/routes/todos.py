@@ -5,17 +5,20 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
 from app.core.database import get_session
+from app.services.todos import TodoService
 from app.models.todos import Todo
+from app.models.users import User
 from app.schemas.todos import TodoCreate, TodoUpdate
 
 
 todo_router = APIRouter(prefix="/todos")
 
 
-def get_todo(current_user, todo_id: int, session: Session = Depends(get_session)) -> Todo:
-    query = session.query(Todo)
-    query.filter_by(id=todo_id, user_id=current_user.id)
-    todo = query.first()
+def get_todo(current_user: User, todo_id: int, session: Session = Depends(get_session)) -> Todo:
+    todo = TodoService(session).get_todo(
+        todo_id=todo_id, 
+        user_id=current_user.id
+    )
     if todo is None:
         raise HTTPException(
             status_code=HTTPStatus.NOT_FOUND, 
@@ -27,36 +30,29 @@ def get_todo(current_user, todo_id: int, session: Session = Depends(get_session)
 
 @todo_router.get("", name="todos:read-all")
 def read_todos(
-    current_user, 
-    session: Session = Depends(get_session), 
-    offset: int = 1, 
-    limit: int = 20
+    current_user: User, 
+    session: Session = Depends(get_session)
 ):
     """
     Get the current user's todos.
     """
-    todos = session.query(Todo).filter_by(user_id=current_user.id)
-    todos.offset(offset).limit(limit)
-    return todos
+    return TodoService(session).get_todos(user_id=current_user.id)
 
 
 @todo_router.post("", name="todos:create", status_code=HTTPStatus.CREATED)
 def create_todo(
-    current_user, 
+    current_user: User, 
     data: TodoCreate, 
     session: Session = Depends(get_session)
 ):
     """
     Create a new todo.
     """
-    todo = Todo(
-        content=data.content, 
+    return TodoService(session).create_todo(
+        content=data.content,
         completed=data.completed,
         user_id=current_user.id
     )
-    session.add(todo)
-    session.commit()
-    return todo
 
 
 @todo_router.get("/{todo_id}", name="todos:read")
@@ -76,13 +72,11 @@ def update_todo(
     """
     Update a todo by ID.
     """
-    if data.content is not None:
-        todo.content = data.content
-    if data.completed is not None:
-        todo.completed = data.completed
-    session.add(todo)
-    session.commit()
-    return todo
+    return TodoService(session).update_todo(
+        todo=todo,
+        completed=data.completed,
+        content=data.content
+    )
 
 
 @todo_router.delete("/{todo_id}", name="todos:delete", status_code=HTTPStatus.NO_CONTENT)
@@ -93,18 +87,15 @@ def delete_todo(
     """
     Delete a todo by ID.
     """
-    session.delete(todo)
-    session.commit()
+    TodoService(session).delete_todo(todo=todo)
 
 
 @todo_router.delete("", name="todos:clear", status_code=HTTPStatus.NO_CONTENT)
 def clear_todos(
-    current_user, 
+    current_user: User, 
     session: Session = Depends(get_session)
 ):
     """
     Clears the current user's todos.
     """
-    todos = session.query(Todo)
-    todos.filter_by(user_id=current_user.id)
-    todos.delete()
+    TodoService(session).clear_todos(user_id=current_user.id)
