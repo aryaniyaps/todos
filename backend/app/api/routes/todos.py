@@ -6,13 +6,17 @@ from fastapi import APIRouter, Depends
 from app.api.dependencies import get_service, get_todo, get_current_user
 from app.models.todos import Todo
 from app.models.users import User
-from app.schemas.todos import TodoCreate, TodoUpdate
+from app.schemas.todos import TodoSchema, TodoCreateSchema, TodoUpdateSchema
 from app.services.todos import TodoService
 
 todo_router = APIRouter(prefix="/todos")
 
 
-@todo_router.get(path="", name="todos:read-all")
+@todo_router.get(
+    path="", 
+    name="todos:read-all", 
+    response_model=List[TodoSchema],
+)
 def read_todos(
     current_user: User = Depends(
         dependency=get_current_user
@@ -29,9 +33,14 @@ def read_todos(
     return todo_service.get_todos(user_id=current_user.id)
 
 
-@todo_router.post(path="", name="todos:create", status_code=HTTPStatus.CREATED)
+@todo_router.post(
+    path="",
+    name="todos:create", 
+    status_code=HTTPStatus.CREATED,
+    response_model=TodoSchema, 
+)
 def create_todo(
-    data: TodoCreate, 
+    data: TodoCreateSchema, 
     current_user: User = Depends(
         dependency=get_current_user
     ), 
@@ -51,7 +60,11 @@ def create_todo(
     )
 
 
-@todo_router.get(path="/{todo_id}", name="todos:read")
+@todo_router.get(
+    path="/{todo_id}", 
+    name="todos:read", 
+    response_model=TodoSchema,
+)
 def read_todo(
     todo: Todo = Depends(
         dependency=get_todo,
@@ -63,9 +76,13 @@ def read_todo(
     return todo
 
 
-@todo_router.patch(path="/{todo_id}", name="todos:update")
+@todo_router.patch(
+    path="/{todo_id}", 
+    name="todos:update", 
+    response_model=TodoSchema,
+)
 def update_todo(
-    data: TodoUpdate,
+    data: TodoUpdateSchema,
     todo: Todo = Depends(
         dependency=get_todo,
     ),
@@ -87,7 +104,7 @@ def update_todo(
 
 @todo_router.delete(
     path="/{todo_id}", 
-    name="todos:delete", 
+    name="todos:delete",
     status_code=HTTPStatus.NO_CONTENT,
 )
 def delete_todo(
@@ -106,7 +123,11 @@ def delete_todo(
     todo_service.delete_todo(todo=todo)
 
 
-@todo_router.delete(path="", name="todos:clear", status_code=HTTPStatus.NO_CONTENT)
+@todo_router.delete(
+    path="", 
+    name="todos:clear", 
+    status_code=HTTPStatus.NO_CONTENT,
+)
 def clear_todos(
     current_user: User = Depends(
         dependency=get_current_user

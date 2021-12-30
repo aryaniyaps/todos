@@ -5,7 +5,7 @@ from fastapi.exceptions import HTTPException
 
 from app.api.dependencies import get_service, get_current_user
 from app.models.users import User
-from app.schemas.auth import Login
+from app.schemas.auth import LoginSchema
 from app.services.users import UserService
 
 auth_router = APIRouter(prefix="/auth")
@@ -13,7 +13,7 @@ auth_router = APIRouter(prefix="/auth")
 
 @auth_router.post(path="/login", name="auth:login")
 def login(
-    data: Login, 
+    data: LoginSchema, 
     user_service: UserService = Depends(
         dependency=get_service(
             service=UserService,

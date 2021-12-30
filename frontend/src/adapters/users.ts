@@ -1,7 +1,7 @@
 import client from "../lib/httpClient";
 
 const fetchCurrentUser = async () => {
-    return await client.get("/users/me");
+    return await client.get("/users/@me");
 };
 
 const createUser = async (data: { email: string; password: string }) => {

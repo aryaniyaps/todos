@@ -4,25 +4,22 @@ from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 
-class UserBase(BaseModel):
-    email: Optional[EmailStr]
+class UserCreateSchema(BaseModel):
+    email: EmailStr
+    password: str
     completed: Optional[bool] = False
 
-
-class UserCreate(UserBase):
-    email: EmailStr
-    password: str
+    class Config:
+        title = "UserCreate"
 
 
-class UserUpdate(UserBase):
-    password: str
-
-
-class User(UserBase):
+class UserSchema(BaseModel):
     id: int
     email: EmailStr
+    completed: bool = False
     created_at: datetime
     updated_at: datetime
 
     class Config:
+        title = "User"
         orm_mode = True

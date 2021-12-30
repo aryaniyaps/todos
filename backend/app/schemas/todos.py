@@ -4,20 +4,24 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class TodoBase(BaseModel):
+class TodoCreateSchema(BaseModel):
+    content: str
     content: Optional[str] = None
     completed: Optional[bool] = False
 
-
-class TodoCreate(TodoBase):
-    content: str
-
-
-class TodoUpdate(TodoBase):
-    pass
+    class Config:
+        title = "TodoCreate"
 
 
-class Todo(TodoBase):
+class TodoUpdateSchema(BaseModel):
+    content: Optional[str] = None
+    completed: Optional[bool] = False
+
+    class Config:
+        title = "TodoUpdate"
+
+
+class TodoSchema(BaseModel):
     id: int
     completed: bool
     content: str
@@ -25,4 +29,5 @@ class Todo(TodoBase):
     updated_at: datetime
 
     class Config:
+        title = "Todo"
         orm_mode = True
