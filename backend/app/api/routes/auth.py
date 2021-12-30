@@ -11,7 +11,7 @@ from app.services.users import UserService
 auth_router = APIRouter(prefix="/auth")
 
 
-@auth_router.post("/login", name="auth:login")
+@auth_router.post(path="/login", name="auth:login")
 def login(
     data: Login, 
     user_service: UserService = Depends(
@@ -19,7 +19,7 @@ def login(
             service=UserService,
         ),
     ),
-):
+) -> User:
     """
     Log the current user in.
     """
@@ -34,12 +34,12 @@ def login(
     return user
 
 
-@auth_router.post("/logout", name="auth:logout", status_code=HTTPStatus.NO_CONTENT)
+@auth_router.post(path="/logout", name="auth:logout", status_code=HTTPStatus.NO_CONTENT)
 def logout(
     current_user: User = Depends(
         dependency=get_current_user,
     ),
-):
+) -> None:
     """
     Log the current user out.
     """

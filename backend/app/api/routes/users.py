@@ -11,19 +11,19 @@ from app.services.users import UserService
 user_router = APIRouter(prefix="/users")
 
 
-@user_router.get("/me", name="users:current")
+@user_router.get(path="/me", name="users:current")
 def read_current_user(
     current_user: User = Depends(
         dependency=get_current_user,
     ),
-):
+)-> User:
     """
     Get the current user.
     """
     return current_user
 
 
-@user_router.post("", name="users:create", status_code=HTTPStatus.CREATED)
+@user_router.post(path="", name="users:create", status_code=HTTPStatus.CREATED)
 def create_user(
     data: UserCreate, 
     user_service: UserService = Depends(
@@ -31,7 +31,7 @@ def create_user(
             service=UserService,
         ),
     ),
-):
+) -> User:
     """
     Create a new user.
     """
