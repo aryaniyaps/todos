@@ -72,7 +72,9 @@ def update_todo(
     Update a todo by ID.
     """
     return todo_service.update_todo(
-        todo=todo, completed=data.completed, content=data.content
+        todo=todo, 
+        completed=data.completed, 
+        content=data.content,
     )
 
 
