@@ -1,4 +1,4 @@
-from factory import Sequence, Factory, SubFactory, PostGenerationMethodCall
+from factory import Factory, PostGenerationMethodCall, Sequence, SubFactory
 
 from app.models.todos import Todo
 from app.models.users import User

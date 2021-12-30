@@ -11,7 +11,7 @@ from app import create_app
 from app.core.database import Base, engine
 from app.models.todos import Todo
 from app.models.users import User
-from app.tests.factories import UserFactory, TodoFactory
+from app.tests.factories import TodoFactory, UserFactory
 
 
 @fixture(scope="session")

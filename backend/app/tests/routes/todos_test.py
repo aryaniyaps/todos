@@ -72,7 +72,9 @@ def test_read_todo_unauthorized(app: FastAPI, client: TestClient, todo: Todo) ->
     assert response.status_code == HTTPStatus.UNAUTHORIZED
 
 
-def test_read_foreign_todo(app: FastAPI, client: TestClient, foreign_todo: Todo) -> None:
+def test_read_foreign_todo(
+    app: FastAPI, client: TestClient, foreign_todo: Todo
+) -> None:
     """
     Ensure we cannot read a todo we don't own.
     """
@@ -85,7 +87,9 @@ def test_update_todo(app: FastAPI, client: TestClient, todo: Todo) -> None:
     Ensure we can update a todo.
     """
     data = {"content": "sample content", "completed": True}
-    response = client.patch(app.url_path_for("todos:update", todo_id=todo.id), json=data)
+    response = client.patch(
+        app.url_path_for("todos:update", todo_id=todo.id), json=data
+    )
     assert response.status_code == HTTPStatus.OK
 
 
@@ -94,16 +98,22 @@ def test_update_todo_unauthorized(app: FastAPI, client: TestClient, todo: Todo) 
     Ensure we cannot update a todo anonymously.
     """
     data = {"content": "sample content", "completed": True}
-    response = client.patch(app.url_path_for("todos:update", todo_id=todo.id), json=data)
+    response = client.patch(
+        app.url_path_for("todos:update", todo_id=todo.id), json=data
+    )
     assert response.status_code == HTTPStatus.UNAUTHORIZED
 
 
-def test_update_foreign_todo(app: FastAPI, client: TestClient, foreign_todo: Todo) -> None:
+def test_update_foreign_todo(
+    app: FastAPI, client: TestClient, foreign_todo: Todo
+) -> None:
     """
     Ensure we cannot update a todo we don't own.
     """
     data = {"content": "sample content", "completed": True}
-    response = client.patch(app.url_path_for("todos:update", todo_id=foreign_todo.id), json=data)
+    response = client.patch(
+        app.url_path_for("todos:update", todo_id=foreign_todo.id), json=data
+    )
     assert response.status_code == HTTPStatus.NOT_FOUND
 
 
@@ -123,7 +133,9 @@ def test_delete_todo_unauthorized(app: FastAPI, client: TestClient, todo: Todo) 
     assert response.status_code == HTTPStatus.UNAUTHORIZED
 
 
-def test_delete_foreign_todo(app: FastAPI, client: TestClient, foreign_todo: Todo) -> None:
+def test_delete_foreign_todo(
+    app: FastAPI, client: TestClient, foreign_todo: Todo
+) -> None:
     """
     Ensure we cannot delete a todo we don't own.
     """

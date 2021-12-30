@@ -1,14 +1,13 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
-from app.schemas.auth import Login
 from app.core.database import get_session
-from app.services.users import UserService
 from app.models.users import User
-
+from app.schemas.auth import Login
+from app.services.users import UserService
 
 auth_router = APIRouter(prefix="/auth")
 
@@ -19,14 +18,11 @@ def login(request: Request, data: Login, session: Session = Depends(get_session)
     Log the current user in.
     """
     user = UserService(session).user_by_email(email=data.email)
-    authenticated = (
-        user is not None and 
-        user.check_password(password=data.password)
-    )
+    authenticated = user is not None and user.check_password(password=data.password)
     if not authenticated:
         raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST, 
-            detail="Incorrect email/ password provided."
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail="Incorrect email/ password provided.",
         )
     request.session["user_id"] = user.id
     return user

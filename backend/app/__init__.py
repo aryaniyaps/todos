@@ -12,7 +12,7 @@ def create_app() -> FastAPI:
     """
     app = FastAPI(
         title="Todos",
-        root_path="/api", 
+        root_path="/api",
         debug=DEBUG,
     )
     register_routes(app)
@@ -30,10 +30,10 @@ def register_routes(app: FastAPI) -> None:
     from app.routes.todos import todo_router
     from app.routes.users import user_router
 
-    @app.get("/status")
-    def check_health():
+    @app.get("/status", name="status")
+    def check_status():
         """
-        Check whether the app is healthy.
+        Check the app's status.
         """
         return {"running": True}
 

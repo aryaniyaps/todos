@@ -1,4 +1,5 @@
 from typing import Optional
+
 from app.models.users import User
 from app.services.base import BaseService
 
@@ -13,7 +14,7 @@ class UserService(BaseService):
         :return: The user with the given email.
         """
         return self.session.query(User).filter_by(email=email).first()
-    
+
     def create_user(self, *, email: str, password: str) -> User:
         """
         Creates an user with the given data.

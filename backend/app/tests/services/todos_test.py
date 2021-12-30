@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app.models.users import User
 from app.models.todos import Todo
+from app.models.users import User
 
 
 def test_get_todos(session: Session, user: User) -> None:

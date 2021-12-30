@@ -31,7 +31,7 @@ spec:
           name: todos-backend
           args: []
           ports:
-            - name: http 
+            - name: http
               containerPort: 8080
           env:
             - name: DATABASE_URL

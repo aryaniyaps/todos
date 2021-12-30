@@ -3,7 +3,6 @@ Configuration options for development/ production.
 """
 from starlette.config import Config
 
-
 config = Config()
 
 # whether the app is in development.

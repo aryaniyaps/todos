@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from app.models.todos import Todo
 from app.services.base import BaseService
@@ -23,18 +23,14 @@ class TodoService(BaseService):
 
         :param user_id: The todo's owner ID.
 
-        :return: The user's todo.        
+        :return: The user's todo.
         """
         query = self.session.query(Todo)
         query.filter_by(id=todo_id, user_id=user_id)
         return query.first()
 
     def create_todo(
-        self, 
-        *, 
-        content: str, 
-        user_id: int, 
-        completed: bool = False
+        self, *, content: str, user_id: int, completed: bool = False
     ) -> Todo:
         """
         Creates a todo with the given data.
@@ -47,11 +43,7 @@ class TodoService(BaseService):
 
         :return: The created todo.
         """
-        todo = Todo(
-            content=content, 
-            user_id=user_id, 
-            completed=completed
-        )
+        todo = Todo(content=content, user_id=user_id, completed=completed)
         self.session.add(todo)
         self.session.commit()
         return todo
@@ -59,7 +51,7 @@ class TodoService(BaseService):
     def update_todo(
         self,
         *,
-        todo: Todo, 
+        todo: Todo,
         completed: Optional[bool] = None,
         content: Optional[str] = None
     ) -> Todo:

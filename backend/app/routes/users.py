@@ -6,9 +6,8 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_session
 from app.models.users import User
-from app.services.users import UserService
 from app.schemas.users import UserCreate
-
+from app.services.users import UserService
 
 user_router = APIRouter(prefix="/users")
 
@@ -29,10 +28,6 @@ def create_user(data: UserCreate, session: Session = Depends(get_session)):
     user = UserService(session).user_by_email(email=data.email)
     if user is not None:
         raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST, 
-            detail="User with email already exists."
+            status_code=HTTPStatus.BAD_REQUEST, detail="User with email already exists."
         )
-    return UserService(session).create_user(
-        email=data.email, 
-        password=data.password
-    )
+    return UserService(session).create_user(email=data.email, password=data.password)
