@@ -30,7 +30,10 @@ class TodoService(BaseService):
         return query.first()
 
     def create_todo(
-        self, *, content: str, user_id: int, completed: bool = False
+        self, *, 
+        content: str, 
+        user_id: int, 
+        completed: bool = False,
     ) -> Todo:
         """
         Creates a todo with the given data.
@@ -43,7 +46,11 @@ class TodoService(BaseService):
 
         :return: The created todo.
         """
-        todo = Todo(content=content, user_id=user_id, completed=completed)
+        todo = Todo(
+            content=content, 
+            user_id=user_id, 
+            completed=completed,
+        )
         self.session.add(todo)
         self.session.commit()
         return todo
@@ -53,7 +60,7 @@ class TodoService(BaseService):
         *,
         todo: Todo,
         completed: Optional[bool] = None,
-        content: Optional[str] = None
+        content: Optional[str] = None,
     ) -> Todo:
         """
         Updates a todo with the given data.

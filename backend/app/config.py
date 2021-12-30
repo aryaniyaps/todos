@@ -1,24 +1,25 @@
 """
 Configuration options for development/ production.
 """
-from starlette.config import Config
+from pydantic import BaseSettings
 
-config = Config()
 
-# whether the app is in development.
-DEBUG = config("DEBUG", cast=bool, default=False)
+class Settings(BaseSettings):
+    # whether the app is in development.
+    DEBUG: str = False
+    # branding configuration.
+    SITE_NAME: str = "Todos"
+    # SQLAlchemy database URL.
+    DATABASE_URL: str
+    # Celery broker URL.
+    CELERY_BROKER_URL: str
+    # Celery result expiration duration.
+    CELERY_RESULT_EXPIRES: int
+    # Celery result backend.
+    CELERY_RESULT_BACKEND: str
 
-# branding configuration.
-SITE_NAME = config("SITE_NAME", cast=str, default="todos")
+    class Config:
+        case_sensitive = True
 
-# SQLAlchemy database URL.
-DATABASE_URL = config("DATABASE_URL", cast=str)
 
-# Celery broker URL.
-CELERY_BROKER_URL = config("CELERY_BROKER_URL", cast=str)
-
-# Celery result expiration duration.
-CELERY_RESULT_EXPIRES = config("CELERY_RESULT_EXPIRES", cast=int)
-
-# Celery result backend.
-CELERY_RESULT_BACKEND = config("CELERY_RESULT_BACKEND", cast=str)
+settings = Settings()
