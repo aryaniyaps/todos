@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.schemas.auth import Login
 from app.core.database import get_session
+from app.services.users import UserService
 from app.models.users import User
 
 
@@ -17,7 +18,7 @@ def login(request: Request, data: Login, session: Session = Depends(get_session)
     """
     Log the current user in.
     """
-    user = session.query(User).filter_by(email=data.email).first()
+    user = UserService(session).user_by_email(email=data.email)
     authenticated = (
         user is not None and 
         user.check_password(password=data.password)
