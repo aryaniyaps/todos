@@ -25,7 +25,7 @@
         "@babel/core": "7.16.0",
         "@babel/preset-env": "7.16.4",
         "@babel/preset-react": "7.16.0",
-        "@babel/preset-typescript": "7.16.0",
+        "@babel/preset-typescript": "7.16.5",
         "@storybook/addon-essentials": "6.3.12",
         "@storybook/addon-links": "6.3.12",
         "@storybook/addon-postcss": "2.0.0",
