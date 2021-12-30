@@ -1,6 +1,8 @@
-from pytest import fixture
+from typing import Generator
+
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+from pytest import fixture
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session, scoped_session
 from sqlalchemy.orm.session import sessionmaker
@@ -30,11 +32,11 @@ def client(app: FastAPI) -> TestClient:
     :return: The created test client.
     """
     with TestClient(app) as client:
-        yield client
+        return client
 
 
 @fixture(scope="session")
-def test_connection() -> Connection:
+def test_connection() -> Generator[Connection, None, None]:
     """
     Creates a database connection for testing.
 
@@ -53,7 +55,7 @@ def session_factory(test_connection: Connection) -> Session:
 
 
 @fixture()
-def session(session_factory: Session) -> Session:
+def session(session_factory: Session) -> Generator[Session, None, None]:
     """
     Creates a session for testing.
 
