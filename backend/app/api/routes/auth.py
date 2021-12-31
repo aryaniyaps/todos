@@ -9,7 +9,7 @@ from app.schemas.auth import LoginSchema
 from app.schemas.users import UserSchema
 from app.services.users import UserService
 
-auth_router = APIRouter(prefix="/auth")
+auth_router = APIRouter(prefix="/auth", tags=["authentication"])
 
 
 @auth_router.post(
@@ -29,7 +29,10 @@ def login(
     Log the current user in.
     """
     user = user_service.user_by_email(email=data.email)
-    authenticated = user is not None and user.check_password(password=data.password)
+    authenticated = (
+        user is not None and 
+        user.check_password(password=data.password)
+    )
     if not authenticated:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,

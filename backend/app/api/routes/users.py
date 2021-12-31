@@ -8,7 +8,7 @@ from app.models.users import User
 from app.schemas.users import UserCreateSchema, UserSchema
 from app.services.users import UserService
 
-user_router = APIRouter(prefix="/users")
+user_router = APIRouter(prefix="/users", tags=["users"])
 
 
 @user_router.get(

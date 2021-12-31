@@ -9,7 +9,7 @@ from app.models.users import User
 from app.schemas.todos import TodoSchema, TodoCreateSchema, TodoUpdateSchema
 from app.services.todos import TodoService
 
-todo_router = APIRouter(prefix="/todos")
+todo_router = APIRouter(prefix="/todos", tags=["todos"])
 
 
 @todo_router.get(
@@ -139,6 +139,6 @@ def clear_todos(
     ),
 ) -> None:
     """
-    Clears the current user's todos.
+    Clear the current user's todos.
     """
     todo_service.clear_todos(user_id=current_user.id)
