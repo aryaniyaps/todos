@@ -16,6 +16,7 @@ def create_app() -> FastAPI:
         debug=settings.DEBUG,
     )
     register_routes(app)
+    register_event_handlers(app)
     register_middleware(app)
     return app
 
@@ -53,6 +54,19 @@ def register_middleware(app: FastAPI) -> None:
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
+    )
+
+def register_event_handlers(app: FastAPI) -> None:
+    """
+    Registers event handlers for the app.
+
+    :param app: The app instance.
+    """
+    from app.handlers.metrics import start_metrics
+
+    app.add_event_handler(
+        event_type="startup",
+        func=start_metrics
     )
 
 

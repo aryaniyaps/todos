@@ -7,6 +7,8 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     # whether the app is in development.
     DEBUG: str = False
+    # Prometheus metrics port.
+    METRICS_PORT: int
     # branding configuration.
     SITE_NAME: str = "Todos"
     # SQLAlchemy database URL.

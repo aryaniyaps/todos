@@ -11,3 +11,4 @@ data:
   celery_broker_url: redis://todos-redis:6379/0
   celery_result_expires: 60
   celery_result_backend: redis://todos-redis:6379/1
+  metrics_port: 8181

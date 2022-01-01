@@ -37,6 +37,11 @@ spec:
             configMapKeyRef:
               name: todos-config
               key: celery_result_expires
+          - name: METRICS_PORT
+            valueFrom:
+            configMapKeyRef:
+              name: todos-config
+              key: metrics_port
         resources:
           limits:
             cpu: 300m
