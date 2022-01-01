@@ -15,12 +15,12 @@ services:
       context: "./backend"
       target: "development"
     environment:
+      DEBUG: "true"
       DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:3306/todos"
-      MAIL_SERVER: "localhost"
-      MAIL_PORT: "25"
-      MAIL_USE_TLS: "false"
-      MAIL_USERNAME: "${MAIL_USERNAME}"
-      MAIL_PASSWORD: "${MAIL_PASSWORD}"
+      METRICS_PORT: 8181
+      CELERY_BROKER_URL: "redis://redis:6379/0"
+      CELERY_RESULT_EXPIRES: 60
+      CELERY_RESULT_BACKEND: "redis://redis:6379/1"
 
   backend:
     command: "scripts/start-local.sh"

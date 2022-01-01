@@ -26,12 +26,12 @@ services:
       target: "production"
     working_dir: "/backend/"
     environment:
+      DEBUG: "${DEBUG}"
       DATABASE_URL: "${DATABASE_URL}"
-      MAIL_SERVER: "${MAIL_SERVER}"
-      MAIL_PORT: "${MAIL_PORT}"
-      MAIL_USE_TLS: "${MAIL_USE_TLS}"
-      MAIL_USERNAME: "${MAIL_USERNAME}"
-      MAIL_PASSWORD: "${MAIL_PASSWORD}"
+      METRICS_PORT: "${METRICS_PORT}"
+      CELERY_BROKER_URL: "${CELERY_BROKER_URL}"
+      CELERY_RESULT_EXPIRES: "${CELERY_RESULT_EXPIRES}"
+      CELERY_RESULT_BACKEND: "${CELERY_RESULT_BACKEND}"
     volumes:
       - ./backend:/backend
 

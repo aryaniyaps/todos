@@ -8,8 +8,6 @@ spec:
     - name: http
       targetPort: http
       port: 8080
-    - name: metrics
-      port: 8181
   selector:
     app: backend
 ---
