@@ -68,6 +68,3 @@ def register_event_handlers(app: FastAPI) -> None:
         event_type="startup",
         func=start_metrics
     )
-
-
-application = create_app()
