@@ -1,3 +1,3 @@
 #!/bin/sh
 pipenv run alembic upgrade head
-pipenv run uvicorn app:application
+pipenv run uvicorn app.asgi:application
