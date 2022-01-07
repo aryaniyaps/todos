@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader
 
-from app.config import settings
+from app.conf import settings
 
 environment = Environment(loader=PackageLoader("app"), auto_reload=settings.DEBUG)
 

@@ -7,7 +7,6 @@ from pydantic import BaseModel, EmailStr
 class UserCreateSchema(BaseModel):
     email: EmailStr
     password: str
-    completed: Optional[bool] = False
 
     class Config:
         title = "UserCreate"
@@ -16,7 +15,6 @@ class UserCreateSchema(BaseModel):
 class UserSchema(BaseModel):
     id: int
     email: EmailStr
-    completed: bool = False
     created_at: datetime
     updated_at: datetime
 
