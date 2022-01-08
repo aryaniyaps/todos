@@ -3,7 +3,7 @@ from http import HTTPStatus
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from app.models.users import User
+from app.entities.users import User
 
 
 def test_login(app: FastAPI, client: TestClient, user: User) -> None:
@@ -15,11 +15,11 @@ def test_login(app: FastAPI, client: TestClient, user: User) -> None:
     assert response.status_code == HTTPStatus.OK
 
 
-def test_logout(app: FastAPI, client: TestClient) -> None:
+def test_logout(app: FastAPI, auth_client: TestClient) -> None:
     """
     Ensure we can log the current user out.
     """
-    response = client.post(app.url_path_for("auth:logout"))
+    response = auth_client.post(app.url_path_for("auth:logout"))
     assert response.status_code == HTTPStatus.NO_CONTENT
 
 

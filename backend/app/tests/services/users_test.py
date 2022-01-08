@@ -1,7 +1,7 @@
 from passlib.hash import argon2
 from sqlalchemy.orm import Session
 
-from app.models.users import User
+from app.entities.users import User
 from app.services.users import UserService
 
 

@@ -9,8 +9,8 @@ from sqlalchemy.orm.session import sessionmaker
 
 from app import create_app
 from app.core.database import Base, engine
-from app.models.todos import Todo
-from app.models.users import User
+from app.entities.todos import Todo
+from app.entities.users import User
 from app.tests.factories import TodoFactory, UserFactory
 
 
@@ -32,6 +32,17 @@ def client(app: FastAPI) -> TestClient:
     :return: The created test client.
     """
     with TestClient(app) as client:
+        return client
+
+@fixture()
+def auth_client() -> TestClient:
+    """
+    Creates an authenticated client for testing.
+
+    :return: The created test client.
+    """
+    with TestClient(app) as client:
+        # TODO: add auth headers.
         return client
 
 

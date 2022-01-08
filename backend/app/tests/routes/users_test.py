@@ -3,14 +3,14 @@ from http import HTTPStatus
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from app.models.users import User
+from app.entities.users import User
 
 
-def test_read_current_user(app: FastAPI, client: TestClient) -> None:
+def test_read_current_user(app: FastAPI, auth_client: TestClient) -> None:
     """
     Ensure we can read the current user.
     """
-    response = client.get(app.url_path_for("users:current"))
+    response = auth_client.get(app.url_path_for("users:current"))
     assert response.status_code == HTTPStatus.OK
 
 

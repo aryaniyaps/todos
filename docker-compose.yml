@@ -30,8 +30,6 @@ services:
       DATABASE_URL: "${DATABASE_URL}"
       METRICS_PORT: "${METRICS_PORT}"
       CELERY_BROKER_URL: "${CELERY_BROKER_URL}"
-      CELERY_RESULT_EXPIRES: "${CELERY_RESULT_EXPIRES}"
-      CELERY_RESULT_BACKEND: "${CELERY_RESULT_BACKEND}"
     volumes:
       - ./backend:/backend
 

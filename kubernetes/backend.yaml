@@ -8,6 +8,9 @@ spec:
     - name: http
       targetPort: http
       port: 8080
+    - name: metrics
+      targetPort: metrics
+      port: 8181
   selector:
     app: backend
 ---
@@ -33,6 +36,8 @@ spec:
           ports:
             - name: http
               containerPort: 8080
+            - name: metrics
+              containerPort: 8181
           env:
             - name: DATABASE_URL
               valueFrom:
@@ -44,16 +49,6 @@ spec:
             configMapKeyRef:
               name: todos-config
               key: celery_broker_url
-          - name: CELERY_RESULT_BACKEND
-            valueFrom:
-            configMapKeyRef:
-              name: todos-config
-              key: celery_result_backend
-          - name: CELERY_RESULT_EXPIRES
-            valueFrom:
-            configMapKeyRef:
-              name: todos-config
-              key: celery_result_expires
           - name: METRICS_PORT
             valueFrom:
             configMapKeyRef:

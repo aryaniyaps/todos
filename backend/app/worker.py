@@ -9,11 +9,12 @@ def create_worker() -> Celery:
 
     :return: The created worker.
     """
-    celery = Celery(main=__name__, include=("app.tasks",))
+    celery = Celery(
+        main=__name__,
+        include=("app.tasks",),
+    )
     celery.conf.update(
         broker_url=settings.CELERY_BROKER_URL,
-        result_expires=settings.CELERY_RESULT_EXPIRES,
-        result_backend=settings.CELERY_RESULT_BACKEND,
     )
     return celery
 

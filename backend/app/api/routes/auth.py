@@ -3,8 +3,8 @@ from http import HTTPStatus
 from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
 
-from app.api.dependencies import get_service, get_current_user
-from app.models.users import User
+from app.api.providers import get_service, get_current_user
+from app.entities.users import User
 from app.schemas.auth import LoginSchema
 from app.schemas.users import UserSchema
 from app.services.users import UserService

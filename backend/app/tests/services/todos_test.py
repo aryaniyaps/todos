@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app.models.todos import Todo
-from app.models.users import User
+from app.entities.todos import Todo
+from app.entities.users import User
 from app.services.todos import TodoService
 
 

@@ -1,7 +1,7 @@
 from factory import Factory, PostGenerationMethodCall, Sequence, SubFactory
 
-from app.models.todos import Todo
-from app.models.users import User
+from app.entities.todos import Todo
+from app.entities.users import User
 
 
 class UserFactory(Factory):

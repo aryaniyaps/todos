@@ -3,9 +3,9 @@ from typing import List
 
 from fastapi import APIRouter, Depends
 
-from app.api.dependencies import get_service, get_todo, get_current_user
-from app.models.todos import Todo
-from app.models.users import User
+from app.api.providers import get_service, get_todo, get_current_user
+from app.entities.todos import Todo
+from app.entities.users import User
 from app.schemas.todos import TodoSchema, TodoCreateSchema, TodoUpdateSchema
 from app.services.todos import TodoService
 

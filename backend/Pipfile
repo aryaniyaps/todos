@@ -13,7 +13,6 @@ celery = {version="==5.2", extras=["redis"]}
 passlib = {version="==1.7", extras=["argon2"]}
 uvicorn = "==0.16.0"
 prometheus-client = "==0.12"
-pyjwt = "==2.3.0"
 
 [dev-packages]
 pytest = "==6.2"

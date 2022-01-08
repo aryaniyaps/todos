@@ -15,10 +15,6 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     # Celery broker URL.
     CELERY_BROKER_URL: str
-    # Celery result expiration duration.
-    CELERY_RESULT_EXPIRES: int
-    # Celery result backend.
-    CELERY_RESULT_BACKEND: str
 
     class Config:
         case_sensitive = True

@@ -1,6 +1,6 @@
 from typing import Optional
 
-from app.models.users import User
+from app.entities.users import User
 from app.services.base import BaseService
 
 

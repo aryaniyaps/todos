@@ -1,4 +1,4 @@
-from app.models.users import User
+from app.entities.users import User
 from app.services.base import BaseService
 
 
@@ -12,3 +12,10 @@ class AuthService(BaseService):
         :return: The created access token.
         """
         pass
+
+    def revoke_access_token(self, *, access_token: str) -> None:
+        """
+        Revokes the given access token.
+
+        :param access_token: The access token to revoke.
+        """

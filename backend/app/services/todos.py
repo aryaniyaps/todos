@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from app.models.todos import Todo
+from app.entities.todos import Todo
 from app.services.base import BaseService
 
 
