@@ -8,7 +8,7 @@ fastapi = "==0.70.1"
 jinja2 = "==3.0"
 alembic = "==1.7.5"
 pydantic = {version="==1.8.2", extras=["email"]}
-sqlalchemy = {version="==1.4.28", extras=["mysql"]}
+sqlalchemy = {version="==1.4.29", extras=["mysql"]}
 celery = "==5.2.3"
 passlib = {version="==1.7", extras=["argon2"]}
 uvicorn = "==0.16.0"
