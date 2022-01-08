@@ -1,6 +1,6 @@
 {
     "name": "frontend",
-    "version": "0.1.0",
+    "version": "2.0.0",
     "license": "BSD-3-Clause",
     "author": "Aryan Iyappan",
     "private": true,
@@ -52,15 +52,15 @@
         "jest": "27.3.1",
         "jsdom": "18.1.0",
         "postcss": "8.3.11",
-        "postcss-loader": "6.2.0",
+        "postcss-loader": "6.2.1",
         "style-loader": "3.3.1",
         "svg-inline-loader": "0.8.2",
         "tailwindcss": "2.2.19",
         "ts-loader": "9.2.6",
         "typescript": "4.4.4",
-        "webpack": "5.64.0",
+        "webpack": "5.65.0",
         "webpack-cli": "4.9.1",
-        "webpack-dev-server": "4.5.0"
+        "webpack-dev-server": "4.7.2"
     },
     "browserslist": [
         "last 3 chrome versions",
