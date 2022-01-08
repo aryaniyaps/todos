@@ -1,6 +1,3 @@
-"""
-Configuration options for development/ production.
-"""
 from pydantic import BaseSettings
 
 

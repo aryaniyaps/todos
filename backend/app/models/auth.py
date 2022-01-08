@@ -1,9 +1,9 @@
 from pydantic import BaseModel, EmailStr
 
 
-class LoginSchema(BaseModel):
+class LoginInput(BaseModel):
     email: EmailStr
     password: str
 
     class Config:
-        title = "Login"
+        title = "LoginInput"

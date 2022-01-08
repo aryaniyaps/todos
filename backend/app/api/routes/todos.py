@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends
 from app.api.providers import get_service, get_todo, get_current_user
 from app.entities.todos import Todo
 from app.entities.users import User
-from app.schemas.todos import TodoSchema, TodoCreateSchema, TodoUpdateSchema
+from app.models.todos import TodoModel, TodoCreateInput, TodoUpdateInput
 from app.services.todos import TodoService
 
 todo_router = APIRouter(prefix="/todos", tags=["todos"])
@@ -15,7 +15,7 @@ todo_router = APIRouter(prefix="/todos", tags=["todos"])
 @todo_router.get(
     path="", 
     name="todos:read-all", 
-    response_model=List[TodoSchema],
+    response_model=List[TodoModel],
 )
 def read_todos(
     current_user: User = Depends(
@@ -37,10 +37,10 @@ def read_todos(
     path="",
     name="todos:create", 
     status_code=HTTPStatus.CREATED,
-    response_model=TodoSchema, 
+    response_model=TodoModel, 
 )
 def create_todo(
-    data: TodoCreateSchema, 
+    data: TodoCreateInput, 
     current_user: User = Depends(
         dependency=get_current_user
     ), 
@@ -63,7 +63,7 @@ def create_todo(
 @todo_router.get(
     path="/{todo_id}", 
     name="todos:read", 
-    response_model=TodoSchema,
+    response_model=TodoModel,
 )
 def read_todo(
     todo: Todo = Depends(
@@ -79,10 +79,10 @@ def read_todo(
 @todo_router.patch(
     path="/{todo_id}", 
     name="todos:update", 
-    response_model=TodoSchema,
+    response_model=TodoModel,
 )
 def update_todo(
-    data: TodoUpdateSchema,
+    data: TodoUpdateInput,
     todo: Todo = Depends(
         dependency=get_todo,
     ),

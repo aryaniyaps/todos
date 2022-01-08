@@ -5,7 +5,7 @@ from fastapi.exceptions import HTTPException
 
 from app.api.providers import get_service, get_current_user
 from app.entities.users import User
-from app.schemas.users import UserCreateSchema, UserSchema
+from app.models.users import UserCreateInput, UserModel
 from app.services.users import UserService
 
 user_router = APIRouter(prefix="/users", tags=["users"])
@@ -14,7 +14,7 @@ user_router = APIRouter(prefix="/users", tags=["users"])
 @user_router.get(
     path="/@me", 
     name="users:current", 
-    response_model=UserSchema,
+    response_model=UserModel,
 )
 def read_current_user(
     current_user: User = Depends(
@@ -31,10 +31,10 @@ def read_current_user(
     path="", 
     name="users:create", 
     status_code=HTTPStatus.CREATED, 
-    response_model=UserSchema,
+    response_model=UserModel,
 )
 def create_user(
-    data: UserCreateSchema, 
+    data: UserCreateInput, 
     user_service: UserService = Depends(
         dependency=get_service(
             service=UserService,

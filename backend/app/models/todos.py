@@ -4,24 +4,24 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class TodoCreateSchema(BaseModel):
+class TodoCreateInput(BaseModel):
     content: str
     content: Optional[str] = None
     completed: Optional[bool] = False
 
     class Config:
-        title = "TodoCreate"
+        title = "TodoCreateInput"
 
 
-class TodoUpdateSchema(BaseModel):
+class TodoUpdateInput(BaseModel):
     content: Optional[str] = None
     completed: Optional[bool] = False
 
     class Config:
-        title = "TodoUpdate"
+        title = "TodoUpdateInput"
 
 
-class TodoSchema(BaseModel):
+class TodoModel(BaseModel):
     id: int
     completed: bool
     content: str

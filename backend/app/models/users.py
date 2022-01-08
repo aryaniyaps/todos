@@ -3,15 +3,15 @@ from datetime import datetime
 from pydantic import BaseModel, EmailStr
 
 
-class UserCreateSchema(BaseModel):
+class UserCreateInput(BaseModel):
     email: EmailStr
     password: str
 
     class Config:
-        title = "UserCreate"
+        title = "UserCreateInput"
 
 
-class UserSchema(BaseModel):
+class UserModel(BaseModel):
     id: int
     email: EmailStr
     created_at: datetime

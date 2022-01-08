@@ -1,12 +1,15 @@
 from http import HTTPStatus
+from typing import Optional
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 from fastapi.exceptions import HTTPException
+from fastapi.param_functions import Cookie
 
-from app.api.providers import get_service, get_current_user
+from app.api.providers import get_service
 from app.entities.users import User
-from app.schemas.auth import LoginSchema
-from app.schemas.users import UserSchema
+from app.models.users import UserModel
+from app.models.auth import LoginInput
+from app.services.auth import AuthService
 from app.services.users import UserService
 
 auth_router = APIRouter(prefix="/auth", tags=["authentication"])
@@ -15,10 +18,16 @@ auth_router = APIRouter(prefix="/auth", tags=["authentication"])
 @auth_router.post(
     path="/login", 
     name="auth:login", 
-    response_model=UserSchema,
+    response_model=UserModel,
 )
 def login(
-    data: LoginSchema, 
+    data: LoginInput, 
+    response: Response,
+    auth_service: AuthService = Depends(
+        dependency=get_service(
+            service=AuthService,
+        ),
+    ),
     user_service: UserService = Depends(
         dependency=get_service(
             service=UserService,
@@ -38,7 +47,8 @@ def login(
             status_code=HTTPStatus.BAD_REQUEST,
             detail="Incorrect email/ password provided.",
         )
-    # TODO: login user here.
+    access_token = auth_service.create_access_token(user=user)
+    response.set_cookie("access_token", access_token)
     return user
 
 
@@ -48,12 +58,16 @@ def login(
     status_code=HTTPStatus.NO_CONTENT,
 )
 def logout(
-    current_user: User = Depends(
-        dependency=get_current_user,
+    access_token: Optional[str] = Cookie(None),
+    auth_service: AuthService = Depends(
+        dependency=get_service(
+            service=AuthService,
+        ),
     ),
 ) -> None:
     """
     Log the current user out.
     """
-    # TODO: logout user here.
-    pass
+    auth_service.revoke_access_token(
+        access_token=access_token,
+    )
