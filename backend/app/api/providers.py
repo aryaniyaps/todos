@@ -58,7 +58,7 @@ def get_current_user() -> User:
     """
     Gets the current user from the given request.
 
-    :return: The current user.
+    :return: The request's current user.
     """
     pass
 
