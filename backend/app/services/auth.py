@@ -1,3 +1,5 @@
+from typing import Optional
+
 from app.entities.users import User
 from app.services.base import BaseService
 
@@ -19,3 +21,14 @@ class AuthService(BaseService):
 
         :param access_token: The access token to revoke.
         """
+        pass
+
+    def user_from_access_token(self, *, access_token: str) -> Optional[User]:
+        """
+        Gets the user from the given access token.
+
+        :param access_token: The token to get the user from.
+
+        :return: The user associated with the access token.
+        """
+        pass

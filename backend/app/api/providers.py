@@ -1,7 +1,7 @@
 from http import HTTPStatus
-from typing import Callable, Generator, Type
+from typing import Callable, Generator, Optional, Type
 
-from fastapi import Depends
+from fastapi import Cookie, Depends
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
@@ -9,7 +9,8 @@ from app.core.database import session_factory
 from app.entities.todos import Todo
 from app.entities.users import User
 from app.services.base import BaseService
-from backend.app.services.todos import TodoService
+from app.services.auth import AuthService
+from app.services.todos import TodoService
 
 
 def get_session() -> Generator[Session, None, None]:
@@ -54,13 +55,31 @@ def get_service(
     return create_service
 
 
-def get_current_user() -> User:
+def get_current_user(
+    access_token: Optional[str] = Cookie(None),
+    auth_service: AuthService = Depends(
+        dependency=get_service(
+            service=AuthService,
+        ),
+    ),
+) -> User:
     """
     Gets the current user from the given request.
 
     :return: The request's current user.
     """
-    pass
+    if access_token is None:
+        user = None
+    else:
+        user = auth_service.user_from_access_token(
+            access_token=access_token,
+        )
+    if user is None:
+        raise HTTPException(
+            status_code=HTTPStatus.UNAUTHORIZED,
+            detail="could not find credentials."
+        )
+    return user
 
 
 def get_todo(

@@ -1,9 +1,8 @@
 from http import HTTPStatus
 from typing import Optional
 
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Cookie, Depends, Response
 from fastapi.exceptions import HTTPException
-from fastapi.param_functions import Cookie
 
 from app.api.providers import get_service
 from app.entities.users import User
