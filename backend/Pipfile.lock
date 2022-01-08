@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5aa29e2481a93991e72ff4283ebad32ccff166cb5dc0bfab086b5a47743f18fc"
+            "sha256": "7bc9715184bcdd1769884bde34f6285d15a4064f70b65859faba1ab653a9a555"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -90,7 +90,6 @@
             "version": "==3.6.4.0"
         },
         "celery": {
-            "extras": [],
             "hashes": [
                 "sha256:8aacd02fc23a02760686d63dde1eb0daa9f594e735e73ea8fb15c2ff15cb608c",
                 "sha256:e2cd41667ad97d4f6a2f4672d1c6a6ebada194c619253058b5f23704aaadaa82"
@@ -182,14 +181,6 @@
                 "sha256:cd12f68d745bf6151210790540b4cb064c7b13e571bc64b6957d98d120dacfd8"
             ],
             "version": "==0.2.0"
-        },
-        "colorama": {
-            "hashes": [
-                "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b",
-                "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"
-            ],
-            "markers": "platform_system == 'Windows'",
-            "version": "==0.4.4"
         },
         "dnspython": {
             "hashes": [
@@ -581,14 +572,6 @@
         }
     },
     "develop": {
-        "atomicwrites": {
-            "hashes": [
-                "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197",
-                "sha256:ae70396ad1a434f9c7046fd2dd196fc04b12f9e91ffb859164193be8b6168a7a"
-            ],
-            "markers": "sys_platform == 'win32'",
-            "version": "==1.4.0"
-        },
         "attrs": {
             "hashes": [
                 "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4",
@@ -612,21 +595,13 @@
             "markers": "python_version >= '3'",
             "version": "==2.0.10"
         },
-        "colorama": {
-            "hashes": [
-                "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b",
-                "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"
-            ],
-            "markers": "platform_system == 'Windows'",
-            "version": "==0.4.4"
-        },
         "factory-boy": {
             "hashes": [
-                "sha256:1d3db4b44b8c8c54cdd8b83ae4bdb9aeb121e464400035f1f03ae0e1eade56a4",
-                "sha256:401cc00ff339a022f84d64a4339503d1689e8263a4478d876e58a3295b155c5b"
+                "sha256:a98d277b0c047c75eb6e4ab8508a7f81fb03d2cb21986f627913546ef7a2a55e",
+                "sha256:eb02a7dd1b577ef606b75a253b9818e6f9eaf996d94449c9d5ebb124f90dc795"
             ],
             "index": "pypi",
-            "version": "==3.2"
+            "version": "==3.2.1"
         },
         "faker": {
             "hashes": [
