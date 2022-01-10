@@ -33,7 +33,6 @@ class TodoService(BaseService):
         self, *, 
         content: str, 
         user_id: int, 
-        completed: bool = False,
     ) -> Todo:
         """
         Creates a todo with the given data.
@@ -42,14 +41,11 @@ class TodoService(BaseService):
 
         :param user_id: The todos's owner ID.
 
-        :param completed: Whether the todo is completed.
-
         :return: The created todo.
         """
         todo = Todo(
             content=content, 
-            user_id=user_id, 
-            completed=completed,
+            user_id=user_id,
         )
         self.session.add(todo)
         self.session.commit()

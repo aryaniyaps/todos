@@ -31,12 +31,11 @@ def test_create_todo(session: Session, user: User) -> None:
     content = "sample content"
     result = TodoService(session).create_todo(
         content=content,
-        completed=True,
         user_id=user.id,
     )
     assert result.content == content
     assert result.user_id == user.id
-    assert result.completed
+    assert not result.completed
 
 
 def test_update_todo(session: Session, todo: Todo) -> None:

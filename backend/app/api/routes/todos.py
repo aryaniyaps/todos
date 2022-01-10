@@ -54,8 +54,7 @@ def create_todo(
     Create a new todo.
     """
     return todo_service.create_todo(
-        content=data.content, 
-        completed=data.completed, 
+        content=data.content,  
         user_id=current_user.id,
     )
 

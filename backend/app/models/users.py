@@ -7,9 +7,6 @@ class UserCreateInput(BaseModel):
     email: EmailStr
     password: str
 
-    class Config:
-        title = "UserCreateInput"
-
 
 class UserModel(BaseModel):
     id: int

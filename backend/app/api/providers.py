@@ -77,7 +77,7 @@ def get_current_user(
     if user is None:
         raise HTTPException(
             status_code=HTTPStatus.UNAUTHORIZED,
-            detail="could not find credentials."
+            detail="Could not find credentials."
         )
     return user
 

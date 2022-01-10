@@ -6,19 +6,11 @@ from pydantic import BaseModel
 
 class TodoCreateInput(BaseModel):
     content: str
-    content: Optional[str] = None
-    completed: Optional[bool] = False
-
-    class Config:
-        title = "TodoCreateInput"
 
 
 class TodoUpdateInput(BaseModel):
-    content: Optional[str] = None
-    completed: Optional[bool] = False
-
-    class Config:
-        title = "TodoUpdateInput"
+    content: Optional[str]
+    completed: Optional[bool]
 
 
 class TodoModel(BaseModel):

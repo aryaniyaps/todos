@@ -42,7 +42,7 @@ def auth_client() -> TestClient:
     :return: The created test client.
     """
     with TestClient(app) as client:
-        # TODO: add auth headers.
+        # TODO: add auth cookies.
         return client
 
 

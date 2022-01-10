@@ -47,7 +47,12 @@ def login(
             detail="Incorrect email/ password provided.",
         )
     access_token = auth_service.create_access_token(user=user)
-    response.set_cookie("access_token", access_token)
+    response.set_cookie(
+        key="access_token", 
+        value=access_token, 
+        httponly=True, 
+        samesite="Strict",
+    )
     return user
 
 
@@ -57,6 +62,7 @@ def login(
     status_code=HTTPStatus.NO_CONTENT,
 )
 def logout(
+    response: Response,
     access_token: Optional[str] = Cookie(None),
     auth_service: AuthService = Depends(
         dependency=get_service(
@@ -70,3 +76,4 @@ def logout(
     auth_service.revoke_access_token(
         access_token=access_token,
     )
+    response.delete_cookie(key="access_token")
