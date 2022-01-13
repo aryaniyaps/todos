@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Callable, Generator, Optional, Type
+from typing import Callable, Optional, Type
 
 from fastapi import Cookie, Depends
 from fastapi.exceptions import HTTPException
@@ -13,21 +13,15 @@ from app.services.auth import AuthService
 from app.services.todos import TodoService
 
 
-def get_session() -> Generator[Session, None, None]:
+def get_session() -> Session:
     """
     Gets a database session, and 
     closes it when it's returned back.
 
     :return: The datbase session.
     """
-    session = session_factory()
-    try:
-        yield session
-    except Exception as err:
-        session.rollback()
-        raise err
-    finally:
-        session.close()
+    with session_factory.begin() as session:
+        return session
 
 
 def get_service(

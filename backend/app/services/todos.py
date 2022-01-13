@@ -1,5 +1,7 @@
 from typing import List, Optional
 
+from sqlalchemy import select, delete
+
 from app.entities.todos import Todo
 from app.services.base import BaseService
 
@@ -13,7 +15,8 @@ class TodoService(BaseService):
 
         :return: The user's todos.
         """
-        return self.session.query(Todo).filter_by(user_id=user_id)
+        statement = select(Todo).filter_by(user_id=user_id)
+        return self.session.execute(statement).scalars()
 
     def get_todo(self, *, todo_id: int, user_id: int) -> Optional[Todo]:
         """
@@ -25,9 +28,8 @@ class TodoService(BaseService):
 
         :return: The user's todo.
         """
-        query = self.session.query(Todo)
-        query.filter_by(id=todo_id, user_id=user_id)
-        return query.first()
+        statement = select(Todo).filter_by(id=todo_id, user_id=user_id)
+        return self.session.scalars(statement).first()
 
     def create_todo(
         self, *, 
@@ -92,6 +94,5 @@ class TodoService(BaseService):
 
         :param user_id: The owner ID of the todos.
         """
-        todos = self.session.query(Todo)
-        todos.filter_by(user_id=user_id)
-        todos.delete()
+        statement = delete(Todo).filter_by(user_id=user_id)
+        self.session.execute(statement)

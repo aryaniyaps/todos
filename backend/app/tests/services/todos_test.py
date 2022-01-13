@@ -57,7 +57,7 @@ def test_delete_todo(session: Session, todo: Todo) -> None:
     Ensure we can delete a todo.
     """
     TodoService(session).delete_todo(todo=todo)
-    assert not session.query(Todo).get(todo.id)
+    assert not session.get(Todo, todo.id)
 
 
 def test_clear_todos(session: Session, user: User) -> None:

@@ -1,5 +1,7 @@
 from typing import Optional
 
+from sqlalchemy import select
+
 from app.entities.users import User
 from app.services.base import BaseService
 
@@ -13,7 +15,8 @@ class UserService(BaseService):
 
         :return: The user with the given email.
         """
-        return self.session.query(User).filter_by(email=email).first()
+        statement = select(User).filter_by(email=email)
+        return self.session.scalars(statement).first()
 
     def create_user(self, *, email: str, password: str) -> User:
         """
