@@ -6,8 +6,6 @@ class Settings(BaseSettings):
     DEBUG: str = False
     # Prometheus metrics port.
     METRICS_PORT: int
-    # branding configuration.
-    SITE_NAME: str = "Todos"
     # SQLAlchemy database URL.
     DATABASE_URL: str
     # Celery broker URL.

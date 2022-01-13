@@ -1,7 +1,7 @@
-from http import HTTPStatus
 from typing import List
 
-from fastapi import APIRouter, Depends
+from flask import Blueprint
+from fastapi import Depends
 
 from app.api.providers import get_service, get_todo, get_current_user
 from app.entities.todos import Todo
@@ -9,14 +9,10 @@ from app.entities.users import User
 from app.models.todos import TodoModel, TodoCreateInput, TodoUpdateInput
 from app.services.todos import TodoService
 
-todo_router = APIRouter(prefix="/todos", tags=["todos"])
+todo_blueprint = Blueprint(url_prefix="/todos")
 
 
-@todo_router.get(
-    path="", 
-    name="todos:read-all", 
-    response_model=List[TodoModel],
-)
+@todo_blueprint.get("")
 def read_todos(
     current_user: User = Depends(
         dependency=get_current_user
@@ -33,12 +29,7 @@ def read_todos(
     return todo_service.get_todos(user_id=current_user.id)
 
 
-@todo_router.post(
-    path="",
-    name="todos:create", 
-    status_code=HTTPStatus.CREATED,
-    response_model=TodoModel, 
-)
+@todo_blueprint.post("")
 def create_todo(
     data: TodoCreateInput, 
     current_user: User = Depends(
@@ -59,11 +50,7 @@ def create_todo(
     )
 
 
-@todo_router.get(
-    path="/{todo_id}", 
-    name="todos:read", 
-    response_model=TodoModel,
-)
+@todo_blueprint.get("/<todo_id:int>")
 def read_todo(
     todo: Todo = Depends(
         dependency=get_todo,
@@ -75,11 +62,7 @@ def read_todo(
     return todo
 
 
-@todo_router.patch(
-    path="/{todo_id}", 
-    name="todos:update", 
-    response_model=TodoModel,
-)
+@todo_blueprint.patch("/<todo_id:int>")
 def update_todo(
     data: TodoUpdateInput,
     todo: Todo = Depends(
@@ -101,11 +84,7 @@ def update_todo(
     )
 
 
-@todo_router.delete(
-    path="/{todo_id}", 
-    name="todos:delete",
-    status_code=HTTPStatus.NO_CONTENT,
-)
+@todo_blueprint.delete("/<todo_id:int>")
 def delete_todo(
     todo: Todo = Depends(
         dependency=get_todo,
@@ -122,11 +101,7 @@ def delete_todo(
     todo_service.delete_todo(todo=todo)
 
 
-@todo_router.delete(
-    path="", 
-    name="todos:clear", 
-    status_code=HTTPStatus.NO_CONTENT,
-)
+@todo_blueprint.delete("")
 def clear_todos(
     current_user: User = Depends(
         dependency=get_current_user

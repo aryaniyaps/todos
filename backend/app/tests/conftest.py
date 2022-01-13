@@ -1,7 +1,7 @@
 from typing import Generator
 
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
+from flask import Flask
+from flask.testing import FlaskClient
 from pytest import fixture
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
@@ -15,7 +15,7 @@ from app.tests.factories import TodoFactory, UserFactory
 
 
 @fixture(scope="session")
-def app() -> FastAPI:
+def app() -> Flask:
     """
     Initializes the app for testing.
 
@@ -25,25 +25,25 @@ def app() -> FastAPI:
 
 
 @fixture()
-def client(app: FastAPI) -> TestClient:
+def client(app: Flask) -> FlaskClient:
     """
     Creates a client for testing.
 
     :return: The created test client.
     """
-    with TestClient(app) as client:
-        return client
+    with app.test_request_context():
+        return app.test_client()
 
 @fixture()
-def auth_client() -> TestClient:
+def auth_client() -> FlaskClient:
     """
     Creates an authenticated client for testing.
 
     :return: The created test client.
     """
-    with TestClient(app) as client:
+    with app.test_request_context():
         # TODO: add auth cookies.
-        return client
+        return app.test_client()
 
 
 @fixture(scope="session")

@@ -4,7 +4,7 @@ services:
   frontend:
     build:
       target: "development"
-    command: "scripts/start-local.sh"
+    command: "scripts/start-dev.sh"
     environment:
       NODE_ENV: "development"
     ports:
@@ -21,7 +21,7 @@ services:
       CELERY_BROKER_URL: "redis://redis:6379/0"
 
   backend:
-    command: "scripts/start-local.sh"
+    command: "scripts/start-dev.sh"
     ports:
       - "8000:8000"
       - "8181:8181"

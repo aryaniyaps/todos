@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, Depends
+from flask import Blueprint
+from fastapi import Depends
 from fastapi.exceptions import HTTPException
 
 from app.api.providers import get_service, get_current_user
@@ -8,14 +9,10 @@ from app.entities.users import User
 from app.models.users import UserCreateInput, UserModel
 from app.services.users import UserService
 
-user_router = APIRouter(prefix="/users", tags=["users"])
+user_blueprint = Blueprint(url_prefix="/users")
 
 
-@user_router.get(
-    path="/@me", 
-    name="users:current", 
-    response_model=UserModel,
-)
+@user_blueprint.get("/@me")
 def read_current_user(
     current_user: User = Depends(
         dependency=get_current_user,
@@ -27,12 +24,7 @@ def read_current_user(
     return current_user
 
 
-@user_router.post(
-    path="", 
-    name="users:create", 
-    status_code=HTTPStatus.CREATED, 
-    response_model=UserModel,
-)
+@user_blueprint.post("")
 def create_user(
     data: UserCreateInput, 
     user_service: UserService = Depends(

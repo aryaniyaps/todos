@@ -1,7 +1,8 @@
 from http import HTTPStatus
 from typing import Optional
 
-from fastapi import APIRouter, Cookie, Depends, Response
+from flask import Blueprint
+from fastapi import Cookie, Depends, Response
 from fastapi.exceptions import HTTPException
 
 from app.api.providers import get_service
@@ -11,14 +12,10 @@ from app.models.auth import LoginInput
 from app.services.auth import AuthService
 from app.services.users import UserService
 
-auth_router = APIRouter(prefix="/auth", tags=["authentication"])
+auth_blueprint = Blueprint(url_prefix="/auth")
 
 
-@auth_router.post(
-    path="/login", 
-    name="auth:login", 
-    response_model=UserModel,
-)
+@auth_blueprint.post("/login")
 def login(
     data: LoginInput, 
     response: Response,
@@ -56,11 +53,7 @@ def login(
     return user
 
 
-@auth_router.post(
-    path="/logout", 
-    name="auth:logout", 
-    status_code=HTTPStatus.NO_CONTENT,
-)
+@auth_blueprint.post("/logout")
 def logout(
     response: Response,
     access_token: Optional[str] = Cookie(None),
