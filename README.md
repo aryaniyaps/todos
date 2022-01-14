@@ -8,18 +8,12 @@ This is an example todos app.
 
 ## How to use
 
-You can use [Docker Compose](https://github.com/docker/compose) to run this application.
-Make sure you have it installed on your machine! For development purposes, you can get
+You can use [Docker Compose](https://github.com/docker/compose) to run this application 
+locally. Make sure you have it installed on your machine! For development purposes, you can get
 going with the following command:
 
 ```text
 docker compose up --build
 ```
 
-This spins up a few containers locally. The site will be available at
-http://localhost. To use in a production environment, you need to set environment
-variables first. Here's an [example env file](example.env) to reference.
-
-```text
-docker compose -f docker-compose.yml up --build
-```
+This spins up a few containers locally. The site will be available at http://localhost.
