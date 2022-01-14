@@ -4,13 +4,15 @@ services:
   frontend:
     build:
       context: "./frontend"
-      target: "production"
+      target: "development"
     container_name: todos-frontend
     restart: on-failure
     working_dir: "/frontend/"
-    command: "scripts/start-prod.sh"
+    command: "scripts/start-dev.sh"
+    ports:
+      - "3000:3000"
     environment:
-      NODE_ENV: "production"
+      NODE_ENV: "development"
     networks:
       - todos-frontend
       - todos-proxy
@@ -23,13 +25,13 @@ services:
   base-app:
     build:
       context: "./backend"
-      target: "production"
+      target: "development"
     working_dir: "/backend/"
     environment:
-      DEBUG: "${DEBUG}"
-      DATABASE_URL: "${DATABASE_URL}"
-      METRICS_PORT: "${METRICS_PORT}"
-      CELERY_BROKER_URL: "${CELERY_BROKER_URL}"
+      DEBUG: true
+      DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:3306/todos"
+      METRICS_PORT: 8181
+      CELERY_BROKER_URL: "redis://redis:6379/0"
     volumes:
       - ./backend:/backend
 
@@ -38,7 +40,10 @@ services:
       service: base-app
     container_name: todos-backend
     restart: on-failure
-    command: "scripts/start-prod.sh"
+    command: "scripts/start-dev.sh"
+    ports:
+      - "8000:8000"
+      - "8181:8181"
     networks:
       - todos-backend
       - todos-proxy
@@ -51,6 +56,8 @@ services:
     container_name: todos-worker
     restart: always
     command: "scripts/run-worker.sh"
+    ports:
+      - "8080:8080"
     networks:
       - todos-backend
     depends_on:
@@ -62,10 +69,10 @@ services:
     container_name: todos-mysql
     restart: on-failure
     environment:
-      MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "todos"
+      MYSQL_ROOT_PASSWORD: "todos"
+      MYSQL_PASSWORD: "todos"
+      MYSQL_DATABASE: "todos"
     networks:
       - todos-backend
     volumes:
@@ -75,8 +82,10 @@ services:
     image: redis:6.2-alpine
     container_name: todos-redis
     restart: on-failure
+    ports:
+      - "6379:6379"
     environment:
-      REDIS_PASSWORD: "${REDIS_PASSWORD}"
+      REDIS_PASSWORD: "todos"
     networks:
       - todos-backend
     volumes:
