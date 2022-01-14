@@ -2,13 +2,12 @@ from typing import List
 
 from flask import Blueprint
 
-from app.api.providers import get_service, get_todo, get_current_user
 from app.todos.entities import Todo
 from app.users.entities import User
-from app.todos.models import TodoCreateInput, TodoUpdateInput
 from app.todos.services import TodoService
 
-todo_blueprint = Blueprint(url_prefix="/todos")
+
+todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
 
 
 @todo_blueprint.get("")

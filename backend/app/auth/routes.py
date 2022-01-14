@@ -3,13 +3,12 @@ from typing import Optional
 
 from flask import Blueprint
 
-from app.api.providers import get_service
 from app.users.entities import User
-from app.auth.models import LoginInput
 from app.auth.services import AuthService
 from app.users.services import UserService
 
-auth_blueprint = Blueprint(url_prefix="/auth")
+
+auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 
 
 @auth_blueprint.post("/login")

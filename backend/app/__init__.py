@@ -1,5 +1,7 @@
 from flask import Flask
 
+from app.core.config import DEBUG, TESTING
+
 
 def create_app() -> Flask:
     """
@@ -8,6 +10,11 @@ def create_app() -> Flask:
     :return: The created app.
     """
     app = Flask(__name__)
+    app.config.update(
+        DEBUG=DEBUG, 
+        APPLICATION_ROOT="/api",
+        TESTING=TESTING,
+    )
     register_routes(app)
     register_event_handlers(app)
     register_middleware(app)
@@ -50,9 +57,4 @@ def register_event_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.metrics.handlers import start_metrics
-
-    app.add_event_handler(
-        event_type="startup",
-        func=start_metrics
-    )
+    pass

@@ -1,35 +1,35 @@
-from sqlalchemy.orm import Session
+from app.core.database import db_session
 
 from app.todos.entities import Todo
-from app.users.entities import User
 from app.todos.services import TodoService
+from app.users.entities import User
 
 
-def test_get_todos(session: Session, user: User) -> None:
+def test_get_todos(user: User) -> None:
     """
     Ensure we can get todos for a given user.
     """
-    result = TodoService(session).get_todos(user_id=user.id)
+    result = TodoService().get_todos(user_id=user.id)
     assert result == user.todos
 
 
-def test_get_todo(session: Session, todo: Todo) -> None:
+def test_get_todo(todo: Todo) -> None:
     """
     Ensure we can get a todo with a given ID and user ID.
     """
-    result = TodoService(session).get_todo(
+    result = TodoService().get_todo(
         todo_id=todo.id, 
         user_id=todo.user_id,
     )
     assert result == todo
 
 
-def test_create_todo(session: Session, user: User) -> None:
+def test_create_todo(user: User) -> None:
     """
     Ensure we can create a todo.
     """
     content = "sample content"
-    result = TodoService(session).create_todo(
+    result = TodoService().create_todo(
         content=content,
         user_id=user.id,
     )
@@ -38,12 +38,12 @@ def test_create_todo(session: Session, user: User) -> None:
     assert not result.completed
 
 
-def test_update_todo(session: Session, todo: Todo) -> None:
+def test_update_todo(todo: Todo) -> None:
     """
     Ensure we can update a todo.
     """
     content = "sample content"
-    result = TodoService(session).update_todo(
+    result = TodoService().update_todo(
         todo=todo, 
         completed=True, 
         content=content,
@@ -52,17 +52,17 @@ def test_update_todo(session: Session, todo: Todo) -> None:
     assert result.completed
 
 
-def test_delete_todo(session: Session, todo: Todo) -> None:
+def test_delete_todo(todo: Todo) -> None:
     """
     Ensure we can delete a todo.
     """
-    TodoService(session).delete_todo(todo=todo)
-    assert not session.get(Todo, todo.id)
+    TodoService().delete_todo(todo=todo)
+    assert not db_session.get(Todo, todo.id)
 
 
-def test_clear_todos(session: Session, user: User) -> None:
+def test_clear_todos(user: User) -> None:
     """
     Ensure we can clear todos for a user.
     """
-    TodoService(session).clear_todos(user_id=user.id)
+    TodoService().clear_todos(user_id=user.id)
     assert not user.todos.first()

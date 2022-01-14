@@ -10,10 +10,8 @@ def create_worker() -> Celery:
     :return: The created worker.
     """
     celery = Celery(__name__)
+    celery.conf.update(broker_url=CELERY_BROKER_URL)
     celery.autodiscover_tasks()
-    celery.conf.update(
-        broker_url=CELERY_BROKER_URL,
-    )
     return celery
 
 

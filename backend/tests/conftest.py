@@ -4,14 +4,13 @@ from flask import Flask
 from flask.testing import FlaskClient
 from pytest import fixture
 from sqlalchemy.engine import Connection
-from sqlalchemy.orm import Session
-from sqlalchemy.orm.session import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 from app import create_app
 from app.core.database import Base, engine
 from app.todos.entities import Todo
 from app.users.entities import User
-from app.tests.factories import TodoFactory, UserFactory
+from tests.factories import TodoFactory, UserFactory
 
 
 @fixture(scope="session")
@@ -35,7 +34,7 @@ def client(app: Flask) -> FlaskClient:
         return app.test_client()
 
 @fixture()
-def auth_client() -> FlaskClient:
+def auth_client(app: Flask) -> FlaskClient:
     """
     Creates an authenticated client for testing.
 

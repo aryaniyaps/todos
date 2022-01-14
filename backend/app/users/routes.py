@@ -2,12 +2,11 @@ from http import HTTPStatus
 
 from flask import Blueprint
 
-from app.api.providers import get_service, get_current_user
 from app.users.entities import User
-from app.users.models import UserCreateInput
 from app.users.services import UserService
 
-user_blueprint = Blueprint(url_prefix="/users")
+
+user_blueprint = Blueprint("users", __name__, url_prefix="/users")
 
 
 @user_blueprint.get("/@me")
