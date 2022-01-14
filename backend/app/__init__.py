@@ -57,4 +57,6 @@ def register_event_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    pass
+    from app.metrics.handlers import start_metrics
+
+    app.before_first_request(start_metrics)
