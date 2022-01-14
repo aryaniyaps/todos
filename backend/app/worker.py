@@ -1,6 +1,6 @@
 from celery import Celery
 
-from app.core.config import settings
+from app.core.config import CELERY_BROKER_URL
 
 
 def create_worker() -> Celery:
@@ -12,7 +12,7 @@ def create_worker() -> Celery:
     celery = Celery(__name__)
     celery.autodiscover_tasks()
     celery.conf.update(
-        broker_url=settings.CELERY_BROKER_URL,
+        broker_url=CELERY_BROKER_URL,
     )
     return celery
 

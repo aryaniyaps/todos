@@ -1,18 +1,14 @@
-from pydantic import BaseSettings
+from decouple import config
 
 
-class Settings(BaseSettings):
-    # whether the app is in development.
-    DEBUG: str = False
-    # Prometheus metrics port.
-    METRICS_PORT: int
-    # SQLAlchemy database URL.
-    DATABASE_URL: str
-    # Celery broker URL.
-    CELERY_BROKER_URL: str
+# whether the app is in development.
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-    class Config:
-        case_sensitive = True
+# Prometheus metrics port.
+METRICS_PORT = config("METRICS_PORT", cast=int)
 
+# SQLAlchemy database URL.
+DATABASE_URL = config("DATABASE_URL")
 
-settings = Settings()
+# Celery broker URL.
+CELERY_BROKER_URL = config("CELERY_BROKER_URL")

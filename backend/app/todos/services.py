@@ -2,11 +2,11 @@ from typing import List, Optional
 
 from sqlalchemy import select, delete
 
+from app.core.database import db_session
 from app.todos.entities import Todo
-from app.core.services import BaseService
 
 
-class TodoService(BaseService):
+class TodoService:
     def get_todos(self, *, user_id: int) -> List[Todo]:
         """
         Gets todos with the given user ID.
@@ -16,7 +16,7 @@ class TodoService(BaseService):
         :return: The user's todos.
         """
         statement = select(Todo).filter_by(user_id=user_id)
-        return self.session.execute(statement).scalars()
+        return db_session.execute(statement).scalars()
 
     def get_todo(self, *, todo_id: int, user_id: int) -> Optional[Todo]:
         """
@@ -29,7 +29,7 @@ class TodoService(BaseService):
         :return: The user's todo.
         """
         statement = select(Todo).filter_by(id=todo_id, user_id=user_id)
-        return self.session.scalars(statement).first()
+        return db_session.scalars(statement).first()
 
     def create_todo(
         self, *, 
@@ -49,8 +49,8 @@ class TodoService(BaseService):
             content=content, 
             user_id=user_id,
         )
-        self.session.add(todo)
-        self.session.commit()
+        db_session.add(todo)
+        db_session.commit()
         return todo
 
     def update_todo(
@@ -75,8 +75,8 @@ class TodoService(BaseService):
             todo.content = content
         if completed is not None:
             todo.completed = completed
-        self.session.add(todo)
-        self.session.commit()
+        db_session.add(todo)
+        db_session.commit()
         return todo
 
     def delete_todo(self, *, todo: Todo) -> None:
@@ -85,8 +85,8 @@ class TodoService(BaseService):
 
         :param todo: The todo to delete.
         """
-        self.session.delete(todo)
-        self.session.commit()
+        db_session.delete(todo)
+        db_session.commit()
 
     def clear_todos(self, *, user_id: int) -> None:
         """
@@ -95,4 +95,4 @@ class TodoService(BaseService):
         :param user_id: The owner ID of the todos.
         """
         statement = delete(Todo).filter_by(user_id=user_id)
-        self.session.execute(statement)
+        db_session.execute(statement)

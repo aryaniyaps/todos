@@ -1,10 +1,9 @@
 from typing import Optional
 
 from app.users.entities import User
-from app.core.services import BaseService
 
 
-class AuthService(BaseService):
+class AuthService:
     def create_access_token(self, *, user: User) -> str:
         """
         Creates an access token for the given user.

@@ -2,11 +2,11 @@ from typing import Optional
 
 from sqlalchemy import select
 
+from app.core.database import db_session
 from app.users.entities import User
-from app.core.services import BaseService
 
 
-class UserService(BaseService):
+class UserService:
     def user_by_email(self, *, email: str) -> Optional[User]:
         """
         Gets an user with the given email.
@@ -16,7 +16,7 @@ class UserService(BaseService):
         :return: The user with the given email.
         """
         statement = select(User).filter_by(email=email)
-        return self.session.scalars(statement).first()
+        return db_session.scalars(statement).first()
 
     def create_user(self, *, email: str, password: str) -> User:
         """
@@ -30,6 +30,6 @@ class UserService(BaseService):
         """
         user = User(email=email)
         user.set_password(password=password)
-        self.session.add(user)
-        self.session.commit()
+        db_session.add(user)
+        db_session.commit()
         return user
