@@ -1,8 +1,8 @@
 from passlib.hash import argon2
 from sqlalchemy.orm import Session
 
-from app.entities.users import User
-from app.services.users import UserService
+from app.users.entities import User
+from app.users.services import UserService
 
 
 def test_user_by_email(session: Session, user: User) -> None:

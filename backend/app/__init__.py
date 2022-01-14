@@ -1,5 +1,4 @@
 from flask import Flask
-from fastapi.middleware.cors import CORSMiddleware
 
 
 def create_app() -> Flask:
@@ -21,9 +20,9 @@ def register_routes(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.routes.auth import auth_blueprint
-    from app.routes.todos import todo_blueprint
-    from app.routes.users import user_blueprint
+    from app.auth.routes import auth_blueprint
+    from app.todos.routes import todo_blueprint
+    from app.users.routes import user_blueprint
 
     @app.get("/status")
     def check_status():
@@ -43,12 +42,7 @@ def register_middleware(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    app.add_middleware(
-        CORSMiddleware,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+    pass
 
 def register_event_handlers(app: Flask) -> None:
     """
@@ -56,7 +50,7 @@ def register_event_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.handlers.metrics import start_metrics
+    from app.metrics.handlers import start_metrics
 
     app.add_event_handler(
         event_type="startup",

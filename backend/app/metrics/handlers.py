@@ -1,6 +1,6 @@
 from prometheus_client import start_http_server
 
-from app.conf import settings
+from app.core.config import settings
 
 
 def start_metrics() -> None:

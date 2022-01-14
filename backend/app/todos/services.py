@@ -2,8 +2,8 @@ from typing import List, Optional
 
 from sqlalchemy import select, delete
 
-from app.entities.todos import Todo
-from app.services.base import BaseService
+from app.todos.entities import Todo
+from app.core.services import BaseService
 
 
 class TodoService(BaseService):

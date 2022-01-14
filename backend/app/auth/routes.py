@@ -2,15 +2,12 @@ from http import HTTPStatus
 from typing import Optional
 
 from flask import Blueprint
-from fastapi import Cookie, Depends, Response
-from fastapi.exceptions import HTTPException
 
 from app.api.providers import get_service
-from app.entities.users import User
-from app.models.users import UserModel
-from app.models.auth import LoginInput
-from app.services.auth import AuthService
-from app.services.users import UserService
+from app.users.entities import User
+from app.auth.models import LoginInput
+from app.auth.services import AuthService
+from app.users.services import UserService
 
 auth_blueprint = Blueprint(url_prefix="/auth")
 

@@ -1,13 +1,11 @@
 from http import HTTPStatus
 
 from flask import Blueprint
-from fastapi import Depends
-from fastapi.exceptions import HTTPException
 
 from app.api.providers import get_service, get_current_user
-from app.entities.users import User
-from app.models.users import UserCreateInput, UserModel
-from app.services.users import UserService
+from app.users.entities import User
+from app.users.models import UserCreateInput
+from app.users.services import UserService
 
 user_blueprint = Blueprint(url_prefix="/users")
 

@@ -1,7 +1,7 @@
 from typing import Optional
 
-from app.entities.users import User
-from app.services.base import BaseService
+from app.users.entities import User
+from app.core.services import BaseService
 
 
 class AuthService(BaseService):

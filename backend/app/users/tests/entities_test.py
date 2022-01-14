@@ -1,6 +1,6 @@
 from passlib.hash import argon2
 
-from app.entities.users import User
+from app.users.entities import User
 
 
 def test_set_password(user: User) -> None:

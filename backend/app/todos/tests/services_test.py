@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from app.entities.todos import Todo
-from app.entities.users import User
-from app.services.todos import TodoService
+from app.todos.entities import Todo
+from app.users.entities import User
+from app.todos.services import TodoService
 
 
 def test_get_todos(session: Session, user: User) -> None:

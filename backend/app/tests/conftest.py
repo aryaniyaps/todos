@@ -9,8 +9,8 @@ from sqlalchemy.orm.session import sessionmaker
 
 from app import create_app
 from app.core.database import Base, engine
-from app.entities.todos import Todo
-from app.entities.users import User
+from app.todos.entities import Todo
+from app.users.entities import User
 from app.tests.factories import TodoFactory, UserFactory
 
 

@@ -2,8 +2,8 @@ from typing import Optional
 
 from sqlalchemy import select
 
-from app.entities.users import User
-from app.services.base import BaseService
+from app.users.entities import User
+from app.core.services import BaseService
 
 
 class UserService(BaseService):

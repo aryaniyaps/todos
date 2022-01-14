@@ -4,19 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = ">=2.0"
-alembic = ">=1.7.5"
-sqlalchemy = {version=">=1.4.28", extras=["mysql"]}
-celery = ">=5.2.3"
-passlib = {version=">=1.7", extras=["argon2"]}
-marshmallow = ">=3.14"
-prometheus-client = ">=0.12"
-gunicorn = ">=20.1"
+flask = "==2.0.2"
+alembic = "==1.7.5"
+sqlalchemy = {version = "==1.4.28", extras = ["mysql"]}
+celery = "==5.2.3"
+passlib = {version = "==1.7.4", extras = ["argon2"]}
+marshmallow = "==3.14.1"
+prometheus-client = "==0.12.0"
+gunicorn = "==20.1.0"
 
 [dev-packages]
-pytest = ">=6.2"
-factory-boy = ">=3.2"
-requests = ">=2.26"
+pytest = "==6.2.5"
+factory-boy = "==3.2.1"
+requests = "==2.27.1"
 
 [requires]
 python_version = "3.9"
