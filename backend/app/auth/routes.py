@@ -4,8 +4,8 @@ from typing import Optional
 from flask import Blueprint
 
 from app.users.entities import User
-from app.auth.services import AuthService
-from app.users.services import UserService
+from app.auth.services import auth_service
+from app.users.services import user_service
 
 
 auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
@@ -15,16 +15,6 @@ auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 def login(
     data: LoginInput, 
     response: Response,
-    auth_service: AuthService = Depends(
-        dependency=get_service(
-            service=AuthService,
-        ),
-    ),
-    user_service: UserService = Depends(
-        dependency=get_service(
-            service=UserService,
-        ),
-    ),
 ) -> User:
     """
     Log the current user in.
@@ -53,11 +43,6 @@ def login(
 def logout(
     response: Response,
     access_token: Optional[str] = Cookie(None),
-    auth_service: AuthService = Depends(
-        dependency=get_service(
-            service=AuthService,
-        ),
-    ),
 ) -> None:
     """
     Log the current user out.

@@ -31,3 +31,6 @@ class AuthService:
         :return: The user associated with the access token.
         """
         pass
+
+
+auth_service = AuthService()

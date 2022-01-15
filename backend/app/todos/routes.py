@@ -1,10 +1,11 @@
+from http import HTTPStatus
 from typing import List
 
 from flask import Blueprint
 
 from app.todos.entities import Todo
 from app.users.entities import User
-from app.todos.services import TodoService
+from app.todos.services import todo_service
 
 
 todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
@@ -14,11 +15,6 @@ todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
 def read_todos(
     current_user: User = Depends(
         dependency=get_current_user
-    ), 
-    todo_service: TodoService = Depends(
-        dependency=get_service(
-            service=TodoService,
-        ),
     ),
 ) -> List[Todo]:
     """
@@ -33,11 +29,6 @@ def create_todo(
     current_user: User = Depends(
         dependency=get_current_user
     ), 
-    todo_service: TodoService = Depends(
-        dependency=get_service(
-            service=TodoService,
-        ),
-    ),
 ) -> Todo:
     """
     Create a new todo.
@@ -66,11 +57,6 @@ def update_todo(
     todo: Todo = Depends(
         dependency=get_todo,
     ),
-    todo_service: TodoService = Depends(
-        dependency=get_service(
-            service=TodoService,
-        ),
-    ),
 ) -> Todo:
     """
     Update a todo by ID.
@@ -87,11 +73,6 @@ def delete_todo(
     todo: Todo = Depends(
         dependency=get_todo,
     ), 
-    todo_service: TodoService = Depends(
-        dependency=get_service(
-            service=TodoService,
-        ),
-    ),
 ) -> None:
     """
     Delete a todo by ID.
@@ -104,13 +85,9 @@ def clear_todos(
     current_user: User = Depends(
         dependency=get_current_user
     ), 
-    todo_service: TodoService = Depends(
-        dependency=get_service(
-            service=TodoService,
-        ),
-    ),
 ) -> None:
     """
     Clear the current user's todos.
     """
     todo_service.clear_todos(user_id=current_user.id)
+    return "", HTTPStatus.NO_CONTENT

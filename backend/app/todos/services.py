@@ -96,3 +96,6 @@ class TodoService:
         """
         statement = delete(Todo).filter_by(user_id=user_id)
         db_session.execute(statement)
+
+
+todo_service = TodoService()

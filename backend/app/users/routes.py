@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint
 
 from app.users.entities import User
-from app.users.services import UserService
+from app.users.services import user_service
 
 
 user_blueprint = Blueprint("users", __name__, url_prefix="/users")
@@ -22,14 +22,7 @@ def read_current_user(
 
 
 @user_blueprint.post("")
-def create_user(
-    data: UserCreateInput, 
-    user_service: UserService = Depends(
-        dependency=get_service(
-            service=UserService,
-        ),
-    ),
-) -> User:
+def create_user(data: UserCreateInput) -> User:
     """
     Create a new user.
     """
