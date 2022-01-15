@@ -16,6 +16,7 @@ def create_app() -> Flask:
         TESTING=TESTING,
     )
     register_routes(app)
+    register_extensions(app)
     register_event_handlers(app)
     register_middleware(app)
     return app
@@ -41,6 +42,15 @@ def register_routes(app: Flask) -> None:
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(todo_blueprint)
     app.register_blueprint(user_blueprint)
+
+
+def register_extensions(app: Flask) -> None:
+    """
+    Registers extensions for the app.
+
+    :param app: The app instance.
+    """
+    pass
 
 
 def register_middleware(app: Flask) -> None:

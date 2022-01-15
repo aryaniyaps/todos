@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 flask = "==2.0.2"
+flask-login = "==0.5.0"
 alembic = "==1.7.5"
 sqlalchemy = {version = "==1.4.28", extras = ["mysql"]}
 celery = "==5.2.3"
