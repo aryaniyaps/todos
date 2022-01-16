@@ -9,6 +9,9 @@ workers = (cpu_count() * 2) + 1
 # worker class
 worker_class = "gevent"
 
+# worker connections
+worker_connections = pow(10, 2)
+
 # max requests to be processed
 max_requests = pow(10, 3)
 
