@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from flask_login import UserMixin
 from passlib.hash import argon2
 from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.orm import relationship
@@ -8,7 +9,7 @@ from sqlalchemy.sql import func
 from app.core.database import Base
 
 
-class User(Base):
+class User(UserMixin, Base):
     """Represents an individual user account."""
 
     id = Column(Integer, primary_key=True)

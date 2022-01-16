@@ -1,8 +1,8 @@
 from http import HTTPStatus
 
 from flask import Blueprint
+from flask_login import login_required, login_user, logout_user
 
-from app.users.entities import User
 from app.users.services import user_service
 
 
@@ -14,7 +14,7 @@ auth_blueprint = Blueprint(
 
 
 @auth_blueprint.post("/login")
-def login() -> User:
+def login():
     user = user_service.user_by_email(email=data.email)
     authenticated = (
         user is not None and 
@@ -25,14 +25,15 @@ def login() -> User:
             status_code=HTTPStatus.BAD_REQUEST,
             detail="Incorrect email/ password provided.",
         )
-    # TODO: login user.
+    login_user(user=user)
     return user
 
 
 @auth_blueprint.post("/logout")
-def logout() -> None:
+@login_required
+def logout():
     """
     Log the current user out.
     """
-    # TODO: logout user.
-    pass
+    logout_user()
+    return "", HTTPStatus.NO_CONTENT

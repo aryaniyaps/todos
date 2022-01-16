@@ -12,3 +12,8 @@ class UserSchema(Schema):
     email = Email(required=True)
     created_at = DateTime(dump_only=True)
     updated_at = DateTime(dump_only=True)
+
+
+user_create_schema = UserCreateSchema()
+
+user_schema = UserSchema()

@@ -1,10 +1,9 @@
 from http import HTTPStatus
-from typing import List
 
 from flask import Blueprint
+from flask_login import current_user, login_required
 
 from app.todos.entities import Todo
-from app.users.entities import User
 from app.todos.services import todo_service
 
 
@@ -16,7 +15,8 @@ todo_blueprint = Blueprint(
 
 
 @todo_blueprint.get("")
-def read_todos() -> List[Todo]:
+@login_required
+def read_todos():
     """
     Get the current user's todos.
     """
@@ -24,18 +24,21 @@ def read_todos() -> List[Todo]:
 
 
 @todo_blueprint.post("")
-def create_todo() -> Todo:
+@login_required
+def create_todo():
     """
     Create a new todo.
     """
-    return todo_service.create_todo(
+    todo = todo_service.create_todo(
         content=data.content,  
         user_id=current_user.id,
     )
+    return todo, HTTPStatus.CREATED
 
 
 @todo_blueprint.get("/<todo_id:int>")
-def read_todo() -> Todo:
+@login_required
+def read_todo():
     """
     Get a todo by ID.
     """
@@ -43,7 +46,8 @@ def read_todo() -> Todo:
 
 
 @todo_blueprint.patch("/<todo_id:int>")
-def update_todo() -> Todo:
+@login_required
+def update_todo():
     """
     Update a todo by ID.
     """
@@ -55,15 +59,18 @@ def update_todo() -> Todo:
 
 
 @todo_blueprint.delete("/<todo_id:int>")
-def delete_todo() -> None:
+@login_required
+def delete_todo():
     """
     Delete a todo by ID.
     """
     todo_service.delete_todo(todo=todo)
+    return "", HTTPStatus.NO_CONTENT
 
 
 @todo_blueprint.delete("")
-def clear_todos() -> None:
+@login_required
+def clear_todos():
     """
     Clear the current user's todos.
     """

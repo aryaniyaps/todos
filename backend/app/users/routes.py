@@ -1,8 +1,8 @@
 from http import HTTPStatus
 
 from flask import Blueprint
+from flask_login import current_user, login_required, login_user
 
-from app.users.entities import User
 from app.users.services import user_service
 
 
@@ -14,19 +14,22 @@ user_blueprint = Blueprint(
 
 
 @user_blueprint.get("/@me")
-def read_current_user()-> User:
+@login_required
+def read_current_user():
     return current_user
 
 
 @user_blueprint.post("")
-def create_user() -> User:
+def create_user():
     user = user_service.user_by_email(email=data.email)
     if user is not None:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST, 
             detail="User with email already exists.",
         )
-    return user_service.create_user(
+    user = user_service.create_user(
         email=data.email, 
         password=data.password,
     )
+    login_user(user=user)
+    return user, HTTPStatus.CREATED

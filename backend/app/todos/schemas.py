@@ -17,3 +17,12 @@ class TodoSchema(Schema):
     content: String(required=True)
     created_at = DateTime(dump_only=True)
     updated_at = DateTime(dump_only=True)
+
+
+todo_create_schema = TodoCreateSchema()
+
+todo_update_schema = TodoUpdateSchema()
+
+todo_schema = TodoSchema()
+
+todos_schema = TodoSchema(many=True)
