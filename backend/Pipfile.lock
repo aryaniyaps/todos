@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "852527f5627562ac58efaede6f81401915d9b0405a3920909aef2e37f3648576"
+            "sha256": "e11d7fb8c3b9dd671f8c4d66c420ccb2b6394976049669eef19524474003572c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -437,14 +437,6 @@
             "index": "pypi",
             "version": "==1.7.4"
         },
-        "prometheus-client": {
-            "hashes": [
-                "sha256:1b12ba48cee33b9b0b9de64a1047cbd3c5f2d0ab6ebcead7ddda613a750ec3c5",
-                "sha256:317453ebabff0a1b02df7f708efbab21e3489e7072b61cb6957230dd004a0af0"
-            ],
-            "index": "pypi",
-            "version": "==0.12.0"
-        },
         "prompt-toolkit": {
             "hashes": [
                 "sha256:1bb05628c7d87b645974a1bad3f17612be0c29fa39af9f7688030163f680bad6",
@@ -534,6 +526,14 @@
             ],
             "index": "pypi",
             "version": "==1.4.28"
+        },
+        "statsd": {
+            "hashes": [
+                "sha256:c610fb80347fca0ef62666d241bce64184bd7cc1efe582f9690e045c25535eaa",
+                "sha256:e3e6db4c246f7c59003e51c9720a51a7f39a396541cb9b147ff4b14d15b5dd1f"
+            ],
+            "index": "pypi",
+            "version": "==3.3.0"
         },
         "vine": {
             "hashes": [

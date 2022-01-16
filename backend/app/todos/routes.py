@@ -8,15 +8,15 @@ from app.users.entities import User
 from app.todos.services import todo_service
 
 
-todo_blueprint = Blueprint("todos", __name__, url_prefix="/todos")
+todo_blueprint = Blueprint(
+    name="todos", 
+    import_name=__name__, 
+    url_prefix="/todos",
+)
 
 
 @todo_blueprint.get("")
-def read_todos(
-    current_user: User = Depends(
-        dependency=get_current_user
-    ),
-) -> List[Todo]:
+def read_todos() -> List[Todo]:
     """
     Get the current user's todos.
     """
@@ -24,12 +24,7 @@ def read_todos(
 
 
 @todo_blueprint.post("")
-def create_todo(
-    data: TodoCreateInput, 
-    current_user: User = Depends(
-        dependency=get_current_user
-    ), 
-) -> Todo:
+def create_todo() -> Todo:
     """
     Create a new todo.
     """
@@ -40,11 +35,7 @@ def create_todo(
 
 
 @todo_blueprint.get("/<todo_id:int>")
-def read_todo(
-    todo: Todo = Depends(
-        dependency=get_todo,
-    ),
-) -> Todo:
+def read_todo() -> Todo:
     """
     Get a todo by ID.
     """
@@ -52,12 +43,7 @@ def read_todo(
 
 
 @todo_blueprint.patch("/<todo_id:int>")
-def update_todo(
-    data: TodoUpdateInput,
-    todo: Todo = Depends(
-        dependency=get_todo,
-    ),
-) -> Todo:
+def update_todo() -> Todo:
     """
     Update a todo by ID.
     """
@@ -69,11 +55,7 @@ def update_todo(
 
 
 @todo_blueprint.delete("/<todo_id:int>")
-def delete_todo(
-    todo: Todo = Depends(
-        dependency=get_todo,
-    ), 
-) -> None:
+def delete_todo() -> None:
     """
     Delete a todo by ID.
     """
@@ -81,11 +63,7 @@ def delete_todo(
 
 
 @todo_blueprint.delete("")
-def clear_todos(
-    current_user: User = Depends(
-        dependency=get_current_user
-    ), 
-) -> None:
+def clear_todos() -> None:
     """
     Clear the current user's todos.
     """

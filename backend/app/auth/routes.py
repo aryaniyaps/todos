@@ -1,24 +1,20 @@
 from http import HTTPStatus
-from typing import Optional
 
 from flask import Blueprint
 
 from app.users.entities import User
-from app.auth.services import auth_service
 from app.users.services import user_service
 
 
-auth_blueprint = Blueprint("auth", __name__, url_prefix="/auth")
+auth_blueprint = Blueprint(
+    name="auth", 
+    import_name=__name__, 
+    url_prefix="/auth",
+)
 
 
 @auth_blueprint.post("/login")
-def login(
-    data: LoginInput, 
-    response: Response,
-) -> User:
-    """
-    Log the current user in.
-    """
+def login() -> User:
     user = user_service.user_by_email(email=data.email)
     authenticated = (
         user is not None and 
@@ -29,25 +25,14 @@ def login(
             status_code=HTTPStatus.BAD_REQUEST,
             detail="Incorrect email/ password provided.",
         )
-    access_token = auth_service.create_access_token(user=user)
-    response.set_cookie(
-        key="access_token", 
-        value=access_token, 
-        httponly=True, 
-        samesite="Strict",
-    )
+    # TODO: login user.
     return user
 
 
 @auth_blueprint.post("/logout")
-def logout(
-    response: Response,
-    access_token: Optional[str] = Cookie(None),
-) -> None:
+def logout() -> None:
     """
     Log the current user out.
     """
-    auth_service.revoke_access_token(
-        access_token=access_token,
-    )
-    response.delete_cookie(key="access_token")
+    # TODO: logout user.
+    pass

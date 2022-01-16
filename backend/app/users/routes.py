@@ -6,26 +6,20 @@ from app.users.entities import User
 from app.users.services import user_service
 
 
-user_blueprint = Blueprint("users", __name__, url_prefix="/users")
+user_blueprint = Blueprint(
+    name="users", 
+    import_name=__name__, 
+    url_prefix="/users",
+)
 
 
 @user_blueprint.get("/@me")
-def read_current_user(
-    current_user: User = Depends(
-        dependency=get_current_user,
-    ),
-)-> User:
-    """
-    Get the current user.
-    """
+def read_current_user()-> User:
     return current_user
 
 
 @user_blueprint.post("")
-def create_user(data: UserCreateInput) -> User:
-    """
-    Create a new user.
-    """
+def create_user() -> User:
     user = user_service.user_by_email(email=data.email)
     if user is not None:
         raise HTTPException(
