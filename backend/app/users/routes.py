@@ -3,6 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint
 from flask_login import current_user, login_required, login_user
 
+from app.users.schemas import user_schema
 from app.users.services import user_service
 
 
@@ -16,7 +17,7 @@ user_blueprint = Blueprint(
 @user_blueprint.get("/@me")
 @login_required
 def read_current_user():
-    return current_user
+    return user_schema.dump(current_user)
 
 
 @user_blueprint.post("")
@@ -32,4 +33,4 @@ def create_user():
         password=data.password,
     )
     login_user(user=user)
-    return user, HTTPStatus.CREATED
+    return user_schema.dump(user), HTTPStatus.CREATED

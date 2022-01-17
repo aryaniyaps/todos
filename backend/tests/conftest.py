@@ -2,15 +2,28 @@ from typing import Generator
 
 from flask import Flask
 from flask.testing import FlaskClient
+from flask_login import FlaskLoginClient
 from pytest import fixture
-from sqlalchemy.engine import Connection
-from sqlalchemy.orm import Session, sessionmaker
 
 from app import create_app
 from app.core.database import Base, engine
 from app.todos.entities import Todo
 from app.users.entities import User
 from tests.factories import TodoFactory, UserFactory
+
+
+def pytest_configure(config) -> None:
+    """
+    Setup test suite.
+    """
+    Base.metadata.create_all(engine)
+
+
+def pytest_unconfigure(config) -> None:
+    """
+    Teardown test suite.
+    """
+    Base.metadata.drop_all(engine)
 
 
 @fixture(scope="session")
@@ -20,95 +33,58 @@ def app() -> Flask:
 
     :return: The initialized app.
     """
-    return create_app()
+    app = create_app()
+    app.test_client_class = FlaskLoginClient
+    return app
 
 
 @fixture()
-def client(app: Flask) -> FlaskClient:
+def client(app: Flask) -> Generator[FlaskClient, None, None]:
     """
     Creates a client for testing.
 
     :return: The created test client.
     """
     with app.test_request_context():
-        return app.test_client()
+        yield app.test_client()
 
 @fixture()
-def auth_client(app: Flask) -> FlaskClient:
+def auth_client(app: Flask, user: User) -> Generator[FlaskClient, None, None]:
     """
     Creates an authenticated client for testing.
 
     :return: The created test client.
     """
     with app.test_request_context():
-        # TODO: add auth cookies.
-        return app.test_client()
-
-
-@fixture(scope="session")
-def test_connection() -> Generator[Connection, None, None]:
-    """
-    Creates a database connection for testing.
-
-    :return: The created database connection.
-    """
-    with engine.begin() as connection:
-        Base.metadata.create_all(connection)
-        yield connection
-        Base.metadata.drop_all(connection)
-
-
-@fixture(scope="session")
-def session_factory(test_connection: Connection) -> Session:
-    return sessionmaker(test_connection)
+        yield app.test_client(user=user)
 
 
 @fixture()
-def session(session_factory: Session) -> Session:
-    """
-    Creates a session for testing.
-
-    :return: The created session.
-    """
-    with session_factory.begin() as session:
-        return session
-
-
-@fixture()
-def user(session: Session) -> User:
+def user() -> User:
     """
     Creates an user for testing.
 
     :return: The created user.
     """
-    user = UserFactory()
-    session.add(user)
-    session.commit()
-    return user
+    return UserFactory()
 
 
 @fixture()
-def todo(user: User, session: Session) -> Todo:
+def todo(user: User) -> Todo:
     """
     Creates a todo for testing.
 
     :return: The created todo.
     """
-    todo = TodoFactory(user=user)
-    session.add(todo)
-    session.commit()
-    return todo
+    return TodoFactory(user=user)
 
 
 @fixture()
-def foreign_todo(session: Session) -> Todo:
+def foreign_todo() -> Todo:
     """
     Creates a todo that belongs to another
     user for testing.
 
     :return: The created todo.
     """
-    todo = TodoFactory()
-    session.add(todo)
-    session.commit()
-    return todo
+    return TodoFactory()

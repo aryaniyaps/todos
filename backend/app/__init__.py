@@ -15,16 +15,16 @@ def create_app() -> Flask:
         APPLICATION_ROOT="/api",
         TESTING=TESTING,
     )
-    register_routes(app)
-    register_extensions(app)
-    register_event_handlers(app)
-    register_middleware(app)
+    configure_routes(app)
+    configure_extensions(app)
+    configure_event_handlers(app)
+    configure_middleware(app)
     return app
 
 
-def register_routes(app: Flask) -> None:
+def configure_routes(app: Flask) -> None:
     """
-    Registers routes for the app.
+    Configures routes for the app.
 
     :param app: The app instance.
     """
@@ -44,27 +44,31 @@ def register_routes(app: Flask) -> None:
     app.register_blueprint(user_blueprint)
 
 
-def register_extensions(app: Flask) -> None:
+def configure_extensions(app: Flask) -> None:
     """
-    Registers extensions for the app.
+    Configures extensions for the app.
+
+    :param app: The app instance.
+    """
+    from app.extensions import login_manager
+
+    login_manager.init_app(app)
+
+
+def configure_middleware(app: Flask) -> None:
+    """
+    Configures middleware for the app.
 
     :param app: The app instance.
     """
     pass
 
-
-def register_middleware(app: Flask) -> None:
+def configure_event_handlers(app: Flask) -> None:
     """
-    Registers middleware for the app.
-
-    :param app: The app instance.
-    """
-    pass
-
-def register_event_handlers(app: Flask) -> None:
-    """
-    Registers event handlers for the app.
+    Configures event handlers for the app.
 
     :param app: The app instance.
     """
-    pass
+    from app.core.database import teardown_session
+
+    app.teardown_appcontext(teardown_session)

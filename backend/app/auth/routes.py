@@ -3,6 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint
 from flask_login import login_required, login_user, logout_user
 
+from app.users.schemas import user_schema
 from app.users.services import user_service
 
 
@@ -26,7 +27,7 @@ def login():
             detail="Incorrect email/ password provided.",
         )
     login_user(user=user)
-    return user
+    return user_schema.dump(user)
 
 
 @auth_blueprint.post("/logout")
