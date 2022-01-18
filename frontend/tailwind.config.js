@@ -1,6 +1,5 @@
 module.exports = {
-    purge: ["./src/**/*.tsx"],
-    darkMode: false,
+    content: ["./src/**/*.tsx"],
     theme: {
         fontFamily: {
             sans: ["Inter", "Segoe UI", "Roboto", "sans-serif"],
@@ -43,9 +42,6 @@ module.exports = {
                 hover: "var(--color-danger-hover)",
             },
         },
-        extend: {},
-    },
-    variants: {
         extend: {},
     },
     plugins: [],
