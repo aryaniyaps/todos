@@ -1,10 +1,7 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { Form } from "react-final-form";
 import * as yup from "yup";
-import TextField from "../components/TextField";
-import Button from "../components/Button";
 import BaseLayout from "../layouts/BaseLayout";
 
 const registerSchema = yup.object().shape({

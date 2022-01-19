@@ -56,7 +56,7 @@ module.exports = function (env) {
                 {
                     test: /\.css$/,
                     exclude: /node_modules/,
-                    use: ["style-loader", "css-loader", "postcss-loader"],
+                    use: ["style-loader", "css-loader"],
                 },
                 {
                     test: /\.svg$/,

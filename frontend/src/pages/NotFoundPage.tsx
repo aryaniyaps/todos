@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
 import BaseLayout from "../layouts/BaseLayout";
 
 const NotFoundPage: FC = () => {

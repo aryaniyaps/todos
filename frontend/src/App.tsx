@@ -1,6 +1,7 @@
 import "./styles/main.css";
 import { FC, Suspense, lazy } from "react";
 import { QueryClientProvider } from "react-query";
+import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import queryClient from "./lib/queryClient";
 import Fallback from "./components/Fallback";
@@ -13,19 +14,21 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App: FC = () => {
     return (
-        <Suspense fallback={<Fallback />}>
+        <ChakraProvider>
             <QueryClientProvider client={queryClient}>
-                <BrowserRouter>
-                    <Routes>
-                        <Route index element={<LandingPage />} />
-                        <Route path="/dash" element={<DashboardPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                    </Routes>
-                </BrowserRouter>
+                <Suspense fallback={<Fallback />}>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route index element={<LandingPage />} />
+                            <Route path="/dash" element={<DashboardPage />} />
+                            <Route path="/register" element={<RegisterPage />} />
+                            <Route path="/login" element={<LoginPage />} />
+                            <Route path="*" element={<NotFoundPage />} />
+                        </Routes>
+                    </BrowserRouter>
+                </Suspense>
             </QueryClientProvider>
-        </Suspense>
+        </ChakraProvider>
     );
 };
 

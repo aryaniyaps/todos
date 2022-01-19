@@ -1,5 +1,4 @@
 import { FC } from "react";
-import Spinner from "./Spinner";
 
 const Fallback: FC = () => {
     return (

@@ -1,7 +1,6 @@
 import { FC } from "react";
 import SettingsIcon from "../icons/SettingsIcon";
 import UserAvatar from "./UserAvatar";
-import Button from "./Button";
 
 const Navbar: FC = () => {
     return (
