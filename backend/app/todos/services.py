@@ -4,50 +4,48 @@ from sqlalchemy import select, delete
 
 from app.core.database import db_session
 from app.todos.entities import Todo
+from app.users.entities import User
 
 
 class TodoService:
-    def get_todos(self, *, user_id: int) -> List[Todo]:
+    def get_todos(self, *, user: User) -> List[Todo]:
         """
-        Gets todos with the given user ID.
+        Gets the current user's todos.
 
-        :param user_id: The todos' owner ID.
+        :param user: The current user.
 
         :return: The user's todos.
         """
-        statement = select(Todo).filter_by(user_id=user_id)
+        statement = select(Todo).filter_by(user_id=user.id)
         return db_session.execute(statement).scalars()
 
-    def get_todo(self, *, todo_id: int, user_id: int) -> Optional[Todo]:
+    def get_todo(self, *, user: User, todo_id: int) -> Todo:
         """
         Gets a todo with the given ID.
 
-        :param todo_id: The todo's ID.
+        :param user: The current user.
 
-        :param user_id: The todo's owner ID.
+        :param todo_id: The todo's ID.
 
         :return: The user's todo.
         """
-        statement = select(Todo).filter_by(id=todo_id, user_id=user_id)
+        statement = select(Todo)
+        statement.filter_by(id=todo_id, user_id=user.id)
         return db_session.scalars(statement).first()
 
-    def create_todo(
-        self, *, 
-        content: str, 
-        user_id: int, 
-    ) -> Todo:
+    def create_todo(self, *, user: User, content: str) -> Todo:
         """
         Creates a todo with the given data.
 
-        :param content: The todo's content.
+        :param user: The current user.
 
-        :param user_id: The todos's owner ID.
+        :param content: The todo's content.
 
         :return: The created todo.
         """
         todo = Todo(
             content=content, 
-            user_id=user_id,
+            user_id=user.id,
         )
         db_session.add(todo)
         db_session.commit()
@@ -56,14 +54,17 @@ class TodoService:
     def update_todo(
         self,
         *,
-        todo: Todo,
+        user: User,
+        todo_id: int,
         completed: Optional[bool] = None,
         content: Optional[str] = None,
     ) -> Todo:
         """
-        Updates a todo with the given data.
+        Updates the todo with the given ID.
 
-        :param todo: The todo to update.
+        :param user: The current user.
+
+        :param todo_id: ID of the todo to update.
 
         :param completed: Whether the todo is completed.
 
@@ -71,6 +72,7 @@ class TodoService:
 
         :return: The updated todo.
         """
+        todo = self.get_todo(user=user, todo_id=todo_id)
         if content is not None:
             todo.content = content
         if completed is not None:
@@ -79,22 +81,25 @@ class TodoService:
         db_session.commit()
         return todo
 
-    def delete_todo(self, *, todo: Todo) -> None:
+    def delete_todo(self, *, user: User, todo_id: int) -> None:
         """
-        Deletes the given todo.
+        Deletes the todo with the given ID.
 
-        :param todo: The todo to delete.
+        :param user: The current user.
+
+        :param todo_id: ID of the todo to delete.
         """
+        todo = self.get_todo(user=user, todo_id=todo_id)
         db_session.delete(todo)
         db_session.commit()
 
-    def clear_todos(self, *, user_id: int) -> None:
+    def clear_todos(self, *, user: User) -> None:
         """
-        Deletes todos owned by the user with the given ID.
+        Deletes todos owned by the current user.
 
-        :param user_id: The owner ID of the todos.
+        :param user: The current user.
         """
-        statement = delete(Todo).filter_by(user_id=user_id)
+        statement = delete(Todo).filter_by(user_id=user.id)
         db_session.execute(statement)
         db_session.commit()
 

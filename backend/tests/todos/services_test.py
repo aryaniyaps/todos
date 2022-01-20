@@ -9,7 +9,7 @@ def test_get_todos(user: User) -> None:
     """
     Ensure we can get todos for a given user.
     """
-    result = TodoService().get_todos(user_id=user.id)
+    result = TodoService().get_todos(user=user)
     assert result == user.todos
 
 
@@ -19,7 +19,7 @@ def test_get_todo(todo: Todo) -> None:
     """
     result = TodoService().get_todo(
         todo_id=todo.id, 
-        user_id=todo.user_id,
+        user=todo.user,
     )
     assert result == todo
 
@@ -31,7 +31,7 @@ def test_create_todo(user: User) -> None:
     content = "sample content"
     result = TodoService().create_todo(
         content=content,
-        user_id=user.id,
+        user=user,
     )
     assert result.content == content
     assert result.user_id == user.id
@@ -44,7 +44,8 @@ def test_update_todo(todo: Todo) -> None:
     """
     content = "sample content"
     result = TodoService().update_todo(
-        todo=todo, 
+        user=todo.user,
+        todo_id=todo.id, 
         completed=True, 
         content=content,
     )
@@ -56,7 +57,7 @@ def test_delete_todo(todo: Todo) -> None:
     """
     Ensure we can delete a todo.
     """
-    TodoService().delete_todo(todo=todo)
+    TodoService().delete_todo(user=todo.user, todo_id=todo.id)
     assert not db_session.get(Todo, todo.id)
 
 
@@ -64,5 +65,5 @@ def test_clear_todos(user: User) -> None:
     """
     Ensure we can clear todos for a user.
     """
-    TodoService().clear_todos(user_id=user.id)
+    TodoService().clear_todos(user=user)
     assert not user.todos.first()

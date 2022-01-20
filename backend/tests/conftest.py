@@ -95,7 +95,7 @@ def todo(user: User) -> Todo:
     """
     return todo_service.create_todo(
         content="sample content",
-        user_id=user.id
+        user=user
     )
 
 
@@ -108,5 +108,5 @@ def foreign_todo(foreign_user: User) -> Todo:
     """
     return todo_service.create_todo(
         content="sample content",
-        user_id=foreign_user.id
+        user=foreign_user
     )

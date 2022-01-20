@@ -1,11 +1,15 @@
 from http import HTTPStatus
 
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import current_user, login_required
 
-from app.todos.schemas import todo_schema, todos_schema
+from app.todos.schemas import (
+    todo_schema, 
+    todo_create_schema, 
+    todo_update_schema,
+    todos_schema, 
+)
 from app.todos.services import todo_service
-from backend.tests.conftest import user
 
 
 todo_blueprint = Blueprint(
@@ -21,7 +25,7 @@ def read_todos():
     """
     Get the current user's todos.
     """
-    todos = todo_service.get_todos(user_id=current_user.id)
+    todos = todo_service.get_todos(viewer=current_user)
     return todos_schema.dump(todos)
 
 
@@ -31,9 +35,10 @@ def create_todo():
     """
     Create a new todo.
     """
+    data = todo_create_schema.load(request.json)
     todo = todo_service.create_todo(
-        content=data.content,  
-        user_id=current_user.id,
+        viewer=current_user,
+        content=data.content, 
     )
     return todo_schema.dump(todo), HTTPStatus.CREATED
 
@@ -45,8 +50,8 @@ def read_todo(todo_id: int):
     Get a todo by ID.
     """
     todo = todo_service.get_todo(
+        viewer=current_user,
         todo_id=todo_id, 
-        user_id=current_user.id,
     )
     return todo_schema.dump(todo)
 
@@ -57,8 +62,10 @@ def update_todo(todo_id: int):
     """
     Update a todo by ID.
     """
+    data = todo_update_schema.load(request.json)
     todo = todo_service.update_todo(
-        todo=todo, 
+        viewer=current_user,
+        todo_id=todo_id, 
         completed=data.completed, 
         content=data.content,
     )
@@ -71,7 +78,10 @@ def delete_todo(todo_id: int):
     """
     Delete a todo by ID.
     """
-    todo_service.delete_todo(todo=todo)
+    todo_service.delete_todo(
+        viewer=current_user, 
+        todo_id=todo_id,
+    )
     return "", HTTPStatus.NO_CONTENT
 
 
@@ -81,5 +91,5 @@ def clear_todos():
     """
     Clear the current user's todos.
     """
-    todo_service.clear_todos(user_id=current_user.id)
+    todo_service.clear_todos(viewer=current_user)
     return "", HTTPStatus.NO_CONTENT
