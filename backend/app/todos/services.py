@@ -31,7 +31,11 @@ class TodoService:
         """
         statement = select(Todo)
         statement.filter_by(id=todo_id, user_id=user.id)
-        return db_session.scalars(statement).first()
+        todo = db_session.scalars(statement).first()
+        if todo is None:
+            # TODO: raise exception.
+            pass
+        return todo
 
     def create_todo(self, *, user: User, content: str) -> Todo:
         """

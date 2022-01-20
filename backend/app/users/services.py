@@ -28,6 +28,10 @@ class UserService:
 
         :return: The created user.
         """
+        user = self.user_by_email(email=email)
+        if user is not None:
+            # TODO: raise exception.
+            pass
         user = User(email=email)
         user.set_password(password=password)
         db_session.add(user)

@@ -22,22 +22,16 @@ todo_blueprint = Blueprint(
 @todo_blueprint.get("")
 @login_required
 def read_todos():
-    """
-    Get the current user's todos.
-    """
-    todos = todo_service.get_todos(viewer=current_user)
+    todos = todo_service.get_todos(user=current_user)
     return todos_schema.dump(todos)
 
 
 @todo_blueprint.post("")
 @login_required
 def create_todo():
-    """
-    Create a new todo.
-    """
     data = todo_create_schema.load(request.json)
     todo = todo_service.create_todo(
-        viewer=current_user,
+        user=current_user,
         content=data.content, 
     )
     return todo_schema.dump(todo), HTTPStatus.CREATED
@@ -46,11 +40,8 @@ def create_todo():
 @todo_blueprint.get("/<int:todo_id>")
 @login_required
 def read_todo(todo_id: int):
-    """
-    Get a todo by ID.
-    """
     todo = todo_service.get_todo(
-        viewer=current_user,
+        user=current_user,
         todo_id=todo_id, 
     )
     return todo_schema.dump(todo)
@@ -59,12 +50,9 @@ def read_todo(todo_id: int):
 @todo_blueprint.patch("/<int:todo_id>")
 @login_required
 def update_todo(todo_id: int):
-    """
-    Update a todo by ID.
-    """
     data = todo_update_schema.load(request.json)
     todo = todo_service.update_todo(
-        viewer=current_user,
+        user=current_user,
         todo_id=todo_id, 
         completed=data.completed, 
         content=data.content,
@@ -75,11 +63,8 @@ def update_todo(todo_id: int):
 @todo_blueprint.delete("/<int:todo_id>")
 @login_required
 def delete_todo(todo_id: int):
-    """
-    Delete a todo by ID.
-    """
     todo_service.delete_todo(
-        viewer=current_user, 
+        user=current_user, 
         todo_id=todo_id,
     )
     return "", HTTPStatus.NO_CONTENT
@@ -88,8 +73,5 @@ def delete_todo(todo_id: int):
 @todo_blueprint.delete("")
 @login_required
 def clear_todos():
-    """
-    Clear the current user's todos.
-    """
-    todo_service.clear_todos(viewer=current_user)
+    todo_service.clear_todos(user=current_user)
     return "", HTTPStatus.NO_CONTENT
