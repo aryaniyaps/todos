@@ -1,5 +1,5 @@
 # development stage
-FROM node:14-slim as development
+FROM node:16-slim as development
 
 # set workdir
 ARG APP_HOME=/frontend/

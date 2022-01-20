@@ -3,23 +3,24 @@ from typing import Generator
 from flask import Flask
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient
-from pytest import fixture
+from pytest import fixture, Session
 
 from app import create_app
 from app.core.database import Base, engine
 from app.todos.entities import Todo
+from app.todos.services import todo_service
 from app.users.entities import User
-from tests.factories import TodoFactory, UserFactory
+from app.users.services import user_service
 
 
-def pytest_configure(config) -> None:
+def pytest_sessionstart(session: Session) -> None:
     """
     Setup test suite.
     """
     Base.metadata.create_all(engine)
 
 
-def pytest_unconfigure(config) -> None:
+def pytest_sessionfinish(session: Session, exitstatus: int) -> None:
     """
     Teardown test suite.
     """
@@ -59,32 +60,53 @@ def auth_client(app: Flask, user: User) -> Generator[FlaskClient, None, None]:
         yield app.test_client(user=user)
 
 
-@fixture()
+@fixture(scope="session")
 def user() -> User:
     """
     Creates an user for testing.
 
     :return: The created user.
     """
-    return UserFactory()
+    return user_service.create_user(
+        email="user@example.org",
+        password="password"
+    )
 
 
-@fixture()
+@fixture(scope="session")
+def foreign_user() -> User:
+    """
+    Creates a foreign user for testing.
+
+    :return: The created user.
+    """
+    return user_service.create_user(
+        email="foreign-user@example.org",
+        password="password"
+    )
+
+
+@fixture(scope="session")
 def todo(user: User) -> Todo:
     """
     Creates a todo for testing.
 
     :return: The created todo.
     """
-    return TodoFactory(user=user)
+    return todo_service.create_todo(
+        content="sample content",
+        user_id=user.id
+    )
 
 
-@fixture()
-def foreign_todo() -> Todo:
+@fixture(scope="session")
+def foreign_todo(foreign_user: User) -> Todo:
     """
-    Creates a todo that belongs to another
-    user for testing.
+    Creates a foreign todo for testing.
 
     :return: The created todo.
     """
-    return TodoFactory()
+    return todo_service.create_todo(
+        content="sample content",
+        user_id=foreign_user.id
+    )

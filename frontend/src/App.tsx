@@ -1,20 +1,20 @@
 import "./styles/main.css";
 import { FC, Suspense, lazy } from "react";
 import { QueryClientProvider } from "react-query";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ThemeProvider } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import queryClient from "./lib/queryClient";
 import Fallback from "./components/Fallback";
 
-const LandingPage = lazy(() => import("./pages/LandingPage"));
-const DashboardPage = lazy(() => import("./pages/DashboardPage"));
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage"));
+const LandingPage = lazy(() => import("./modules/landing/LandingPage"));
+const DashboardPage = lazy(() => import("./modules/dashboard/DashboardPage"));
+const RegisterPage = lazy(() => import("./modules/register/RegisterPage"));
+const LoginPage = lazy(() => import("./modules/login/LoginPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App: FC = () => {
     return (
-        <ChakraProvider>
+        <ThemeProvider theme={{}}>
             <QueryClientProvider client={queryClient}>
                 <Suspense fallback={<Fallback />}>
                     <BrowserRouter>
@@ -28,7 +28,7 @@ const App: FC = () => {
                     </BrowserRouter>
                 </Suspense>
             </QueryClientProvider>
-        </ChakraProvider>
+        </ThemeProvider>
     );
 };
 

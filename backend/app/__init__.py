@@ -1,6 +1,6 @@
 from flask import Flask
 
-from app.core.config import DEBUG, TESTING
+from app.core.config import DEBUG, TESTING, SECRET_KEY
 
 
 def create_app() -> Flask:
@@ -12,6 +12,7 @@ def create_app() -> Flask:
     app = Flask(__name__)
     app.config.update(
         DEBUG=DEBUG, 
+        SECRET_KEY=SECRET_KEY,
         APPLICATION_ROOT="/api",
         TESTING=TESTING,
     )

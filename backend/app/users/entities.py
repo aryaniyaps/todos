@@ -31,7 +31,7 @@ class User(UserMixin, Base):
         nullable=False,
     )
 
-    todos = relationship("Todo", back_populates="user")
+    todos = relationship("Todo", back_populates="user", lazy="dynamic")
 
     __tablename__ = "users"
 

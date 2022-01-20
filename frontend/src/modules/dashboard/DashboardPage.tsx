@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
-import withAuth from "../hocs/withAuth";
-import AppLayout from "../layouts/AppLayout";
-import TodoList from "../components/TodoList";
+import withAuth from "../auth/withAuth";
+import AppLayout from "../../layouts/AppLayout";
+import TodoList from "./TodoList";
 
 const DashboardPage: FC = () => {
     return (

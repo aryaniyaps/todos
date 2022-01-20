@@ -5,6 +5,7 @@ from flask_login import current_user, login_required
 
 from app.todos.schemas import todo_schema, todos_schema
 from app.todos.services import todo_service
+from backend.tests.conftest import user
 
 
 todo_blueprint = Blueprint(
@@ -43,6 +44,10 @@ def read_todo(todo_id: int):
     """
     Get a todo by ID.
     """
+    todo = todo_service.get_todo(
+        todo_id=todo_id, 
+        user_id=current_user.id,
+    )
     return todo_schema.dump(todo)
 
 

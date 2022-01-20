@@ -1,5 +1,5 @@
 import { FC } from "react";
-import SettingsIcon from "../icons/SettingsIcon";
+import SettingsIcon from "../../icons/SettingsIcon";
 import UserAvatar from "./UserAvatar";
 
 const Navbar: FC = () => {

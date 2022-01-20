@@ -1,44 +1,5 @@
 @import "./fonts.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-    h1,
-    h2,
-    h3,
-    h4 {
-        @apply text-header-text;
-    }
-
-    h1 {
-        @apply text-4xl;
-        @apply font-black;
-    }
-
-    h2 {
-        @apply text-3xl;
-        @apply font-black;
-    }
-
-    h3 {
-        @apply text-2xl;
-        @apply font-semibold;
-    }
-
-    h4 {
-        @apply text-xl;
-        @apply font-semibold;
-    }
-
-    a {
-        @apply text-accent;
-        @apply hover:text-accent-hover;
-        @apply font-semibold;
-    }
-}
-
 :root {
     --color-primary-100: #f9fafb;
     --color-primary-200: #f3f4f6;
@@ -58,23 +19,23 @@
 html,
 body,
 #app {
-    @apply w-full;
-    @apply h-full;
-    @apply box-border;
-    @apply text-primary-600;
-    @apply bg-primary-200;
-    @apply flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    color: var(--color-primary-100);
+    background-color: var(--color-primary-200);
 }
 
 html {
-    @apply fixed;
+    position: fixed;
 }
 
 #app {
-    @apply overflow-y-auto;
+    overflow-y: auto;
 }
 
 input:focus,
 button:focus {
-    @apply outline-none;
+    outline: none;
 }
