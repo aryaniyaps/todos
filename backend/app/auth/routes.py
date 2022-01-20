@@ -1,10 +1,12 @@
+import email
 from http import HTTPStatus
 
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import login_required, login_user, logout_user
 
+from app.auth.schemas import login_schema
+from app.auth.services import auth_service
 from app.users.schemas import user_schema
-from app.users.services import user_service
 
 
 auth_blueprint = Blueprint(
@@ -16,16 +18,11 @@ auth_blueprint = Blueprint(
 
 @auth_blueprint.post("/login")
 def login():
-    user = user_service.user_by_email(email=data.email)
-    authenticated = (
-        user is not None and 
-        user.check_password(password=data.password)
+    data = login_schema.load(request.json)
+    user = auth_service.authenticate_user(
+        email=data.email, 
+        password=data.password,
     )
-    if not authenticated:
-        raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST,
-            detail="Incorrect email/ password provided.",
-        )
     login_user(user=user)
     return user_schema.dump(user)
 

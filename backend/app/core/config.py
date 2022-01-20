@@ -10,7 +10,7 @@ TESTING = config("TESTING", default=False, cast=bool)
 # SQLAlchemy database URL.
 DATABASE_URL = config("DATABASE_URL")
 
-# secret key
+# app's secret key.
 SECRET_KEY = config("SECRET_KEY")
 
 # Celery broker URL.

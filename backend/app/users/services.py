@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlalchemy import select
 
-from app.core.database import db_session
+from app.database import db_session
 from app.users.entities import User
 
 
@@ -17,6 +17,16 @@ class UserService:
         """
         statement = select(User).filter_by(email=email)
         return db_session.scalars(statement).first()
+
+    def get_user(self, user_id: int) -> Optional[User]:
+        """
+        Gets an user with the given ID.
+
+        :param user_id: The user's ID.
+
+        :return: The user with the given ID.
+        """
+        return db_session.get(User, user_id)
 
     def create_user(self, *, email: str, password: str) -> User:
         """

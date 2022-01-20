@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from sqlalchemy import select, delete
 
-from app.core.database import db_session
+from app.database import db_session
 from app.todos.entities import Todo
 from app.users.entities import User
 

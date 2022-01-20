@@ -6,7 +6,7 @@ from flask_login import FlaskLoginClient
 from pytest import fixture, Session
 
 from app import create_app
-from app.core.database import Base, engine
+from app.database import Base, engine
 from app.todos.entities import Todo
 from app.todos.services import todo_service
 from app.users.entities import User

@@ -70,6 +70,6 @@ def configure_event_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.core.database import teardown_session
+    from app.database import teardown_session
 
     app.teardown_appcontext(teardown_session)

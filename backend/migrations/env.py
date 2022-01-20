@@ -21,7 +21,7 @@ logger = getLogger("alembic.env")
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from app.core.config import DATABASE_URL
-from app.core.database import Base
+from app.database import Base
 
 target_metadata = Base.metadata
 config.set_main_option("sqlalchemy.url", DATABASE_URL)

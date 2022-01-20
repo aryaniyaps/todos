@@ -22,42 +22,49 @@ todo_blueprint = Blueprint(
 @todo_blueprint.get("")
 @login_required
 def read_todos():
-    todos = todo_service.get_todos(user=current_user)
-    return todos_schema.dump(todos)
+    return todos_schema.dump(
+        todo_service.get_todos(
+            user=current_user,
+        )
+    )
 
 
 @todo_blueprint.post("")
 @login_required
 def create_todo():
     data = todo_create_schema.load(request.json)
-    todo = todo_service.create_todo(
-        user=current_user,
-        content=data.content, 
+    result = todo_schema.dump(
+        todo_service.create_todo(
+            user=current_user,
+            content=data.content, 
+        )
     )
-    return todo_schema.dump(todo), HTTPStatus.CREATED
+    return result, HTTPStatus.CREATED
 
 
 @todo_blueprint.get("/<int:todo_id>")
 @login_required
 def read_todo(todo_id: int):
-    todo = todo_service.get_todo(
-        user=current_user,
-        todo_id=todo_id, 
+    return todo_schema.dump(
+        todo_service.get_todo(
+            user=current_user,
+            todo_id=todo_id, 
+        )
     )
-    return todo_schema.dump(todo)
 
 
 @todo_blueprint.patch("/<int:todo_id>")
 @login_required
 def update_todo(todo_id: int):
     data = todo_update_schema.load(request.json)
-    todo = todo_service.update_todo(
-        user=current_user,
-        todo_id=todo_id, 
-        completed=data.completed, 
-        content=data.content,
+    return todo_schema.dump(
+        todo_service.update_todo(
+            user=current_user,
+            todo_id=todo_id, 
+            completed=data.completed, 
+            content=data.content,
+        )
     )
-    return todo_schema.dump(todo)
 
 
 @todo_blueprint.delete("/<int:todo_id>")
