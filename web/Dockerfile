@@ -2,7 +2,7 @@
 FROM node:16-slim as development
 
 # set workdir
-ARG APP_HOME=/frontend/
+ARG APP_HOME=/web/
 WORKDIR ${APP_HOME}
 
 # copy dep files
@@ -27,4 +27,4 @@ FROM nginx:1.21-alpine as production
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # copy created build
-COPY --from=build /frontend/dist /usr/share/nginx/html
+COPY --from=build /web/dist /usr/share/nginx/html
