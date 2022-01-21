@@ -7,7 +7,7 @@ from app.users.entities import User
 
 
 class UserService:
-    def user_by_email(self, *, email: str) -> Optional[User]:
+    def user_by_email(self, email: str) -> Optional[User]:
         """
         Gets an user with the given email.
 
@@ -28,7 +28,7 @@ class UserService:
         """
         return db_session.get(User, user_id)
 
-    def create_user(self, *, email: str, password: str) -> User:
+    def create_user(self, email: str, password: str) -> User:
         """
         Creates an user with the given data.
 

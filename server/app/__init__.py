@@ -13,7 +13,7 @@ def create_app() -> Flask:
     app.config.update(
         DEBUG=DEBUG, 
         SECRET_KEY=SECRET_KEY,
-        APPLICATION_ROOT="/api",
+        # APPLICATION_ROOT="/api",
         TESTING=TESTING,
     )
     configure_routes(app)

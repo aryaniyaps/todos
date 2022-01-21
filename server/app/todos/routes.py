@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from flask import Blueprint, request
+from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 
 from app.todos.schemas import (
@@ -22,11 +22,12 @@ todo_blueprint = Blueprint(
 @todo_blueprint.get("")
 @login_required
 def read_todos():
-    return todos_schema.dump(
+    result = todos_schema.dump(
         todo_service.get_todos(
             user=current_user,
         )
     )
+    return jsonify(result)
 
 
 @todo_blueprint.post("")
@@ -36,7 +37,7 @@ def create_todo():
     result = todo_schema.dump(
         todo_service.create_todo(
             user=current_user,
-            content=data.content, 
+            content=data["content"], 
         )
     )
     return result, HTTPStatus.CREATED
@@ -61,8 +62,8 @@ def update_todo(todo_id: int):
         todo_service.update_todo(
             user=current_user,
             todo_id=todo_id, 
-            completed=data.completed, 
-            content=data.content,
+            completed=data["completed"], 
+            content=data["content"],
         )
     )
 

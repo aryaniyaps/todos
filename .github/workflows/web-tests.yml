@@ -1,23 +1,23 @@
-name: frontend tests
+name: web tests
 
 on:
   push:
     branches:
       - main
     paths:
-      - "frontend/**"
+      - "web/**"
   pull_request:
     branches:
       - main
     paths:
-      - "frontend/**"
+      - "web/**"
 
 jobs:
   tests:
     runs-on: ubuntu-20.04
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./web
 
     steps:
       - name: Checkout Code

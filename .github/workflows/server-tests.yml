@@ -1,23 +1,23 @@
-name: backend tests
+name: server tests
 
 on:
   push:
     branches:
       - main
     paths:
-      - "backend/**"
+      - "server/**"
   pull_request:
     branches:
       - main
     paths:
-      - "backend/**"
+      - "server/**"
 
 jobs:
   tests:
     runs-on: ubuntu-20.04
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: ./server
     env:
       DEBUG: true
       DATABASE_URL: "mysql+mysqldb://todos:todos@127.0.0.1:3306/todos"

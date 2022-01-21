@@ -19,8 +19,8 @@ auth_blueprint = Blueprint(
 def login():
     data = login_schema.load(request.json)
     user = auth_service.authenticate_user(
-        email=data.email, 
-        password=data.password,
+        email=data["email"], 
+        password=data["password"],
     )
     login_user(user=user)
     return user_schema.dump(user)

@@ -8,7 +8,7 @@ from app.users.entities import User
 
 
 class TodoService:
-    def get_todos(self, *, user: User) -> List[Todo]:
+    def get_todos(self, user: User) -> List[Todo]:
         """
         Gets the current user's todos.
 
@@ -19,7 +19,7 @@ class TodoService:
         statement = select(Todo).filter_by(user_id=user.id)
         return db_session.execute(statement).scalars()
 
-    def get_todo(self, *, user: User, todo_id: int) -> Todo:
+    def get_todo(self, user: User, todo_id: int) -> Todo:
         """
         Gets a todo with the given ID.
 
@@ -37,7 +37,7 @@ class TodoService:
             pass
         return todo
 
-    def create_todo(self, *, user: User, content: str) -> Todo:
+    def create_todo(self, user: User, content: str) -> Todo:
         """
         Creates a todo with the given data.
 
@@ -85,7 +85,7 @@ class TodoService:
         db_session.commit()
         return todo
 
-    def delete_todo(self, *, user: User, todo_id: int) -> None:
+    def delete_todo(self, user: User, todo_id: int) -> None:
         """
         Deletes the todo with the given ID.
 
@@ -97,7 +97,7 @@ class TodoService:
         db_session.delete(todo)
         db_session.commit()
 
-    def clear_todos(self, *, user: User) -> None:
+    def clear_todos(self, user: User) -> None:
         """
         Deletes todos owned by the current user.
 
