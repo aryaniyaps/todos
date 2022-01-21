@@ -5,7 +5,7 @@ from app.core.config import DEBUG, DATABASE_URL
 
 Base = declarative_base()
 
-engine = create_engine(DATABASE_URL, future=True, echo=DEBUG)
+engine = create_engine(url=DATABASE_URL, future=True, echo=DEBUG)
 
 session_factory = sessionmaker(bind=engine)
 

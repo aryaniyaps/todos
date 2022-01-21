@@ -9,13 +9,13 @@ def test_get_todos(user: User) -> None:
     """
     Ensure we can get todos for a given user.
     """
-    result = todo_service.get_todos(user=user)
-    assert result == user.todos
+    results = todo_service.get_todos(user=user)
+    assert results == user.todos
 
 
 def test_get_todo(todo: Todo) -> None:
     """
-    Ensure we can get a todo with a given ID and user ID.
+    Ensure we can get a todo.
     """
     result = todo_service.get_todo(
         todo_id=todo.id, 
@@ -66,4 +66,4 @@ def test_clear_todos(user: User) -> None:
     Ensure we can clear todos for a user.
     """
     todo_service.clear_todos(user=user)
-    assert not user.todos.first()
+    assert not user.todos

@@ -65,4 +65,4 @@ def configure_event_handlers(app: Flask) -> None:
     """
     from app.database import teardown_session
 
-    app.teardown_appcontext(teardown_session)
+    # app.teardown_appcontext(teardown_session)

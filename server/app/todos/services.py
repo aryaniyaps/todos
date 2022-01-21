@@ -17,7 +17,7 @@ class TodoService:
         :return: The user's todos.
         """
         statement = select(Todo).filter_by(user_id=user.id)
-        return db_session.execute(statement).scalars()
+        return db_session.scalars(statement)
 
     def get_todo(self, user: User, todo_id: int) -> Todo:
         """
