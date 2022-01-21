@@ -13,7 +13,7 @@ def create_app() -> Flask:
     app.config.update(
         DEBUG=DEBUG, 
         SECRET_KEY=SECRET_KEY,
-        # APPLICATION_ROOT="/api",
+        APPLICATION_ROOT="/api",
         TESTING=TESTING,
     )
     configure_routes(app)
@@ -32,13 +32,6 @@ def configure_routes(app: Flask) -> None:
     from app.auth.routes import auth_blueprint
     from app.todos.routes import todo_blueprint
     from app.users.routes import user_blueprint
-
-    @app.get("/status")
-    def check_status():
-        """
-        Check the app's status.
-        """
-        return {"running": True}
 
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(todo_blueprint)
