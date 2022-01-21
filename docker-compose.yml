@@ -1,51 +1,51 @@
 version: "3.9"
 
 services:
-  frontend:
+  web:
     build:
-      context: "./frontend"
+      context: "./web"
       target: "development"
-    container_name: todos-frontend
+    container_name: todos-web
     restart: on-failure
-    working_dir: "/frontend/"
+    working_dir: "/web/"
     command: "scripts/start-dev.sh"
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: "development"
     networks:
-      - todos-frontend
+      - todos-web
       - todos-proxy
     volumes:
-      - ./frontend:/frontend
-      - /frontend/node_modules
+      - ./web:/web
+      - /web/node_modules
     depends_on:
-      - backend
+      - server
 
   base-app:
     build:
-      context: "./backend"
+      context: "./server"
       target: "development"
-    working_dir: "/backend/"
+    working_dir: "/server/"
     environment:
       DEBUG: true
       DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:3306/todos"
       CELERY_BROKER_URL: "redis://redis:6379/0"
       SECRET_KEY: "secret"
     volumes:
-      - ./backend:/backend
+      - ./server:/server
 
-  backend:
+  server:
     extends:
       service: base-app
-    container_name: todos-backend
+    container_name: todos-server
     restart: on-failure
     command: "scripts/start-dev.sh"
     ports:
       - "8000:8000"
       - "8181:8181"
     networks:
-      - todos-backend
+      - todos-server
       - todos-proxy
     depends_on:
       - mysql
@@ -59,10 +59,10 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - todos-backend
+      - todos-server
     depends_on:
       - redis
-      - backend
+      - server
 
   mysql:
     image: mysql:8
@@ -74,7 +74,7 @@ services:
       MYSQL_PASSWORD: "todos"
       MYSQL_DATABASE: "todos"
     networks:
-      - todos-backend
+      - todos-server
     volumes:
       - ./data/mysql:/var/lib/mysql
 
@@ -87,14 +87,14 @@ services:
     environment:
       REDIS_PASSWORD: "todos"
     networks:
-      - todos-backend
+      - todos-server
     volumes:
       - ./data/redis:/data
 
 networks:
-  todos-backend:
+  todos-server:
     driver: bridge
-  todos-frontend:
+  todos-web:
     driver: bridge
   todos-proxy:
     driver: bridge
