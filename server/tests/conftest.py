@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Iterator
 
 from flask import Flask
 from flask.testing import FlaskClient
@@ -40,7 +40,7 @@ def app() -> Flask:
 
 
 @fixture()
-def client(app: Flask) -> Generator[FlaskClient, None, None]:
+def client(app: Flask) -> Iterator[FlaskClient]:
     """
     Creates a client for testing.
 
@@ -50,7 +50,7 @@ def client(app: Flask) -> Generator[FlaskClient, None, None]:
         yield app.test_client()
 
 @fixture()
-def auth_client(app: Flask, user: User) -> Generator[FlaskClient, None, None]:
+def auth_client(app: Flask, user: User) -> Iterator[FlaskClient]:
     """
     Creates an authenticated client for testing.
 
