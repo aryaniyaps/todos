@@ -7,9 +7,7 @@
     "scripts": {
         "start": "webpack serve",
         "build": "webpack",
-        "test": "jest",
-        "storybook": "start-storybook -p 6006 -s public",
-        "build-storybook": "build-storybook -s public"
+        "test": "jest"
     },
     "dependencies": {
         "@emotion/react": "11.7.1",
@@ -28,14 +26,6 @@
         "@babel/preset-env": "7.16.4",
         "@babel/preset-react": "7.16.0",
         "@babel/preset-typescript": "7.16.0",
-        "@storybook/addon-essentials": "6.4.9",
-        "@storybook/addon-links": "6.4.9",
-        "@storybook/addon-postcss": "2.0.0",
-        "@storybook/addons": "6.4.9",
-        "@storybook/builder-webpack5": "6.4.9",
-        "@storybook/manager-webpack5": "6.4.9",
-        "@storybook/react": "6.4.9",
-        "@storybook/theming": "6.4.9",
         "@testing-library/dom": "8.11.1",
         "@testing-library/jest-dom": "5.15.0",
         "@testing-library/react": "12.1.2",
