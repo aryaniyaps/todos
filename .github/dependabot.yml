@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/frontend/"
+    directory: "/web/"
     schedule:
       interval: "weekly"
       time: "08:00"
@@ -11,7 +11,7 @@ updates:
       - dependabot
 
   - package-ecosystem: "pip"
-    directory: "/backend/"
+    directory: "/server/"
     schedule:
       interval: "weekly"
       time: "08:00"
