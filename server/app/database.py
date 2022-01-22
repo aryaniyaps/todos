@@ -12,7 +12,7 @@ session_factory = sessionmaker(bind=engine)
 db_session = scoped_session(session_factory)
 
 
-def teardown_session(exception=None) -> None:
+def shutdown_session(exception=None) -> None:
     """
     Tears down the database session.
     """

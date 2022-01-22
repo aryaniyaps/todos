@@ -13,7 +13,6 @@ def create_app() -> Flask:
     app.config.update(
         DEBUG=DEBUG, 
         SECRET_KEY=SECRET_KEY,
-        APPLICATION_ROOT="/api",
         TESTING=TESTING,
     )
     configure_routes(app)
@@ -63,6 +62,6 @@ def configure_event_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.database import teardown_session
+    from app.database import shutdown_session
 
-    # app.teardown_appcontext(teardown_session)
+    # app.teardown_appcontext(shutdown_session)

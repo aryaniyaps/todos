@@ -68,7 +68,7 @@ def user() -> User:
     :return: The created user.
     """
     return user_service.create_user(
-        email="user@example.org",
+        email="tester@example.org",
         password="password"
     )
 
@@ -81,7 +81,7 @@ def foreign_user() -> User:
     :return: The created user.
     """
     return user_service.create_user(
-        email="foreign-user@example.org",
+        email="foreign-tester@example.org",
         password="password"
     )
 
