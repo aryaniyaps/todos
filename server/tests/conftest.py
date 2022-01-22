@@ -40,6 +40,19 @@ def app() -> Flask:
 
 
 @fixture()
+def test_connection():
+    # TODO: return test connection here.
+    pass
+
+
+@fixture(autouse=True)
+def setup_session(test_connection):
+    # TODO: wrap session within transaction
+    # refer: https://aalvarez.me/posts/python-transactional-tests-using-sqlalchemy-pytest-and-factory-boy/
+    pass
+
+
+@fixture()
 def client(app: Flask) -> Iterator[FlaskClient]:
     """
     Creates a client for testing.
