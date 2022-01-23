@@ -1,3 +1,4 @@
+from app.exceptions import InvalidUsage
 from app.users.entities import User
 from app.users.services import user_service
 
@@ -19,8 +20,9 @@ class AuthService:
             user.check_password(password=password)
         )
         if not authenticated:
-            # TODO: raise exception
-            pass
+            raise InvalidUsage(
+                message="Invalid credentials given.",
+            )
         return user
 
 

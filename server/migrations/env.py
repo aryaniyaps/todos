@@ -20,7 +20,7 @@ logger = getLogger("alembic.env")
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.core.config import DATABASE_URL
+from app.config import DATABASE_URL
 from app.database import Base
 
 target_metadata = Base.metadata

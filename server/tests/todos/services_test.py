@@ -24,6 +24,14 @@ def test_get_todo(todo: Todo) -> None:
     assert result == todo
 
 
+def test_get_foreign_todo(foreign_todo: Todo) -> None:
+    """
+    Ensure we cannot get a foreign todo.
+    """
+    pass
+
+
+
 def test_create_todo(user: User) -> None:
     """
     Ensure we can create a todo.
@@ -53,12 +61,26 @@ def test_update_todo(todo: Todo) -> None:
     assert result.completed
 
 
+def test_update_foreign_todo(foreign_todo: Todo) -> None:
+    """
+    Ensure we cannot update a foreign todo.
+    """
+    pass
+
+
 def test_delete_todo(todo: Todo) -> None:
     """
     Ensure we can delete a todo.
     """
     todo_service.delete_todo(user=todo.user, todo_id=todo.id)
     assert not db_session.get(Todo, todo.id)
+
+
+def test_delete_foreign_todo(foreign_todo: Todo) -> None:
+    """
+    Ensure we cannot delete a foreign todo.
+    """
+    pass
 
 
 def test_clear_todos(user: User) -> None:

@@ -1,6 +1,6 @@
 from celery import Celery
 
-from app.core.config import CELERY_BROKER_URL
+from app.config import CELERY_BROKER_URL
 
 
 def create_worker() -> Celery:
