@@ -4,27 +4,15 @@ from flask import Flask
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient
 from pytest import fixture
+from sqlalchemy.engine import Connection
+from sqlalchemy.orm import Session
 
 from app import create_app
-from app.database import Base, engine
+from app.database import Base, engine, db_session
 from app.todos.entities import Todo
 from app.todos.services import todo_service
 from app.users.entities import User
 from app.users.services import user_service
-
-
-def pytest_sessionstart() -> None:
-    """
-    Setup test suite.
-    """
-    Base.metadata.create_all(engine)
-
-
-def pytest_sessionfinish() -> None:
-    """
-    Teardown test suite.
-    """
-    Base.metadata.drop_all(engine)
 
 
 @fixture(scope="session")
@@ -39,17 +27,25 @@ def app() -> Flask:
     return app
 
 
-@fixture()
-def test_connection():
-    # TODO: return test connection here.
-    pass
+@fixture(scope="session")
+def db_connection() -> Iterator[Connection]:
+    """
+    Initializes the connection to 
+    the test database.
 
+    :return: The database connection.
+    """
+    connection = engine.connect()
+    Base.metadata.create_all(connection)
+    yield connection
+    Base.metadata.drop_all(connection)
+    connection.close()
 
 @fixture(autouse=True)
-def setup_session(test_connection):
-    # TODO: wrap session within transaction
-    # refer: https://aalvarez.me/posts/python-transactional-tests-using-sqlalchemy-pytest-and-factory-boy/
-    pass
+def setup_session(db_connection: Connection) -> Iterator[Session]:
+    db_connection.begin_nested()
+    yield db_session
+    db_connection.rollback()
 
 
 @fixture()

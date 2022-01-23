@@ -1,6 +1,6 @@
 from flask import Flask
 
-from app.core.config import DEBUG, TESTING, SECRET_KEY
+from app.config import DEBUG, TESTING, SECRET_KEY
 
 
 def create_app() -> Flask:
@@ -17,6 +17,7 @@ def create_app() -> Flask:
     )
     configure_routes(app)
     configure_extensions(app)
+    configure_error_handlers(app)
     configure_event_handlers(app)
     configure_middleware(app)
     return app
@@ -55,6 +56,31 @@ def configure_middleware(app: Flask) -> None:
     :param app: The app instance.
     """
     pass
+
+
+def configure_error_handlers(app: Flask) -> None:
+    """
+    Configures error handlers for the app.
+
+    :param app: The app instance.
+    """
+    from app.errors import (
+        InvalidUsage, 
+        ResourceNotFound,
+    )
+    from app.error_handlers import (
+        handle_invalid_usage, 
+        handle_resource_not_found
+    )
+
+    app.register_error_handler(
+        InvalidUsage, 
+        handle_invalid_usage,
+    )
+    app.register_error_handler(
+        ResourceNotFound, 
+        handle_resource_not_found,
+    )
 
 def configure_event_handlers(app: Flask) -> None:
     """

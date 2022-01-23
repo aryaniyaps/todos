@@ -5,7 +5,7 @@ from sqlalchemy.orm import (
     sessionmaker
 )
 
-from app.core.config import DEBUG, DATABASE_URL
+from app.config import DEBUG, DATABASE_URL
 
 Base = declarative_base()
 

@@ -1,8 +1,10 @@
 from typing import Optional
 
+from passlib.hash import argon2
 from sqlalchemy import select
 
 from app.database import db_session
+from app.errors import InvalidUsage
 from app.users.entities import User
 
 
@@ -40,10 +42,11 @@ class UserService:
         """
         user = self.user_by_email(email=email)
         if user is not None:
-            # TODO: raise exception.
-            pass
+            raise InvalidUsage(
+                message="User with that email already exists.",
+            )
         user = User(email=email)
-        user.set_password(password=password)
+        user.password = argon2.hash(password)
         db_session.add(user)
         db_session.commit()
         return user

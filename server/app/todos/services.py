@@ -3,6 +3,7 @@ from typing import List, Optional
 from sqlalchemy import select, delete
 
 from app.database import db_session
+from app.errors import ResourceNotFound
 from app.todos.entities import Todo
 from app.users.entities import User
 
@@ -29,12 +30,12 @@ class TodoService:
 
         :return: The user's todo.
         """
-        statement = select(Todo)
-        statement.filter_by(id=todo_id, user_id=user.id)
+        statement = select(Todo).filter_by(id=todo_id, user_id=user.id)
         todo = db_session.scalars(statement).first()
         if todo is None:
-            # TODO: raise exception.
-            pass
+            raise ResourceNotFound(
+                message=f"Could not find todo with ID {todo_id}.",
+            )
         return todo
 
     def create_todo(self, user: User, content: str) -> Todo:
