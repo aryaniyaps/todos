@@ -1310,7 +1310,7 @@
     jest-haste-map "^27.4.6"
     jest-runtime "^27.4.6"
 
-"@jest/transform@^27.3.1", "@jest/transform@^27.4.6":
+"@jest/transform@^27.4.6":
   version "27.4.6"
   resolved "https://registry.yarnpkg.com/@jest/transform/-/transform-27.4.6.tgz#153621940b1ed500305eacdb31105d415dc30231"
   integrity sha512-9MsufmJC8t5JTpWEQJ0OcOOAXaH5ioaIX6uHVBLBMoCZPfKKQF+EqP8kACAvCZ0Y1h2Zr3uOccg8re+Dr5jxyw==
@@ -1331,7 +1331,7 @@
     source-map "^0.6.1"
     write-file-atomic "^3.0.0"
 
-"@jest/types@^27.2.5", "@jest/types@^27.4.2":
+"@jest/types@^27.4.2":
   version "27.4.2"
   resolved "https://registry.yarnpkg.com/@jest/types/-/types-27.4.2.tgz#96536ebd34da6392c2b7c7737d693885b5dd44a5"
   integrity sha512-j35yw0PMTPpZsUoOBiuHzr1zTYoad1cVIE0ajEjcrJONxxrko/IRGKkXx3os0Nsi4Hu3+5VmDbVfq5WhG/pWAg==
@@ -2174,21 +2174,7 @@ axios@0.25.0:
   dependencies:
     follow-redirects "^1.14.7"
 
-babel-jest@27.3.1:
-  version "27.3.1"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.3.1.tgz#0636a3404c68e07001e434ac4956d82da8a80022"
-  integrity sha512-SjIF8hh/ir0peae2D6S6ZKRhUy7q/DnpH7k/V6fT4Bgs/LXXUztOpX4G2tCgq8mLo5HA9mN6NmlFMeYtKmIsTQ==
-  dependencies:
-    "@jest/transform" "^27.3.1"
-    "@jest/types" "^27.2.5"
-    "@types/babel__core" "^7.1.14"
-    babel-plugin-istanbul "^6.0.0"
-    babel-preset-jest "^27.2.0"
-    chalk "^4.0.0"
-    graceful-fs "^4.2.4"
-    slash "^3.0.0"
-
-babel-jest@^27.4.6:
+babel-jest@27.4.6, babel-jest@^27.4.6:
   version "27.4.6"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.4.6.tgz#4d024e69e241cdf4f396e453a07100f44f7ce314"
   integrity sha512-qZL0JT0HS1L+lOuH+xC2DVASR3nunZi/ozGhpgauJHgmI7f8rudxf6hUjEHympdQ/J64CdKmPkgfJ+A3U6QCrg==
@@ -2219,7 +2205,7 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
-babel-plugin-istanbul@^6.0.0, babel-plugin-istanbul@^6.1.1:
+babel-plugin-istanbul@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-istanbul/-/babel-plugin-istanbul-6.1.1.tgz#fa88ec59232fd9b4e36dbbc540a8ec9a9b47da73"
   integrity sha512-Y1IQok9821cC9onCx5otgFfRm7Lm+I+wwxOx738M/WLPZ9Q42m4IG5W0FNX8WLL2gYMZo3JkuXIH2DOpWM+qwA==
@@ -2291,7 +2277,7 @@ babel-preset-current-node-syntax@^1.0.0:
     "@babel/plugin-syntax-optional-chaining" "^7.8.3"
     "@babel/plugin-syntax-top-level-await" "^7.8.3"
 
-babel-preset-jest@^27.2.0, babel-preset-jest@^27.4.0:
+babel-preset-jest@^27.4.0:
   version "27.4.0"
   resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-27.4.0.tgz#70d0e676a282ccb200fbabd7f415db5fdf393bca"
   integrity sha512-NK4jGYpnBvNxcGo7/ZpZJr51jCGT+3bwwpVIDY2oNfTxJJldRtB4VAcYdgp1loDE50ODuTu+yBjpMAswv5tlpg==
