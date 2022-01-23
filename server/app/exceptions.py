@@ -7,9 +7,16 @@ class BaseException(Exception):
 
 
 class InvalidUsage(BaseException):
+    """
+    Used to indicate that the client has
+    issued a bad request.
+    """
     pass
 
 
 class ResourceNotFound(BaseException):
-    """The requested resource doesn't exist."""
+    """
+    Used to indicate that the requested 
+    resource doesn't exist.
+    """
     pass

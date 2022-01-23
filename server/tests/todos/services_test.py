@@ -1,5 +1,7 @@
-from app.database import db_session
+from pytest import raises
 
+from app.database import db_session
+from app.exceptions import ResourceNotFound
 from app.todos.entities import Todo
 from app.todos.services import todo_service
 from app.users.entities import User
@@ -10,7 +12,7 @@ def test_get_todos(user: User) -> None:
     Ensure we can get todos for a given user.
     """
     results = todo_service.get_todos(user=user)
-    assert results == user.todos
+    assert results
 
 
 def test_get_todo(todo: Todo) -> None:
@@ -24,11 +26,15 @@ def test_get_todo(todo: Todo) -> None:
     assert result == todo
 
 
-def test_get_foreign_todo(foreign_todo: Todo) -> None:
+def test_get_foreign_todo(user: User, foreign_todo: Todo) -> None:
     """
     Ensure we cannot get a foreign todo.
     """
-    pass
+    with raises(ResourceNotFound):
+        todo_service.get_todo(
+            todo_id=foreign_todo.id,
+            user=user,
+        )
 
 
 
@@ -61,11 +67,16 @@ def test_update_todo(todo: Todo) -> None:
     assert result.completed
 
 
-def test_update_foreign_todo(foreign_todo: Todo) -> None:
+def test_update_foreign_todo(user: User, foreign_todo: Todo) -> None:
     """
     Ensure we cannot update a foreign todo.
     """
-    pass
+    with raises(ResourceNotFound):
+        todo_service.update_todo(
+            user=user,
+            todo_id=foreign_todo.id,
+            completed=True,
+        )
 
 
 def test_delete_todo(todo: Todo) -> None:
@@ -76,11 +87,15 @@ def test_delete_todo(todo: Todo) -> None:
     assert not db_session.get(Todo, todo.id)
 
 
-def test_delete_foreign_todo(foreign_todo: Todo) -> None:
+def test_delete_foreign_todo(user: User, foreign_todo: Todo) -> None:
     """
     Ensure we cannot delete a foreign todo.
     """
-    pass
+    with raises(ResourceNotFound):
+        todo_service.delete_todo(
+            user=user,
+            todo_id=foreign_todo.id,
+        )
 
 
 def test_clear_todos(user: User) -> None:
