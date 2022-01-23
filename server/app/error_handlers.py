@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from app.exceptions import InvalidUsage, ResourceNotFound
+from app.errors import InvalidUsage, ResourceNotFound
 
 
 def handle_invalid_usage(exception: InvalidUsage):

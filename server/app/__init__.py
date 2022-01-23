@@ -64,7 +64,7 @@ def configure_error_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.exceptions import (
+    from app.errors import (
         InvalidUsage, 
         ResourceNotFound,
     )

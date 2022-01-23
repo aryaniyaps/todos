@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy import select
 
 from app.database import db_session
-from app.exceptions import InvalidUsage
+from app.errors import InvalidUsage
 from app.users.entities import User
 
 
@@ -42,7 +42,7 @@ class UserService:
         user = self.user_by_email(email=email)
         if user is not None:
             raise InvalidUsage(
-                message="User with email already exists.",
+                message="User with that email already exists.",
             )
         user = User(email=email)
         user.set_password(password=password)

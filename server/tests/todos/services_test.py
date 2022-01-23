@@ -1,7 +1,6 @@
 from pytest import raises
 
-from app.database import db_session
-from app.exceptions import ResourceNotFound
+from app.errors import ResourceNotFound
 from app.todos.entities import Todo
 from app.todos.services import todo_service
 from app.users.entities import User
@@ -83,7 +82,11 @@ def test_delete_todo(todo: Todo) -> None:
     Ensure we can delete a todo.
     """
     todo_service.delete_todo(user=todo.user, todo_id=todo.id)
-    assert not db_session.get(Todo, todo.id)
+    with raises(ResourceNotFound):
+        todo_service.get_todo(
+            user=todo.user,
+            todo_id=todo.id,
+        )
 
 
 def test_delete_foreign_todo(user: User, foreign_todo: Todo) -> None:

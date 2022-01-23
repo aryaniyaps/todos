@@ -1,4 +1,4 @@
-from app.exceptions import InvalidUsage
+from app.errors import InvalidUsage
 from app.users.entities import User
 from app.users.services import user_service
 
