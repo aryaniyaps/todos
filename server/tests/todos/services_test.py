@@ -35,8 +35,7 @@ def test_get_foreign_todo(user: User, foreign_todo: Todo) -> None:
             todo_id=foreign_todo.id,
             user=user,
         )
-
-
+        
 
 def test_create_todo(user: User) -> None:
     """
