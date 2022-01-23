@@ -1,3 +1,5 @@
+from passlib.hash import argon2
+
 from app.errors import InvalidUsage
 from app.users.entities import User
 from app.users.services import user_service
@@ -17,7 +19,7 @@ class AuthService:
         user = user_service.user_by_email(email=email)
         authenticated = (
             user is not None and 
-            user.check_password(password=password)
+            argon2.verify(password, user.password)
         )
         if not authenticated:
             raise InvalidUsage(

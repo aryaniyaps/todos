@@ -41,11 +41,11 @@ def db_connection() -> Iterator[Connection]:
     Base.metadata.drop_all(connection)
     connection.close()
 
-# @fixture(autouse=True)
-# def setup_session(db_connection: Connection) -> Iterator[Session]:
-#     db_connection.begin_nested()
-#     yield db_session
-#     db_connection.rollback()
+@fixture(autouse=True)
+def setup_session(db_connection: Connection) -> Iterator[Session]:
+    db_connection.begin_nested()
+    yield db_session
+    db_connection.rollback()
 
 
 @fixture()
