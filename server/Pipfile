@@ -16,7 +16,6 @@ python-decouple = "==3.5"
 
 [dev-packages]
 pytest = "==6.2.5"
-factory-boy = "==3.2.1"
 
 [requires]
 python_version = "3.9"
