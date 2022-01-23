@@ -1,41 +1,22 @@
-"""initial
+"""add todos
 
-Revision ID: 109a46339d4b
-Revises:
-Create Date: 2021-10-23 19:09:00.036437
+Revision ID: 5979d11c46f8
+Revises: dee7e2b6f04d
+Create Date: 2022-01-23 18:32:57.082549
 
 """
-import sqlalchemy as sa
 from alembic import op
+import sqlalchemy as sa
+
 
 # revision identifiers, used by Alembic.
-revision = "109a46339d4b"
-down_revision = None
+revision = '5979d11c46f8'
+down_revision = 'dee7e2b6f04d'
 branch_labels = None
 depends_on = None
 
 
 def upgrade():
-    op.create_table(
-        "users",
-        sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("password", sa.String(length=255), nullable=False),
-        sa.Column("email", sa.String(length=255), nullable=False),
-        sa.Column(
-            "created_at",
-            sa.DateTime(timezone=True),
-            server_default=sa.text("now()"),
-            nullable=False,
-        ),
-        sa.Column(
-            "updated_at",
-            sa.DateTime(timezone=True),
-            server_default=sa.text("now()"),
-            nullable=False,
-        ),
-        sa.PrimaryKeyConstraint("id"),
-        sa.UniqueConstraint("email"),
-    )
     op.create_table(
         "todos",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -64,4 +45,3 @@ def upgrade():
 
 def downgrade():
     op.drop_table("todos")
-    op.drop_table("users")
