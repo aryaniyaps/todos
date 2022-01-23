@@ -1,14 +1,12 @@
 class BaseError(Exception):
-    """
-    Base error class.
-    """
+    """Base error class."""
     def __init__(self, message: str) -> None:
         self.message = message
 
 
 class InvalidUsage(BaseError):
     """
-    Used to indicate that the client has
+    Indicates that the client has
     issued a bad request.
     """
     pass
@@ -16,7 +14,7 @@ class InvalidUsage(BaseError):
 
 class ResourceNotFound(BaseError):
     """
-    Used to indicate that the requested 
+    Indicates that the requested 
     resource doesn't exist.
     """
     pass
