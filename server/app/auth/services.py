@@ -1,6 +1,6 @@
 from passlib.hash import argon2
 
-from app.errors import InvalidUsage
+from app.errors import InvalidInput
 from app.users.entities import User
 from app.users.services import user_service
 
@@ -22,7 +22,7 @@ class AuthService:
             argon2.verify(password, user.password)
         )
         if not authenticated:
-            raise InvalidUsage(
+            raise InvalidInput(
                 message="Invalid credentials given.",
             )
         return user

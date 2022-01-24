@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from typing import Optional
 
 from flask_login import LoginManager
@@ -19,3 +20,9 @@ def load_user(user_id: str) -> Optional[User]:
     :return: The user with the given ID.
     """
     return user_service.get_user(user_id=int(user_id))
+
+
+@login_manager.unauthorized_handler
+def handle_unauthorized():
+    result = {"message": "Could not validate credentials."}
+    return result, HTTPStatus.UNAUTHORIZED

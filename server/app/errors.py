@@ -4,10 +4,10 @@ class BaseError(Exception):
         self.message = message
 
 
-class InvalidUsage(BaseError):
+class InvalidInput(BaseError):
     """
     Indicates that the client has
-    issued a bad request.
+    issued an invalid request.
     """
     pass
 

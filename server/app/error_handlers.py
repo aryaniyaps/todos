@@ -1,11 +1,13 @@
 from http import HTTPStatus
 
-from app.errors import InvalidUsage, ResourceNotFound
+from app.errors import InvalidInput, ResourceNotFound
 
 
-def handle_invalid_usage(exception: InvalidUsage):
+def invalid_input_handler(exception: InvalidInput):
+    """Handles invalid input exceptions."""
     return {"message": exception.message}, HTTPStatus.BAD_REQUEST
 
 
-def handle_resource_not_found(exception: ResourceNotFound):
+def resource_not_found_handler(exception: ResourceNotFound):
+    """Handles resource not found exceptions."""
     return {"message": exception.message}, HTTPStatus.NOT_FOUND

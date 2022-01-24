@@ -12,6 +12,3 @@ DATABASE_URL = config("DATABASE_URL")
 
 # app's secret key.
 SECRET_KEY = config("SECRET_KEY")
-
-# Celery broker URL.
-CELERY_BROKER_URL = config("CELERY_BROKER_URL")

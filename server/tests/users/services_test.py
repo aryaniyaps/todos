@@ -1,7 +1,7 @@
 from passlib.hash import argon2
 from pytest import raises
 
-from app.errors import InvalidUsage
+from app.errors import InvalidInput
 from app.users.entities import User
 from app.users.services import user_service
 
@@ -34,7 +34,6 @@ def test_create_user() -> None:
     )
     assert result.email == email
     assert result.password != password
-    assert result.check_password(password)
     assert argon2.identify(result.password)
 
 
@@ -42,7 +41,7 @@ def test_create_duplicate_user(user: User) -> None:
     """
     Ensure we cannot create an user with a duplicate email.
     """
-    with raises(InvalidUsage):
+    with raises(InvalidInput):
         user_service.create_user(
             email=user.email,
             password="password"

@@ -15,3 +15,6 @@ coverage.xml
 .venv
 env/
 venv/
+
+# test database
+test.db

@@ -64,22 +64,19 @@ def configure_error_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.errors import (
-        InvalidUsage, 
-        ResourceNotFound,
-    )
+    from app.errors import InvalidInput, ResourceNotFound
     from app.error_handlers import (
-        handle_invalid_usage, 
-        handle_resource_not_found
+        invalid_input_handler, 
+        resource_not_found_handler
     )
 
     app.register_error_handler(
-        InvalidUsage, 
-        handle_invalid_usage,
+        InvalidInput, 
+        invalid_input_handler,
     )
     app.register_error_handler(
         ResourceNotFound, 
-        handle_resource_not_found,
+        resource_not_found_handler,
     )
 
 def configure_event_handlers(app: Flask) -> None:

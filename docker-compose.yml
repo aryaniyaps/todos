@@ -22,10 +22,13 @@ services:
     depends_on:
       - server
 
-  base-app:
+  server:
     build:
       context: "./server"
       target: "development"
+    container_name: todos-server
+    restart: on-failure
+    command: "scripts/start-dev.sh"
     working_dir: "/server/"
     environment:
       DEBUG: true
@@ -34,13 +37,6 @@ services:
       SECRET_KEY: "secret"
     volumes:
       - ./server:/server
-
-  server:
-    extends:
-      service: base-app
-    container_name: todos-server
-    restart: on-failure
-    command: "scripts/start-dev.sh"
     ports:
       - "5000:5000"
       - "8181:8181"
@@ -49,20 +45,6 @@ services:
       - todos-proxy
     depends_on:
       - mysql
-
-  worker:
-    extends:
-      service: base-app
-    container_name: todos-worker
-    restart: always
-    command: "scripts/run-worker.sh"
-    ports:
-      - "8080:8080"
-    networks:
-      - todos-server
-    depends_on:
-      - redis
-      - server
 
   mysql:
     image: mysql:8
@@ -77,19 +59,6 @@ services:
       - todos-server
     volumes:
       - ./data/mysql:/var/lib/mysql
-
-  redis:
-    image: redis:6.2-alpine
-    container_name: todos-redis
-    restart: on-failure
-    ports:
-      - "6379:6379"
-    environment:
-      REDIS_PASSWORD: "todos"
-    networks:
-      - todos-server
-    volumes:
-      - ./data/redis:/data
 
 networks:
   todos-server:

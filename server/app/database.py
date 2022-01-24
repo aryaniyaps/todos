@@ -9,11 +9,9 @@ from app.config import DEBUG, DATABASE_URL
 
 Base = declarative_base()
 
-db_session = scoped_session(sessionmaker())
-
 engine = create_engine(url=DATABASE_URL, future=True, echo=DEBUG)
 
-db_session.configure(bind=engine)
+db_session = scoped_session(sessionmaker(bind=engine))
 
 
 def shutdown_session(exception=None) -> None:

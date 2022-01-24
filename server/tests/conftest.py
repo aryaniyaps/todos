@@ -8,7 +8,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
 
 from app import create_app
-from app.database import Base, engine, db_session
+from app.database import Base, engine
 from app.todos.entities import Todo
 from app.todos.services import todo_service
 from app.users.entities import User
@@ -35,16 +35,15 @@ def db_connection() -> Iterator[Connection]:
 
     :return: The database connection.
     """
-    connection = engine.connect()
-    Base.metadata.create_all(connection)
-    yield connection
-    Base.metadata.drop_all(connection)
-    connection.close()
+    with engine.connect() as connection:
+        Base.metadata.create_all(connection)
+        yield connection
+        Base.metadata.drop_all(connection)
 
 @fixture(autouse=True)
-def setup_session(db_connection: Connection) -> Iterator[Session]:
+def setup_transaction(db_connection: Connection) -> Iterator[Session]:
     db_connection.begin_nested()
-    yield db_session
+    yield db_connection
     db_connection.rollback()
 
 
