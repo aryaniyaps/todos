@@ -6,7 +6,7 @@ from flask import Flask
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient
 from pytest import fixture
-from sqlalchemy.engine import Connection, Engine
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
 from app import create_app
@@ -39,31 +39,20 @@ def db_engine() -> Iterator[Engine]:
     stamp(alembic_cfg, revision=None, purge=True)
 
 
-@fixture(scope="session")
-def db_connection(db_engine: Engine) -> Iterator[Connection]:
-    """
-    Initializes the connection to 
-    the test database.
-
-    :return: The database connection.
-    """
-    connection = db_engine.connect()
-    yield connection
-    connection.close()
-
-
 @fixture(autouse=True)
-def db_transaction(db_connection: Connection) -> Iterator[Session]:
+def db_transaction(db_engine: Engine) -> Iterator[Session]:
     """
     Sets up a database transaction for each test case.
 
     :return: The database transaction.
     """
-    transaction = db_connection.begin()
-    session = db_session(bind=db_connection)
+    connection = db_engine.connect()
+    transaction = connection.begin()
+    session = db_session(bind=connection)
     yield session
     session.close()
     transaction.rollback()
+    connection.close()
 
 
 @fixture()
