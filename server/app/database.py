@@ -16,6 +16,6 @@ db_session = scoped_session(sessionmaker(bind=engine))
 
 def shutdown_session(exception=None) -> None:
     """
-    Tears down the database session.
+    Shuts down the database session.
     """
     db_session.remove()

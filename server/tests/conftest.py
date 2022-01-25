@@ -41,9 +41,7 @@ def connection() -> Iterator[Connection]:
 @fixture(autouse=True)
 def setup_transaction(connection: Connection) -> Iterator[Session]:
     transaction = connection.begin()
-    db_session.configure(bind=connection)
     yield db_session
-    db_session.remove()
     transaction.rollback()
 
 
