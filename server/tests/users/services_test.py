@@ -26,14 +26,12 @@ def test_create_user() -> None:
     """
     Ensure we can create an user.
     """
-    email = "tester@abc.com"
-    password = "avocados"
     result = user_service.create_user(
-        email=email,
-        password=password
+        email="user@example.com",
+        password="password"
     )
-    assert result.email == email
-    assert result.password != password
+    assert result.email == "user@example.com"
+    assert result.password != "password"
     assert argon2.identify(result.password)
 
 

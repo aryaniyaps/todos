@@ -8,7 +8,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.orm import Session
 
 from app import create_app
-from app.database import Base, engine
+from app.database import db_session, engine
 from app.todos.entities import Todo
 from app.todos.services import todo_service
 from app.users.entities import User
@@ -28,7 +28,7 @@ def app() -> Flask:
 
 
 @fixture(scope="session")
-def db_connection() -> Iterator[Connection]:
+def connection() -> Iterator[Connection]:
     """
     Initializes the connection to 
     the test database.
@@ -36,15 +36,15 @@ def db_connection() -> Iterator[Connection]:
     :return: The database connection.
     """
     with engine.connect() as connection:
-        Base.metadata.create_all(connection)
         yield connection
-        Base.metadata.drop_all(connection)
 
 @fixture(autouse=True)
-def setup_transaction(db_connection: Connection) -> Iterator[Session]:
-    db_connection.begin_nested()
-    yield db_connection
-    db_connection.rollback()
+def setup_transaction(connection: Connection) -> Iterator[Session]:
+    transaction = connection.begin()
+    db_session.configure(bind=connection)
+    yield db_session
+    db_session.remove()
+    transaction.rollback()
 
 
 @fixture()
@@ -82,19 +82,6 @@ def user() -> User:
 
 
 @fixture(scope="session")
-def foreign_user() -> User:
-    """
-    Creates a foreign user for testing.
-
-    :return: The created user.
-    """
-    return user_service.create_user(
-        email="foreign-tester@example.org",
-        password="password"
-    )
-
-
-@fixture(scope="session")
 def todo(user: User) -> Todo:
     """
     Creates a todo for testing.
@@ -108,7 +95,7 @@ def todo(user: User) -> Todo:
 
 
 @fixture(scope="session")
-def foreign_todo(foreign_user: User) -> Todo:
+def foreign_todo() -> Todo:
     """
     Creates a foreign todo for testing.
 
@@ -116,5 +103,8 @@ def foreign_todo(foreign_user: User) -> Todo:
     """
     return todo_service.create_todo(
         content="sample content",
-        user=foreign_user
+        user=user_service.create_user(
+            email="foreign-tester@example.org",
+            password="password",
+        )
     )

@@ -40,12 +40,11 @@ def test_create_todo(user: User) -> None:
     """
     Ensure we can create a todo.
     """
-    content = "sample content"
     result = todo_service.create_todo(
-        content=content,
+        content="content",
         user=user,
     )
-    assert result.content == content
+    assert result.content == "content"
     assert result.user_id == user.id
     assert not result.completed
 
@@ -54,14 +53,13 @@ def test_update_todo(todo: Todo) -> None:
     """
     Ensure we can update a todo.
     """
-    content = "sample content"
     result = todo_service.update_todo(
         user=todo.user,
         todo_id=todo.id, 
         completed=True, 
-        content=content,
+        content="content",
     )
-    assert result.content == content
+    assert result.content == "content"
     assert result.completed
 
 
