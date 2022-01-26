@@ -1,10 +1,17 @@
 from marshmallow import Schema
 from marshmallow.fields import DateTime, Email, Integer, String
+from marshmallow.validate import Length
 
 
 class UserCreateSchema(Schema):
     email = Email(required=True)
-    password = String(required=True, load_only=True)
+    password = String(
+        required=True, 
+        load_only=True, 
+        validate=(
+            Length(min=8, max=255)
+        ),
+    )
 
 
 class UserSchema(Schema):

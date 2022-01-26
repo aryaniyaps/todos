@@ -1,13 +1,23 @@
 from marshmallow import Schema
 from marshmallow.fields import Boolean, DateTime, Integer, String
+from marshmallow.validate import Length
 
 
 class TodoCreateSchema(Schema):
-    content = String(required=True)
+    content = String(
+        required=True, 
+        validate=(
+            Length(max=250),
+        ),
+    )
 
 
 class TodoUpdateSchema(Schema):
-    content = String()
+    content = String(
+        validate=(
+            Length(max=250),
+        ),
+    )
     completed = Boolean()
 
 
