@@ -6,8 +6,7 @@ from flask import Flask
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient
 from pytest import fixture
-from sqlalchemy.engine import Engine
-from sqlalchemy.orm import Session
+from sqlalchemy.engine import Connection, Engine
 
 from app import create_app
 from app.database import Base, db_session, engine
@@ -40,19 +39,20 @@ def db_engine() -> Iterator[Engine]:
 
 
 @fixture(autouse=True)
-def db_transaction(db_engine: Engine) -> Iterator[Session]:
+def db_transaction(db_engine: Engine) -> Iterator[Connection]:
     """
-    Sets up a database transaction for each test case.
+    Sets up a session inside a database 
+    transaction for each test case.
 
     :return: The database transaction.
     """
-    connection = db_engine.connect()
-    transaction = connection.begin()
-    session = db_session(bind=connection)
-    yield session
-    session.close()
-    transaction.rollback()
-    connection.close()
+    with db_engine.connect() as connection:
+        transaction = connection.begin()
+        session = db_session(bind=connection)
+        yield session
+        session.close()
+        db_session.remove()
+        transaction.rollback()
 
 
 @fixture()
@@ -64,6 +64,7 @@ def client(app: Flask) -> Iterator[FlaskClient]:
     """
     with app.test_request_context():
         yield app.test_client()
+        
 
 @fixture()
 def auth_client(app: Flask, user: User) -> Iterator[FlaskClient]:
@@ -76,7 +77,7 @@ def auth_client(app: Flask, user: User) -> Iterator[FlaskClient]:
         yield app.test_client(user=user)
 
 
-@fixture(scope="session")
+@fixture()
 def user() -> User:
     """
     Creates an user for testing.
@@ -89,7 +90,7 @@ def user() -> User:
     )
 
 
-@fixture(scope="session")
+@fixture()
 def todo(user: User) -> Todo:
     """
     Creates a todo for testing.
@@ -102,7 +103,7 @@ def todo(user: User) -> Todo:
     )
 
 
-@fixture(scope="session")
+@fixture()
 def foreign_todo() -> Todo:
     """
     Creates a foreign todo for testing.

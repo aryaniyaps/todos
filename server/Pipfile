@@ -15,6 +15,7 @@ python-decouple = "==3.5"
 
 [dev-packages]
 pytest = "==6.2.5"
+pytest-timeout = "==2.1.0"
 
 [requires]
 python_version = "3.9"
