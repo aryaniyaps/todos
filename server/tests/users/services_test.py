@@ -1,4 +1,4 @@
-from passlib.hash import argon2
+from passlib.hash import bcrypt
 from pytest import raises
 
 from app.errors import InvalidInput
@@ -32,7 +32,7 @@ def test_create_user() -> None:
     )
     assert result.email == "user@example.com"
     assert result.password != "password"
-    assert argon2.identify(result.password)
+    assert bcrypt.identify(result.password)
 
 
 def test_create_duplicate_user(user: User) -> None:

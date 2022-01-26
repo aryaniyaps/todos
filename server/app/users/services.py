@@ -1,6 +1,6 @@
 from typing import Optional
 
-from passlib.hash import argon2
+from passlib.hash import bcrypt
 from sqlalchemy import select
 
 from app.database import db_session
@@ -46,7 +46,7 @@ class UserService:
                 message="User with that email already exists.",
             )
         user = User(email=email)
-        user.password = argon2.hash(password)
+        user.password = bcrypt.hash(password)
         db_session.add(user)
         db_session.commit()
         return user

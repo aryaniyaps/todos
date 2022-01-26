@@ -1,4 +1,4 @@
-from passlib.hash import argon2
+from passlib.hash import bcrypt
 
 from app.errors import InvalidInput
 from app.users.entities import User
@@ -19,7 +19,7 @@ class AuthService:
         user = user_service.user_by_email(email=email)
         authenticated = (
             user is not None and 
-            argon2.verify(password, user.password)
+            bcrypt.verify(password, user.password)
         )
         if not authenticated:
             raise InvalidInput(

@@ -39,19 +39,23 @@ def db_engine() -> Iterator[Engine]:
 
 
 @fixture(autouse=True)
-def db_transaction(db_engine: Engine) -> Iterator[Connection]:
+def setup_transaction(db_engine: Engine) -> Iterator[Connection]:
     """
-    Sets up a session inside a database 
-    transaction for each test case.
+    Sets up a transaction inside a database 
+    connection for each test case.
 
-    :return: The database transaction.
+    :return: The connection with transaction.
     """
     with db_engine.connect() as connection:
+        # begin database transaction.
         transaction = connection.begin()
-        session = db_session(bind=connection)
-        yield session
-        session.close()
+        # configure session bind.
+        db_session.configure(bind=connection)
+        # yield connection with transaction.
+        yield connection
+        # remove session instance.
         db_session.remove()
+        # rollback database transaction.
         transaction.rollback()
 
 
