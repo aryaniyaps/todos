@@ -1,22 +1,22 @@
 from multiprocessing import cpu_count
 
-# server socket
+# server socket.
 bind = "0.0.0.0:5000"
 
-# worker processes
+# worker processes.
 workers = (cpu_count() * 2) + 1
 
-# worker class
+# worker class.
 worker_class = "gevent"
 
-# worker connections
+# worker connections.
 worker_connections = pow(10, 2)
 
-# max requests to be processed
+# max requests to be processed.
 max_requests = pow(10, 3)
 
-# worker timeout
+# worker timeout.
 timeout = 15
 
-# request waiting time
+# request waiting time.
 keepalive = 5

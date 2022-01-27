@@ -31,10 +31,15 @@ def app() -> Flask:
 @fixture(scope="session")
 def db_engine() -> Iterator[Engine]:
     alembic_cfg = Config("alembic.ini")
+    # create database tables.
     Base.metadata.create_all(bind=engine)
+    # stamp the revisions table.
     stamp(alembic_cfg, revision="head")
+    # yield database engine.
     yield engine
+    # drop database tables.
     Base.metadata.drop_all(bind=engine)
+    # stamp the revisions table.
     stamp(alembic_cfg, revision=None, purge=True)
 
 

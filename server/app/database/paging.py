@@ -19,10 +19,10 @@ class PageInfo:
 
 def paginate(
     query: Query, 
+    identifier,
     after: Optional[int] = None, 
     before: Optional[int] = None,
-    limit: Optional[int] = None, 
-    reversed = False,
+    limit: Optional[int] = None,
 ) -> Page:
     """
     description.
@@ -32,8 +32,6 @@ def paginate(
     :param before: before
 
     :param limit: limit
-
-    :param reversed: reversed
 
     :return:
     """
