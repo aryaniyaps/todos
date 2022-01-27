@@ -23,6 +23,6 @@ def load_user(user_id: str) -> Optional[User]:
 
 
 @login_manager.unauthorized_handler
-def handle_unauthorized():
-    result = {"message": "Could not validate credentials."}
+def unauthorized_handler():
+    result = {"message": "Could not validate the given credentials."}
     return result, HTTPStatus.UNAUTHORIZED
