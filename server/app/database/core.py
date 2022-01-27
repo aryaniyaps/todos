@@ -21,10 +21,3 @@ Base = declarative_base(metadata=metadata)
 engine = create_engine(url=DATABASE_URL, future=True, echo=DEBUG)
 
 db_session = scoped_session(sessionmaker(bind=engine))
-
-
-def shutdown_session(exception=None) -> None:
-    """
-    Shuts down the database session.
-    """
-    db_session.remove()

@@ -5,7 +5,7 @@ from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from app.database import Base
+from app.database.core import Base
 
 
 class User(UserMixin, Base):

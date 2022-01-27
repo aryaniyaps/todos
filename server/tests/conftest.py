@@ -9,7 +9,7 @@ from pytest import fixture
 from sqlalchemy.engine import Connection, Engine
 
 from app import create_app
-from app.database import Base, db_session, engine
+from app.database.core import Base, db_session, engine
 from app.todos.entities import Todo
 from app.todos.services import todo_service
 from app.users.entities import User

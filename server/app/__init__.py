@@ -85,6 +85,6 @@ def configure_event_handlers(app: Flask) -> None:
 
     :param app: The app instance.
     """
-    from app.database import shutdown_session
+    from app.database.events import shutdown_session
 
-    # app.teardown_appcontext(shutdown_session)
+    app.teardown_appcontext(shutdown_session)

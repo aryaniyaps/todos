@@ -3,7 +3,7 @@ from typing import Optional
 from passlib.hash import bcrypt
 from sqlalchemy import select
 
-from app.database import db_session
+from app.database.core import db_session
 from app.errors import InvalidInput
 from app.users.entities import User
 
