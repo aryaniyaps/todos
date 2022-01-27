@@ -115,7 +115,8 @@ def todo(user: User) -> Todo:
 @fixture()
 def foreign_todo() -> Todo:
     """
-    Creates a foreign todo for testing.
+    Creates a todo that belongs to 
+    another user for testing.
 
     :return: The created todo.
     """
