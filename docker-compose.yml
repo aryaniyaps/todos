@@ -15,7 +15,6 @@ services:
       NODE_ENV: "development"
     networks:
       - todos-web
-      - todos-proxy
     volumes:
       - ./web:/web
       - /web/node_modules
@@ -42,7 +41,6 @@ services:
       - "8181:8181"
     networks:
       - todos-server
-      - todos-proxy
     depends_on:
       - mysql
 
@@ -64,6 +62,4 @@ networks:
   todos-server:
     driver: bridge
   todos-web:
-    driver: bridge
-  todos-proxy:
     driver: bridge
