@@ -7,7 +7,7 @@ name = "pypi"
 flask = "==2.0.2"
 flask-login = "==0.5.0"
 alembic = "==1.7.5"
-sqlalchemy = {version = "==1.4.28", extras = ["mysql"]}
+sqlalchemy = {version = "==1.4.28", extras = ["postgresql"]}
 passlib = {version = "==1.7.4", extras = ["bcrypt"]}
 marshmallow = "==3.14.1"
 gunicorn = {version = "==20.1.0", extras = ["gevent"]}

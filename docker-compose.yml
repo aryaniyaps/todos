@@ -31,8 +31,7 @@ services:
     working_dir: "/server/"
     environment:
       DEBUG: true
-      DATABASE_URL: "mysql+mysqldb://todos:todos@mysql:3306/todos"
-      CELERY_BROKER_URL: "redis://redis:6379/0"
+      DATABASE_URL: "postgresql+psycopg2://todos:todos@postgres:5432/todos"
       SECRET_KEY: "secret"
     volumes:
       - ./server:/server
@@ -42,21 +41,22 @@ services:
     networks:
       - todos-server
     depends_on:
-      - mysql
+      - postgres
 
-  mysql:
-    image: mysql:8
-    container_name: todos-mysql
+  postgres:
+    image: postgres:14-alpine
+    container_name: todos-postgres
     restart: on-failure
     environment:
-      MYSQL_USER: "todos"
-      MYSQL_ROOT_PASSWORD: "todos"
-      MYSQL_PASSWORD: "todos"
-      MYSQL_DATABASE: "todos"
+      POSTGRES_USER: "todos"
+      POSTGRES_PASSWORD: "todos"
+      POSTGRES_DB: "todos"
     networks:
       - todos-server
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
 
 networks:
   todos-server:
