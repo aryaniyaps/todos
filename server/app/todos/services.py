@@ -15,7 +15,7 @@ class TodoService:
         user: User, 
         after: Optional[int] = None, 
         per_page: Optional[int] = None,
-) -> List[Todo]:
+    ) -> List[Todo]:
         """
         Gets the current user's todos.
 
