@@ -3,22 +3,32 @@ from typing import List, Optional
 from sqlalchemy import select, delete
 
 from app.database.core import db_session
+from app.database.paging import paginate
 from app.errors import ResourceNotFound
 from app.todos.entities import Todo
 from app.users.entities import User
 
 
 class TodoService:
-    def get_todos(self, user: User) -> List[Todo]:
+    def get_todos(self, user: User, after: int, per_page: int) -> List[Todo]:
         """
         Gets the current user's todos.
 
         :param user: The current user.
 
+        :param after: 
+
+        :param per_page:
+
         :return: The user's todos.
         """
         statement = select(Todo).filter_by(user_id=user.id)
-        return db_session.scalars(statement)
+        return paginate(
+            statement=db_session.scalars(statement), 
+            paginate_by=Todo.id, 
+            after=after, 
+            per_page=per_page,
+        )
 
     def get_todo(self, user: User, todo_id: int) -> Todo:
         """

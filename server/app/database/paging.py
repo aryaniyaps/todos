@@ -1,36 +1,33 @@
-from typing import Optional
+from typing import Optional, TypeVar
 
-from sqlalchemy.orm import Query
-
-
-class Page(list):
-    """
-    Represents a paginated set of items.
-    """
-    pass
+from sqlalchemy.sql import Select
+from sqlalchemy.orm import Mapped
 
 
-class PageInfo:
-    """
-    Contains metadata that assist in pagination.
-    """
-    pass
+T = TypeVar("T")
 
 
 def paginate(
-    query: Query, 
-    cursor: Optional[int] = None, 
-    limit: Optional[int] = None,
-) -> Page:
+    statement: Select, 
+    paginate_by: Mapped[T],
+    after: Optional[T] = None, 
+    per_page: Optional[int] = None,
+) -> Select:
     """
-    description.
+    Paginates the given statement.
 
-    :param query: The query to paginate.
+    :param statement: The statement to paginate.
 
-    :param cursor: cursor
+    :param paginate_by: The attribute using which
+        the given statement must be paginated.
 
-    :param limit: limit
+    :param after: The attribute after which items
+        must be selected.
 
-    :return:
+    :param per_page: The number of items to paginate.
+
+    :return: The paginated statement.
     """
-    pass
+    if after is not None:
+        statement.filter(paginate_by > after)
+    return statement.limit(per_page)
