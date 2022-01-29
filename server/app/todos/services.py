@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 
 from sqlalchemy import select, delete
 
@@ -13,8 +13,8 @@ class TodoService:
     def get_todos(
         self, 
         user: User, 
-        after: Optional[int] = None, 
-        per_page: Optional[int] = None,
+        after: int | None = None, 
+        per_page: int | None = None,
     ) -> List[Todo]:
         """
         Gets the current user's todos.
@@ -78,8 +78,8 @@ class TodoService:
         *,
         user: User,
         todo_id: int,
-        completed: Optional[bool] = None,
-        content: Optional[str] = None,
+        completed: bool | None = None,
+        content: str | None = None,
     ) -> Todo:
         """
         Updates the todo with the given ID.

@@ -1,5 +1,5 @@
 # build stage
-FROM python:3.9-slim as build
+FROM python:3.10-slim as build
 
 # set workdir
 ARG APP_HOME=/server/

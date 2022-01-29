@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from typing import Optional
 
 from flask_login import LoginManager
 
@@ -11,7 +10,7 @@ login_manager = LoginManager()
 
 
 @login_manager.user_loader
-def load_user(user_id: str) -> Optional[User]:
+def load_user(user_id: str) -> User | None:
     """
     Loads an user from the given ID.
 

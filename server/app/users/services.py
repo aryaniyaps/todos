@@ -1,5 +1,3 @@
-from typing import Optional
-
 from passlib.hash import bcrypt
 from sqlalchemy import select
 
@@ -9,7 +7,7 @@ from app.users.entities import User
 
 
 class UserService:
-    def user_by_email(self, email: str) -> Optional[User]:
+    def user_by_email(self, email: str) -> User | None:
         """
         Gets an user with the given email.
 
@@ -20,7 +18,7 @@ class UserService:
         statement = select(User).filter_by(email=email)
         return db_session.scalars(statement).first()
 
-    def get_user(self, user_id: int) -> Optional[User]:
+    def get_user(self, user_id: int) -> User | None:
         """
         Gets an user with the given ID.
 
