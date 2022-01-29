@@ -23,11 +23,13 @@ class TodoService:
         :return: The user's todos.
         """
         statement = select(Todo).filter_by(user_id=user.id)
-        return paginate(
-            statement=db_session.scalars(statement), 
-            paginate_by=Todo.id, 
-            after=after, 
-            per_page=per_page,
+        return db_session.scalars(
+            paginate(
+                statement=statement, 
+                paginate_by=Todo.id, 
+                after=after, 
+                per_page=per_page,
+            )
         )
 
     def get_todo(self, user: User, todo_id: int) -> Todo:
