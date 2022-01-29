@@ -10,7 +10,12 @@ from app.users.entities import User
 
 
 class TodoService:
-    def get_todos(self, user: User, after: int, per_page: int) -> List[Todo]:
+    def get_todos(
+        self, 
+        user: User, 
+        after: Optional[int] = None, 
+        per_page: Optional[int] = None,
+) -> List[Todo]:
         """
         Gets the current user's todos.
 
