@@ -5,7 +5,7 @@ from app.config import DEBUG, TESTING, SECRET_KEY
 
 def create_app() -> Flask:
     """
-    Initializes an app instance.
+    Initialize an app instance.
 
     :return: The created app.
     """
@@ -25,7 +25,7 @@ def create_app() -> Flask:
 
 def configure_routes(app: Flask) -> None:
     """
-    Configures routes for the app.
+    Configure routes for the app.
 
     :param app: The app instance.
     """
@@ -40,7 +40,7 @@ def configure_routes(app: Flask) -> None:
 
 def configure_extensions(app: Flask) -> None:
     """
-    Configures extensions for the app.
+    Configure extensions for the app.
 
     :param app: The app instance.
     """
@@ -51,7 +51,7 @@ def configure_extensions(app: Flask) -> None:
 
 def configure_middleware(app: Flask) -> None:
     """
-    Configures middleware for the app.
+    Configure middleware for the app.
 
     :param app: The app instance.
     """
@@ -60,7 +60,7 @@ def configure_middleware(app: Flask) -> None:
 
 def configure_error_handlers(app: Flask) -> None:
     """
-    Configures error handlers for the app.
+    Configure error handlers for the app.
 
     :param app: The app instance.
     """
@@ -81,7 +81,7 @@ def configure_error_handlers(app: Flask) -> None:
 
 def configure_event_handlers(app: Flask) -> None:
     """
-    Configures event handlers for the app.
+    Configure event handlers for the app.
 
     :param app: The app instance.
     """

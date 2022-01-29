@@ -30,6 +30,8 @@ services:
     command: "scripts/start-dev.sh"
     working_dir: "/server/"
     environment:
+      FLASK_APP: "app.wsgi:application"
+      FLASK_ENV: "development"
       DEBUG: true
       DATABASE_URL: "postgresql+psycopg2://todos:todos@postgres:5432/todos"
       SECRET_KEY: "secret"

@@ -14,7 +14,7 @@ def paginate(
     per_page: Optional[int] = None,
 ) -> Select:
     """
-    Paginates the given statement.
+    Paginate the given statement.
 
     :param statement: The statement to paginate.
 

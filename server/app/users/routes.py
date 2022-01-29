@@ -17,11 +17,17 @@ user_blueprint = Blueprint(
 @user_blueprint.get("/@me")
 @login_required
 def read_current_user():
+    """
+    Get the current user.
+    """
     return user_schema.dump(current_user)
 
 
 @user_blueprint.post("")
 def create_user():
+    """
+    Create an user.
+    """
     data = user_create_schema.load(request.json)
     user = user_service.create_user(
         email=data.get("email"), 

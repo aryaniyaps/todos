@@ -6,7 +6,7 @@ class BaseError(Exception):
 
 class InvalidInput(BaseError):
     """
-    Indicates that the client has
+    Indicate that the client has
     issued an invalid request.
     """
     pass
@@ -14,7 +14,7 @@ class InvalidInput(BaseError):
 
 class ResourceNotFound(BaseError):
     """
-    Indicates that the requested 
+    Indicate that the requested 
     resource doesn't exist.
     """
     pass

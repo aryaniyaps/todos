@@ -12,7 +12,7 @@ login_manager = LoginManager()
 @login_manager.user_loader
 def load_user(user_id: str) -> User | None:
     """
-    Loads an user from the given ID.
+    Load an user from the given ID.
 
     :param user_id: The given ID.
 

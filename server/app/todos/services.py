@@ -17,7 +17,7 @@ class TodoService:
         after: int | None = None, 
     ) -> List[Todo]:
         """
-        Gets the current user's todos.
+        Get the current user's todos.
 
         :param user: The current user.
 
@@ -39,7 +39,7 @@ class TodoService:
 
     def get_todo(self, user: User, todo_id: int) -> Todo:
         """
-        Gets a todo with the given ID.
+        Get a todo with the given ID.
 
         :param user: The current user.
 
@@ -57,7 +57,7 @@ class TodoService:
 
     def create_todo(self, user: User, content: str) -> Todo:
         """
-        Creates a todo with the given data.
+        Create a todo.
 
         :param user: The current user.
 
@@ -82,7 +82,7 @@ class TodoService:
         content: str | None = None,
     ) -> Todo:
         """
-        Updates the todo with the given ID.
+        Update the todo with the given ID.
 
         :param user: The current user.
 
@@ -105,7 +105,7 @@ class TodoService:
 
     def delete_todo(self, user: User, todo_id: int) -> None:
         """
-        Deletes the todo with the given ID.
+        Delete the todo with the given ID.
 
         :param user: The current user.
 
@@ -117,7 +117,7 @@ class TodoService:
 
     def clear_todos(self, user: User) -> None:
         """
-        Deletes todos owned by the current user.
+        Clear the user's todos.
 
         :param user: The current user.
         """

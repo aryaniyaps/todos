@@ -8,7 +8,7 @@ from app.users.services import user_service
 class AuthService:
     def authenticate_user(self, email: str, password: str) -> User:
         """
-        Checks the given credentials.
+        Check the given user credentials.
 
         :param email: The user's email.
 

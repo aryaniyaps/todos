@@ -17,6 +17,9 @@ auth_blueprint = Blueprint(
 
 @auth_blueprint.post("/login")
 def login():
+    """
+    Log the current user in.
+    """
     data = login_schema.load(request.json)
     user = auth_service.authenticate_user(
         email=data.get("email"), 

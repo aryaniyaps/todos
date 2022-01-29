@@ -9,7 +9,7 @@ from app.users.entities import User
 class UserService:
     def user_by_email(self, email: str) -> User | None:
         """
-        Gets an user with the given email.
+        Get an user with the given email.
 
         :param email: The user's email.
 
@@ -20,7 +20,7 @@ class UserService:
 
     def get_user(self, user_id: int) -> User | None:
         """
-        Gets an user with the given ID.
+        Get an user with the given ID.
 
         :param user_id: The user's ID.
 
@@ -30,7 +30,7 @@ class UserService:
 
     def create_user(self, email: str, password: str) -> User:
         """
-        Creates an user with the given data.
+        Create an user.
 
         :param email: The user's email.
 
