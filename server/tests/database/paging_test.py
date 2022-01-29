@@ -12,7 +12,7 @@ def test_paginate() -> None:
 
 def test_paginate_by() -> None:
     """
-    Ensure we can paginate by a specific 
+    Ensure we can paginate by the given 
     paging attribute.
     """
     pass
@@ -29,6 +29,6 @@ def test_paginate_after() -> None:
 def test_paginate_per_page() -> None:
     """
     Ensure we can paginate a statement
-    with the correct number of items per page.
+    with the given page limit.
     """
     pass
