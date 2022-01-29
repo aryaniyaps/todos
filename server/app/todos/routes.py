@@ -25,6 +25,8 @@ def read_todos():
     result = todos_schema.dump(
         todo_service.get_todos(
             user=current_user,
+            per_page=request.args.get("per_page"),
+            after=request.args.get("after"),
         )
     )
     return jsonify(result)
@@ -37,7 +39,7 @@ def create_todo():
     result = todo_schema.dump(
         todo_service.create_todo(
             user=current_user,
-            content=data["content"], 
+            content=data.get("content"), 
         )
     )
     return result, HTTPStatus.CREATED
@@ -62,8 +64,8 @@ def update_todo(todo_id: int):
         todo_service.update_todo(
             user=current_user,
             todo_id=todo_id, 
-            completed=data["completed"], 
-            content=data["content"],
+            completed=data.get("completed"), 
+            content=data.get("content"),
         )
     )
 

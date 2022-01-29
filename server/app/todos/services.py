@@ -13,17 +13,17 @@ class TodoService:
     def get_todos(
         self, 
         user: User, 
-        after: int | None = None, 
         per_page: int | None = None,
+        after: int | None = None, 
     ) -> List[Todo]:
         """
         Gets the current user's todos.
 
         :param user: The current user.
 
-        :param after: 
+        :param per_page: The number of todos to show per page.
 
-        :param per_page:
+        :param after: The todo ID after which todos must be selected.
 
         :return: The user's todos.
         """

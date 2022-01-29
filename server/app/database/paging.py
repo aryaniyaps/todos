@@ -21,10 +21,11 @@ def paginate(
     :param paginate_by: The attribute using which
         the given statement must be paginated.
 
-    :param after: The attribute after which items
-        must be selected.
+    :param after: The attribute value after which 
+        items must be selected.
 
-    :param per_page: The number of items to paginate.
+    :param per_page: The number of items to show 
+        in a page.
 
     :return: The paginated statement.
     """

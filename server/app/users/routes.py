@@ -24,8 +24,8 @@ def read_current_user():
 def create_user():
     data = user_create_schema.load(request.json)
     user = user_service.create_user(
-        email=data["email"], 
-        password=data["password"],
+        email=data.get("email"), 
+        password=data.get("password"),
     )
     login_user(user=user)
     return user_schema.dump(user), HTTPStatus.CREATED
