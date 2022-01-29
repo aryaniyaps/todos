@@ -29,5 +29,5 @@ def paginate(
     :return: The paginated statement.
     """
     if after is not None:
-        statement.where(paginate_by > after)
+        statement.filter(paginate_by > after)
     return statement.limit(per_page)
