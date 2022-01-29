@@ -17,11 +17,10 @@ class AuthService:
         :return: The authenticated user.
         """
         user = user_service.user_by_email(email=email)
-        authenticated = (
-            user is not None and 
+        if (
+            user is None or not 
             bcrypt.verify(password, user.password)
-        )
-        if not authenticated:
+        ):
             raise InvalidInput(
                 message="Invalid credentials given.",
             )

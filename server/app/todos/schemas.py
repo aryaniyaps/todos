@@ -23,8 +23,8 @@ class TodoUpdateSchema(Schema):
 
 class TodoSchema(Schema):
     id = Integer(dump_only=True)
-    completed: Boolean(dump_default=False)
-    content: String(required=True)
+    completed = Boolean(dump_default=False)
+    content = String(required=True)
     created_at = DateTime(dump_only=True)
     updated_at = DateTime(dump_only=True)
 
