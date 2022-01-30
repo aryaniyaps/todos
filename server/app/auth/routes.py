@@ -1,3 +1,4 @@
+from typing import Any
 from http import HTTPStatus
 
 from flask import Blueprint, request
@@ -16,7 +17,7 @@ auth_blueprint = Blueprint(
 
 
 @auth_blueprint.post("/authenticate")
-def authenticate():
+def authenticate() -> Any:
     """
     Authenticate the current user.
     """
@@ -31,7 +32,7 @@ def authenticate():
 
 @auth_blueprint.post("/unauthenticate")
 @login_required
-def unauthenticate():
+def unauthenticate() -> tuple[str, HTTPStatus]:
     """
     Unauthenticate the current user.
     """

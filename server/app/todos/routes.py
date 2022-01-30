@@ -1,6 +1,7 @@
+from typing import Any
 from http import HTTPStatus
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, Response, jsonify, request
 from flask_login import current_user, login_required
 
 from app.todos.schemas import (
@@ -21,7 +22,7 @@ todo_blueprint = Blueprint(
 
 @todo_blueprint.get("")
 @login_required
-def read_todos():
+def read_todos() -> Response:
     """
     Get the current user's todos.
     """
@@ -37,7 +38,7 @@ def read_todos():
 
 @todo_blueprint.post("")
 @login_required
-def create_todo():
+def create_todo() -> tuple[Any, HTTPStatus]:
     """
     Create a todo.
     """
@@ -53,7 +54,7 @@ def create_todo():
 
 @todo_blueprint.get("/<int:todo_id>")
 @login_required
-def read_todo(todo_id: int):
+def read_todo(todo_id: int) -> Any:
     """
     Get a todo by ID.
     """
@@ -67,7 +68,7 @@ def read_todo(todo_id: int):
 
 @todo_blueprint.patch("/<int:todo_id>")
 @login_required
-def update_todo(todo_id: int):
+def update_todo(todo_id: int) -> Any:
     """
     Update a todo by ID.
     """
@@ -84,7 +85,7 @@ def update_todo(todo_id: int):
 
 @todo_blueprint.delete("/<int:todo_id>")
 @login_required
-def delete_todo(todo_id: int):
+def delete_todo(todo_id: int) -> tuple[str, HTTPStatus]:
     """
     Delete a todo by ID.
     """
@@ -97,7 +98,7 @@ def delete_todo(todo_id: int):
 
 @todo_blueprint.delete("")
 @login_required
-def clear_todos():
+def clear_todos() -> tuple[str, HTTPStatus]:
     """
     Clear the current user's todos.
     """

@@ -1,3 +1,4 @@
+from typing import Any
 from http import HTTPStatus
 
 from flask import Blueprint, request
@@ -16,7 +17,7 @@ user_blueprint = Blueprint(
 
 @user_blueprint.get("/@me")
 @login_required
-def read_current_user():
+def read_current_user() -> Any:
     """
     Get the current user.
     """
@@ -24,7 +25,7 @@ def read_current_user():
 
 
 @user_blueprint.post("")
-def create_user():
+def create_user() -> tuple[Any, HTTPStatus]:
     """
     Create an user.
     """
