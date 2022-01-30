@@ -3,7 +3,7 @@ from marshmallow.fields import String
 from marshmallow.validate import Length
 
 
-class LoginSchema(Schema):
+class AuthenticateSchema(Schema):
     email = String(required=True)
     password = String(
         required=True, 
@@ -14,4 +14,4 @@ class LoginSchema(Schema):
     )
 
 
-login_schema = LoginSchema()
+authenticate_schema = AuthenticateSchema()

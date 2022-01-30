@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint, request
 from flask_login import login_required, login_user, logout_user
 
-from app.auth.schemas import login_schema
+from app.auth.schemas import authenticate_schema
 from app.auth.services import auth_service
 from app.users.schemas import user_schema
 
@@ -20,7 +20,7 @@ def authenticate():
     """
     Authenticate the current user.
     """
-    data = login_schema.load(request.json)
+    data = authenticate_schema.load(request.json)
     user = auth_service.authenticate(
         email=data.get("email"), 
         password=data.get("password"),
