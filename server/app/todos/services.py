@@ -75,7 +75,6 @@ class TodoService:
 
     def update_todo(
         self,
-        *,
         user: User,
         todo_id: int,
         completed: bool | None = None,

@@ -1,4 +1,4 @@
-from typing import Optional, TypeVar
+from typing import TypeVar
 
 from sqlalchemy.sql import Select
 from sqlalchemy.orm import Mapped
@@ -10,8 +10,8 @@ T = TypeVar("T")
 def paginate(
     statement: Select, 
     paginate_by: Mapped[T],
-    after: Optional[T] = None, 
-    per_page: Optional[int] = None,
+    after: T | None = None, 
+    per_page: int | None = None,
 ) -> Select:
     """
     Paginate the given statement.
