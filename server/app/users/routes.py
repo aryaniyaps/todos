@@ -1,7 +1,7 @@
-from typing import Any
 from http import HTTPStatus
 
 from flask import Blueprint, request
+from flask.typing import ResponseReturnValue
 from flask_login import current_user, login_required, login_user
 
 from app.users.schemas import user_schema, user_create_schema
@@ -17,7 +17,7 @@ user_blueprint = Blueprint(
 
 @user_blueprint.get("/@me")
 @login_required
-def read_current_user() -> Any:
+def read_current_user() -> ResponseReturnValue:
     """
     Get the current user.
     """
@@ -25,7 +25,7 @@ def read_current_user() -> Any:
 
 
 @user_blueprint.post("")
-def create_user() -> tuple[Any, HTTPStatus]:
+def create_user() -> ResponseReturnValue:
     """
     Create an user.
     """

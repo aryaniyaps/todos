@@ -1,7 +1,7 @@
-from typing import Any
 from http import HTTPStatus
 
 from flask import Blueprint, request
+from flask.typing import ResponseReturnValue
 from flask_login import login_required, login_user, logout_user
 
 from app.auth.schemas import authenticate_schema
@@ -17,7 +17,7 @@ auth_blueprint = Blueprint(
 
 
 @auth_blueprint.post("/authenticate")
-def authenticate() -> Any:
+def authenticate() -> ResponseReturnValue:
     """
     Authenticate the current user.
     """
@@ -32,7 +32,7 @@ def authenticate() -> Any:
 
 @auth_blueprint.post("/unauthenticate")
 @login_required
-def unauthenticate() -> tuple[str, HTTPStatus]:
+def unauthenticate() -> ResponseReturnValue:
     """
     Unauthenticate the current user.
     """
