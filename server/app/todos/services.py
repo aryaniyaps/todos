@@ -21,9 +21,11 @@ class TodoService:
 
         :param user: The todos' owner.
 
-        :param per_page: The number of todos to show per page.
+        :param per_page: The number of todos to 
+            show per page.
 
-        :param after: The todo ID after which todos must be selected.
+        :param after: The todo ID after which 
+            todos must be selected.
 
         :return: The user's todos.
         """
