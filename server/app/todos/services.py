@@ -27,7 +27,7 @@ class TodoService:
 
         :return: The user's todos.
         """
-        statement = select(Todo).filter_by(user_id=user.id)
+        statement = select(Todo).filter(Todo.user_id == user.id)
         return db_session.scalars(
             paginate(
                 statement=statement, 
@@ -47,7 +47,10 @@ class TodoService:
 
         :return: The user's todo.
         """
-        statement = select(Todo).filter_by(id=todo_id, user_id=user.id)
+        statement = select(Todo).filter(
+            Todo.id == todo_id, 
+            Todo.user_id == user.id,
+        )
         todo = db_session.scalars(statement).first()
         if todo is None:
             raise ResourceNotFound(
@@ -65,10 +68,7 @@ class TodoService:
 
         :return: The created todo.
         """
-        todo = Todo(
-            content=content, 
-            user_id=user.id,
-        )
+        todo = Todo(content=content, user_id=user.id)
         db_session.add(todo)
         db_session.commit()
         return todo

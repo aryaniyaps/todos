@@ -15,7 +15,7 @@ class UserService:
 
         :return: The user with the given email.
         """
-        statement = select(User).filter_by(email=email)
+        statement = select(User).filter(User.email == email)
         return db_session.scalars(statement).first()
 
     def get_user(self, user_id: int) -> User | None:
