@@ -22,9 +22,9 @@ def paginate(
         the given statement must be paginated.
 
     :param after: The attribute value after which 
-        items must be selected.
+        entities must be selected.
 
-    :param per_page: The number of items to show 
+    :param per_page: The number of entities to show 
         in a page.
 
     :return: The paginated statement.
