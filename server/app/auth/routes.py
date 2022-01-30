@@ -15,13 +15,13 @@ auth_blueprint = Blueprint(
 )
 
 
-@auth_blueprint.post("/login")
-def login():
+@auth_blueprint.post("/authenticate")
+def authenticate():
     """
-    Log the current user in.
+    Authenticate the current user.
     """
     data = login_schema.load(request.json)
-    user = auth_service.authenticate_user(
+    user = auth_service.authenticate(
         email=data.get("email"), 
         password=data.get("password"),
     )
@@ -29,11 +29,11 @@ def login():
     return user_schema.dump(user)
 
 
-@auth_blueprint.post("/logout")
+@auth_blueprint.post("/unauthenticate")
 @login_required
-def logout():
+def unauthenticate():
     """
-    Log the current user out.
+    Unauthenticate the current user.
     """
     logout_user()
     return "", HTTPStatus.NO_CONTENT

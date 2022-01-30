@@ -27,7 +27,8 @@ def test_get_todo(todo: Todo) -> None:
 
 def test_get_foreign_todo(user: User, foreign_todo: Todo) -> None:
     """
-    Ensure we cannot get a foreign todo.
+    Ensure we cannot get a todo
+    owned by another user.
     """
     with raises(ResourceNotFound):
         todo_service.get_todo(
@@ -65,7 +66,8 @@ def test_update_todo(todo: Todo) -> None:
 
 def test_update_foreign_todo(user: User, foreign_todo: Todo) -> None:
     """
-    Ensure we cannot update a foreign todo.
+    Ensure we cannot update a todo
+    owned by another user.
     """
     with raises(ResourceNotFound):
         todo_service.update_todo(
@@ -89,7 +91,8 @@ def test_delete_todo(todo: Todo) -> None:
 
 def test_delete_foreign_todo(user: User, foreign_todo: Todo) -> None:
     """
-    Ensure we cannot delete a foreign todo.
+    Ensure we cannot delete a todo
+    owned by another user.
     """
     with raises(ResourceNotFound):
         todo_service.delete_todo(

@@ -6,7 +6,7 @@ from app.users.services import user_service
 
 
 class AuthService:
-    def authenticate_user(self, email: str, password: str) -> User:
+    def authenticate(self, email: str, password: str) -> User:
         """
         Check the given user credentials.
 

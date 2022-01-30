@@ -17,9 +17,9 @@ class TodoService:
         after: int | None = None, 
     ) -> List[Todo]:
         """
-        Get the current user's todos.
+        Get the given user's todos.
 
-        :param user: The current user.
+        :param user: The todos' owner.
 
         :param per_page: The number of todos to show per page.
 
@@ -41,7 +41,7 @@ class TodoService:
         """
         Get a todo with the given ID.
 
-        :param user: The current user.
+        :param user: The todo's owner.
 
         :param todo_id: The todo's ID.
 
@@ -59,7 +59,7 @@ class TodoService:
         """
         Create a todo.
 
-        :param user: The current user.
+        :param user: The todo's owner.
 
         :param content: The todo's content.
 
@@ -83,7 +83,7 @@ class TodoService:
         """
         Update the todo with the given ID.
 
-        :param user: The current user.
+        :param user: The todo's owner.
 
         :param todo_id: ID of the todo to update.
 
@@ -106,7 +106,7 @@ class TodoService:
         """
         Delete the todo with the given ID.
 
-        :param user: The current user.
+        :param user: The todo's owner.
 
         :param todo_id: ID of the todo to delete.
         """
@@ -116,9 +116,9 @@ class TodoService:
 
     def clear_todos(self, user: User) -> None:
         """
-        Clear the user's todos.
+        Clear the given user's todos.
 
-        :param user: The current user.
+        :param user: The todos' user.
         """
         statement = delete(Todo).filter_by(user_id=user.id)
         db_session.execute(statement)

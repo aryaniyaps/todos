@@ -6,26 +6,36 @@ from flask.testing import FlaskClient
 from app.users.entities import User
 
 
-def test_login(client: FlaskClient, user: User) -> None:
+def test_authenticate(client: FlaskClient, user: User) -> None:
     """
-    Ensure we can log the current user in.
+    Ensure we can authenticate the current user.
     """
     data = {"email": user.email, "password": "password"}
-    response = client.post(url_for("auth.login"), json=data)
+    response = client.post(url_for("auth.authenticate"), json=data)
     assert response.status_code == HTTPStatus.OK
 
 
-def test_logout(auth_client: FlaskClient) -> None:
+def test_authenticate_invalid(client: FlaskClient, user: User) -> None:
     """
-    Ensure we can log the current user out.
+    Ensure we cannot authenticate the current user
+    with invalid credentials.
     """
-    response = auth_client.post(url_for("auth.logout"))
+    data = {"email": user.email, "password": "invalid-password"}
+    response = client.post(url_for("auth.authenticate"), json=data)
+    assert response.status_code == HTTPStatus.BAD_REQUEST
+
+
+def test_unauthenticate(auth_client: FlaskClient) -> None:
+    """
+    Ensure we can unauthenticate the current user.
+    """
+    response = auth_client.post(url_for("auth.unauthenticate"))
     assert response.status_code == HTTPStatus.NO_CONTENT
 
 
-def test_logout_unauthorized(client: FlaskClient) -> None:
+def test_unauthenticate_unauthorized(client: FlaskClient) -> None:
     """
-    Ensure we cannot logout anonymously.
+    Ensure we cannot unauthenticate anonymously.
     """
-    response = client.post(url_for("auth.logout"))
+    response = client.post(url_for("auth.unauthenticate"))
     assert response.status_code == HTTPStatus.UNAUTHORIZED

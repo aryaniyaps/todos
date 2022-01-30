@@ -6,7 +6,7 @@ from app.users.entities import User
 from app.users.services import user_service
 
 
-def test_user_by_email(user: User) -> None:
+def test_get_user_by_email(user: User) -> None:
     """
     Ensure we can get an user by email.
     """
@@ -14,12 +14,31 @@ def test_user_by_email(user: User) -> None:
     assert result == user
 
 
-def test_get_user(user: User) -> None:
+def test_get_unknown_user_by_email() ->  None:
+    """
+    Ensure we cannot get an unknown 
+    user by email.
+    """
+    result = user_service.user_by_email(
+        email="unknown-user@example.org",
+    )
+    assert result is None
+
+
+def test_get_user_by_id(user: User) -> None:
     """
     Ensure we can get an user by ID.
     """
     result = user_service.get_user(user_id=user.id)
     assert result == user
+
+
+def test_get_unknown_user_by_id() -> None:
+    """
+    Ensure we cannot get an unknown user by ID.
+    """
+    result = user_service.get_user(user_id=0)
+    assert result is None
 
 
 def test_create_user() -> None:
