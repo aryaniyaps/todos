@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Button, TextField } from "@mui/material";
+import { Input, Button } from "@nextui-org/react";
 import BaseLayout from "../../layouts/BaseLayout";
 
 type LoginInput = {
@@ -28,8 +28,8 @@ const LoginForm: FC = () => {
                 onSubmit={handleSubmit((data) => {})}
                 className="flex flex-col w-full p-6 bg-primary-100 rounded-md shadow"
             >
-                <TextField name="email" placeholder="email" type="email" />
-                <TextField name="password" placeholder="password" type="password" />
+                <Input name="email" placeholder="email" type="email" />
+                <Input name="password" placeholder="password" type="password" />
                 <Link to="/password" className="text-right text-sm mb-4">
                     Forgot password?
                 </Link>

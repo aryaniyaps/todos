@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button } from "@nextui-org/react";
 import BaseLayout from "../layouts/BaseLayout";
 
 const NotFoundPage: FC = () => {

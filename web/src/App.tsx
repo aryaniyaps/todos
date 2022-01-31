@@ -1,7 +1,7 @@
 import "./styles/main.css";
 import { FC, Suspense, lazy } from "react";
 import { QueryClientProvider } from "react-query";
-import { ThemeProvider } from "@mui/material";
+import { NextUIProvider } from "@nextui-org/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import queryClient from "./lib/queryClient";
 import Fallback from "./components/Fallback";
@@ -14,7 +14,7 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App: FC = () => {
     return (
-        <ThemeProvider theme={{}}>
+        <NextUIProvider>
             <QueryClientProvider client={queryClient}>
                 <Suspense fallback={<Fallback />}>
                     <BrowserRouter>
@@ -28,7 +28,7 @@ const App: FC = () => {
                     </BrowserRouter>
                 </Suspense>
             </QueryClientProvider>
-        </ThemeProvider>
+        </NextUIProvider>
     );
 };
 
