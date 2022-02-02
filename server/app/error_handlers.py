@@ -1,11 +1,11 @@
 from http import HTTPStatus
 
+from flask.typing import ResponseReturnValue
+
 from app.errors import InvalidInput, ResourceNotFound
 
 
-def invalid_input_handler(
-    error: InvalidInput,
-) -> tuple[dict[str, str], HTTPStatus]:
+def invalid_input_handler(error: InvalidInput) -> ResponseReturnValue:
     """
     Handle invalid input errors.
 
@@ -14,9 +14,7 @@ def invalid_input_handler(
     return {"message": error.message}, HTTPStatus.BAD_REQUEST
 
 
-def resource_not_found_handler(
-    error: ResourceNotFound,
-) -> tuple[dict[str, str], HTTPStatus]:
+def resource_not_found_handler(error: ResourceNotFound) -> ResponseReturnValue:
     """
     Handle resource not found errors.
 
