@@ -9,6 +9,10 @@
         "build": "webpack",
         "test": "jest"
     },
+    "engines": {
+        "node": ">=16.5",
+        "yarn": ">=1.22"
+    },
     "dependencies": {
         "@nextui-org/react": "1.0.2-beta.3",
         "axios": "0.25.0",
