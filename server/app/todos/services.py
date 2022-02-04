@@ -122,7 +122,7 @@ class TodoService:
 
         :param user: The todos' user.
         """
-        statement = delete(Todo).filter_by(user_id=user.id)
+        statement = delete(Todo).filter(Todo.user_id == user.id)
         db_session.execute(statement)
         db_session.commit()
 
