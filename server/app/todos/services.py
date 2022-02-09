@@ -1,5 +1,3 @@
-from typing import List
-
 from app.database.core import db_session
 from app.database.paging import paginate
 from app.errors import InvalidAccess, ResourceNotFound
@@ -14,7 +12,7 @@ class TodoService:
         user: User, 
         per_page: int | None = None,
         after: int | None = None, 
-    ) -> List[Todo]:
+    ) -> list[Todo]:
         """
         Get the given user's todos.
 
