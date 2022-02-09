@@ -1,11 +1,10 @@
 from typing import List
 
-from sqlalchemy import select, delete
-
 from app.database.core import db_session
 from app.database.paging import paginate
-from app.errors import ResourceNotFound
+from app.errors import InvalidAccess, ResourceNotFound
 from app.todos.entities import Todo
+from app.todos.repositories import todo_repo
 from app.users.entities import User
 
 
@@ -29,7 +28,7 @@ class TodoService:
 
         :return: The user's todos.
         """
-        statement = select(Todo).filter(Todo.user_id == user.id)
+        statement = todo_repo.get_by_user_id(user_id=user.id)
         return db_session.scalars(
             paginate(
                 statement=statement, 
@@ -49,14 +48,14 @@ class TodoService:
 
         :return: The user's todo.
         """
-        statement = select(Todo).filter(
-            Todo.id == todo_id, 
-            Todo.user_id == user.id,
-        )
-        todo = db_session.scalars(statement).first()
+        todo = todo_repo.get_by_id(todo_id=todo_id)
         if todo is None:
             raise ResourceNotFound(
                 message=f"Could not find todo with ID {todo_id}.",
+            )
+        if todo.id != user.id:
+            raise InvalidAccess(
+                message="Could not access requested todo."
             )
         return todo
 
@@ -70,10 +69,10 @@ class TodoService:
 
         :return: The created todo.
         """
-        todo = Todo(content=content, user_id=user.id)
-        db_session.add(todo)
-        db_session.commit()
-        return todo
+        return todo_repo.create_todo(
+            user_id=user.id, 
+            content=content,
+        )
 
     def update_todo(
         self,
@@ -112,9 +111,12 @@ class TodoService:
 
         :param todo_id: ID of the todo to delete.
         """
-        todo = self.get_todo(user=user, todo_id=todo_id)
-        db_session.delete(todo)
-        db_session.commit()
+        todo_repo.delete_todo(
+            todo=self.get_todo(
+                user=user,
+                todo_id=todo_id
+            )
+        )
 
     def clear_todos(self, user: User) -> None:
         """
@@ -122,9 +124,7 @@ class TodoService:
 
         :param user: The todos' user.
         """
-        statement = delete(Todo).filter(Todo.user_id == user.id)
-        db_session.execute(statement)
-        db_session.commit()
+        todo_repo.delete_by_user_id(user_id=user.id)
 
 
 todo_service = TodoService()

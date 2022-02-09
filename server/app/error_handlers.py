@@ -2,7 +2,16 @@ from http import HTTPStatus
 
 from flask.typing import ResponseReturnValue
 
-from app.errors import InvalidInput, ResourceNotFound
+from app.errors import InvalidAccess, InvalidInput, ResourceNotFound
+
+
+def invalid_access_handler(error: InvalidAccess) -> ResponseReturnValue:
+    """
+    Handle invalid access errors.
+
+    :param error: The error to handle.
+    """
+    return {"message": error.message}, HTTPStatus.FORBIDDEN
 
 
 def invalid_input_handler(error: InvalidInput) -> ResponseReturnValue:

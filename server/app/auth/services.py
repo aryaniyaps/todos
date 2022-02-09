@@ -2,7 +2,7 @@ from passlib.hash import bcrypt
 
 from app.errors import InvalidInput
 from app.users.entities import User
-from app.users.services import user_service
+from app.users.repositories import user_repo
 
 
 class AuthService:
@@ -16,7 +16,7 @@ class AuthService:
 
         :return: The authenticated user.
         """
-        user = user_service.user_by_email(email=email)
+        user = user_repo.by_email(email=email)
         if (
             user is None or not 
             bcrypt.verify(password, user.password)

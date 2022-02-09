@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flask_login import LoginManager
 
 from app.users.entities import User
-from app.users.services import user_service
+from app.users.repositories import user_repo
 
 
 login_manager = LoginManager()
@@ -18,7 +18,7 @@ def load_user(user_id: str) -> User | None:
 
     :return: The user with the given ID.
     """
-    return user_service.get_user(user_id=int(user_id))
+    return user_repo.by_id(user_id=int(user_id))
 
 
 @login_manager.unauthorized_handler

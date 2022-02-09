@@ -1,7 +1,18 @@
 class BaseError(Exception):
-    """Base error class."""
+    """
+    Base error class.
+    """
     def __init__(self, message: str) -> None:
         self.message = message
+
+
+class InvalidAccess(BaseError):
+    """
+    Indicate that the client has
+    not got access to the requested
+    resource.
+    """
+    pass
 
 
 class InvalidInput(BaseError):
