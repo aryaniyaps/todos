@@ -19,7 +19,12 @@ depends_on = None
 def upgrade():
     op.create_table(
         "todos",
-        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column(
+            "id", 
+            sa.Integer(), 
+            autoincrement=True, 
+            nullable=False,
+        ),
         sa.Column("content", sa.Text(), nullable=False),
         sa.Column("completed", sa.Boolean(), nullable=False),
         sa.Column("user_id", sa.Integer(), nullable=False),

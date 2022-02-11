@@ -17,7 +17,11 @@ class Todo(Base):
     Represents an user's todo.
     """
 
-    id = Column(Integer, primary_key=True)
+    id = Column(
+        Integer,
+        autoincrement=True,
+        primary_key=True, 
+    )
 
     user_id = Column(
         Integer,
@@ -27,7 +31,6 @@ class Todo(Base):
             onupdate="CASCADE",
         ),
         primary_key=True,
-        nullable=False,
     )
 
     content = Column(Text, nullable=False)
