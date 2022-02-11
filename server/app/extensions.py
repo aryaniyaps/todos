@@ -18,7 +18,7 @@ def load_user(user_id: str) -> User | None:
 
     :return: The user with the given ID.
     """
-    return user_repo.by_id(user_id=int(user_id))
+    return user_repo.get_user(user_id=int(user_id))
 
 
 @login_manager.unauthorized_handler

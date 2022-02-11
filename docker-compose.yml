@@ -8,7 +8,7 @@ services:
     container_name: todos-web
     restart: on-failure
     working_dir: "/web/"
-    command: "scripts/start-dev.sh"
+    command: "scripts/run-dev.sh"
     ports:
       - "3000:3000"
     environment:
@@ -27,7 +27,7 @@ services:
       target: "development"
     container_name: todos-server
     restart: on-failure
-    command: "scripts/start-dev.sh"
+    command: "scripts/run-dev.sh"
     working_dir: "/server/"
     environment:
       FLASK_APP: "app.wsgi:application"

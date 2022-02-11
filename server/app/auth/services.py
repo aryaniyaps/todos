@@ -16,7 +16,7 @@ class AuthService:
 
         :return: The authenticated user.
         """
-        user = user_repo.by_email(email=email)
+        user = user_repo.get_user_by_email(email=email)
         if (
             user is None or not 
             bcrypt.verify(password, user.password)

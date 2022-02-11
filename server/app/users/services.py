@@ -14,7 +14,7 @@ class UserService:
 
         :return: The created user.
         """
-        user = user_repo.by_email(email=email)
+        user = user_repo.get_user_by_email(email=email)
         if user is not None:
             raise InvalidInput(
                 message="User with that email already exists.",

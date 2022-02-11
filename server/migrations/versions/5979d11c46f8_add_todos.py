@@ -39,7 +39,7 @@ def upgrade():
             ["user_id"],
             ["users.id"],
         ),
-        sa.PrimaryKeyConstraint("id"),
+        sa.PrimaryKeyConstraint("id", "user_id"),
     )
 
 

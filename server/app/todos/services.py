@@ -1,6 +1,4 @@
-from app.database.core import db_session
-from app.database.paging import paginate
-from app.errors import InvalidAccess, ResourceNotFound
+from app.errors import ResourceNotFound
 from app.todos.entities import Todo
 from app.todos.repositories import todo_repo
 from app.users.entities import User
@@ -18,22 +16,18 @@ class TodoService:
 
         :param user: The todos' owner.
 
-        :param per_page: The number of todos to 
-            show per page.
-
         :param after: The todo ID after which 
             todos must be selected.
 
+        :param per_page: The number of todos to 
+            show per page.
+
         :return: The user's todos.
         """
-        statement = todo_repo.get_by_user_id(user_id=user.id)
-        return db_session.scalars(
-            paginate(
-                statement=statement, 
-                paginate_by=Todo.id, 
-                after=after, 
-                per_page=per_page,
-            )
+        return todo_repo.get_todos(
+            user_id=user.id, 
+            per_page=per_page, 
+            after=after,
         )
 
     def get_todo(self, user: User, todo_id: int) -> Todo:
@@ -46,14 +40,10 @@ class TodoService:
 
         :return: The user's todo.
         """
-        todo = todo_repo.get_by_id(todo_id=todo_id)
+        todo = todo_repo.get_todo(todo_id=todo_id, user_id=user.id)
         if todo is None:
             raise ResourceNotFound(
                 message=f"Could not find todo with ID {todo_id}.",
-            )
-        if todo.id != user.id:
-            raise InvalidAccess(
-                message="Could not access requested todo."
             )
         return todo
 
@@ -92,14 +82,14 @@ class TodoService:
 
         :return: The updated todo.
         """
-        todo = self.get_todo(user=user, todo_id=todo_id)
-        if content is not None:
-            todo.content = content
-        if completed is not None:
-            todo.completed = completed
-        db_session.add(todo)
-        db_session.commit()
-        return todo
+        return todo_repo.update_todo(
+            todo=self.get_todo(
+                user=user, 
+                todo_id=todo_id,
+            ),
+            completed=completed,
+            content=content
+        )
 
     def delete_todo(self, user: User, todo_id: int) -> None:
         """
@@ -122,7 +112,7 @@ class TodoService:
 
         :param user: The todos' user.
         """
-        todo_repo.delete_by_user_id(user_id=user.id)
+        todo_repo.clear_todos(user_id=user.id)
 
 
 todo_service = TodoService()

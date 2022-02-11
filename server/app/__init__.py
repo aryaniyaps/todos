@@ -65,20 +65,14 @@ def configure_error_handlers(app: Flask) -> None:
     :param app: The app instance.
     """
     from app.errors import (
-        InvalidAccess, 
         InvalidInput, 
         ResourceNotFound
     )
     from app.error_handlers import (
-        invalid_access_handler,
         invalid_input_handler, 
         resource_not_found_handler
     )
-
-    app.register_error_handler(
-        InvalidAccess,
-        invalid_access_handler
-    )
+    
     app.register_error_handler(
         InvalidInput, 
         invalid_input_handler,

@@ -17,6 +17,7 @@ class Todo(Base):
     user_id = Column(
         Integer,
         ForeignKey("users.id"),
+        primary_key=True,
         nullable=False,
     )
 
