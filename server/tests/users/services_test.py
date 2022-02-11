@@ -10,12 +10,14 @@ def test_create_user() -> None:
     """
     Ensure we can create an user.
     """
+    email = "user@example.org"
+    password = "password"
     result = user_service.create_user(
-        email="user@example.com",
-        password="password"
+        email=email,
+        password=password
     )
-    assert result.email == "user@example.com"
-    assert result.password != "password"
+    assert result.email == email
+    assert result.password != password
     assert bcrypt.identify(result.password)
 
 

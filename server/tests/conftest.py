@@ -19,7 +19,7 @@ from app.users.services import user_service
 @fixture(scope="session")
 def app() -> Flask:
     """
-    Initializes the app for testing.
+    Initialize the app for testing.
 
     :return: The initialized app.
     """
@@ -30,6 +30,11 @@ def app() -> Flask:
 
 @fixture(scope="session")
 def db_engine() -> Iterator[Engine]:
+    """
+    Set up the database engine.
+
+    :return: The test database engine.
+    """
     alembic_cfg = Config("alembic.ini")
     # create database tables.
     Base.metadata.create_all(bind=engine)
@@ -46,7 +51,7 @@ def db_engine() -> Iterator[Engine]:
 @fixture(autouse=True)
 def setup_transaction(db_engine: Engine) -> Iterator[Connection]:
     """
-    Sets up a transaction inside a database 
+    Set up a transaction inside a database 
     connection for each test case.
 
     :return: The connection with transaction.
@@ -67,7 +72,7 @@ def setup_transaction(db_engine: Engine) -> Iterator[Connection]:
 @fixture()
 def client(app: Flask) -> Iterator[FlaskClient]:
     """
-    Creates a client for testing.
+    Create a client for testing.
 
     :return: The created test client.
     """
@@ -78,7 +83,7 @@ def client(app: Flask) -> Iterator[FlaskClient]:
 @fixture()
 def auth_client(app: Flask, user: User) -> Iterator[FlaskClient]:
     """
-    Creates an authenticated client for testing.
+    Create an authenticated client for testing.
 
     :return: The created test client.
     """
@@ -89,7 +94,7 @@ def auth_client(app: Flask, user: User) -> Iterator[FlaskClient]:
 @fixture()
 def user() -> User:
     """
-    Creates an user for testing.
+    Create an user for testing.
 
     :return: The created user.
     """
@@ -102,7 +107,7 @@ def user() -> User:
 @fixture()
 def todo(user: User) -> Todo:
     """
-    Creates a todo for testing.
+    Create a todo for testing.
 
     :return: The created todo.
     """
@@ -115,7 +120,7 @@ def todo(user: User) -> Todo:
 @fixture()
 def foreign_todo() -> Todo:
     """
-    Creates a todo that belongs to 
+    Create a todo that belongs to 
     another user for testing.
 
     :return: The created todo.

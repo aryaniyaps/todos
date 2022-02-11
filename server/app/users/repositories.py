@@ -29,7 +29,7 @@ class UserRepo:
         return db_session.scalars(statement).first()
         
 
-    def create(self, email: str, password: str) -> User:
+    def create_user(self, email: str, password: str) -> User:
         """
         Create an user.
 
@@ -44,6 +44,15 @@ class UserRepo:
         db_session.add(user)
         db_session.commit()
         return user
+
+    def delete_user(self, user: User) -> None:
+        """
+        Delete the given user.
+
+        :param user: The user to delete.
+        """
+        db_session.delete(user)
+        db_session.commit()
 
 
 user_repo = UserRepo()

@@ -1,4 +1,11 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, Text
+from sqlalchemy import (
+    Boolean, 
+    Column, 
+    DateTime, 
+    ForeignKey, 
+    Integer, 
+    Text
+)
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -6,18 +13,28 @@ from app.database.core import Base
 
 
 class Todo(Base):
-    """Represents an user's todo."""
+    """
+    Represents an user's todo.
+    """
 
     id = Column(Integer, primary_key=True)
 
-    content = Column(Text, nullable=False)
-
-    completed = Column(Boolean, default=False, nullable=False)
-
     user_id = Column(
         Integer,
-        ForeignKey("users.id"),
+        ForeignKey(
+            column="users.id", 
+            ondelete="CASCADE", 
+            onupdate="CASCADE",
+        ),
         primary_key=True,
+        nullable=False,
+    )
+
+    content = Column(Text, nullable=False)
+
+    completed = Column(
+        Boolean, 
+        default=False, 
         nullable=False,
     )
 

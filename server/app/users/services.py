@@ -19,7 +19,7 @@ class UserService:
             raise InvalidInput(
                 message="User with that email already exists.",
             )
-        return user_repo.create(
+        return user_repo.create_user(
             email=email, 
             password=password,
         )

@@ -1,6 +1,5 @@
 from app.database.core import db_session
 from app.database.paging import paginate
-from app.users.entities import User
 
 
 def test_paginate() -> None:
