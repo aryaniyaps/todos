@@ -11,9 +11,9 @@ from sqlalchemy.engine import Connection, Engine
 from app import create_app
 from app.database.core import Base, db_session, engine
 from app.todos.entities import Todo
-from app.todos.services import todo_service
+from app.todos.repositories import todo_repo
 from app.users.entities import User
-from app.users.services import user_service
+from app.users.repositories import user_repo
 
 
 @fixture(scope="session")
@@ -98,8 +98,22 @@ def user() -> User:
 
     :return: The created user.
     """
-    return user_service.create_user(
+    return user_repo.create_user(
         email="tester@example.org",
+        password="password"
+    )
+
+
+@fixture()
+def foreign_user() -> User:
+    """
+    Create another user for checking
+    authorization while testing.
+
+    :return: The created user.
+    """
+    return user_repo.create_user(
+        email="foreign-tester@example.org",
         password="password"
     )
 
@@ -111,24 +125,21 @@ def todo(user: User) -> Todo:
 
     :return: The created todo.
     """
-    return todo_service.create_todo(
+    return todo_repo.create_todo(
         content="sample content",
-        user=user
+        user_id=user.id
     )
 
 
 @fixture()
-def foreign_todo() -> Todo:
+def foreign_todo(foreign_user: User) -> Todo:
     """
     Create a todo that belongs to 
     another user for testing.
 
     :return: The created todo.
     """
-    return todo_service.create_todo(
+    return todo_repo.create_todo(
         content="sample content",
-        user=user_service.create_user(
-            email="foreign-tester@example.org",
-            password="password",
-        )
+        user_id=foreign_user.id
     )
