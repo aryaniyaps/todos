@@ -28,7 +28,7 @@ def read_todos() -> ResponseReturnValue:
     """
     result = todos_schema.dump(
         todo_service.get_todos(
-            user=current_user,
+            user_id=current_user.id,
             per_page=request.args.get("per_page"),
             after=request.args.get("after"),
         )
@@ -45,7 +45,7 @@ def create_todo() -> ResponseReturnValue:
     data = todo_create_schema.load(request.json)
     result = todo_schema.dump(
         todo_service.create_todo(
-            user=current_user,
+            user_id=current_user.id,
             content=data.get("content"), 
         )
     )
@@ -60,7 +60,7 @@ def read_todo(todo_id: int) -> ResponseReturnValue:
     """
     return todo_schema.dump(
         todo_service.get_todo(
-            user=current_user,
+            user_id=current_user.id,
             todo_id=todo_id, 
         )
     )
@@ -75,7 +75,7 @@ def update_todo(todo_id: int) -> ResponseReturnValue:
     data = todo_update_schema.load(request.json)
     return todo_schema.dump(
         todo_service.update_todo(
-            user=current_user,
+            user_id=current_user.id,
             todo_id=todo_id, 
             completed=data.get("completed"), 
             content=data.get("content"),
@@ -90,7 +90,7 @@ def delete_todo(todo_id: int) -> ResponseReturnValue:
     Delete a todo by ID.
     """
     todo_service.delete_todo(
-        user=current_user, 
+        user_id=current_user.id, 
         todo_id=todo_id,
     )
     return "", HTTPStatus.NO_CONTENT
@@ -102,5 +102,5 @@ def clear_todos() -> ResponseReturnValue:
     """
     Clear the current user's todos.
     """
-    todo_service.clear_todos(user=current_user)
+    todo_service.clear_todos(user_id=current_user.id)
     return "", HTTPStatus.NO_CONTENT
