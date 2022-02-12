@@ -99,8 +99,11 @@ class TodoRepo:
 
         :param user_id: The todos' user ID.
         """
-        statement = delete(Todo).filter(Todo.user_id == user_id)
-        db_session.execute(statement)
+        db_session.execute(
+            delete(Todo).filter(
+                Todo.user_id == user_id,
+            ),
+        )
         db_session.commit()
 
 
