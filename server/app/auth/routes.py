@@ -5,7 +5,7 @@ from flask.typing import ResponseReturnValue
 from flask_login import login_required, login_user, logout_user
 
 from app.auth.schemas import authenticate_schema
-from app.auth.services import auth_service
+from app.auth.services import AuthService
 from app.users.schemas import user_schema
 
 
@@ -22,7 +22,7 @@ def authenticate() -> ResponseReturnValue:
     Authenticate the current user.
     """
     data = authenticate_schema.load(request.json)
-    user = auth_service.authenticate(
+    user = AuthService.authenticate(
         email=data.get("email"), 
         password=data.get("password"),
     )

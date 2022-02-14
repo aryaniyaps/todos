@@ -10,7 +10,7 @@ from app.todos.schemas import (
     todo_update_schema,
     todos_schema, 
 )
-from app.todos.services import todo_service
+from app.todos.services import TodoService
 
 
 todo_blueprint = Blueprint(
@@ -27,7 +27,7 @@ def read_todos() -> ResponseReturnValue:
     Get the current user's todos.
     """
     result = todos_schema.dump(
-        todo_service.get_todos(
+        TodoService.get_todos(
             user_id=current_user.id,
             per_page=request.args.get("per_page"),
             after=request.args.get("after"),
@@ -44,7 +44,7 @@ def create_todo() -> ResponseReturnValue:
     """
     data = todo_create_schema.load(request.json)
     result = todo_schema.dump(
-        todo_service.create_todo(
+        TodoService.create_todo(
             user_id=current_user.id,
             content=data.get("content"), 
         )
@@ -59,7 +59,7 @@ def read_todo(todo_id: int) -> ResponseReturnValue:
     Get a todo by ID.
     """
     return todo_schema.dump(
-        todo_service.get_todo(
+        TodoService.get_todo(
             user_id=current_user.id,
             todo_id=todo_id, 
         )
@@ -74,7 +74,7 @@ def update_todo(todo_id: int) -> ResponseReturnValue:
     """
     data = todo_update_schema.load(request.json)
     return todo_schema.dump(
-        todo_service.update_todo(
+        TodoService.update_todo(
             user_id=current_user.id,
             todo_id=todo_id, 
             completed=data.get("completed"), 
@@ -89,7 +89,7 @@ def delete_todo(todo_id: int) -> ResponseReturnValue:
     """
     Delete a todo by ID.
     """
-    todo_service.delete_todo(
+    TodoService.delete_todo(
         user_id=current_user.id, 
         todo_id=todo_id,
     )
@@ -102,5 +102,5 @@ def clear_todos() -> ResponseReturnValue:
     """
     Clear the current user's todos.
     """
-    todo_service.clear_todos(user_id=current_user.id)
+    TodoService.clear_todos(user_id=current_user.id)
     return "", HTTPStatus.NO_CONTENT

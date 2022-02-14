@@ -1,11 +1,12 @@
 from app.errors import ResourceNotFound
 from app.todos.entities import Todo
-from app.todos.repositories import todo_repo
+from app.todos.repositories import TodoRepo
 
 
 class TodoService:
+    @classmethod
     def get_todos(
-        self, 
+        cls, 
         user_id: int, 
         per_page: int | None = None,
         after: int | None = None, 
@@ -23,13 +24,15 @@ class TodoService:
 
         :return: The user's todos.
         """
-        return todo_repo.get_todos(
+        return TodoRepo.get_todos(
             user_id=user_id, 
             per_page=per_page, 
             after=after,
         )
 
-    def get_todo(self, user_id: int, todo_id: int) -> Todo:
+
+    @classmethod
+    def get_todo(cls, user_id: int, todo_id: int) -> Todo:
         """
         Get a todo with the given ID.
 
@@ -39,7 +42,7 @@ class TodoService:
 
         :return: The user's todo.
         """
-        todo = todo_repo.get_todo(
+        todo = TodoRepo.get_todo(
             todo_id=todo_id, 
             user_id=user_id,
         )
@@ -49,7 +52,9 @@ class TodoService:
             )
         return todo
 
-    def create_todo(self, user_id: int, content: str) -> Todo:
+
+    @classmethod
+    def create_todo(cls, user_id: int, content: str) -> Todo:
         """
         Create a todo.
 
@@ -59,13 +64,15 @@ class TodoService:
 
         :return: The created todo.
         """
-        return todo_repo.create_todo(
+        return TodoRepo.create_todo(
             user_id=user_id, 
             content=content,
         )
 
+
+    @classmethod
     def update_todo(
-        self,
+        cls,
         user_id: int,
         todo_id: int,
         completed: bool | None = None,
@@ -84,8 +91,8 @@ class TodoService:
 
         :return: The updated todo.
         """
-        return todo_repo.update_todo(
-            todo=self.get_todo(
+        return TodoRepo.update_todo(
+            todo=cls.get_todo(
                 user_id=user_id, 
                 todo_id=todo_id,
             ),
@@ -93,7 +100,9 @@ class TodoService:
             content=content,
         )
 
-    def delete_todo(self, user_id: int, todo_id: int) -> None:
+
+    @classmethod
+    def delete_todo(cls, user_id: int, todo_id: int) -> None:
         """
         Delete the todo with the given ID.
 
@@ -101,20 +110,19 @@ class TodoService:
 
         :param todo_id: ID of the todo to delete.
         """
-        todo_repo.delete_todo(
-            todo=self.get_todo(
+        TodoRepo.delete_todo(
+            todo=cls.get_todo(
                 user_id=user_id,
                 todo_id=todo_id,
             ),
         )
 
-    def clear_todos(self, user_id: int) -> None:
+
+    @classmethod
+    def clear_todos(cls, user_id: int) -> None:
         """
         Clear the given user's todos.
 
         :param user_id: The todos' user ID.
         """
-        todo_repo.clear_todos(user_id=user_id)
-
-
-todo_service = TodoService()
+        TodoRepo.clear_todos(user_id=user_id)

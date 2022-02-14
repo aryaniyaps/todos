@@ -11,9 +11,9 @@ from sqlalchemy.engine import Connection, Engine
 from app import create_app
 from app.database.core import Base, db_session, engine
 from app.todos.entities import Todo
-from app.todos.repositories import todo_repo
+from app.todos.repositories import TodoRepo
 from app.users.entities import User
-from app.users.repositories import user_repo
+from app.users.repositories import UserRepo
 
 
 @fixture(scope="session")
@@ -98,7 +98,7 @@ def user() -> User:
 
     :return: The created user.
     """
-    return user_repo.create_user(
+    return UserRepo.create_user(
         email="tester@example.org",
         password="password"
     )
@@ -112,7 +112,7 @@ def foreign_user() -> User:
 
     :return: The created user.
     """
-    return user_repo.create_user(
+    return UserRepo.create_user(
         email="foreign-tester@example.org",
         password="password"
     )
@@ -125,7 +125,7 @@ def todo(user: User) -> Todo:
 
     :return: The created todo.
     """
-    return todo_repo.create_todo(
+    return TodoRepo.create_todo(
         content="sample content",
         user_id=user.id
     )
@@ -139,7 +139,7 @@ def foreign_todo(foreign_user: User) -> Todo:
 
     :return: The created todo.
     """
-    return todo_repo.create_todo(
+    return TodoRepo.create_todo(
         content="sample content",
         user_id=foreign_user.id
     )

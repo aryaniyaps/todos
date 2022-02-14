@@ -1,10 +1,11 @@
 from app.errors import InvalidInput
 from app.users.entities import User
-from app.users.repositories import user_repo
+from app.users.repositories import UserRepo
 
 
 class UserService:
-    def create_user(self, email: str, password: str) -> User:
+    @classmethod
+    def create_user(cls, email: str, password: str) -> User:
         """
         Create an user.
 
@@ -14,15 +15,12 @@ class UserService:
 
         :return: The created user.
         """
-        user = user_repo.get_user_by_email(email=email)
+        user = UserRepo.get_user_by_email(email=email)
         if user is not None:
             raise InvalidInput(
                 message="User with that email already exists.",
             )
-        return user_repo.create_user(
+        return UserRepo.create_user(
             email=email, 
             password=password,
         )
-
-
-user_service = UserService()

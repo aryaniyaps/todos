@@ -5,7 +5,7 @@ from flask.typing import ResponseReturnValue
 from flask_login import current_user, login_required, login_user
 
 from app.users.schemas import user_schema, user_create_schema
-from app.users.services import user_service
+from app.users.services import UserService
 
 
 user_blueprint = Blueprint(
@@ -30,7 +30,7 @@ def create_user() -> ResponseReturnValue:
     Create an user.
     """
     data = user_create_schema.load(request.json)
-    user = user_service.create_user(
+    user = UserService.create_user(
         email=data.get("email"), 
         password=data.get("password"),
     )

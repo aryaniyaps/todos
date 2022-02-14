@@ -3,7 +3,7 @@ from pytest import raises
 
 from app.errors import InvalidInput
 from app.users.entities import User
-from app.users.services import user_service
+from app.users.services import UserService
 
 
 def test_create_user() -> None:
@@ -12,7 +12,7 @@ def test_create_user() -> None:
     """
     email = "user@example.org"
     password = "password"
-    result = user_service.create_user(
+    result = UserService.create_user(
         email=email,
         password=password
     )
@@ -26,7 +26,7 @@ def test_create_duplicate_user(user: User) -> None:
     Ensure we cannot create an user with a duplicate email.
     """
     with raises(InvalidInput):
-        user_service.create_user(
+        UserService.create_user(
             email=user.email,
             password="password"
         )

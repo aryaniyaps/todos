@@ -2,11 +2,12 @@ from passlib.hash import bcrypt
 
 from app.errors import InvalidInput
 from app.users.entities import User
-from app.users.repositories import user_repo
+from app.users.repositories import UserRepo
 
 
 class AuthService:
-    def authenticate(self, email: str, password: str) -> User:
+    @classmethod
+    def authenticate(cls, email: str, password: str) -> User:
         """
         Check the given user credentials.
 
@@ -16,7 +17,7 @@ class AuthService:
 
         :return: The authenticated user.
         """
-        user = user_repo.get_user_by_email(email=email)
+        user = UserRepo.get_user_by_email(email=email)
         if (
             user is None or not 
             bcrypt.verify(password, user.password)
@@ -25,6 +26,3 @@ class AuthService:
                 message="Invalid credentials given.",
             )
         return user
-
-
-auth_service = AuthService()

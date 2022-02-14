@@ -6,7 +6,8 @@ from app.users.entities import User
 
 
 class UserRepo:
-    def get_user(self, user_id: int) -> User | None:
+    @classmethod
+    def get_user(cls, user_id: int) -> User | None:
         """
         Get an user with the given ID.
 
@@ -17,7 +18,8 @@ class UserRepo:
         return db_session.get(User, user_id)
 
 
-    def get_user_by_email(self, email: str) -> User | None:
+    @classmethod
+    def get_user_by_email(cls, email: str) -> User | None:
         """
         Get an user with the given email.
 
@@ -29,7 +31,8 @@ class UserRepo:
         return db_session.scalars(statement).first()
         
 
-    def create_user(self, email: str, password: str) -> User:
+    @classmethod
+    def create_user(cls, email: str, password: str) -> User:
         """
         Create an user.
 
@@ -45,7 +48,9 @@ class UserRepo:
         db_session.commit()
         return user
 
-    def delete_user(self, user: User) -> None:
+
+    @classmethod
+    def delete_user(cls, user: User) -> None:
         """
         Delete the given user.
 
@@ -53,6 +58,3 @@ class UserRepo:
         """
         db_session.delete(user)
         db_session.commit()
-
-
-user_repo = UserRepo()

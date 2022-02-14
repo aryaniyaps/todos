@@ -6,7 +6,8 @@ from app.todos.entities import Todo
 
 
 class TodoRepo:
-    def get_todo(self, todo_id: int, user_id: int) -> Todo | None:
+    @classmethod
+    def get_todo(cls, todo_id: int, user_id: int) -> Todo | None:
         """
         Get an todo with the given ID.
 
@@ -19,8 +20,9 @@ class TodoRepo:
         return db_session.get(Todo, (todo_id, user_id))
 
 
+    @classmethod
     def get_todos(
-        self, 
+        cls, 
         user_id: int, 
         after: int | None = None, 
         per_page: int | None = None,
@@ -49,7 +51,8 @@ class TodoRepo:
         )
 
 
-    def create_todo(self, user_id: int, content: str) -> Todo:
+    @classmethod
+    def create_todo(cls, user_id: int, content: str) -> Todo:
         """
         Create a todo.
 
@@ -67,8 +70,10 @@ class TodoRepo:
         db_session.commit()
         return todo
 
+
+    @classmethod
     def update_todo(
-        self,
+        cls,
         todo: Todo,
         completed: bool | None = None,
         content: str | None = None,
@@ -93,7 +98,8 @@ class TodoRepo:
         return todo
 
 
-    def clear_todos(self, user_id: int) -> None:
+    @classmethod
+    def clear_todos(cls, user_id: int) -> None:
         """
         Clear todos with the given user ID.
 
@@ -104,7 +110,8 @@ class TodoRepo:
         db_session.commit()
 
 
-    def delete_todo(self, todo: Todo) -> None:
+    @classmethod
+    def delete_todo(cls, todo: Todo) -> None:
         """
         Delete the given todo.
 
@@ -112,6 +119,3 @@ class TodoRepo:
         """
         db_session.delete(todo)
         db_session.commit()
-
-
-todo_repo = TodoRepo()

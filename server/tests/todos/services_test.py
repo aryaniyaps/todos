@@ -2,7 +2,7 @@ from pytest import raises
 
 from app.errors import ResourceNotFound
 from app.todos.entities import Todo
-from app.todos.services import todo_service
+from app.todos.services import TodoService
 from app.users.entities import User
 
 
@@ -10,7 +10,7 @@ def test_get_todos(user: User) -> None:
     """
     Ensure we can get todos for a given user.
     """
-    results = todo_service.get_todos(user_id=user.id)
+    results = TodoService.get_todos(user_id=user.id)
     assert results
 
 
@@ -18,7 +18,7 @@ def test_get_todo(todo: Todo) -> None:
     """
     Ensure we can get a todo.
     """
-    result = todo_service.get_todo(
+    result = TodoService.get_todo(
         todo_id=todo.id, 
         user_id=todo.user_id,
     )
@@ -31,7 +31,7 @@ def test_get_foreign_todo(user: User, foreign_todo: Todo) -> None:
     owned by another user.
     """
     with raises(ResourceNotFound):
-        todo_service.get_todo(
+        TodoService.get_todo(
             todo_id=foreign_todo.id,
             user_id=user.id,
         )
@@ -42,7 +42,7 @@ def test_create_todo(user: User) -> None:
     Ensure we can create a todo.
     """
     content = "content"
-    result = todo_service.create_todo(
+    result = TodoService.create_todo(
         content=content,
         user_id=user.id,
     )
@@ -56,7 +56,7 @@ def test_update_todo(todo: Todo) -> None:
     Ensure we can update a todo.
     """
     content = "content"
-    result = todo_service.update_todo(
+    result = TodoService.update_todo(
         user_id=todo.user_id,
         todo_id=todo.id, 
         completed=True, 
@@ -72,7 +72,7 @@ def test_update_foreign_todo(user: User, foreign_todo: Todo) -> None:
     owned by another user.
     """
     with raises(ResourceNotFound):
-        todo_service.update_todo(
+        TodoService.update_todo(
             user_id=user.id,
             todo_id=foreign_todo.id,
             completed=True,
@@ -83,12 +83,12 @@ def test_delete_todo(todo: Todo) -> None:
     """
     Ensure we can delete a todo.
     """
-    todo_service.delete_todo(
+    TodoService.delete_todo(
         user_id=todo.user_id, 
         todo_id=todo.id,
     )
     with raises(ResourceNotFound):
-        todo_service.get_todo(
+        TodoService.get_todo(
             user_id=todo.user_id,
             todo_id=todo.id,
         )
@@ -100,7 +100,7 @@ def test_delete_foreign_todo(user: User, foreign_todo: Todo) -> None:
     owned by another user.
     """
     with raises(ResourceNotFound):
-        todo_service.delete_todo(
+        TodoService.delete_todo(
             user_id=user.id,
             todo_id=foreign_todo.id,
         )
@@ -110,5 +110,5 @@ def test_clear_todos(user: User) -> None:
     """
     Ensure we can clear todos for a user.
     """
-    todo_service.clear_todos(user_id=user.id)
+    TodoService.clear_todos(user_id=user.id)
     assert not user.todos
