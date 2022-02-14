@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+from flask.typing import ResponseReturnValue
 from flask_login import LoginManager
 
 from app.users.entities import User
@@ -22,7 +23,7 @@ def load_user(user_id: str) -> User | None:
 
 
 @login_manager.unauthorized_handler
-def unauthorized_handler():
+def unauthorized_handler() -> ResponseReturnValue:
     """
     Handle unauthorized responses.
     """
