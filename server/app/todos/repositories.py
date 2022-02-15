@@ -41,13 +41,11 @@ class TodoRepo:
         :return: The todos with the given user ID.
         """
         statement = select(Todo).filter(Todo.user_id == user_id)
-        return db_session.scalars(
-            paginate(
-                statement=statement, 
-                paginate_by=Todo.id, 
-                after=after, 
-                per_page=per_page,
-            )
+        return paginate(
+            statement=statement, 
+            paginate_by=Todo.id, 
+            after=after, 
+            per_page=per_page,
         )
 
 

@@ -27,5 +27,5 @@ def unauthorized_handler() -> ResponseReturnValue:
     """
     Handle unauthorized responses.
     """
-    result = {"message": "Could not validate the given credentials."}
+    result = {"message": "Could not validate credentials."}
     return result, HTTPStatus.UNAUTHORIZED
