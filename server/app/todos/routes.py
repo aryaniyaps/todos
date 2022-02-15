@@ -31,7 +31,7 @@ def read_todos() -> ResponseReturnValue:
             user_id=current_user.id,
             per_page=request.args.get("per_page"),
             after=request.args.get("after"),
-        )
+        ),
     )
     return jsonify(result)
 
@@ -47,7 +47,7 @@ def create_todo() -> ResponseReturnValue:
         TodoService.create_todo(
             user_id=current_user.id,
             content=data.get("content"), 
-        )
+        ),
     )
     return result, HTTPStatus.CREATED
 
@@ -62,7 +62,7 @@ def read_todo(todo_id: int) -> ResponseReturnValue:
         TodoService.get_todo(
             user_id=current_user.id,
             todo_id=todo_id, 
-        )
+        ),
     )
 
 
@@ -79,7 +79,7 @@ def update_todo(todo_id: int) -> ResponseReturnValue:
             todo_id=todo_id, 
             completed=data.get("completed"), 
             content=data.get("content"),
-        )
+        ),
     )
 
 

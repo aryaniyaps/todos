@@ -1,7 +1,7 @@
 from sqlalchemy import select, delete
 
 from app.database.core import db_session
-from app.database.paging import paginate
+from app.database.paging import paginate, Page
 from app.todos.entities import Todo
 
 
@@ -26,7 +26,7 @@ class TodoRepo:
         user_id: int, 
         after: int | None = None, 
         per_page: int | None = None,
-    ) -> list[Todo]:
+    ) -> Page[Todo]:
         """
         Get todos with the given user ID.
 

@@ -1,21 +1,60 @@
-from typing import TypeVar
+from dataclasses import dataclass
+from typing import Generic, TypeVar
 
-from sqlalchemy.engine import ScalarResult
-from sqlalchemy.sql import Select
 from sqlalchemy.orm import Mapped
+from sqlalchemy.sql import Select
 
 from app.database.core import db_session
 
 
-T = TypeVar("T")
+CT = TypeVar("CT")
+
+ET = TypeVar("ET")
+
+
+@dataclass
+class PageMeta(Generic[CT]):
+    """
+    Represents additional metadata 
+    that aids in pagination.
+
+    :param has_prev: When paginating backwards, 
+        are there more items?
+
+    :param has_next: When paginating forwards, 
+        are there more items?
+
+    :param start_cursor: When paginating backwards, 
+        the cursor to continue.
+
+    :param end_cursor: When paginating forwards, 
+        the cursor to continue.
+    """
+    has_prev: bool
+    has_next: bool
+    start_cursor: CT
+    end_cursor: CT
+
+
+@dataclass
+class Page(Generic[ET]):
+    """
+    Represents a paginated sequence of entities.
+
+    :param entities: A sequence of entities in the Page.
+
+    :param page_meta: Metadata to aid in pagination.
+    """
+    entities: list[ET]
+    page_meta: PageMeta
 
 
 def paginate(
     statement: Select, 
-    paginate_by: Mapped[T],
-    after: T | None = None, 
+    paginate_by: Mapped[CT],
+    after: CT | None = None, 
     per_page: int | None = None,
-) -> ScalarResult:
+) -> Page:
     """
     Paginate the given statement.
 
@@ -35,6 +74,13 @@ def paginate(
     if after is not None:
         statement.filter(paginate_by > after)
     statement.limit(per_page)
-    # TODO: return a page object with additional
-    # paging metadata here.
-    return db_session.scalars(statement)
+    entities = db_session.scalars(statement)
+    return Page(
+        entities=entities,
+        page_meta=PageMeta(
+            has_next=True,
+            has_prev=False,
+            end_cursor="",
+            start_cursor=""
+        )
+    )

@@ -1,3 +1,4 @@
+from app.database.paging import Page
 from app.errors import ResourceNotFound
 from app.todos.entities import Todo
 from app.todos.repositories import TodoRepo
@@ -10,7 +11,7 @@ class TodoService:
         user_id: int, 
         per_page: int | None = None,
         after: int | None = None, 
-    ) -> list[Todo]:
+    ) -> Page[Todo]:
         """
         Get the given user's todos.
 
