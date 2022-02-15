@@ -75,6 +75,23 @@ def client(app: Flask) -> Iterator[FlaskClient]:
     """
     with app.test_request_context():
         yield app.test_client()
+
+
+def authenticate_client(
+    client: FlaskClient, user: User,
+) -> FlaskClient:
+    """
+    Helper to authenticate the given test client.
+
+    :param client: The test client to authenticate.
+
+    :param user: The user to authenticate as.
+
+    :return: The authenticated test client.
+    """
+    with client.session_transaction() as session:
+        session["user_id"] = user.id
+    return client
         
 
 @fixture()
@@ -86,9 +103,9 @@ def auth_client(app: Flask, user: User) -> Iterator[FlaskClient]:
     """
     with app.test_request_context():
         with app.test_client() as client:
-            with client.session_transaction() as session:
-                session["user_id"] = user.id
-            yield client
+            yield authenticate_client(
+                client=client, user=user,
+            )
 
 
 @fixture()
