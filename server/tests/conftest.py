@@ -4,7 +4,6 @@ from alembic.command import stamp
 from alembic.config import Config
 from flask import Flask
 from flask.testing import FlaskClient
-from flask_login import FlaskLoginClient
 from pytest import fixture
 from sqlalchemy.engine import Connection, Engine
 
@@ -23,9 +22,7 @@ def app() -> Flask:
 
     :return: The initialized app.
     """
-    app = create_app()
-    app.test_client_class = FlaskLoginClient
-    return app
+    return create_app()
 
 
 @fixture(scope="session")
@@ -88,7 +85,10 @@ def auth_client(app: Flask, user: User) -> Iterator[FlaskClient]:
     :return: The created test client.
     """
     with app.test_request_context():
-        yield app.test_client(user=user)
+        with app.test_client() as client:
+            with client.session_transaction() as session:
+                session["user_id"] = user.id
+            yield client
 
 
 @fixture()

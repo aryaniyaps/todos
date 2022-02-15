@@ -1,9 +1,9 @@
 from http import HTTPStatus
 
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from flask.typing import ResponseReturnValue
-from flask_login import login_required, login_user, logout_user
 
+from app.auth.decorators import auth_required
 from app.auth.schemas import authenticate_schema
 from app.auth.services import AuthService
 from app.users.schemas import user_schema
@@ -26,15 +26,15 @@ def authenticate() -> ResponseReturnValue:
         email=data.get("email"), 
         password=data.get("password"),
     )
-    login_user(user=user)
+    session["user_id"] = user.id
     return user_schema.dump(user)
 
 
 @auth_blueprint.post("/unauthenticate")
-@login_required
+@auth_required
 def unauthenticate() -> ResponseReturnValue:
     """
     Unauthenticate the current user.
     """
-    logout_user()
+    del session["user_id"]
     return "", HTTPStatus.NO_CONTENT

@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask.typing import ResponseReturnValue
 
-from app.errors import InvalidInput, ResourceNotFound
+from app.errors import InvalidInput, ResourceNotFound, Unauthenticated
 
 
 def invalid_input_handler(error: InvalidInput) -> ResponseReturnValue:
@@ -21,3 +21,12 @@ def resource_not_found_handler(error: ResourceNotFound) -> ResponseReturnValue:
     :param error: The error to handle.
     """
     return {"message": error.message}, HTTPStatus.NOT_FOUND
+
+
+def unauthenticated_handler(error: Unauthenticated) -> ResponseReturnValue:
+    """
+    Handle unauthenticated errors.
+
+    :param error: The error to handle.
+    """
+    return {"message": error.message}, HTTPStatus.UNAUTHORIZED

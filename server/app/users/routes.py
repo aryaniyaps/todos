@@ -1,9 +1,9 @@
 from http import HTTPStatus
 
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from flask.typing import ResponseReturnValue
-from flask_login import current_user, login_required, login_user
 
+from app.auth.decorators import auth_required
 from app.users.schemas import user_schema, user_create_schema
 from app.users.services import UserService
 
@@ -16,12 +16,16 @@ user_blueprint = Blueprint(
 
 
 @user_blueprint.get("/@me")
-@login_required
+@auth_required
 def read_current_user() -> ResponseReturnValue:
     """
     Get the current user.
     """
-    return user_schema.dump(current_user)
+    return user_schema.dump(
+        UserService.get_user(
+            user_id=session["user_id"],
+        ),
+    )
 
 
 @user_blueprint.post("")
@@ -31,8 +35,8 @@ def create_user() -> ResponseReturnValue:
     """
     data = user_create_schema.load(request.json)
     user = UserService.create_user(
-        email=data.get("email"), 
-        password=data.get("password"),
+        email=data["email"], 
+        password=data["password"],
     )
-    login_user(user=user)
+    session["user_id"] = user.id
     return user_schema.dump(user), HTTPStatus.CREATED

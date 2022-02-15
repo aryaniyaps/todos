@@ -5,6 +5,16 @@ from app.users.repositories import UserRepo
 
 class UserService:
     @classmethod
+    def get_user(cls, user_id: int) -> User:
+        """
+        Get an user with the given ID.
+
+        :param user_id: The user's ID.
+        """
+        return UserRepo.get_user(user_id=user_id)
+
+
+    @classmethod
     def create_user(cls, email: str, password: str) -> User:
         """
         Create an user.

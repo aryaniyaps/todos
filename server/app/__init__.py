@@ -16,7 +16,6 @@ def create_app() -> Flask:
         TESTING=TESTING,
     )
     configure_routes(app)
-    configure_extensions(app)
     configure_error_handlers(app)
     configure_event_handlers(app)
     configure_middleware(app)
@@ -38,17 +37,6 @@ def configure_routes(app: Flask) -> None:
     app.register_blueprint(user_blueprint)
 
 
-def configure_extensions(app: Flask) -> None:
-    """
-    Configure extensions for the app.
-
-    :param app: The app instance.
-    """
-    from app.extensions import login_manager
-
-    login_manager.init_app(app)
-
-
 def configure_middleware(app: Flask) -> None:
     """
     Configure middleware for the app.
@@ -66,11 +54,13 @@ def configure_error_handlers(app: Flask) -> None:
     """
     from app.errors import (
         InvalidInput, 
-        ResourceNotFound
+        ResourceNotFound,
+        Unauthenticated
     )
     from app.error_handlers import (
         invalid_input_handler, 
-        resource_not_found_handler
+        resource_not_found_handler,
+        unauthenticated_handler
     )
     
     app.register_error_handler(
@@ -80,6 +70,10 @@ def configure_error_handlers(app: Flask) -> None:
     app.register_error_handler(
         ResourceNotFound, 
         resource_not_found_handler,
+    )
+    app.register_error_handler(
+        Unauthenticated,
+        unauthenticated_handler
     )
 
 def configure_event_handlers(app: Flask) -> None:

@@ -20,3 +20,11 @@ class ResourceNotFound(BaseError):
     resource doesn't exist.
     """
     pass
+
+
+class Unauthenticated(BaseError):
+    """
+    Indicate that the client has not
+    authenticated yet.
+    """
+    pass
