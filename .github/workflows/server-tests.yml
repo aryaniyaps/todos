@@ -20,6 +20,7 @@ jobs:
         working-directory: ./server
     env:
       DEBUG: true
+      CELERY_BROKER_URL: ""
       DATABASE_URL: "postgresql+psycopg2://todos:todos@127.0.0.1:5432/todos"
       SECRET_KEY: "secret"
 
