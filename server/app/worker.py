@@ -5,7 +5,8 @@ from app.config import CELERY_BROKER_URL
 
 def create_worker() -> Celery:
     """
-    Initializes a worker instance.
+    Initialize a worker instance.
+
     :return: The created worker.
     """
     celery = Celery(__name__)
