@@ -40,7 +40,7 @@
         "axios-mock-adapter": "1.20.0",
         "babel-jest": "27.3.1",
         "babel-loader": "8.2.3",
-        "css-loader": "6.5.1",
+        "css-loader": "6.7.0",
         "html-webpack-plugin": "5.5.0",
         "jest": "27.3.1",
         "jsdom": "19.0.0",
