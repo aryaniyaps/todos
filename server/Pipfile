@@ -14,7 +14,7 @@ python-decouple = "==3.5"
 celery = "==5.2.3"
 
 [dev-packages]
-pytest = "==7.0.0"
+pytest = "==7.1.0"
 pytest-timeout = "==2.1.0"
 
 [requires]
