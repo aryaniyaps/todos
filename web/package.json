@@ -39,7 +39,7 @@
         "@types/react-helmet": "6.1.4",
         "axios-mock-adapter": "1.20.0",
         "babel-jest": "27.3.1",
-        "babel-loader": "8.2.3",
+        "babel-loader": "8.2.4",
         "css-loader": "6.5.1",
         "html-webpack-plugin": "5.5.0",
         "jest": "27.3.1",
