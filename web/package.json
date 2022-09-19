@@ -21,7 +21,7 @@
         "react-helmet": "6.1.0",
         "react-hook-form": "7.25.0",
         "react-query": "3.34.7",
-        "react-router-dom": "6.2.1"
+        "react-router-dom": "6.4.0"
     },
     "devDependencies": {
         "@babel/core": "7.16.0",
