@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 flask = "==2.0.2"
-alembic = "==1.7.6"
+alembic = "==1.9.0"
 sqlalchemy = {version = "==1.4.31", extras = ["postgresql"]}
 passlib = {version = "==1.7.4", extras = ["bcrypt"]}
 marshmallow = "==3.14.1"
