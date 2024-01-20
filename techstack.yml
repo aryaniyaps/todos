@@ -1,0 +1,767 @@
+repo_name: aryaniyaps/todos
+report_id: 73c56cc5e7f45a71b5d3dcf5c55f27c3
+version: 0.1
+repo_type: Public
+timestamp: '2024-01-20T08:13:40+00:00'
+requested_by: aryaniyaps
+provider: github
+branch: main
+detected_tools_count: 57
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: Mako
+  description: Template library written in Python
+  website_url: https://github.com/zzzeek/mako
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Templating Languages & Extensions
+  image_url: https://img.stackshare.io/service/3583/default_43e3ee00dcc48a40f6fcba33551e4f5a99a10537.png
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: Python
+  description: A clear and powerful object-oriented programming language, comparable
+    to Perl, Ruby, Scheme, or Java.
+  website_url: https://www.python.org
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: TypeScript
+  description: A superset of JavaScript that compiles to clean JavaScript output
+  website_url: http://www.typescriptlang.org
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: Flask
+  description: A microframework for Python based on Werkzeug, Jinja 2 and good intentions
+  website_url: http://flask.pocoo.org/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Microframeworks (Backend)
+  image_url: https://img.stackshare.io/service/1001/default_6d109315b60108628b7cd3e159b84645c31ef0e2.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-14 06:55:06.000000000 Z
+- name: Node.js
+  description: A platform built on Chrome's JavaScript runtime for easily building
+    fast, scalable network applications
+  website_url: http://nodejs.org/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-10-22 10:56:38.000000000 Z
+- name: React
+  description: A JavaScript library for building user interfaces
+  website_url: https://reactjs.org/
+  version: 17.0.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript UI Libraries
+  image_url: https://img.stackshare.io/service/1020/OYIaJ1KK.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: React Router
+  description: A complete routing solution for React.js
+  website_url: https://github.com/rackt/react-router
+  version: 6.2.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: JavaScript Framework Components
+  image_url: https://img.stackshare.io/service/3350/8261421.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: css-loader
+  description: Helps webpack to collect CSS from all the css files
+  website_url: https://github.com/webpack-contrib/css-loader
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: CSS Pre-processors / Extensions
+  image_url: https://img.stackshare.io/service/8074/default_d2b16fd6997fb2e164de645a34f9b8d5a880d999.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/package.json
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-18 06:10:50.000000000 Z
+- name: Celery
+  description: Distributed task queue
+  website_url: http://www.celeryproject.org/
+  version: 5.2.3
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Message Queue
+  image_url: https://img.stackshare.io/service/1075/celery.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-02-22 09:24:25.000000000 Z
+- name: PostgreSQL
+  description: A powerful, open source object-relational database system
+  website_url: http://www.postgresql.org/
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1028/ASOhU5xJ.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-02-04 08:32:25.000000000 Z
+- name: SQLAlchemy
+  description: The Python SQL Toolkit and Object Relational Mapper
+  website_url: http://www.sqlalchemy.org/
+  version: 1.4.31
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Object Relational Mapper (ORM)
+  image_url: https://img.stackshare.io/service/1839/q5uAkmy7.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-02-09 07:56:44.000000000 Z
+- name: Babel
+  description: Use next generation JavaScript, today.
+  website_url: http://babeljs.io/
+  version: 7.16.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: JavaScript Compilers
+  image_url: https://img.stackshare.io/service/2739/-1wfGjNw.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/babel.config.js
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-11-18 10:35:19.000000000 Z
+- name: Docker
+  description: Enterprise Container Platform for High-Velocity Innovation.
+  website_url: https://www.docker.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Virtual Machine Platforms & Containers
+  image_url: https://img.stackshare.io/service/586/n4u37v9t_400x400.png
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: ESLint
+  description: The fully pluggable JavaScript code quality tool
+  website_url: http://eslint.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/package.json
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-10-25 10:02:32.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/.github/workflows/server-tests.yml
+  detection_source: ".github/workflows/server-tests.yml"
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-11-17 08:26:29.000000000 Z
+- name: Gunicorn
+  description: A Python WSGI HTTP Server for UNIX
+  website_url: http://gunicorn.org/
+  version: 20.1.0
+  open_source: true
+  hosted_saas: false
+  category: Application Hosting
+  sub_category: Web Servers
+  image_url: https://img.stackshare.io/service/1091/gunicorn.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-14 14:08:15.000000000 Z
+- name: Jest
+  description: Painless JavaScript Unit Testing
+  website_url: http://facebook.github.io/jest/
+  version: 27.3.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Javascript Testing Framework
+  image_url: https://img.stackshare.io/service/830/jest.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-10-25 10:02:32.000000000 Z
+- name: NGINX
+  description: A high performance free open source web server powering busiest sites
+    on the Internet.
+  website_url: http://nginx.org
+  open_source: false
+  hosted_saas: false
+  category: Application Hosting
+  sub_category: Web Servers
+  image_url: https://img.stackshare.io/service/1052/YMxUfyWf.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/nginx.conf
+  detection_source: web/nginx.conf
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-11-09 03:26:08.000000000 Z
+- name: PyPI
+  description: A repository of software for the Python programming language
+  website_url: https://pypi.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Hosted Package Repository
+  image_url: https://img.stackshare.io/service/12572/-RIWgodF_400x400.jpg
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-10-22 10:56:38.000000000 Z
+- name: Webpack
+  description: A bundler for javascript and friends
+  website_url: http://webpack.js.org
+  version: 5.66.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: JS Build Tools / JS Task Runners
+  image_url: https://img.stackshare.io/service/1682/IMG_4636.PNG
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-21 06:28:05.000000000 Z
+- name: Yarn
+  description: A new package manager for JavaScript
+  website_url: https://yarnpkg.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/5848/44mC-kJ3.jpg
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/yarn.lock
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-10-25 10:02:32.000000000 Z
+- name: jsdom
+  description: A JavaScript implementation of the WHATWG DOM and HTML standards, for
+    use with node.js
+  website_url: https://github.com/jsdom/jsdom
+  version: 19.0.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Headless Browsers
+  image_url: https://img.stackshare.io/service/7054/preview.jpeg
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2022-01-22 09:22:08.000000000 Z
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/package.json
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2021-10-25 10:02:32.000000000 Z
+- name: Alpine Linux
+  description: Security-oriented, lightweight Linux distribution based on musl libc
+    and busybox
+  website_url: https://www.alpinelinux.org/
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Operating Systems
+  image_url: https://img.stackshare.io/service/6429/alpine_linux.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-28 03:25:19.000000000 Z
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source_url: https://github.com/aryaniyaps/todos
+  detection_source: Repo Metadata
+- name: axios
+  description: Promise based HTTP client for the browser and node.js
+  website_url: https://github.com/mzabriskie/axios
+  version: 0.25.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript Utilities & Libraries
+  image_url: https://img.stackshare.io/no-img-open-source.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2022-01-22 09:22:33.000000000 Z
+- name: "@babel/core"
+  description: Babel compiler core
+  package_url: https://www.npmjs.com/@babel/core
+  version: 7.16.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15810/default_004658cda9b38934f2871435e9dc15608c86e8be.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-18 06:10:50.000000000 Z
+- name: "@babel/preset-env"
+  description: A Babel preset for each environment
+  package_url: https://www.npmjs.com/@babel/preset-env
+  version: 7.16.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15819/default_98aa227f51aa9d787815ec3fd98d0ab2bfebbb91.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-18 06:10:50.000000000 Z
+- name: "@babel/preset-react"
+  description: Babel preset for all React plugins
+  package_url: https://www.npmjs.com/@babel/preset-react
+  version: 7.16.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15890/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: "@babel/preset-typescript"
+  description: Babel preset for TypeScript
+  package_url: https://www.npmjs.com/@babel/preset-typescript
+  version: 7.16.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16084/default_d4e765f8a43dcfd232c8b9ee9732058bc27c727a.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2022-01-22 09:23:53.000000000 Z
+- name: "@testing-library/jest-dom"
+  description: Custom jest matchers to test the state of the DOM
+  package_url: https://www.npmjs.com/@testing-library/jest-dom
+  version: 5.15.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17424/default_1cdcda15ebb7caed879f8340bc212b44c4ec9dac.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2022-01-22 09:23:53.000000000 Z
+- name: "@testing-library/react"
+  description: Simple and complete React DOM testing utilities that encourage good
+    testing practices
+  package_url: https://www.npmjs.com/@testing-library/react
+  version: 12.1.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16549/default_d522554c6a41cb28d922d6d3ad32ad4afa0e3bb5.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: "@types/jest"
+  description: TypeScript definitions for Jest
+  package_url: https://www.npmjs.com/@types/jest
+  version: 27.4.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15840/default_004658cda9b38934f2871435e9dc15608c86e8be.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2022-01-22 09:23:53.000000000 Z
+- name: "@types/node"
+  description: TypeScript definitions for Node.js
+  package_url: https://www.npmjs.com/@types/node
+  version: 17.0.14
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15809/default_5e5e8ac63beda29f31f1844df64d4b8247570a66.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-02-02 04:38:20.000000000 Z
+- name: "@types/react"
+  description: TypeScript definitions for React
+  package_url: https://www.npmjs.com/@types/react
+  version: 17.0.38
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15894/default_1d65e37e65b7f80761374f0202776043277d505d.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: "@types/react-dom"
+  description: TypeScript definitions for React
+  package_url: https://www.npmjs.com/@types/react-dom
+  version: 17.0.11
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15946/default_54b691c123fc8979741e800e4dcd3936c0f3b246.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: axios-mock-adapter
+  description: Axios adapter that allows to easily mock requests
+  package_url: https://www.npmjs.com/axios-mock-adapter
+  version: 1.20.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17391/default_e9c4b89784d4fe5d59f93b4a54dd8910ea23e5de.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2022-01-22 09:22:33.000000000 Z
+- name: babel-jest
+  description: Jest plugin to use babel for transformation
+  package_url: https://www.npmjs.com/babel-jest
+  version: 27.3.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15839/default_4479dbac220be99e50e724b2df6cf415241d71fd.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2022-01-22 09:23:28.000000000 Z
+- name: babel-loader
+  description: Babel module loader for webpack
+  package_url: https://www.npmjs.com/babel-loader
+  version: 8.2.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15800/default_4acafe585186b4157fa23322ae7ca89e24b5cdef.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-18 06:10:50.000000000 Z
+- name: html-webpack-plugin
+  description: Simplifies creation of HTML files to serve your webpack bundles
+  package_url: https://www.npmjs.com/html-webpack-plugin
+  version: 5.5.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15841/default_5e5e8ac63beda29f31f1844df64d4b8247570a66.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-21 06:28:05.000000000 Z
+- name: react-dom
+  description: React package for working with the DOM
+  package_url: https://www.npmjs.com/react-dom
+  version: 17.0.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15808/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: react-helmet
+  description: A document head manager for React
+  package_url: https://www.npmjs.com/react-helmet
+  version: 6.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16513/default_4e3259350c525d1d859fa80a938000081d7c9db8.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: react-router-dom
+  description: DOM bindings for React Router
+  package_url: https://www.npmjs.com/react-router-dom
+  version: 6.2.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16025/default_e25d1fbb04a118c79fb444294461417342bd03bf.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-31 10:10:08.000000000 Z
+- name: style-loader
+  description: Style loader module for webpack
+  package_url: https://www.npmjs.com/style-loader
+  version: 3.3.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15822/default_004658cda9b38934f2871435e9dc15608c86e8be.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-18 06:10:50.000000000 Z
+- name: svg-inline-loader
+  description: Cleans up and inlines your SVG files into Webpack module
+  package_url: https://www.npmjs.com/svg-inline-loader
+  version: 0.8.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17354/default_66bbb2a75a0234b1bfceaa99b8e82825fa7b8284.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-18 06:10:50.000000000 Z
+- name: ts-loader
+  description: TypeScript loader for webpack
+  package_url: https://www.npmjs.com/ts-loader
+  version: 9.2.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15938/default_e0a4fb1126d7400f419f0931cf1669947a5bc552.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-18 06:10:50.000000000 Z
+- name: webpack-cli
+  description: CLI for webpack &amp; friends
+  package_url: https://www.npmjs.com/webpack-cli
+  version: 4.9.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15826/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-21 06:28:05.000000000 Z
+- name: webpack-dev-server
+  description: Serves a webpack app. Updates the browser on changes
+  package_url: https://www.npmjs.com/webpack-dev-server
+  version: 4.7.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15821/default_64690bc3e49bcee57094e51a7a26c620c48dbd82.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/web/yarn.lock
+  detection_source: web/package.json
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-21 06:28:05.000000000 Z
+- name: alembic
+  description: A database migration tool for SQLAlchemy
+  package_url: https://pypi.org/project/alembic
+  version: 1.7.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19961/default_61e35171bd9c0e5c5b88b2e4221ca242576ad8c0.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-02-11 09:28:07.000000000 Z
+- name: marshmallow
+  description: A lightweight library for converting complex datatypes to and from
+    native Python datatypes
+  package_url: https://pypi.org/project/marshmallow
+  version: 3.14.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19893/default_f716e4bc541a9eb6e3f5b7a20d7c35355075b0b4.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-14 06:55:06.000000000 Z
+- name: passlib
+  description: Comprehensive password hashing framework supporting over 30 schemes
+  package_url: https://pypi.org/project/passlib
+  version: 1.7.4
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19992/default_aa5b3e77340c2bb80cd8e6a59cd82909abcdcd63.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-26 06:46:35.000000000 Z
+- name: pytest
+  description: 'Pytest: simple powerful testing with Python'
+  package_url: https://pypi.org/project/pytest
+  version: 7.0.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19843/default_4604ff5dcb7f4d9c7b3833591c2142493951b19c.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-02-11 09:28:07.000000000 Z
+- name: pytest-timeout
+  description: Py.test plugin to abort hanging tests
+  package_url: https://pypi.org/project/pytest-timeout
+  version: 2.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/pypi/image.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-02-11 09:28:07.000000000 Z
+- name: python-decouple
+  description: Strict separation of settings from code
+  package_url: https://pypi.org/project/python-decouple
+  version: '3.5'
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20545/default_7b61da87043cab6a451d00283941da078ee5c9d9.png
+  detection_source_url: https://github.com/aryaniyaps/todos/blob/main/server/Pipfile.lock
+  detection_source: server/Pipfile
+  last_updated_by: Aryan Iyappan
+  last_updated_on: 2022-01-29 06:32:00.000000000 Z
